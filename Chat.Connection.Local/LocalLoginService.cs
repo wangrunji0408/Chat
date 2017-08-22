@@ -4,18 +4,19 @@ namespace Chat.Connection.Local
     using Core.Interfaces;
     using Server;
 
-    public class LocalLoginService: ILoginService, ILoginListener
+    public class LocalLoginService: ILoginService
     {
-        public event EventHandler<(long userId, IClientService service)> NewUserLogin;
-
-        public string ServerName { get; set; }
+		readonly Server _server;
+		public LocalLoginService(Server server)
+		{
+			_server = server;
+		}
 
         public IServerService Login(long userId)
         {
             var client = LocalClientService.GetService(userId);
-			if (NewUserLogin != null)
-                NewUserLogin(this, (userId, client));
-            return LocalServerService.GetService(ServerName, userId);
+            _server.UserLogin(userId, client);
+            return new LocalServerService(_server, userId);
         }
     }
 }

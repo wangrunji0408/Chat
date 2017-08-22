@@ -13,18 +13,17 @@ namespace Chat.Server.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var loginService = new LocalLoginService() {ServerName = "server"};
             var loggerFactory = new LoggerFactory();
             loggerFactory.AddConsole();
 
 			var container = new ServiceCollection();
-            container.AddSingleton<ILoggerFactory>(loggerFactory)
-                     .AddSingleton<ILoginService>(loginService)
-                     .AddSingleton<ILoginListener>(loginService);
+            container.AddSingleton<ILoggerFactory>(loggerFactory);
 			var provider = container.BuildServiceProvider();
 
 			var server = new Server(provider);
-            LocalServerService.Register(server, "server");
+			var loginService = new LocalLoginService(server);
+            container.AddSingleton<ILoginService>(loginService);
+            provider = container.BuildServiceProvider();
 
 			var client1 = new Client(1, provider);
 			LocalClientService.Register(client1);

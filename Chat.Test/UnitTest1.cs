@@ -15,22 +15,18 @@ namespace Chat.Test
     public class UnitTest1
     {
         readonly IServiceProvider provider;
-        readonly Server server;
 
         public UnitTest1 ()
         {
-			LocalServerService.Clear();
-            LocalClientService.Clear();
-
-			var loginService = new LocalLoginService() { ServerName = "server" };
-
 			var container = new ServiceCollection();
-			container.AddSingleton<ILoginService>(loginService)
-					 .AddSingleton<ILoginListener>(loginService);
 			provider = container.BuildServiceProvider();
 
-			server = new Server(provider);
-			LocalServerService.Register(server, "server");
+			var server = new Server(provider);
+            var loginService = new LocalLoginService(server);
+            container.AddSingleton<ILoginService>(loginService);
+			provider = container.BuildServiceProvider();
+
+			LocalClientService.Clear();
         }
 
         public Client NewClient (long userId)
