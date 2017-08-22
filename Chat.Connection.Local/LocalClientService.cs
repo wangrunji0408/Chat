@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Chat.Connection.Local
 {
     using Core.Interfaces;
+    using Core.Models;
     using Client;
 
     public class LocalClientService : IClientService
@@ -14,9 +15,9 @@ namespace Chat.Connection.Local
             _client = client;
         }
 
-        public void NewMessage(long senderId, string message)
+        public void NewMessage(ChatMessage message)
         {
-            _client.InformNewMessage(senderId, message);
+            _client.InformNewMessage(message);
         }
 
         static Dictionary<long, LocalClientService> clients 

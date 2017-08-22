@@ -9,6 +9,7 @@ namespace Chat.Test
     using Client;
     using Server;
     using Core.Interfaces;
+    using Core.Models;
     using Connection.Local;
 
 
@@ -29,32 +30,52 @@ namespace Chat.Test
 			LocalClientService.Clear();
         }
 
-        public Client NewClient (long userId)
+	    private Client NewClient (string username, string password)
         {
-            var client1 = new Client(userId, provider);
+            var userId = Signup(username, password);
+
+	        var client1 = new Client(userId, provider);
 			LocalClientService.Register(client1);
-			client1.Login();
+			client1.Login(password);
             return client1;
         }
 
-        [Fact]
+	    private long Signup(string username, string password)
+	    {
+		    var loginService = provider.GetRequiredService<ILoginService>();
+		    var request = new SignupRequest {Username = username, Password = password};
+		    var response = loginService.Signup(request);
+		    var userId = response.UserId;
+		    return userId;
+	    }
+
+	    [Fact]
         public void Login()
         {
-            NewClient(1);
+            NewClient("user1", "123456");
         }
+
+	    [Fact]
+	    public void Login_WrongPassword()
+	    {
+		    long userId = Signup("user1", "123456");
+		    var client = new Client(userId, provider);
+		    LocalClientService.Register(client);
+		    Assert.Throws<Exception>(() => client.Login("654321"));
+	    }
 
 		[Fact]
 		public void SendMessage()
 		{
-			var client1 = NewClient(1);
-			var client2 = NewClient(2);
+			var client1 = NewClient("user1", "123456");
+			var client2 = NewClient("user2", "123456");
             bool recv1 = false;
             bool recv2 = false;
             string message = "Hello";
-            client1.NewMessage += (sender, e) => recv1 |= e.SenderId == 2 && e.Message == message;
-			client2.NewMessage += (sender, e) => recv2 |= e.SenderId == 2 && e.Message == message;
+            client1.NewMessage += (sender, e) => recv1 |= e.SenderId == 2 && e.Content.Text == message;
+			client2.NewMessage += (sender, e) => recv2 |= e.SenderId == 2 && e.Content.Text == message;
 
-            client2.SendMessage(message);
+            client2.SendTextMessage(message);
 
 			Assert.True(recv1);
 			Assert.True(recv2);

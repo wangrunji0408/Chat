@@ -1,8 +1,10 @@
 ﻿using System;
 namespace Chat.Core.Interfaces
 {
+    using Models;
+
     public interface IClientService
     {
-        void NewMessage(long senderId, string message);
+        void NewMessage(ChatMessage message);
     }
 }

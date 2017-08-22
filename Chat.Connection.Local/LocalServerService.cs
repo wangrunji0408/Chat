@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Chat.Connection.Local
 {
     using Core.Interfaces;
+    using Core.Models;
     using Server;
 
     public class LocalServerService : IServerService
@@ -16,9 +17,9 @@ namespace Chat.Connection.Local
             _userId = userId;
         }
 
-        public void SendMessage(string message)
+        public void SendMessage(ChatMessage message)
         {
-            _server.SendMessage(_userId, message);
+            _server.SendMessage(message);
         }
 
         #region Container

@@ -1,9 +1,10 @@
 ﻿using System;
+using Chat.Core.Models;
 
 namespace Chat.Core.Interfaces
 {
     public interface IServerService
     {
-        void SendMessage(string message);
+        void SendMessage(ChatMessage message);
     }
 }
