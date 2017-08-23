@@ -1,5 +1,6 @@
 ﻿syntax = "proto3";
-package chat.core.models;
+package chat;
+option csharp_namespace = "Chat.Core.Models";
 
 // To compile:
 // protoc Models.proto --csharp_out=./ --grpc_out=./ --plugin=protoc-gen-grpc=/usr/local/bin/grpc_csharp_plugin

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Chat.Connection.Local
 {
+    using System.Threading.Tasks;
     using Core.Interfaces;
     using Core.Models;
     using Server;
@@ -17,9 +18,9 @@ namespace Chat.Connection.Local
             _userId = userId;
         }
 
-        public void SendMessage(ChatMessage message)
+        public async Task SendMessageAsync(ChatMessage message)
         {
-            _server.SendMessage(message);
+            await _server.SendMessageAsync(message);
         }
 
         #region Container

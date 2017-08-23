@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,7 +37,7 @@ namespace Chat.Client
                 SenderId = UserId,
                 Content = new Content {Text = text}
             };
-            ServerService.SendMessage(message);
+            ServerService.SendMessageAsync(message);
             _logger?.LogInformation($"Send message.");
         }
 
@@ -48,14 +49,14 @@ namespace Chat.Client
 
         public event EventHandler<ChatMessage> NewMessage;
 
-        public bool Login(string password)
+        public async Task<bool> Login(string password)
         {
             var request = new LoginRequest
             {
                 UserId = (int) UserId,
                 Password = password
             };
-            _serverService = _loginService.Login(request);
+            _serverService = await _loginService.LoginAsync(request);
             return _serverService != null;
         }
     }

@@ -6,6 +6,7 @@ namespace Chat.Connection.Local
     using Core.Interfaces;
     using Core.Models;
     using Client;
+    using System.Threading.Tasks;
 
     public class LocalClientService : IClientService
     {
@@ -15,7 +16,7 @@ namespace Chat.Connection.Local
             _client = client;
         }
 
-        public void NewMessage(ChatMessage message)
+        public async Task NewMessageAsync(ChatMessage message)
         {
             _client.InformNewMessage(message);
         }

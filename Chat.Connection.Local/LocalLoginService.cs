@@ -1,6 +1,7 @@
 ﻿using System;
 namespace Chat.Connection.Local
 {
+    using System.Threading.Tasks;
     using Core.Interfaces;
     using Core.Models;
     using Server;
@@ -13,7 +14,7 @@ namespace Chat.Connection.Local
 			_server = server;
 		}
 
-        public IServerService Login(LoginRequest request)
+        public async Task<IServerService> LoginAsync(LoginRequest request)
         {
             var response = _server.Login(request);
             if (response.Status != LoginResponse.Types.Status.Success)
@@ -24,9 +25,9 @@ namespace Chat.Connection.Local
             return new LocalServerService(_server, userId);
         }
 
-        public SignupResponse Signup(SignupRequest request)
+        public async Task<SignupResponse> SignupAsync(SignupRequest request)
         {
-            return _server.SignUp(request);
+            return _server.Signup(request);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.IO;
 using Xunit;
 using Xunit.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Chat.Test
 {
@@ -36,7 +37,7 @@ namespace Chat.Test
 
 	        var client1 = new Client(userId, provider);
 			LocalClientService.Register(client1);
-			client1.Login(password);
+            client1.Login(password).Wait();
             return client1;
         }
 
@@ -44,7 +45,7 @@ namespace Chat.Test
 	    {
 		    var loginService = provider.GetRequiredService<ILoginService>();
 		    var request = new SignupRequest {Username = username, Password = password};
-		    var response = loginService.Signup(request);
+            var response = loginService.SignupAsync(request).Result;
 		    var userId = response.UserId;
 		    return userId;
 	    }
@@ -61,7 +62,7 @@ namespace Chat.Test
 		    long userId = Signup("user1", "123456");
 		    var client = new Client(userId, provider);
 		    LocalClientService.Register(client);
-		    Assert.Throws<Exception>(() => client.Login("654321"));
+		    Assert.ThrowsAsync<Exception>(async () => await client.Login("654321"));
 	    }
 
 		[Fact]

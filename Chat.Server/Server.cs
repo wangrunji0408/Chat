@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Chat.Server
 {
+    using System.Threading.Tasks;
     using Core.Interfaces;
     using Core.Models;
 
@@ -28,13 +29,14 @@ namespace Chat.Server
             var user = users[request.UserId];
             if (user.Password != request.Password)
                 return new LoginResponse { Status = LoginResponse.Types.Status.WrongPassword };
+            _logger?.LogInformation($"User {request.UserId} login.");
             return new LoginResponse 
             {
                 Status = LoginResponse.Types.Status.Success
             };
         }
 
-        public SignupResponse SignUp (SignupRequest request)
+        public SignupResponse Signup (SignupRequest request)
         {
             if (usernameToId.ContainsKey(request.Username))
                 return new SignupResponse { Status = SignupResponse.Types.Status.UsernameExist };
@@ -47,6 +49,7 @@ namespace Chat.Server
 			};
 			users.Add(user.Id, user);
             usernameToId.Add(user.Username, user.Id);
+            _logger?.LogInformation($"New user {userId} signup.");
             return new SignupResponse
 			{
                 Status = SignupResponse.Types.Status.Success,
@@ -60,11 +63,12 @@ namespace Chat.Server
             clients.Add(userId, client);
         }
 
-        public void SendMessage(ChatMessage message)
+        public async Task SendMessageAsync(ChatMessage message)
         {
-            _logger?.LogTrace($"New message from user {message.SenderId}.");
+            _logger?.LogInformation($"New message from user {message.SenderId}. Sending...");
 			foreach (var pair in clients)
-                pair.Value.NewMessage(message);
-        }
+                await pair.Value.NewMessageAsync(message);
+			_logger?.LogInformation($"Send complete.");
+		}
     }
 }
