@@ -5,7 +5,7 @@ using Grpc.Core;
 
 namespace Chat.Connection.Grpc
 {
-    public class GrpcClientServiceClient: ChatClientService.ChatClientServiceClient, IClientService
+    class GrpcClientServiceClient: ChatClientService.ChatClientServiceClient, IClientService
     {
         public GrpcClientServiceClient(string target) : 
             base(new Channel(target, ChannelCredentials.Insecure))

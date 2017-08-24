@@ -6,10 +6,11 @@ using Grpc.Core;
 
 namespace Chat.Connection.Grpc
 {
-    public class GrpcServerServiceClient: ChatServerService.ChatServerServiceClient, IServerService, ILoginService
+    class GrpcServerServiceClient: ChatServerService.ChatServerServiceClient, IServerService, ILoginService
     {
         private bool logged;
         private long userId;
+        internal GrpcClientServiceImpl ClientService { get; set; }
         
         public GrpcServerServiceClient(string target):
             base(new Channel(target, ChannelCredentials.Insecure))
@@ -34,7 +35,22 @@ namespace Chat.Connection.Grpc
                 throw new Exception($"Failed to login. {response.Detail}");
             logged = true;
             userId = request.UserId;
+
+            await RegisterClient();
+
             return this;
+        }
+
+        async Task RegisterClient ()
+        {
+            var request = new RegisterAddressRequest 
+            {
+                UserId = userId, 
+                Address = ClientService.Port.ToString()
+            };
+			var response = await base.RegisterAddressAsync(request);
+			if (response.Success == false)
+				throw new Exception($"Failed to register client service. {response.Detail}");
         }
 
         public async Task<SignupResponse> SignupAsync(SignupRequest request)

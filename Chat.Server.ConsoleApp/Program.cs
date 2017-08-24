@@ -21,67 +21,54 @@ namespace Chat.Server.ConsoleApp
 	    
 	    private static async Task TestGrpc()
 	    {
-		    var loggerFactory = new LoggerFactory();
-            loggerFactory.AddConsole(minLevel: LogLevel.Debug);
-
-		    var container = new ServiceCollection();
-		    container.AddSingleton<ILoggerFactory>(loggerFactory);
-		    var provider = container.BuildServiceProvider();
-		    // Make Server
-		    var server = new Server(provider);
-		    var grpcServerService = new GrpcServerServiceImpl(server, provider, 8080);
-		   
+            var server = new ServerBuilder()
+				.ConfigureLogger(factory => factory.AddConsole(minLevel: LogLevel.Debug))
+                .UseGrpc(8080)
+                .Build();
+            
 		    // Signup
-		    var rsp1 = server.Signup(new SignupRequest {Username = "user1", Password = "123456"});
-		    var rsp2 = server.Signup(new SignupRequest {Username = "user2", Password = "123456"});
-		    
-		    // Make Connect
-            var grpcServerServiceClient = new GrpcServerServiceClient("localhost:8080"); // for client1
-		    container.AddSingleton<ILoginService>(grpcServerServiceClient);
-		    provider = container.BuildServiceProvider();
-		    var client1 = new Client(rsp1.UserId, provider);
-		    var cs1 = new GrpcClientServiceImpl(client1, grpcServerServiceClient, provider, 8081);
+		    server.Signup(new SignupRequest {Username = "user1", Password = "123456"});
+		    server.Signup(new SignupRequest {Username = "user2", Password = "123456"});
 
-            grpcServerServiceClient = new GrpcServerServiceClient("localhost:8080"); // for client1
-		    container.AddSingleton<ILoginService>(grpcServerServiceClient);
-		    provider = container.BuildServiceProvider();
-		    var client2 = new Client(rsp2.UserId, provider);
-		    var cs2 = new GrpcClientServiceImpl(client2, grpcServerServiceClient, provider, 8082);
+			// Make Connect
+			var clientBuilder = new ClientBuilder()
+				.ConfigureLogger(factory => factory.AddConsole(minLevel: LogLevel.Debug))
+                .UseGrpc("localhost:8080");
+            
+            var client1 = clientBuilder.SetUser(1, "123456").Build();
+			var client2 = clientBuilder.SetUser(2, "123456").Build();
 
-			await client1.Login("123456");
-			await client2.Login("123456");
+			await client1.Login();
+			await client2.Login();
 
-		    client2.SendTextMessage("Hello, 1.");
+		    await client2.SendTextMessage("Hello, 1.");
 
 		    Console.WriteLine("End");
 	    }
 
 	    private static async Task TestLocal()
 	    {
-		    var loggerFactory = new LoggerFactory();
-		    loggerFactory.AddConsole();
 
-		    var container = new ServiceCollection();
-		    container.AddSingleton<ILoggerFactory>(loggerFactory);
-		    var provider = container.BuildServiceProvider();
-		    // Make Server
-		    var server = new Server(provider);
-		    var loginService = new LocalLoginService(server);
-		    container.AddSingleton<ILoginService>(loginService);
-		    provider = container.BuildServiceProvider();
-		    // Signup
-		    var rsp1 = await loginService.SignupAsync(new SignupRequest {Username = "user1", Password = "123456"});
-		    var rsp2 = await loginService.SignupAsync(new SignupRequest {Username = "user2", Password = "123456"});
-		    // Login
-		    var client1 = new Client(rsp1.UserId, provider);
-		    LocalClientService.Register(client1);
-		    var client2 = new Client(rsp2.UserId, provider);
-		    LocalClientService.Register(client2);
+			var server = new ServerBuilder()
+				.ConfigureLogger(factory => factory.AddConsole(minLevel: LogLevel.Debug))
+                .UseLocal()
+				.Build();
 
-		    await client1.Login("123456");
-		    await client2.Login("123456");
+			// Signup
+			server.Signup(new SignupRequest { Username = "user1", Password = "123456" });
+			server.Signup(new SignupRequest { Username = "user2", Password = "123456" });
 
-		    client2.SendTextMessage("Hello, 1.");
+			// Make Connect
+			var clientBuilder = new ClientBuilder()
+				.ConfigureLogger(factory => factory.AddConsole(minLevel: LogLevel.Debug))
+                .UseLocal(server);
+
+			var client1 = clientBuilder.SetUser(1, "123456").Build();
+			var client2 = clientBuilder.SetUser(2, "123456").Build();
+
+			await client1.Login();
+			await client2.Login();
+		    await client2.SendTextMessage("Hello, 1.");
 
 		    Console.WriteLine("End");
 	    }

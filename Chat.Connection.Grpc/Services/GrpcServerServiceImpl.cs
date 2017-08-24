@@ -12,7 +12,7 @@ namespace Chat.Connection.Grpc
     using Server;
     using Core.Interfaces;
 
-    public class GrpcServerServiceImpl : ChatServerService.ChatServerServiceBase
+    class GrpcServerServiceImpl : ChatServerService.ChatServerServiceBase
     {
         private readonly Server _server;
         private readonly ILogger _logger;
@@ -20,7 +20,7 @@ namespace Chat.Connection.Grpc
         public GrpcServerServiceImpl(
             Server server,
             IServiceProvider serviceProvider,
-            int port = 8080)
+            int port)
         {
             _server = server;
             _logger = serviceProvider.GetService<ILoggerFactory>()?
@@ -37,26 +37,30 @@ namespace Chat.Connection.Grpc
 
         public override async Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
         {
+            await Task.CompletedTask;
+
             _logger?.LogInformation($"New login request from {context.Peer}");
             return _server.Login(request);
         }
 
         public override async Task<Response> RegisterAddress(RegisterAddressRequest request, ServerCallContext context)
         {
-            var port = request.Address;
+			await Task.CompletedTask;
+
+			var port = request.Address;
             var target = context.Peer;
             target = target.Remove(target.LastIndexOf(':') + 1) + port;
 
             var client = new GrpcClientServiceClient(target);
             _server.SetUserClient(request.UserId, client);
-            _logger.LogInformation($"User {request.UserId} register address: {target}");
+            _logger?.LogInformation($"User {request.UserId} register address: {target}");
             return new Response { Success = true };
         }
 
         public override async Task<SendMessageResponse> SendMessage(SendMessageRequest request,
             ServerCallContext context)
         {
-            _server.SendMessageAsync(request.Message);
+            await _server.SendMessageAsync(request.Message);
 
             return new SendMessageResponse
             {
@@ -66,7 +70,9 @@ namespace Chat.Connection.Grpc
 
         public override async Task<SignupResponse> Signup(SignupRequest request, ServerCallContext context)
         {
-            return _server.Signup(request);
+			await Task.CompletedTask;
+
+			return _server.Signup(request);
         }
     }
 }

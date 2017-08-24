@@ -14,14 +14,14 @@ namespace Chat.Client
 
         private IServerService _serverService;
 
-        public Client(long userId, IServiceProvider serviceProvider)
+        public Client(IServiceProvider serviceProvider)
         {
-            UserId = userId;
             _loginService = serviceProvider.GetRequiredService<ILoginService>();
             _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger($"Client {UserId}");
         }
 
-        public long UserId { get; }
+        public long UserId { get; internal set; }
+        internal string Password { get; set; }
 
         private IServerService ServerService
         {
@@ -30,15 +30,16 @@ namespace Chat.Client
             set => _serverService = value;
         }
 
-        public void SendTextMessage(string text)
+        public async Task SendTextMessage(string text)
         {
-            var message = new ChatMessage
+			_logger?.LogInformation($"Send message begin.");
+			var message = new ChatMessage
             {
                 SenderId = UserId,
                 Content = new Content {Text = text}
             };
-            ServerService.SendMessageAsync(message);
-            _logger?.LogInformation($"Send message.");
+            await ServerService.SendMessageAsync(message);
+            _logger?.LogInformation($"Send message end.");
         }
 
         public void InformNewMessage(ChatMessage message)
@@ -49,12 +50,12 @@ namespace Chat.Client
 
         public event EventHandler<ChatMessage> NewMessage;
 
-        public async Task<bool> Login(string password)
+        public async Task<bool> Login()
         {
             var request = new LoginRequest
             {
-                UserId = (int) UserId,
-                Password = password
+                UserId = UserId,
+                Password = Password
             };
             _serverService = await _loginService.LoginAsync(request);
             return _serverService != null;

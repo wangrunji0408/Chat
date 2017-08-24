@@ -15,5 +15,6 @@
     <ProjectReference Include="..\Chat.Server\Chat.Server.csproj" />
     <ProjectReference Include="..\Chat.Core\Chat.Core.csproj" />
     <ProjectReference Include="..\Chat.Connection.Local\Chat.Connection.Local.csproj" />
+    <ProjectReference Include="..\Chat.Connection.Grpc\Chat.Connection.Grpc.csproj" />
   </ItemGroup>
 </Project>

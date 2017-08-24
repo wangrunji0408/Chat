@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using Chat.Core.Models;
 using Grpc.Core;
@@ -8,52 +11,57 @@ using Microsoft.Extensions.Logging;
 
 namespace Chat.Connection.Grpc
 {
+    
     using Client;
     using static SendMessageResponse.Types.Status;
     
-    public class GrpcClientServiceImpl: ChatClientService.ChatClientServiceBase
+    class GrpcClientServiceImpl: ChatClientService.ChatClientServiceBase
     {
         private readonly Client _client;
         private readonly ILogger _logger;
-        readonly int _port;
-
+        internal int Port { get; private set; }
+                           
         public GrpcClientServiceImpl(
             Client client,
-            GrpcServerServiceClient ssc,
             IServiceProvider serviceProvider,
-            int port = 8080)
+            int port)
         {
             _client = client;
-			_port = port;
+			Port = port;
 			_logger = serviceProvider.GetService<ILoggerFactory>()?
                                      .CreateLogger($"GrpcServerService for User {client.UserId}");
 
-            StartGrpcServer(port);
-            RegisterSelf(ssc);
+            StartGrpcServer();
         }
 
-        private void StartGrpcServer(int port)
+        private void StartGrpcServer()
         {
-            var grpcServer = new global::Grpc.Core.Server
-            {
-                Services = { ChatClientService.BindService(this) },
-                Ports = { new ServerPort("localhost", port, ServerCredentials.Insecure) }
-            };
+            if (Port == 0)
+                Port = FreeTcpPort();
+			var grpcServer = new global::Grpc.Core.Server
+			{
+				Services = { ChatClientService.BindService(this) },
+				Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
+			};
             grpcServer.Start();
-            _logger?.LogInformation($"Start gRPC Server @ localhost:{port}");
+            _logger?.LogInformation($"Start gRPC Server @ localhost:{Port}");
         }
 
-        private void RegisterSelf (GrpcServerServiceClient ssc)
-        {
-            var request = new RegisterAddressRequest { UserId = _client.UserId, Address = _port.ToString() };
-            var response = ssc.RegisterAddress(request);
-            if (response.Success == false)
-                throw new Exception($"Failed to register client service. {response.Detail}");
-        }
+		// https://stackoverflow.com/questions/138043/find-the-next-tcp-port-in-net
+		static int FreeTcpPort()
+		{
+			var l = new TcpListener(IPAddress.Loopback, 0);
+			l.Start();
+			int port = ((IPEndPoint)l.LocalEndpoint).Port;
+			l.Stop();
+			return port;
+		}
 
         public override async Task<SendMessageResponse> NewMessage(SendMessageRequest request, ServerCallContext context)
         {
-            _client.InformNewMessage(request.Message);
+			await Task.CompletedTask;
+
+			_client.InformNewMessage(request.Message);
             return new SendMessageResponse{Status = Success};
         }
     }

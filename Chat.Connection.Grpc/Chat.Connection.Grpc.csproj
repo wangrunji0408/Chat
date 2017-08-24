@@ -12,6 +12,7 @@
   <ItemGroup>
     <Folder Include="Grpc\" />
     <Folder Include="Services\" />
+    <Folder Include="Builders\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chat.Core\Chat.Core.csproj" />
