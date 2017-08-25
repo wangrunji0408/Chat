@@ -1,21 +1,37 @@
 ﻿using System;
 namespace Chat.Connection.Local
 {
+    using System.Threading.Tasks;
     using Core.Interfaces;
+    using Core.Models;
     using Server;
 
-    public class LocalLoginService: ILoginService, ILoginListener
+    class LocalLoginService: ILoginService
     {
-        public event EventHandler<(long userId, IClientService service)> NewUserLogin;
+        internal Client.Client Client { get; set; }
 
-        public string ServerName { get; set; }
+		readonly Server _server;
+		public LocalLoginService(Server server)
+		{
+			_server = server;
+		}
 
-        public IServerService Login(long userId)
+        public async Task<IServerService> LoginAsync(LoginRequest request)
         {
-            var client = LocalClientService.GetService(userId);
-			if (NewUserLogin != null)
-                NewUserLogin(this, (userId, client));
-            return LocalServerService.GetService(ServerName, userId);
+            await Task.CompletedTask;
+            var response = _server.Login(request);
+            if (response.Status != LoginResponse.Types.Status.Success)
+                throw new Exception($"Failed to login: {response.Detail}");
+            var userId = request.UserId;
+            var client = new LocalClientService(Client);
+            _server.SetUserClient(userId, client);
+            return new LocalServerService(_server, userId);
+        }
+
+        public async Task<SignupResponse> SignupAsync(SignupRequest request)
+        {
+            await Task.CompletedTask;
+            return _server.Signup(request);
         }
     }
 }

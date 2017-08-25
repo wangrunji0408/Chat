@@ -1,0 +1,180 @@
+﻿syntax = "proto3";
+package chat;
+option csharp_namespace = "Chat.Core.Models";
+
+// To compile:
+// protoc Models.proto --csharp_out=./ --grpc_out=./ --plugin=protoc-gen-grpc=/usr/local/bin/grpc_csharp_plugin
+
+message User
+{
+	int64 id = 1;
+	string username = 2;
+	string password = 3;
+}
+
+message Response
+{
+	bool success = 1;
+	string detail = 2;
+}
+
+message Content
+{
+	string text = 1;
+}
+
+message ChatMessage
+{
+	int64 senderId = 1;
+	string time = 2;
+	Content content = 3;
+	int64 chatroomId = 4;
+}
+
+message SendMessageRequest
+{
+	ChatMessage message = 1;
+}
+
+message SendMessageResponse
+{
+	enum Status
+	{
+		Success = 0;
+		Failed = 1;
+	}
+	Status status = 1;
+	string detail = 2;
+}
+
+message People
+{
+	// Public
+	int32 id = 1;
+	string name = 2;
+	// Server
+	string ip = 101;
+	int32 port = 102;
+	// Private
+	map<int32, Friend> friendById = 201;
+	repeated int64 chatroomIds = 202;
+}
+
+message Friend
+{
+	int32 myId = 1;
+	int32 friendId = 2;
+	repeated string tags = 10;
+	string note = 11;
+	bool blocked = 20;
+	int64 chatroomId = 21;
+}
+
+message Chatroom
+{
+	int64 id = 1;
+	repeated int32 peopleIds = 2;
+	int32 hostId = 3;
+	string name = 4;
+	repeated ChatMessage messages = 10;
+}
+
+message NewChatroomRequest
+{
+	int64 senderId = 1;
+	repeated int32 peopleIds = 2;
+}
+
+message GetChatroomRequest
+{
+	int64 senderId = 1;
+	int64 chatroomId = 2;
+}
+
+message ChatroomResponse
+{
+	bool success = 1;
+	Chatroom chatroom = 2;
+	string detail = 3;
+}
+
+message SignupRequest
+{
+	string username = 1;
+	string password = 2;
+}
+
+message SignupResponse
+{
+	enum Status
+	{
+		Success = 0;
+		UsernameExist = 101;
+		UsernameFormatWrong = 102;
+		PasswordFormatWrong = 103;
+	}
+	Status status = 1;
+	string detail = 2;
+	int64 userId = 3;
+}
+
+message LoginRequest
+{
+	string username = 1;
+	string password = 2;
+	int64 userId = 3;
+}
+
+message LoginResponse
+{
+	enum Status
+	{
+		Success = 0;
+		NoSuchUser = 101;
+		WrongPassword = 102;
+	}
+	Status status = 1;
+	string detail = 2;
+}
+
+message MakeFriendRequest
+{
+	int64 senderId = 1;
+	int64 targetId = 2;
+	string greeting = 3;
+}
+
+message MakeFriendResponse
+{
+	enum Status
+	{
+		Accept = 0;
+		Refuse = 1;
+		AlreadyFriend = 2;
+		UserNotExist = 3;
+	}
+	Status status = 1;
+	string detail = 2;
+}
+
+message GetPeoplesInfoRequest
+{
+	repeated int32 ids = 1;
+}
+
+message GetPeoplesInfoResponse
+{
+	repeated People peoples = 1; 
+}
+
+message FriendNotification
+{
+	enum Type
+	{
+		Login = 0;
+		Logout = 1;
+	}
+	int32 id = 1;
+	Type type = 2;
+}
+

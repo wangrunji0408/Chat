@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+import "Models.proto";
+package chat.grpc;
+option csharp_namespace = "Chat.Connection.Grpc";
+
+// To compile:
+// protoc Protobuf.proto --csharp_out=./ --grpc_out=./ --plugin=protoc-gen-grpc=/usr/local/bin/grpc_csharp_plugin
+
+service ChatServerService
+{
+	rpc Login (LoginRequest) returns (LoginResponse);
+	//rpc Logout (Request) returns (Response);
+    rpc RegisterAddress (RegisterAddressRequest) returns (Response);
+	rpc Signup (SignupRequest) returns (SignupResponse);
+	rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+	//rpc MakeFriend (MakeFriendRequest) returns (MakeFriendResponse);
+	//rpc GetPeoplesInfo (GetPeoplesInfoRequest) returns (stream People);
+	//rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);
+	//rpc GetChatroom (GetChatroomRequest) returns (ChatroomResponse);
+}
+
+service ChatClientService
+{
+	rpc NewMessage (SendMessageRequest) returns (SendMessageResponse);
+}
+
+message RegisterAddressRequest
+{
+    int64 userId = 1;
+    string address = 2;
+}

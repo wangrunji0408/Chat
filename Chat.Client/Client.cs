@@ -1,52 +1,64 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Chat.Core.Interfaces;
+using Chat.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Chat.Client
 {
-    using Core.Interfaces;
-    using Core.Models;
-
     public class Client
     {
-        public long UserId { get; private set; }
+        private readonly ILogger _logger;
+        private readonly ILoginService _loginService;
 
-        public void SendMessage(string message)
+        private IServerService _serverService;
+
+        public Client(IServiceProvider serviceProvider)
         {
-            ServerService.SendMessage(message);
-			_logger?.LogInformation($"Send message.");
-
-		}
-
-        public void InformNewMessage(long senderId, string message)
-        {
-            _logger?.LogInformation($"New message from {senderId}.\n{message}");
-            NewMessage?.Invoke(this, new NewMessageContent { SenderId = senderId, Message = message });
-        }
-
-        public event EventHandler<NewMessageContent> NewMessage; 
-
-        IServerService _serverService;
-        ILoginService _loginService;
-        ILogger _logger;
-
-        IServerService ServerService
-        {
-            get => _serverService ?? throw new NullReferenceException("The client has not login. ServerService is null.");
-            set => _serverService = value;
-        }
-
-        public Client(long userId, IServiceProvider serviceProvider)
-        {
-            UserId = userId;
             _loginService = serviceProvider.GetRequiredService<ILoginService>();
             _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger($"Client {UserId}");
         }
 
-        public bool Login ()
+        public long UserId { get; internal set; }
+        internal string Password { get; set; }
+
+        private IServerService ServerService
         {
-            ServerService = _loginService.Login(UserId);
-            return ServerService != null;
+            get => _serverService ??
+                   throw new NullReferenceException("The client has not login. ServerService is null.");
+            set => _serverService = value;
+        }
+
+        public async Task SendTextMessage(string text)
+        {
+			_logger?.LogInformation($"Send message begin.");
+			var message = new ChatMessage
+            {
+                SenderId = UserId,
+                Content = new Content {Text = text}
+            };
+            await ServerService.SendMessageAsync(message);
+            _logger?.LogInformation($"Send message end.");
+        }
+
+        public void InformNewMessage(ChatMessage message)
+        {
+            _logger?.LogInformation($"New message from {message.SenderId}.\n{message.Content.Text}");
+            NewMessage?.Invoke(this, message);
+        }
+
+        public event EventHandler<ChatMessage> NewMessage;
+
+        public async Task<bool> Login()
+        {
+            var request = new LoginRequest
+            {
+                UserId = UserId,
+                Password = Password
+            };
+            _serverService = await _loginService.LoginAsync(request);
+            return _serverService != null;
         }
     }
 }

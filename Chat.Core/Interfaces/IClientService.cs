@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
+
 namespace Chat.Core.Interfaces
 {
+    using Models;
+
     public interface IClientService
     {
-        void NewMessage(long senderId, string message);
+        Task NewMessageAsync(ChatMessage message);
     }
 }
