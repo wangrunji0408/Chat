@@ -11,7 +11,7 @@ namespace Chat.Client.ConsoleApp
 
     class Program
     {
-        ConsoleOption consoleOption;
+        ConsoleOption copt;
         Client client;
 
         void Signup (SignupOption opt)
@@ -28,7 +28,7 @@ namespace Chat.Client.ConsoleApp
             }
             var builder = new ClientBuilder()
                 .ConfigureLogger(obj => obj.AddConsole())
-                .UseGrpc(consoleOption.ServerAddress)
+                .UseGrpc(copt.ServerAddress, copt.Host, copt.Port)
                 .SetUser(opt.UserId, opt.Password);
             client = builder.Build();
             try 
@@ -56,7 +56,7 @@ namespace Chat.Client.ConsoleApp
 
         void Main (ConsoleOption opt)
         {
-            consoleOption = opt;
+            copt = opt;
             while(true)
             {
                 Console.Write("> ");

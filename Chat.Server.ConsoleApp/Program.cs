@@ -53,7 +53,7 @@ namespace Chat.Server.ConsoleApp
 			consoleOption = opt;
 			server = new ServerBuilder()
 				.ConfigureLogger(factory => factory.AddConsole())
-                .UseGrpc(opt.Port)
+                .UseGrpc(opt.Host, opt.Port)
 				.Build();
 			while (true)
 			{

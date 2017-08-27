@@ -7,19 +7,21 @@ namespace Chat.Connection.Grpc
     class GrpcClientConnectionBuilder : ClientConnectionBuilder
     {
         readonly string _serverAddress;
-        //readonly int _port;
+        readonly string _host;
+        readonly int _port;
 
-        public GrpcClientConnectionBuilder(string serverAddress)
+        public GrpcClientConnectionBuilder(string serverAddress, string host, int port)
         {
             _serverAddress = serverAddress;
-            //_port = port;
+            _host = host;
+            _port = port;
         }
 
         GrpcServerServiceClient ssc;
 
         public override void After(Client.Client client, IServiceProvider provider)
         {
-            var cs = new GrpcClientServiceImpl(client, provider, port: 0);
+            var cs = new GrpcClientServiceImpl(client, provider, _host, _port);
 			ssc.ClientService = cs;
         }
 

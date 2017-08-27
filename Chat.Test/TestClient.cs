@@ -76,10 +76,8 @@ namespace Chat.Test
 	{
 		public TestClient_Grpc()
 		{
-            var serverBuilder = new ServerBuilder().UseGrpc(port:8080);
-			
-            clientBuilder = new ClientBuilder().UseGrpc("localhost:8080");
-
+            var serverBuilder = new ServerBuilder().UseGrpc(host: "localhost", port:8080);
+            clientBuilder = new ClientBuilder().UseGrpc("localhost:8080", host: "localhost", port: 0);
             server = serverBuilder.Build();
 		}
 	}

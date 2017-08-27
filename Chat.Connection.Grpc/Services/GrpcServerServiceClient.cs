@@ -46,7 +46,7 @@ namespace Chat.Connection.Grpc
             var request = new RegisterAddressRequest 
             {
                 UserId = userId, 
-                Address = ClientService.Port.ToString()
+                Address = $"{ClientService.Host}:{ClientService.Port}"
             };
 			var response = await base.RegisterAddressAsync(request);
 			if (response.Success == false)

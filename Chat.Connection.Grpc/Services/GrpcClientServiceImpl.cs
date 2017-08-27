@@ -17,15 +17,17 @@ namespace Chat.Connection.Grpc
     {
         private readonly Client _client;
         private readonly ILogger _logger;
+        internal string Host { get; private set; }
         internal int Port { get; private set; }
                            
         public GrpcClientServiceImpl(
             Client client,
             IServiceProvider serviceProvider,
-            int port)
+            string host, int port)
         {
             _client = client;
 			Port = port;
+            Host = host;
 			_logger = serviceProvider.GetService<ILoggerFactory>()?
                                      .CreateLogger($"GrpcServerService for User {client.UserId}");
 
@@ -39,10 +41,10 @@ namespace Chat.Connection.Grpc
 			var grpcServer = new global::Grpc.Core.Server
 			{
 				Services = { ChatClientService.BindService(this) },
-				Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
+				Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
 			};
             grpcServer.Start();
-            _logger?.LogInformation($"Start gRPC Server @ localhost:{Port}");
+            _logger?.LogInformation($"Start gRPC Server @ {Host}:{Port}");
         }
 
         public override async Task<SendMessageResponse> NewMessage(SendMessageRequest request, ServerCallContext context)

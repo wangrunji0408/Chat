@@ -81,6 +81,7 @@ namespace Chat.Server
         {
             _logger?.LogInformation($"New message from user {message.SenderId}.");
             var forwarding = Task.WhenAll(clients.Values.Select(user => user.NewMessageAsync(message)));
+            // TODO store message for offline users
 		}
     }
 }
