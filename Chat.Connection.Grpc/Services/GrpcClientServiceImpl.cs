@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Sockets;
 using System.Threading.Tasks;
 using Chat.Core.Models;
 using Grpc.Core;
@@ -37,7 +35,7 @@ namespace Chat.Connection.Grpc
         private void StartGrpcServer()
         {
             if (Port == 0)
-                Port = FreeTcpPort();
+                Port = Util.FreeTcpPort();
 			var grpcServer = new global::Grpc.Core.Server
 			{
 				Services = { ChatClientService.BindService(this) },
@@ -46,16 +44,6 @@ namespace Chat.Connection.Grpc
             grpcServer.Start();
             _logger?.LogInformation($"Start gRPC Server @ localhost:{Port}");
         }
-
-		// https://stackoverflow.com/questions/138043/find-the-next-tcp-port-in-net
-		static int FreeTcpPort()
-		{
-			var l = new TcpListener(IPAddress.Loopback, 0);
-			l.Start();
-			int port = ((IPEndPoint)l.LocalEndpoint).Port;
-			l.Stop();
-			return port;
-		}
 
         public override async Task<SendMessageResponse> NewMessage(SendMessageRequest request, ServerCallContext context)
         {

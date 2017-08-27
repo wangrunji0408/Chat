@@ -32,7 +32,7 @@ namespace Chat.Connection.Grpc
                 throw new InvalidOperationException("Can only be login once.");
             var response = await base.LoginAsync(request);
             if(response.Status != LoginResponse.Types.Status.Success)
-                throw new Exception($"Failed to login. {response.Detail}");
+                throw new Exception($"Failed to login. [{response.Status}] {response.Detail}");
             logged = true;
             userId = request.UserId;
 
