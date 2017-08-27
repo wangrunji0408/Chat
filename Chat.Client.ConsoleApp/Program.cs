@@ -14,6 +14,11 @@ namespace Chat.Client.ConsoleApp
         ConsoleOption copt;
         Client client;
 
+        void ListenClientEvents ()
+        {
+            client.NewMessage += (sender, e) => Console.WriteLine($"{e.SenderId}: {e.Content.Text}");
+        }
+
         void Signup (SignupOption opt)
         {
             
@@ -34,6 +39,7 @@ namespace Chat.Client.ConsoleApp
             try 
             {
                 client.Login().Wait();
+                ListenClientEvents();
             }
             catch(Exception e)
             {
@@ -62,7 +68,10 @@ namespace Chat.Client.ConsoleApp
                 Console.Write("> ");
                 try
                 {
-					var args = Console.ReadLine().Split(' ');
+					var cmd = Console.ReadLine();
+					if (string.IsNullOrWhiteSpace(cmd))
+						continue;
+					var args = cmd.Split(' ');
 					Parser.Default
 						  .ParseArguments<SignupOption, LoginOption, SendOption>(args)
 						  .WithParsed<SignupOption>(Signup)

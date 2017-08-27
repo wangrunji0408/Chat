@@ -17,6 +17,7 @@ namespace Chat.Test
 
     public abstract class TestClient_Base
     {
+        protected ILoginService loginService;
         protected ClientBuilder clientBuilder;
         protected Server server;
 
@@ -28,7 +29,7 @@ namespace Chat.Test
 	    [Fact]
         public async Task Login()
         {
-            server.Signup(new SignupRequest{Username = "user1", Password = "123456"});
+            await loginService.SignupAsync(new SignupRequest{Username = "user1", Password = "123456"});
             var client = clientBuilder.SetUser(1, "123456").Build();
             await client.Login();
         }
@@ -36,7 +37,7 @@ namespace Chat.Test
 	    [Fact]
         public async Task Login_WrongPassword()
 	    {
-			server.Signup(new SignupRequest { Username = "user1", Password = "123456" });
+			await loginService.SignupAsync(new SignupRequest { Username = "user1", Password = "123456" });
 			var client = clientBuilder.SetUser(1, "654321").Build();
             await Assert.ThrowsAsync<Exception>(client.Login);
 	    }
@@ -44,8 +45,8 @@ namespace Chat.Test
 		[Fact]
 		public async Task SendMessage()
 		{
-			server.Signup(new SignupRequest { Username = "user1", Password = "123456" });
-			server.Signup(new SignupRequest { Username = "user2", Password = "123456" });
+			await loginService.SignupAsync(new SignupRequest { Username = "user1", Password = "123456" });
+			await loginService.SignupAsync(new SignupRequest { Username = "user2", Password = "123456" });
 			var client1 = clientBuilder.SetUser(1, "123456").Build();
 			var client2 = clientBuilder.SetUser(2, "123456").Build();
             bool recv1 = false;
@@ -68,17 +69,34 @@ namespace Chat.Test
         {
 			var serverBuilder = new ServerBuilder().UseLocal();
 			server = serverBuilder.Build();
+            loginService = LocalConnectionExtension.GetLoginService(server);
 			clientBuilder = new ClientBuilder().UseLocal(server);
         }
     }
 
-	public class TestClient_Grpc : TestClient_Base
+	public class TestClient_Grpc_Local : TestClient_Base
 	{
-		public TestClient_Grpc()
+		public TestClient_Grpc_Local()
 		{
-            var serverBuilder = new ServerBuilder().UseGrpc(host: "localhost", port:8080);
-            clientBuilder = new ClientBuilder().UseGrpc("localhost:8080", host: "localhost", port: 0);
+            const string host = "localhost";
+            const int port = 8080;
+            string target = $"{host}:{port}";
+
+            var serverBuilder = new ServerBuilder().UseGrpc(host, port);
+            clientBuilder = new ClientBuilder().UseGrpc(target, host: "localhost", port: 0);
+            loginService = GrpcConnectionExtension.GetLoginService(target);
             server = serverBuilder.Build();
+		}
+	}
+
+	public class TestClient_Grpc_Remote : TestClient_Base
+	{
+		public TestClient_Grpc_Remote()
+		{
+            const string target = "192.168.31.23:8080";
+            const string localIP = "192.168.31.2";
+			loginService = GrpcConnectionExtension.GetLoginService(target);
+			clientBuilder = new ClientBuilder().UseGrpc(target, host: localIP, port: 0);
 		}
 	}
 }

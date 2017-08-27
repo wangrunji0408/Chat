@@ -1,5 +1,6 @@
 ﻿using Chat.Server;
 using Chat.Client;
+using Chat.Core.Interfaces;
 
 namespace Chat.Connection.Grpc
 {
@@ -13,5 +14,9 @@ namespace Chat.Connection.Grpc
 		{
             return builder.SetConnection(new GrpcClientConnectionBuilder(serverAddress, host, port));
 		}
+        public static ILoginService GetLoginService (string serverAddress)
+        {
+            return new GrpcServerServiceClient(serverAddress);
+        }
     }
 }

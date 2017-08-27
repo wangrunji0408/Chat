@@ -60,7 +60,10 @@ namespace Chat.Server.ConsoleApp
 				Console.Write("> ");
                 try
                 {
-					var args = Console.ReadLine().Split(' ');
+                    var cmd = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(cmd))
+                        continue;
+					var args = cmd.Split(' ');
 					Parser.Default
                           .ParseArguments<SignupOption, DeleteOption, UserInfoOption>(args)
 						  .WithParsed<SignupOption>(Signup)
