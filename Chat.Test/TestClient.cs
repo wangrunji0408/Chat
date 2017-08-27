@@ -57,7 +57,7 @@ namespace Chat.Test
 			await client1.Login();
 			await client2.Login();
             await client2.SendTextMessage(message);
-
+            await Task.Delay(1000); // wait for server forwarding the message
 			Assert.True(recv1);
 			Assert.True(recv2);
 		}
