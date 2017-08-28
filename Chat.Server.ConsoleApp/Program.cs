@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using CommandLine;
 using Chat.Server.ConsoleApp.Options;
 using System.Collections.Generic;
+using NLog.Extensions.Logging;
 
 namespace Chat.Server.ConsoleApp
 {
@@ -53,11 +54,7 @@ namespace Chat.Server.ConsoleApp
 		{
             consoleOption = opt;
             var builder = new ServerBuilder()
-                .ConfigureLogger(cfg => cfg
-                                 .AddFilter((category, level) => 
-                                            !category.StartsWith("Microsoft.EntityFrameworkCore", StringComparison.CurrentCulture) 
-                                            || level >= LogLevel.Warning)
-                                 .AddConsole())
+                .ConfigureLogger(cfg => cfg.AddNLog().ConfigureNLog("nlog.config"))
                 .UseGrpc(opt.Host, opt.Port);
             if (opt.Database == ConsoleOption.DbType.InMemory)
                 builder.UseInMemory();

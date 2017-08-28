@@ -7,12 +7,14 @@ namespace Chat.Server
 {
     public sealed class ServerBuilder
     {
+		readonly ILoggerFactory _loggerFactory;
 		readonly IServiceCollection _serviceCollection;
         ServerConnectionBuilder _connection;
 
         public ServerBuilder()
         {
 			_serviceCollection = new ServiceCollection();
+            _serviceCollection.AddSingleton<ILoggerFactory>(_loggerFactory = new LoggerFactory());
         }
 
 		public Server Build()
@@ -31,9 +33,10 @@ namespace Chat.Server
 			return this;
 		}
 
-        public ServerBuilder ConfigureLogger(Action<ILoggingBuilder> config)
+        public ServerBuilder ConfigureLogger(Action<ILoggerFactory> config)
 		{
-            _serviceCollection.AddLogging(config);
+            config(_loggerFactory);
+            //_serviceCollection.Configure(config);
 			return this;
 		}
 

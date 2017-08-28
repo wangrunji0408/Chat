@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using CommandLine;
+using NLog.Extensions.Logging;
 
 namespace Chat.Client.ConsoleApp
 {
@@ -32,7 +33,7 @@ namespace Chat.Client.ConsoleApp
                 return;
             }
             var builder = new ClientBuilder()
-                .ConfigureLogger(obj => obj.AddConsole())
+                .ConfigureLogger(obj => obj.AddNLog().ConfigureNLog("nlog.config"))
                 .UseGrpc(copt.ServerAddress, copt.Host, copt.Port)
                 .SetUser(opt.UserId, opt.Password);
             client = builder.Build();
