@@ -56,4 +56,16 @@ namespace Chat.Server.ConsoleApp.Options
 		[Value(0)]
 		public long UserId { get; set; }
 	}
+
+	[Verb("message")]
+	class MessageOption
+	{
+		[Value(0)]
+		public int Count { get; set; }
+	}
+
+	[Verb("database_clear")]
+	class DatabaseClearOption
+	{
+	}
 }

@@ -24,6 +24,11 @@ namespace Chat.Server
             _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Server");
             _context = serviceProvider.GetRequiredService<ServerDbContext>();
             _context.Database.EnsureCreated();
+            try {_context.Database.Migrate();}
+            catch(Exception e)
+            {
+                _logger?.LogError(e, "An error occurred when database migrate.");
+            }
         }
 
         public LoginResponse Login (LoginRequest request)
@@ -68,6 +73,13 @@ namespace Chat.Server
             return _context.Find<User>(userId);
         }
 
+        public void ClearDatabase ()
+        {
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
+            _context.Database.Migrate();
+        }
+
         public void SetUserClient (long userId, IClientService client)
         {
             _logger?.LogInformation($"User {userId} set client.");
@@ -83,8 +95,16 @@ namespace Chat.Server
         public async Task SendMessageAsync(ChatMessage message)
         {
             _logger?.LogInformation($"New message from user {message.SenderId}.");
+            message.Time = DateTimeOffset.Now.ToString();
+            _context.Add(message);
+            await _context.SaveChangesAsync();
             var forwarding = Task.WhenAll(clients.Values.Select(user => user.NewMessageAsync(message)));
             // TODO store message for offline users
 		}
+
+        public Task<List<ChatMessage>> GetRecentMessages (int count)
+        {
+            return _context.Messages.OrderByDescending(m => m.Time).Take(count).ToListAsync();
+        }
     }
 }

@@ -35,8 +35,7 @@ namespace Chat.Server
 
         public ServerBuilder ConfigureLogger(Action<ILoggerFactory> config)
 		{
-            config(_loggerFactory);
-            //_serviceCollection.Configure(config);
+            _serviceCollection.Configure(config);
 			return this;
 		}
 
