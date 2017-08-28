@@ -5,13 +5,6 @@ option csharp_namespace = "Chat.Core.Models";
 // To compile:
 // protoc Models.proto --csharp_out=./ --grpc_out=./ --plugin=protoc-gen-grpc=/usr/local/bin/grpc_csharp_plugin
 
-message User
-{
-	int64 id = 1;
-	string username = 2;
-	string password = 3;
-}
-
 message Response
 {
 	bool success = 1;

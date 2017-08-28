@@ -1,13 +1,30 @@
 ##开发文档 Note
 
+###v0.4
+
+#### Target
+
+服务端领域类及持久化存储
+
+* 持久化：EntityFrameworkCore + SQLite
+* 配置：Microsoft.Extensions.Configuration
+* 日志文件：NLog
+
 ### v0.3
+
+完成时间：2017.08.28。累计时间：19h
 
 #### Target
 
 客户端与网络测试
 
-* Console，MacApp
-* 局域网，外网测试
+* Console，~~MacApp~~
+* 局域网，~~外网测试~~
+
+#### Problem
+
+* Mac客户端无法正常工作。gRPC库不完全支持Xamarin.Mac。
+* 技术所限，尚未进行外网测试。
 
 ### v0.2
 

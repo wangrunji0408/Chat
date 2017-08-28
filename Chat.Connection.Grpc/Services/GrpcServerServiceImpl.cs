@@ -20,19 +20,21 @@ namespace Chat.Connection.Grpc
         public GrpcServerServiceImpl(
             Server server,
             IServiceProvider serviceProvider,
-            int port)
+            string host, int port)
         {
             _server = server;
             _logger = serviceProvider.GetService<ILoggerFactory>()?
                 .CreateLogger<GrpcServerServiceImpl>();
-
+            
+			if (port == 0)
+				port = Util.FreeTcpPort();
             var grpcServer = new global::Grpc.Core.Server
             {
                 Services = {ChatServerService.BindService(this)},
-                Ports = {new ServerPort("localhost", port, ServerCredentials.Insecure)}
+                Ports = {new ServerPort(host, port, ServerCredentials.Insecure)}
             };
             grpcServer.Start();
-            _logger?.LogInformation($"Start gRPC Server @ localhost:{port}");
+            _logger?.LogInformation($"Start gRPC Server @ {host}:{port}");
         }
 
         public override async Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
@@ -47,9 +49,9 @@ namespace Chat.Connection.Grpc
         {
 			await Task.CompletedTask;
 
-			var port = request.Address;
-            var target = context.Peer;
-            target = target.Remove(target.LastIndexOf(':') + 1) + port;
+			var target = request.Address;
+            //var target = context.Peer;
+            //target = target.Remove(target.LastIndexOf(':') + 1) + port;
 
             var client = new GrpcClientServiceClient(target);
             _server.SetUserClient(request.UserId, client);

@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Collections.Generic;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Chat.Server
 {
-    using System.Threading.Tasks;
     using Core.Interfaces;
     using Core.Models;
+    using Domains;
 
     public class Server
     {
@@ -57,18 +59,29 @@ namespace Chat.Server
 			};
         }
 
+        public User GetUser (long userId)
+        {
+            users.TryGetValue(userId, out var user);
+            return user;
+        }
+
         public void SetUserClient (long userId, IClientService client)
         {
             _logger?.LogInformation($"User {userId} set client.");
-            clients.Add(userId, client);
+            if(clients.ContainsKey(userId))
+            {
+                _logger?.LogWarning($"User {userId} already has a connection, it will be reset.");
+                clients[userId] = client;
+            }
+            else
+                clients.Add(userId, client);
         }
 
         public async Task SendMessageAsync(ChatMessage message)
         {
-            _logger?.LogInformation($"New message from user {message.SenderId}. Sending...");
-			foreach (var pair in clients)
-                await pair.Value.NewMessageAsync(message);
-			_logger?.LogInformation($"Send complete.");
+            _logger?.LogInformation($"New message from user {message.SenderId}.");
+            var forwarding = Task.WhenAll(clients.Values.Select(user => user.NewMessageAsync(message)));
+            // TODO store message for offline users
 		}
     }
 }

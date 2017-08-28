@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Server.ConsoleApp", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Connection.Grpc", "Chat.Connection.Grpc\Chat.Connection.Grpc.csproj", "{70736058-0E08-4C10-8836-E826DFED3C9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Client.ConsoleApp", "Chat.Client.ConsoleApp\Chat.Client.ConsoleApp.csproj", "{45E30B06-85F2-449E-A094-BD72BD5758BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.Client.Mac", "Chat.Client.Mac\Chat.Client.Mac.csproj", "{EDE7522D-7F69-4D30-BAB1-ED0F9F5663A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,5 +53,13 @@ Global
 		{70736058-0E08-4C10-8836-E826DFED3C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70736058-0E08-4C10-8836-E826DFED3C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70736058-0E08-4C10-8836-E826DFED3C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E30B06-85F2-449E-A094-BD72BD5758BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E30B06-85F2-449E-A094-BD72BD5758BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E30B06-85F2-449E-A094-BD72BD5758BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E30B06-85F2-449E-A094-BD72BD5758BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDE7522D-7F69-4D30-BAB1-ED0F9F5663A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE7522D-7F69-4D30-BAB1-ED0F9F5663A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE7522D-7F69-4D30-BAB1-ED0F9F5663A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE7522D-7F69-4D30-BAB1-ED0F9F5663A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -32,14 +32,13 @@ namespace Chat.Client
 
         public async Task SendTextMessage(string text)
         {
-			_logger?.LogInformation($"Send message begin.");
 			var message = new ChatMessage
             {
                 SenderId = UserId,
                 Content = new Content {Text = text}
             };
             await ServerService.SendMessageAsync(message);
-            _logger?.LogInformation($"Send message end.");
+            _logger?.LogInformation($"Sent message.");
         }
 
         public void InformNewMessage(ChatMessage message)
