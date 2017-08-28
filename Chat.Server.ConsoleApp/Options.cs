@@ -11,6 +11,15 @@ namespace Chat.Server.ConsoleApp.Options
         public string Host { get; set; }
         [Option('p', "port", HelpText = "Grpc service port.")]
         public int Port { get; set; }
+        [Option('d', "database", Default = DbType.InMemory, HelpText = "Database type.")]
+        public DbType Database { get; set; }
+        [Option("sqlite", Default = "DataSource=data.db", HelpText = "SQLite connection string.")]
+        public string SQLiteString { get; set; }
+
+        public enum DbType
+        {
+            InMemory, SQLite
+        }
 
 		[Usage(ApplicationAlias = "dotnet run")]
 		public static IEnumerable<Example> Examples

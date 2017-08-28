@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Chat.Server
 {
@@ -15,20 +16,21 @@ namespace Chat.Server
     public class Server
     {
         Dictionary<long, IClientService> clients = new Dictionary<long, IClientService>();
-        Dictionary<long, User> users = new Dictionary<long, User>();
-        Dictionary<string, long> usernameToId = new Dictionary<string, long>();
         readonly ILogger _logger;
+        readonly ServerDbContext _context;
 
         public Server(IServiceProvider serviceProvider)
         {
             _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Server");
+            _context = serviceProvider.GetRequiredService<ServerDbContext>();
+            _context.Database.EnsureCreated();
         }
 
         public LoginResponse Login (LoginRequest request)
         {
-            if(!users.ContainsKey(request.UserId))
+            var user = _context.Find<User>(request.UserId);
+            if(user == null)
                 return new LoginResponse { Status = LoginResponse.Types.Status.NoSuchUser };
-            var user = users[request.UserId];
             if (user.Password != request.Password)
                 return new LoginResponse { Status = LoginResponse.Types.Status.WrongPassword };
             _logger?.LogInformation($"User {request.UserId} login.");
@@ -40,29 +42,30 @@ namespace Chat.Server
 
         public SignupResponse Signup (SignupRequest request)
         {
-            if (usernameToId.ContainsKey(request.Username))
+            bool exist = _context.Users.Any(u => u.Username == request.Username);
+            if (exist)
                 return new SignupResponse { Status = SignupResponse.Types.Status.UsernameExist };
-            var userId = users.Count + 1;
+            
 			var user = new User
 			{
-                Id = userId,
 				Username = request.Username,
 				Password = request.Password
 			};
-			users.Add(user.Id, user);
-            usernameToId.Add(user.Username, user.Id);
-            _logger?.LogInformation($"New user {userId} signup.");
+
+            _context.Add(user);
+            _context.SaveChanges();
+
+            _logger?.LogInformation($"New user {user.Id} signup.");
             return new SignupResponse
 			{
                 Status = SignupResponse.Types.Status.Success,
-                UserId = userId
+                UserId = user.Id
 			};
         }
 
         public User GetUser (long userId)
         {
-            users.TryGetValue(userId, out var user);
-            return user;
+            return _context.Find<User>(userId);
         }
 
         public void SetUserClient (long userId, IClientService client)

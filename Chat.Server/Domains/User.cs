@@ -6,6 +6,7 @@ namespace Chat.Server.Domains
         public long Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public DateTimeOffset CreateTime { get; set; }
 
         public override string ToString()
         {

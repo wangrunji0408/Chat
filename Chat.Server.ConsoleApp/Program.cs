@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Chat.Connection.Grpc;
 using Chat.Core.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using CommandLine;
 using Chat.Server.ConsoleApp.Options;
 using System.Collections.Generic;
@@ -50,11 +51,20 @@ namespace Chat.Server.ConsoleApp
 
 		void Main(ConsoleOption opt)
 		{
-			consoleOption = opt;
-			server = new ServerBuilder()
-				.ConfigureLogger(factory => factory.AddConsole())
-                .UseGrpc(opt.Host, opt.Port)
-				.Build();
+            consoleOption = opt;
+            var builder = new ServerBuilder()
+                .ConfigureLogger(cfg => cfg
+                                 .AddFilter((category, level) => 
+                                            !category.StartsWith("Microsoft.EntityFrameworkCore", StringComparison.CurrentCulture) 
+                                            || level >= LogLevel.Warning)
+                                 .AddConsole())
+                .UseGrpc(opt.Host, opt.Port);
+            if (opt.Database == ConsoleOption.DbType.InMemory)
+                builder.UseInMemory();
+            else if(opt.Database == ConsoleOption.DbType.SQLite)
+                builder.UseSQLite(opt.SQLiteString);
+            server = builder.Build();
+
 			while (true)
 			{
 				Console.Write("> ");

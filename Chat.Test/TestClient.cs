@@ -67,7 +67,7 @@ namespace Chat.Test
     {
         public TestClient_Local()
         {
-			var serverBuilder = new ServerBuilder().UseLocal();
+            var serverBuilder = new ServerBuilder().UseLocal().UseInMemory();
 			server = serverBuilder.Build();
             loginService = LocalConnectionExtension.GetLoginService(server);
 			clientBuilder = new ClientBuilder().UseLocal(server);
@@ -82,7 +82,7 @@ namespace Chat.Test
             const int port = 8080;
             string target = $"{host}:{port}";
 
-            var serverBuilder = new ServerBuilder().UseGrpc(host, port);
+            var serverBuilder = new ServerBuilder().UseGrpc(host, port).UseInMemory();
             clientBuilder = new ClientBuilder().UseGrpc(target, host: "localhost", port: 0);
             loginService = GrpcConnectionExtension.GetLoginService(target);
             server = serverBuilder.Build();

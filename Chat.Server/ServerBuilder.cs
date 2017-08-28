@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -6,20 +7,19 @@ namespace Chat.Server
 {
     public sealed class ServerBuilder
     {
-		readonly ILoggerFactory _loggerFactory;
 		readonly IServiceCollection _serviceCollection;
         ServerConnectionBuilder _connection;
 
         public ServerBuilder()
         {
 			_serviceCollection = new ServiceCollection();
-			_loggerFactory = new LoggerFactory();
-			_serviceCollection.AddSingleton(_loggerFactory);
         }
 
 		public Server Build()
 		{
 			var provider = _serviceCollection.BuildServiceProvider();
+            if (provider.GetService<ServerDbContext>() == null)
+                throw new InvalidOperationException("ConfigureDbContext must be called before build.");
             var server = new Server(provider);
 			_connection?.After(server, provider);
 			return server;
@@ -31,10 +31,26 @@ namespace Chat.Server
 			return this;
 		}
 
-		public ServerBuilder ConfigureLogger(Action<ILoggerFactory> config)
+        public ServerBuilder ConfigureLogger(Action<ILoggingBuilder> config)
 		{
-			config(_loggerFactory);
+            _serviceCollection.AddLogging(config);
 			return this;
+		}
+
+        public ServerBuilder ConfigureDbContext (Action<DbContextOptionsBuilder> optionsAction)
+        {
+            _serviceCollection.AddDbContext<ServerDbContext>(optionsAction);
+            return this;
+        }
+
+		public ServerBuilder UseSQLite(string connectionString)
+		{
+            return ConfigureDbContext(builder => builder.UseSqlite(connectionString));
+		}
+
+		public ServerBuilder UseInMemory(string name = "database")
+		{
+            return ConfigureDbContext(builder => builder.UseInMemoryDatabase(name));
 		}
     }
 
