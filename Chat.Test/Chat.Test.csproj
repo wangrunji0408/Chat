@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Chat.Connection.Local\Chat.Connection.Local.csproj" />
     <ProjectReference Include="..\Chat.Connection.Grpc\Chat.Connection.Grpc.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Client\" />
+    <Folder Include="Server\" />
+  </ItemGroup>
 </Project>

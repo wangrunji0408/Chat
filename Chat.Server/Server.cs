@@ -46,9 +46,23 @@ namespace Chat.Server
 
         public SignupResponse Signup (SignupRequest request)
         {
-            bool exist = _context.Users.Any(u => u.Username == request.Username);
-            if (exist)
-                return new SignupResponse { Status = SignupResponse.Types.Status.UsernameExist };
+            if (!StringCheckService.CheckUsername(request.Username, out var reason))
+                return new SignupResponse 
+                {
+                    Status = SignupResponse.Types.Status.UsernameFormatWrong,
+                    Detail = reason
+                };
+            if(!StringCheckService.CheckPassword(request.Password, out reason))
+				return new SignupResponse
+				{
+                    Status = SignupResponse.Types.Status.PasswordFormatWrong,
+					Detail = reason
+				};
+            if (_context.Users.Any(u => u.Username == request.Username))
+                return new SignupResponse 
+                { 
+                    Status = SignupResponse.Types.Status.UsernameExist 
+                };
             
 			var user = new User
 			{
