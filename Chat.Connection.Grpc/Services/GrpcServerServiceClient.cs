@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
@@ -56,6 +58,17 @@ namespace Chat.Connection.Grpc
         public async Task<SignupResponse> SignupAsync(SignupRequest request)
         {
             return await base.SignupAsync(request);
+        }
+
+        public IAsyncEnumerable<ChatMessage> GetMessageAfter(DateTimeOffset time)
+        {
+			var request = new GetMessagesRequest
+			{
+				UserId = userId,
+				AfterTimeUnix = time.ToUnixTimeSeconds()
+			};
+            var reader = base.GetMessages(request).ResponseStream;
+            return AsyncEnumerable.CreateEnumerable(() => reader);
         }
     }
 }

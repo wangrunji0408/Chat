@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,6 +60,12 @@ namespace Chat.Client
             };
             _serverService = await _loginService.LoginAsync(request);
             return _serverService != null;
+        }
+
+        public Task<List<ChatMessage>> GetMessages ()
+        {
+            var time = DateTimeOffset.MinValue;
+            return _serverService.GetMessageAfter(time).ToList();
         }
     }
 }

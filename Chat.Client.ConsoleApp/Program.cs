@@ -25,6 +25,14 @@ namespace Chat.Client.ConsoleApp
             
         }
 
+        void ShowMessages ()
+        {
+            Console.WriteLine("Unread messages:");
+            var messages = client.GetMessages().Result;
+            foreach(var message in messages)
+                Console.WriteLine($"{message.SenderId}: {message.Content.Text}");
+        }
+
         void Login (LoginOption opt)
         {
             if(client != null)
@@ -41,6 +49,7 @@ namespace Chat.Client.ConsoleApp
             {
                 client.Login().Wait();
                 ListenClientEvents();
+                ShowMessages();
             }
             catch(Exception e)
             {

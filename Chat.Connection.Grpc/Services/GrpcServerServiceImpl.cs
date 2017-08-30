@@ -76,5 +76,13 @@ namespace Chat.Connection.Grpc
 
 			return _server.Signup(request);
         }
+
+        public override async Task GetMessages(GetMessagesRequest request, IServerStreamWriter<ChatMessage> responseStream, ServerCallContext context)
+        {
+            var afterTime = DateTimeOffset.FromUnixTimeSeconds(request.AfterTimeUnix);
+            var messages = await _server.GetMessagesAfter(request.UserId, afterTime);
+            foreach (var message in messages)
+                await responseStream.WriteAsync(message);
+        }
     }
 }

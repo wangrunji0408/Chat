@@ -24,19 +24,23 @@ namespace Chat.Connection.Grpc {
           string.Concat(
             "Cg5Qcm90b2J1Zi5wcm90bxIJY2hhdC5ncnBjGgxNb2RlbHMucHJvdG8iOQoW",
             "UmVnaXN0ZXJBZGRyZXNzUmVxdWVzdBIOCgZ1c2VySWQYASABKAMSDwoHYWRk",
-            "cmVzcxgCIAEoCTKEAgoRQ2hhdFNlcnZlclNlcnZpY2USMAoFTG9naW4SEi5j",
-            "aGF0LkxvZ2luUmVxdWVzdBoTLmNoYXQuTG9naW5SZXNwb25zZRJECg9SZWdp",
-            "c3RlckFkZHJlc3MSIS5jaGF0LmdycGMuUmVnaXN0ZXJBZGRyZXNzUmVxdWVz",
-            "dBoOLmNoYXQuUmVzcG9uc2USMwoGU2lnbnVwEhMuY2hhdC5TaWdudXBSZXF1",
-            "ZXN0GhQuY2hhdC5TaWdudXBSZXNwb25zZRJCCgtTZW5kTWVzc2FnZRIYLmNo",
-            "YXQuU2VuZE1lc3NhZ2VSZXF1ZXN0GhkuY2hhdC5TZW5kTWVzc2FnZVJlc3Bv",
-            "bnNlMlYKEUNoYXRDbGllbnRTZXJ2aWNlEkEKCk5ld01lc3NhZ2USGC5jaGF0",
-            "LlNlbmRNZXNzYWdlUmVxdWVzdBoZLmNoYXQuU2VuZE1lc3NhZ2VSZXNwb25z",
-            "ZUIXqgIUQ2hhdC5Db25uZWN0aW9uLkdycGNiBnByb3RvMw=="));
+            "cmVzcxgCIAEoCSI7ChJHZXRNZXNzYWdlc1JlcXVlc3QSDgoGdXNlcklkGAEg",
+            "ASgDEhUKDWFmdGVyVGltZVVuaXgYAiABKAMyxwIKEUNoYXRTZXJ2ZXJTZXJ2",
+            "aWNlEjAKBUxvZ2luEhIuY2hhdC5Mb2dpblJlcXVlc3QaEy5jaGF0LkxvZ2lu",
+            "UmVzcG9uc2USRAoPUmVnaXN0ZXJBZGRyZXNzEiEuY2hhdC5ncnBjLlJlZ2lz",
+            "dGVyQWRkcmVzc1JlcXVlc3QaDi5jaGF0LlJlc3BvbnNlEjMKBlNpZ251cBIT",
+            "LmNoYXQuU2lnbnVwUmVxdWVzdBoULmNoYXQuU2lnbnVwUmVzcG9uc2USQgoL",
+            "U2VuZE1lc3NhZ2USGC5jaGF0LlNlbmRNZXNzYWdlUmVxdWVzdBoZLmNoYXQu",
+            "U2VuZE1lc3NhZ2VSZXNwb25zZRJBCgtHZXRNZXNzYWdlcxIdLmNoYXQuZ3Jw",
+            "Yy5HZXRNZXNzYWdlc1JlcXVlc3QaES5jaGF0LkNoYXRNZXNzYWdlMAEyVgoR",
+            "Q2hhdENsaWVudFNlcnZpY2USQQoKTmV3TWVzc2FnZRIYLmNoYXQuU2VuZE1l",
+            "c3NhZ2VSZXF1ZXN0GhkuY2hhdC5TZW5kTWVzc2FnZVJlc3BvbnNlQheqAhRD",
+            "aGF0LkNvbm5lY3Rpb24uR3JwY2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Chat.Core.Models.ModelsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Connection.Grpc.RegisterAddressRequest), global::Chat.Connection.Grpc.RegisterAddressRequest.Parser, new[]{ "UserId", "Address" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Connection.Grpc.RegisterAddressRequest), global::Chat.Connection.Grpc.RegisterAddressRequest.Parser, new[]{ "UserId", "Address" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Connection.Grpc.GetMessagesRequest), global::Chat.Connection.Grpc.GetMessagesRequest.Parser, new[]{ "UserId", "AfterTimeUnix" }, null, null, null)
           }));
     }
     #endregion
@@ -180,6 +184,151 @@ namespace Chat.Connection.Grpc {
           }
           case 18: {
             Address = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetMessagesRequest : pb::IMessage<GetMessagesRequest> {
+    private static readonly pb::MessageParser<GetMessagesRequest> _parser = new pb::MessageParser<GetMessagesRequest>(() => new GetMessagesRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetMessagesRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Chat.Connection.Grpc.ProtobufReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetMessagesRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetMessagesRequest(GetMessagesRequest other) : this() {
+      userId_ = other.userId_;
+      afterTimeUnix_ = other.afterTimeUnix_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetMessagesRequest Clone() {
+      return new GetMessagesRequest(this);
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 1;
+    private long userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "afterTimeUnix" field.</summary>
+    public const int AfterTimeUnixFieldNumber = 2;
+    private long afterTimeUnix_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long AfterTimeUnix {
+      get { return afterTimeUnix_; }
+      set {
+        afterTimeUnix_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetMessagesRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetMessagesRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (UserId != other.UserId) return false;
+      if (AfterTimeUnix != other.AfterTimeUnix) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (UserId != 0L) hash ^= UserId.GetHashCode();
+      if (AfterTimeUnix != 0L) hash ^= AfterTimeUnix.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(UserId);
+      }
+      if (AfterTimeUnix != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(AfterTimeUnix);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      }
+      if (AfterTimeUnix != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AfterTimeUnix);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetMessagesRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.UserId != 0L) {
+        UserId = other.UserId;
+      }
+      if (other.AfterTimeUnix != 0L) {
+        AfterTimeUnix = other.AfterTimeUnix;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            UserId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            AfterTimeUnix = input.ReadInt64();
             break;
           }
         }

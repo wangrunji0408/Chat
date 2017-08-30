@@ -18,6 +18,11 @@ namespace Chat.Connection.Local
             _userId = userId;
         }
 
+        public IAsyncEnumerable<ChatMessage> GetMessageAfter(DateTimeOffset time)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task SendMessageAsync(ChatMessage message)
         {
             await _server.SendMessageAsync(message);

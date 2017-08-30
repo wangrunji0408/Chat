@@ -40,7 +40,7 @@ namespace Chat.Server.ConsoleApp
 
         void ShowUserInfo(UserInfoOption opt)
         {
-            var user = server.GetUser(opt.UserId);
+            var user = server.GetUserNullable(opt.UserId);
             if(user == null)
             {
                 Console.Error.WriteLine($"User {opt.UserId} does not exist.");

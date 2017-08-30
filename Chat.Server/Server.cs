@@ -15,7 +15,6 @@ namespace Chat.Server
 
     public class Server
     {
-        Dictionary<long, IClientService> clients = new Dictionary<long, IClientService>();
         readonly ILogger _logger;
         readonly ServerDbContext _context;
 
@@ -68,9 +67,15 @@ namespace Chat.Server
 			};
         }
 
-        public User GetUser (long userId)
+        public User GetUserNullable (long userId)
         {
             return _context.Find<User>(userId);
+        }
+
+        User GetUser (long userId)
+        {
+            return GetUserNullable(userId)
+                ?? throw new InvalidOperationException($"User {userId} does not exist.");
         }
 
         public void ClearDatabase ()
@@ -83,13 +88,10 @@ namespace Chat.Server
         public void SetUserClient (long userId, IClientService client)
         {
             _logger?.LogInformation($"User {userId} set client.");
-            if(clients.ContainsKey(userId))
-            {
+            var user = GetUser(userId);
+            if(user.ClientService != null)
                 _logger?.LogWarning($"User {userId} already has a connection, it will be reset.");
-                clients[userId] = client;
-            }
-            else
-                clients.Add(userId, client);
+            user.ClientService = client;
         }
 
         public async Task SendMessageAsync(ChatMessage message)
@@ -98,8 +100,15 @@ namespace Chat.Server
             message.Time = DateTimeOffset.Now.ToString();
             _context.Add(message);
             await _context.SaveChangesAsync();
-            var forwarding = Task.WhenAll(clients.Values.Select(user => user.NewMessageAsync(message)));
+            var ids = await _context.Users.Select(u => u.Id).ToListAsync();
+            var forwarding = Task.WhenAll(ids.Select(id => _context.Users.Find(id).NewMessageAsync(message)));
             // TODO store message for offline users
+		}
+
+		public Task<List<ChatMessage>> GetMessagesAfter(long userId, DateTimeOffset time)
+		{
+            var user = GetUser(userId);
+            return user.GetMessagesAfter(time, _context.Messages);
 		}
 
         public Task<List<ChatMessage>> GetRecentMessages (int count)
