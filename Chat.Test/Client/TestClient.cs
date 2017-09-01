@@ -61,6 +61,26 @@ namespace Chat.Test
 			Assert.True(recv1);
 			Assert.True(recv2);
 		}
+
+		[Fact]
+		public async Task GetMessageAfter()
+		{
+			await loginService.SignupAsync(new SignupRequest { Username = "user1", Password = "123456" });
+			var client1 = clientBuilder.SetUser(1, "123456").Build();
+            await client1.Login();
+			await client1.SendTextMessage("Message1");
+            await Task.Delay(500);
+            var t0 = DateTimeOffset.Now;
+			await client1.SendTextMessage("Message2");
+			await client1.SendTextMessage("Message3");
+            var messages = await client1.GetMessages(new GetMessagesRequest
+            {
+                AfterTimeUnix = t0.ToUnixTimeSeconds()
+            });
+            Assert.Null(messages.Find(m => m.Content.Text == "Message1"));
+			Assert.NotNull(messages.Find(m => m.Content.Text == "Message2"));
+            Assert.NotNull(messages.Find(m => m.Content.Text == "Message3"));
+		}
     }
 
     public class TestClient_Local: TestClient_Base
@@ -89,14 +109,14 @@ namespace Chat.Test
 		}
 	}
 
-	public class TestClient_Grpc_Remote : TestClient_Base
-	{
-		public TestClient_Grpc_Remote()
-		{
-            const string target = "192.168.31.23:8080";
-            const string localIP = "192.168.31.2";
-			loginService = GrpcConnectionExtension.GetLoginService(target);
-			clientBuilder = new ClientBuilder().UseGrpc(target, host: localIP, port: 0);
-		}
-	}
+	//public class TestClient_Grpc_Remote : TestClient_Base
+	//{
+	//	public TestClient_Grpc_Remote()
+	//	{
+ //           const string target = "192.168.31.23:8080";
+ //           const string localIP = "192.168.31.2";
+	//		loginService = GrpcConnectionExtension.GetLoginService(target);
+	//		clientBuilder = new ClientBuilder().UseGrpc(target, host: localIP, port: 0);
+	//	}
+	//}
 }

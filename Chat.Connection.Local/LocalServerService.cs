@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Chat.Connection.Local
 {
@@ -18,9 +19,12 @@ namespace Chat.Connection.Local
             _userId = userId;
         }
 
-        public IAsyncEnumerable<ChatMessage> GetMessageAfter(DateTimeOffset time)
+
+        public IAsyncEnumerable<ChatMessage> GetMessages(GetMessagesRequest request)
         {
-            throw new NotImplementedException();
+            return _server.GetMessages(request)
+						  .ToAsyncEnumerable()
+						  .SelectMany(list => list.ToAsyncEnumerable());
         }
 
         public async Task SendMessageAsync(ChatMessage message)

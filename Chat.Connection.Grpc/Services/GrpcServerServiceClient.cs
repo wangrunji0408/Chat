@@ -60,13 +60,8 @@ namespace Chat.Connection.Grpc
             return await base.SignupAsync(request);
         }
 
-        public IAsyncEnumerable<ChatMessage> GetMessageAfter(DateTimeOffset time)
+        public IAsyncEnumerable<ChatMessage> GetMessages(GetMessagesRequest request)
         {
-			var request = new GetMessagesRequest
-			{
-				UserId = userId,
-				AfterTimeUnix = time.ToUnixTimeSeconds()
-			};
             var reader = base.GetMessages(request).ResponseStream;
             return AsyncEnumerable.CreateEnumerable(() => reader);
         }

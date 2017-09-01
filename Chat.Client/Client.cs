@@ -62,10 +62,10 @@ namespace Chat.Client
             return _serverService != null;
         }
 
-        public Task<List<ChatMessage>> GetMessages ()
+        public Task<List<ChatMessage>> GetMessages (GetMessagesRequest request)
         {
-            var time = DateTimeOffset.MinValue;
-            return _serverService.GetMessageAfter(time).ToList();
+            request.UserId = UserId;
+            return _serverService.GetMessages(request).ToList();
         }
     }
 }

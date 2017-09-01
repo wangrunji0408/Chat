@@ -79,8 +79,7 @@ namespace Chat.Connection.Grpc
 
         public override async Task GetMessages(GetMessagesRequest request, IServerStreamWriter<ChatMessage> responseStream, ServerCallContext context)
         {
-            var afterTime = DateTimeOffset.FromUnixTimeSeconds(request.AfterTimeUnix);
-            var messages = await _server.GetMessagesAfter(request.UserId, afterTime);
+            var messages = await _server.GetMessages(request);
             foreach (var message in messages)
                 await responseStream.WriteAsync(message);
         }

@@ -119,9 +119,10 @@ namespace Chat.Server
             // TODO store message for offline users
 		}
 
-		public Task<List<ChatMessage>> GetMessagesAfter(long userId, DateTimeOffset time)
+        public Task<List<ChatMessage>> GetMessages(GetMessagesRequest request)
 		{
-            var user = GetUser(userId);
+            var user = GetUser(request.UserId);
+            var time = DateTimeOffset.FromUnixTimeSeconds(request.AfterTimeUnix);
             return user.GetMessagesAfter(time, _context.Messages);
 		}
 

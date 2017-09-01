@@ -59,8 +59,9 @@ namespace Chat.Core.Models {
             "R2V0UGVvcGxlc0luZm9SZXNwb25zZRIdCgdwZW9wbGVzGAEgAygLMgwuY2hh",
             "dC5QZW9wbGUibAoSRnJpZW5kTm90aWZpY2F0aW9uEgoKAmlkGAEgASgFEisK",
             "BHR5cGUYAiABKA4yHS5jaGF0LkZyaWVuZE5vdGlmaWNhdGlvbi5UeXBlIh0K",
-            "BFR5cGUSCQoFTG9naW4QABIKCgZMb2dvdXQQAUITqgIQQ2hhdC5Db3JlLk1v",
-            "ZGVsc2IGcHJvdG8z"));
+            "BFR5cGUSCQoFTG9naW4QABIKCgZMb2dvdXQQASI7ChJHZXRNZXNzYWdlc1Jl",
+            "cXVlc3QSDgoGdXNlcklkGAEgASgDEhUKDWFmdGVyVGltZVVuaXgYAiABKANC",
+            "E6oCEENoYXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -83,7 +84,8 @@ namespace Chat.Core.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.MakeFriendResponse), global::Chat.Core.Models.MakeFriendResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.MakeFriendResponse.Types.Status) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeoplesInfoRequest), global::Chat.Core.Models.GetPeoplesInfoRequest.Parser, new[]{ "Ids" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeoplesInfoResponse), global::Chat.Core.Models.GetPeoplesInfoResponse.Parser, new[]{ "Peoples" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.FriendNotification), global::Chat.Core.Models.FriendNotification.Parser, new[]{ "Id", "Type" }, null, new[]{ typeof(global::Chat.Core.Models.FriendNotification.Types.Type) }, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.FriendNotification), global::Chat.Core.Models.FriendNotification.Parser, new[]{ "Id", "Type" }, null, new[]{ typeof(global::Chat.Core.Models.FriendNotification.Types.Type) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetMessagesRequest), global::Chat.Core.Models.GetMessagesRequest.Parser, new[]{ "UserId", "AfterTimeUnix" }, null, null, null)
           }));
     }
     #endregion
@@ -3288,6 +3290,151 @@ namespace Chat.Core.Models {
 
     }
     #endregion
+
+  }
+
+  public sealed partial class GetMessagesRequest : pb::IMessage<GetMessagesRequest> {
+    private static readonly pb::MessageParser<GetMessagesRequest> _parser = new pb::MessageParser<GetMessagesRequest>(() => new GetMessagesRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetMessagesRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[20]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetMessagesRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetMessagesRequest(GetMessagesRequest other) : this() {
+      userId_ = other.userId_;
+      afterTimeUnix_ = other.afterTimeUnix_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetMessagesRequest Clone() {
+      return new GetMessagesRequest(this);
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 1;
+    private long userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "afterTimeUnix" field.</summary>
+    public const int AfterTimeUnixFieldNumber = 2;
+    private long afterTimeUnix_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long AfterTimeUnix {
+      get { return afterTimeUnix_; }
+      set {
+        afterTimeUnix_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetMessagesRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetMessagesRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (UserId != other.UserId) return false;
+      if (AfterTimeUnix != other.AfterTimeUnix) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (UserId != 0L) hash ^= UserId.GetHashCode();
+      if (AfterTimeUnix != 0L) hash ^= AfterTimeUnix.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(UserId);
+      }
+      if (AfterTimeUnix != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(AfterTimeUnix);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      }
+      if (AfterTimeUnix != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AfterTimeUnix);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetMessagesRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.UserId != 0L) {
+        UserId = other.UserId;
+      }
+      if (other.AfterTimeUnix != 0L) {
+        AfterTimeUnix = other.AfterTimeUnix;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            UserId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            AfterTimeUnix = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
 
   }
 

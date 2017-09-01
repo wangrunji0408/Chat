@@ -8,6 +8,6 @@ namespace Chat.Core.Interfaces
     public interface IServerService
     {
         Task SendMessageAsync(ChatMessage message);
-        IAsyncEnumerable<ChatMessage> GetMessageAfter(DateTimeOffset time);
+        IAsyncEnumerable<ChatMessage> GetMessages(GetMessagesRequest request);
     }
 }
