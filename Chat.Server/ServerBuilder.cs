@@ -7,7 +7,7 @@ namespace Chat.Server
 {
     public sealed class ServerBuilder
     {
-		readonly ILoggerFactory _loggerFactory;
+		ILoggerFactory _loggerFactory;
 		readonly IServiceCollection _serviceCollection;
         ServerConnectionBuilder _connection;
 
@@ -35,7 +35,13 @@ namespace Chat.Server
 
         public ServerBuilder ConfigureLogger(Action<ILoggerFactory> config)
 		{
-            _serviceCollection.Configure(config);
+            config(_loggerFactory);
+			return this;
+		}
+
+		public ServerBuilder UseLoggerFactory(ILoggerFactory factory)
+		{
+            _serviceCollection.AddSingleton(_loggerFactory = factory);
 			return this;
 		}
 

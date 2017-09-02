@@ -82,7 +82,7 @@ namespace Chat.Server.ConsoleApp
 
             consoleOption = opt;
             var builder = new ServerBuilder()
-                .ConfigureLogger(cfg => cfg.AddNLog().ConfigureNLog(NlogConfigFile))
+                .UseLoggerFactory(lf)
                 .UseGrpc(opt.Host, opt.Port);
             if (opt.Database == ConsoleOption.DbType.InMemory)
                 builder.UseInMemory();

@@ -58,7 +58,7 @@ message Friend
 	int64 chatroomId = 21;
 }
 
-message Chatroom
+message ChatroomInfo
 {
 	int64 id = 1;
 	repeated int64 peopleIds = 2;
@@ -81,7 +81,7 @@ message GetChatroomRequest
 message ChatroomResponse
 {
 	bool success = 1;
-	Chatroom chatroom = 2;
+	ChatroomInfo chatroom = 2;
 	string detail = 3;
 }
 

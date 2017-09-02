@@ -22,6 +22,7 @@ namespace Chat.Server
         {
             _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Server");
             _context = serviceProvider.GetRequiredService<ServerDbContext>();
+            _context.ServiceProvider = serviceProvider;
             _context.Database.EnsureCreated();
             try {_context.Database.Migrate();}
             catch(Exception e)

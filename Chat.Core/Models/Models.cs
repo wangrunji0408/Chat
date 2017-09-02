@@ -33,35 +33,35 @@ namespace Chat.Core.Models {
             "CgdTdWNjZXNzEAASCgoGRmFpbGVkEAEiJgoGUGVvcGxlEgoKAmlkGAEgASgD",
             "EhAKCHVzZXJuYW1lGAIgASgJImkKBkZyaWVuZBIMCgRteUlkGAEgASgFEhAK",
             "CGZyaWVuZElkGAIgASgFEgwKBHRhZ3MYCiADKAkSDAoEbm90ZRgLIAEoCRIP",
-            "CgdibG9ja2VkGBQgASgIEhIKCmNoYXRyb29tSWQYFSABKAMiRwoIQ2hhdHJv",
-            "b20SCgoCaWQYASABKAMSEQoJcGVvcGxlSWRzGAIgAygDEg4KBmhvc3RJZBgD",
-            "IAEoAxIMCgRuYW1lGAQgASgJIjkKEk5ld0NoYXRyb29tUmVxdWVzdBIQCghz",
-            "ZW5kZXJJZBgBIAEoAxIRCglwZW9wbGVJZHMYAiADKAUiOgoSR2V0Q2hhdHJv",
-            "b21SZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhIKCmNoYXRyb29tSWQYAiAB",
-            "KAMiVQoQQ2hhdHJvb21SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEiAKCGNo",
-            "YXRyb29tGAIgASgLMg4uY2hhdC5DaGF0cm9vbRIOCgZkZXRhaWwYAyABKAki",
-            "MwoNU2lnbnVwUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29y",
-            "ZBgCIAEoCSK5AQoOU2lnbnVwUmVzcG9uc2USKwoGc3RhdHVzGAEgASgOMhsu",
-            "Y2hhdC5TaWdudXBSZXNwb25zZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJEg4K",
-            "BnVzZXJJZBgDIAEoAyJaCgZTdGF0dXMSCwoHU3VjY2VzcxAAEhEKDVVzZXJu",
-            "YW1lRXhpc3QQZRIXChNVc2VybmFtZUZvcm1hdFdyb25nEGYSFwoTUGFzc3dv",
-            "cmRGb3JtYXRXcm9uZxBnIkIKDExvZ2luUmVxdWVzdBIQCgh1c2VybmFtZRgB",
-            "IAEoCRIQCghwYXNzd29yZBgCIAEoCRIOCgZ1c2VySWQYAyABKAMihQEKDUxv",
-            "Z2luUmVzcG9uc2USKgoGc3RhdHVzGAEgASgOMhouY2hhdC5Mb2dpblJlc3Bv",
-            "bnNlLlN0YXR1cxIOCgZkZXRhaWwYAiABKAkiOAoGU3RhdHVzEgsKB1N1Y2Nl",
-            "c3MQABIOCgpOb1N1Y2hVc2VyEGUSEQoNV3JvbmdQYXNzd29yZBBmIkkKEU1h",
-            "a2VGcmllbmRSZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElk",
-            "GAIgASgDEhAKCGdyZWV0aW5nGAMgASgJIpwBChJNYWtlRnJpZW5kUmVzcG9u",
-            "c2USLwoGc3RhdHVzGAEgASgOMh8uY2hhdC5NYWtlRnJpZW5kUmVzcG9uc2Uu",
-            "U3RhdHVzEg4KBmRldGFpbBgCIAEoCSJFCgZTdGF0dXMSCgoGQWNjZXB0EAAS",
-            "CgoGUmVmdXNlEAESEQoNQWxyZWFkeUZyaWVuZBACEhAKDFVzZXJOb3RFeGlz",
-            "dBADIiQKFUdldFBlb3BsZXNJbmZvUmVxdWVzdBILCgNpZHMYASADKAUiNwoW",
-            "R2V0UGVvcGxlc0luZm9SZXNwb25zZRIdCgdwZW9wbGVzGAEgAygLMgwuY2hh",
-            "dC5QZW9wbGUibAoSRnJpZW5kTm90aWZpY2F0aW9uEgoKAmlkGAEgASgFEisK",
-            "BHR5cGUYAiABKA4yHS5jaGF0LkZyaWVuZE5vdGlmaWNhdGlvbi5UeXBlIh0K",
-            "BFR5cGUSCQoFTG9naW4QABIKCgZMb2dvdXQQASI7ChJHZXRNZXNzYWdlc1Jl",
-            "cXVlc3QSDgoGdXNlcklkGAEgASgDEhUKDWFmdGVyVGltZVVuaXgYAiABKANC",
-            "E6oCEENoYXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
+            "CgdibG9ja2VkGBQgASgIEhIKCmNoYXRyb29tSWQYFSABKAMiSwoMQ2hhdHJv",
+            "b21JbmZvEgoKAmlkGAEgASgDEhEKCXBlb3BsZUlkcxgCIAMoAxIOCgZob3N0",
+            "SWQYAyABKAMSDAoEbmFtZRgEIAEoCSI5ChJOZXdDaGF0cm9vbVJlcXVlc3QS",
+            "EAoIc2VuZGVySWQYASABKAMSEQoJcGVvcGxlSWRzGAIgAygFIjoKEkdldENo",
+            "YXRyb29tUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxISCgpjaGF0cm9vbUlk",
+            "GAIgASgDIlkKEENoYXRyb29tUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIk",
+            "CghjaGF0cm9vbRgCIAEoCzISLmNoYXQuQ2hhdHJvb21JbmZvEg4KBmRldGFp",
+            "bBgDIAEoCSIzCg1TaWdudXBSZXF1ZXN0EhAKCHVzZXJuYW1lGAEgASgJEhAK",
+            "CHBhc3N3b3JkGAIgASgJIrkBCg5TaWdudXBSZXNwb25zZRIrCgZzdGF0dXMY",
+            "ASABKA4yGy5jaGF0LlNpZ251cFJlc3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwY",
+            "AiABKAkSDgoGdXNlcklkGAMgASgDIloKBlN0YXR1cxILCgdTdWNjZXNzEAAS",
+            "EQoNVXNlcm5hbWVFeGlzdBBlEhcKE1VzZXJuYW1lRm9ybWF0V3JvbmcQZhIX",
+            "ChNQYXNzd29yZEZvcm1hdFdyb25nEGciQgoMTG9naW5SZXF1ZXN0EhAKCHVz",
+            "ZXJuYW1lGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEg4KBnVzZXJJZBgDIAEo",
+            "AyKFAQoNTG9naW5SZXNwb25zZRIqCgZzdGF0dXMYASABKA4yGi5jaGF0Lkxv",
+            "Z2luUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSI4CgZTdGF0dXMS",
+            "CwoHU3VjY2VzcxAAEg4KCk5vU3VjaFVzZXIQZRIRCg1Xcm9uZ1Bhc3N3b3Jk",
+            "EGYiSQoRTWFrZUZyaWVuZFJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSEAoI",
+            "dGFyZ2V0SWQYAiABKAMSEAoIZ3JlZXRpbmcYAyABKAkinAEKEk1ha2VGcmll",
+            "bmRSZXNwb25zZRIvCgZzdGF0dXMYASABKA4yHy5jaGF0Lk1ha2VGcmllbmRS",
+            "ZXNwb25zZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJIkUKBlN0YXR1cxIKCgZB",
+            "Y2NlcHQQABIKCgZSZWZ1c2UQARIRCg1BbHJlYWR5RnJpZW5kEAISEAoMVXNl",
+            "ck5vdEV4aXN0EAMiJAoVR2V0UGVvcGxlc0luZm9SZXF1ZXN0EgsKA2lkcxgB",
+            "IAMoBSI3ChZHZXRQZW9wbGVzSW5mb1Jlc3BvbnNlEh0KB3Blb3BsZXMYASAD",
+            "KAsyDC5jaGF0LlBlb3BsZSJsChJGcmllbmROb3RpZmljYXRpb24SCgoCaWQY",
+            "ASABKAUSKwoEdHlwZRgCIAEoDjIdLmNoYXQuRnJpZW5kTm90aWZpY2F0aW9u",
+            "LlR5cGUiHQoEVHlwZRIJCgVMb2dpbhAAEgoKBkxvZ291dBABIjsKEkdldE1l",
+            "c3NhZ2VzUmVxdWVzdBIOCgZ1c2VySWQYASABKAMSFQoNYWZ0ZXJUaW1lVW5p",
+            "eBgCIAEoA0ITqgIQQ2hhdC5Db3JlLk1vZGVsc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -72,7 +72,7 @@ namespace Chat.Core.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageResponse), global::Chat.Core.Models.SendMessageResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.SendMessageResponse.Types.Status) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.People), global::Chat.Core.Models.People.Parser, new[]{ "Id", "Username" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Friend), global::Chat.Core.Models.Friend.Parser, new[]{ "MyId", "FriendId", "Tags", "Note", "Blocked", "ChatroomId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Chatroom), global::Chat.Core.Models.Chatroom.Parser, new[]{ "Id", "PeopleIds", "HostId", "Name" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomInfo), global::Chat.Core.Models.ChatroomInfo.Parser, new[]{ "Id", "PeopleIds", "HostId", "Name" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.NewChatroomRequest), global::Chat.Core.Models.NewChatroomRequest.Parser, new[]{ "SenderId", "PeopleIds" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetChatroomRequest), global::Chat.Core.Models.GetChatroomRequest.Parser, new[]{ "SenderId", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomResponse), global::Chat.Core.Models.ChatroomResponse.Parser, new[]{ "Success", "Chatroom", "Detail" }, null, null, null),
@@ -1266,10 +1266,10 @@ namespace Chat.Core.Models {
 
   }
 
-  public sealed partial class Chatroom : pb::IMessage<Chatroom> {
-    private static readonly pb::MessageParser<Chatroom> _parser = new pb::MessageParser<Chatroom>(() => new Chatroom());
+  public sealed partial class ChatroomInfo : pb::IMessage<ChatroomInfo> {
+    private static readonly pb::MessageParser<ChatroomInfo> _parser = new pb::MessageParser<ChatroomInfo>(() => new ChatroomInfo());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Chatroom> Parser { get { return _parser; } }
+    public static pb::MessageParser<ChatroomInfo> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -1282,14 +1282,14 @@ namespace Chat.Core.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Chatroom() {
+    public ChatroomInfo() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Chatroom(Chatroom other) : this() {
+    public ChatroomInfo(ChatroomInfo other) : this() {
       id_ = other.id_;
       peopleIds_ = other.peopleIds_.Clone();
       hostId_ = other.hostId_;
@@ -1297,8 +1297,8 @@ namespace Chat.Core.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Chatroom Clone() {
-      return new Chatroom(this);
+    public ChatroomInfo Clone() {
+      return new ChatroomInfo(this);
     }
 
     /// <summary>Field number for the "id" field.</summary>
@@ -1346,11 +1346,11 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Chatroom);
+      return Equals(other as ChatroomInfo);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Chatroom other) {
+    public bool Equals(ChatroomInfo other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1413,7 +1413,7 @@ namespace Chat.Core.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Chatroom other) {
+    public void MergeFrom(ChatroomInfo other) {
       if (other == null) {
         return;
       }
@@ -1790,9 +1790,9 @@ namespace Chat.Core.Models {
 
     /// <summary>Field number for the "chatroom" field.</summary>
     public const int ChatroomFieldNumber = 2;
-    private global::Chat.Core.Models.Chatroom chatroom_;
+    private global::Chat.Core.Models.ChatroomInfo chatroom_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Chat.Core.Models.Chatroom Chatroom {
+    public global::Chat.Core.Models.ChatroomInfo Chatroom {
       get { return chatroom_; }
       set {
         chatroom_ = value;
@@ -1884,7 +1884,7 @@ namespace Chat.Core.Models {
       }
       if (other.chatroom_ != null) {
         if (chatroom_ == null) {
-          chatroom_ = new global::Chat.Core.Models.Chatroom();
+          chatroom_ = new global::Chat.Core.Models.ChatroomInfo();
         }
         Chatroom.MergeFrom(other.Chatroom);
       }
@@ -1907,7 +1907,7 @@ namespace Chat.Core.Models {
           }
           case 18: {
             if (chatroom_ == null) {
-              chatroom_ = new global::Chat.Core.Models.Chatroom();
+              chatroom_ = new global::Chat.Core.Models.ChatroomInfo();
             }
             input.ReadMessage(chatroom_);
             break;

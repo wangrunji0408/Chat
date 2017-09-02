@@ -7,16 +7,18 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace Chat.Server.Domains
 {
-    public class User
+    public class User: DomainBase
     {
         public long Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTimeOffset CreateTime { get; set; } = DateTimeOffset.Now;
         public DateTimeOffset LastLoginTime { get; set; }
+        public ICollection<UserChatroom> UserChatrooms { get; set; }
 
         IClientService _clientService;
         [NotMapped]
