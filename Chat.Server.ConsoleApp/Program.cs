@@ -77,8 +77,9 @@ namespace Chat.Server.ConsoleApp
 		{
             var lf = new LoggerFactory();
 			lf.AddNLog().ConfigureNLog(NlogConfigFile);
-            _logger = lf.CreateLogger("Server.Console");
-            _cmdlogger = lf.CreateLogger("Server.Console.Commands");
+            _logger = lf.CreateLogger("Chat.Server.Console");
+            _cmdlogger = lf.CreateLogger("Chat.Server.Console.Commands");
+            GrpcConnectionExtension.SetLogger(lf);
 
             consoleOption = opt;
             var builder = new ServerBuilder()
