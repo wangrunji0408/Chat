@@ -37,6 +37,7 @@ namespace Chat.Client
 			var message = new ChatMessage
             {
                 SenderId = UserId,
+                ChatroomId = 1,
                 Content = new Content {Text = text}
             };
             await ServerService.SendMessageAsync(message);

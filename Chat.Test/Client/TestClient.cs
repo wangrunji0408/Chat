@@ -69,7 +69,7 @@ namespace Chat.Test
 			var client1 = clientBuilder.SetUser(1, "123456").Build();
             await client1.Login();
 			await client1.SendTextMessage("Message1");
-            await Task.Delay(500);
+            await Task.Delay(1000);
             var t0 = DateTimeOffset.Now;
 			await client1.SendTextMessage("Message2");
 			await client1.SendTextMessage("Message3");

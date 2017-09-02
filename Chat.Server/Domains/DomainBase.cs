@@ -13,10 +13,12 @@ namespace Chat.Server.Domains
             {
                 var type = GetType();
                 var id = (long)type.GetProperty("Id").GetValue(this);
-                var className = type.Name;
+                var className = type.FullName;
                 return $"{className} {id}";
             }
         }
+
+        internal ServerDbContext _context;
 
         public void SetServices (IServiceProvider provider)
         {

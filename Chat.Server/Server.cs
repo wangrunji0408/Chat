@@ -18,6 +18,8 @@ namespace Chat.Server
         readonly ILogger _logger;
         readonly ServerDbContext _context;
 
+        readonly UserService _userService;
+
         public Server(IServiceProvider serviceProvider)
         {
             _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server");
@@ -29,57 +31,28 @@ namespace Chat.Server
             {
                 _logger?.LogError(e, "An error occurred when database migrate. It's normal when using InMemory database.");
             }
+
+            _userService = new UserService(serviceProvider);
+            EnsureGlobalChatroomCreated();
+        }
+
+        void EnsureGlobalChatroomCreated ()
+        {
+            if (_context.Find<Chatroom>(1L) != null)
+                return;
+            var chatroom = new Chatroom();
+            _context.Add(chatroom);
+            _context.SaveChanges();
         }
 
         public LoginResponse Login (LoginRequest request)
         {
-            var user = _context.Find<User>(request.UserId);
-            if(user == null)
-                return new LoginResponse { Status = LoginResponse.Types.Status.NoSuchUser };
-            if (user.Password != request.Password)
-                return new LoginResponse { Status = LoginResponse.Types.Status.WrongPassword };
-            _logger?.LogInformation($"User {request.UserId} login.");
-            return new LoginResponse 
-            {
-                Status = LoginResponse.Types.Status.Success
-            };
+            return _userService.Login(request);
         }
 
         public SignupResponse Signup (SignupRequest request)
         {
-            if (!StringCheckService.CheckUsername(request.Username, out var reason))
-                return new SignupResponse 
-                {
-                    Status = SignupResponse.Types.Status.UsernameFormatWrong,
-                    Detail = reason
-                };
-            if(!StringCheckService.CheckPassword(request.Password, out reason))
-				return new SignupResponse
-				{
-                    Status = SignupResponse.Types.Status.PasswordFormatWrong,
-					Detail = reason
-				};
-            if (_context.Users.Any(u => u.Username == request.Username))
-                return new SignupResponse 
-                { 
-                    Status = SignupResponse.Types.Status.UsernameExist 
-                };
-            
-			var user = new User
-			{
-				Username = request.Username,
-				Password = request.Password
-			};
-
-            _context.Add(user);
-            _context.SaveChanges();
-
-            _logger?.LogInformation($"New user {user.Id} signup.");
-            return new SignupResponse
-			{
-                Status = SignupResponse.Types.Status.Success,
-                UserId = user.Id
-			};
+            return _userService.Signup(request);
         }
 
         public User GetUserNullable (long userId)
@@ -102,29 +75,21 @@ namespace Chat.Server
 
         public void SetUserClient (long userId, IClientService client)
         {
-            _logger?.LogInformation($"User {userId} set client.");
-            var user = GetUser(userId);
-            if(user.ClientService != null)
-                _logger?.LogWarning($"User {userId} already has a connection, it will be reset.");
-            user.ClientService = client;
+            GetUser(userId).ClientService = client;
         }
 
         public async Task SendMessageAsync(ChatMessage message)
         {
-            _logger?.LogInformation($"New message from user {message.SenderId}.");
-            message.Time = DateTimeOffset.Now.ToString();
-            _context.Add(message);
-            await _context.SaveChangesAsync();
-            var ids = await _context.Users.Select(u => u.Id).ToListAsync();
-            var forwarding = Task.WhenAll(ids.Select(id => _context.Users.Find(id).NewMessageAsync(message)));
-            // TODO store message for offline users
+            var chatroom = await _context.Chatrooms.FindAsync(message.ChatroomId)
+                                   ?? throw new ArgumentException($"Chatroom {message.ChatroomId} does not exist.");
+            await chatroom.NewMessage(message);
 		}
 
         public Task<List<ChatMessage>> GetMessages(GetMessagesRequest request)
 		{
             var user = GetUser(request.UserId);
             var time = DateTimeOffset.FromUnixTimeSeconds(request.AfterTimeUnix);
-            return user.GetMessagesAfter(time, _context.Messages);
+            return user.GetMessagesAfter(time);
 		}
 
         public Task<List<ChatMessage>> GetRecentMessages (int count)

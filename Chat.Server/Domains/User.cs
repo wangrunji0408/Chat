@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
+using Microsoft.Extensions.Logging;
 
 namespace Chat.Server.Domains
 {
@@ -27,24 +28,29 @@ namespace Chat.Server.Domains
             get => _clientService;
             set
             {
-                _clientService = value;
-                OnClientServiceChanged();
+				_logger?.LogInformation($"Set client.");
+                if(_clientService != null)
+                    _logger?.LogWarning($"Already has a connection, it will be reset.");
+				_clientService = value;
             }
         }
 
         internal async Task NewMessageAsync (ChatMessage message)
         {
-            await _clientService.NewMessageAsync(message);
+            await _clientService?.NewMessageAsync(message);
         }
 
-        internal Task<List<ChatMessage>> GetMessagesAfter (DateTimeOffset time, IQueryable<ChatMessage> messageSet)
+        internal Task<List<ChatMessage>> GetMessagesAfter (DateTimeOffset time)
         {
-            return messageSet.Where(m => m.CreateTime >= time).ToListAsync();
+            return _context.Messages.Where(m => m.CreateTime >= time).ToListAsync();
         }
 
-        async Task OnClientServiceChanged ()
+        internal Task<List<long>> GetChatrooomIds ()
         {
-            
+            return _context.Set<UserChatroom>()
+                           .Where(uc => uc.UserId == Id)
+                           .Select(uc => uc.ChatroomId)
+                           .ToListAsync();
         }
 
         public override string ToString()

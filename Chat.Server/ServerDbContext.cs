@@ -41,7 +41,11 @@ namespace Chat.Server
         {
             var obj =  base.Find<TEntity>(keyValues);
             var domain = obj as DomainBase;
-            domain?.SetServices(ServiceProvider);
+            if(domain != null)
+            {
+				domain.SetServices(ServiceProvider);
+				domain._context = this;
+            }
             return obj;
         }
     }
