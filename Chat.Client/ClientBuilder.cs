@@ -10,7 +10,7 @@ namespace Chat.Client
         long _userId;
         string _username;
         string _password;
-        readonly ILoggerFactory _loggerFactory;
+        ILoggerFactory _loggerFactory;
         readonly IServiceCollection _serviceCollection;
         ClientConnectionBuilder _connection;
 
@@ -54,6 +54,12 @@ namespace Chat.Client
             config(_loggerFactory);
             return this;
         }
+
+		public ClientBuilder UseLoggerFactory(ILoggerFactory factory)
+		{
+			_serviceCollection.AddSingleton(_loggerFactory = factory);
+			return this;
+		}
     }
 
     public abstract class ClientConnectionBuilder

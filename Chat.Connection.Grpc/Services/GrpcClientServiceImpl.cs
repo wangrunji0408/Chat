@@ -29,7 +29,7 @@ namespace Chat.Connection.Grpc
 			Port = port;
             Host = host;
 			_logger = serviceProvider.GetService<ILoggerFactory>()?
-                                     .CreateLogger($"GrpcServerService for User {client.UserId}");
+                                     .CreateLogger($"Chat.GrpcServerService(UserId:{client.UserId})");
 
             StartGrpcServer();
         }

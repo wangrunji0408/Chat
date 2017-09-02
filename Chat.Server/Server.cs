@@ -20,14 +20,14 @@ namespace Chat.Server
 
         public Server(IServiceProvider serviceProvider)
         {
-            _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Server");
+            _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server");
             _context = serviceProvider.GetRequiredService<ServerDbContext>();
             _context.ServiceProvider = serviceProvider;
             _context.Database.EnsureCreated();
             try {_context.Database.Migrate();}
             catch(Exception e)
             {
-                _logger?.LogError(e, "An error occurred when database migrate.");
+                _logger?.LogError(e, "An error occurred when database migrate. It's normal when using InMemory database.");
             }
         }
 

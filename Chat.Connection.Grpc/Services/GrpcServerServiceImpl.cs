@@ -24,7 +24,7 @@ namespace Chat.Connection.Grpc
         {
             _server = server;
             _logger = serviceProvider.GetService<ILoggerFactory>()?
-                .CreateLogger<GrpcServerServiceImpl>();
+                .CreateLogger("$Chat.GrpcServerService");
             
 			if (port == 0)
 				port = Util.FreeTcpPort();

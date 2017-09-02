@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using CommandLine;
 using NLog.Extensions.Logging;
+using Chat.Core.Models;
 
 namespace Chat.Client.ConsoleApp
 {
@@ -12,7 +13,12 @@ namespace Chat.Client.ConsoleApp
 
     class Program
     {
-        ConsoleOption copt;
+		const string NlogConfigFile = "nlog.config";
+        ILoggerFactory _loggerFactory;
+		ILogger _logger;
+		ILogger _cmdlogger;
+
+		ConsoleOption copt;
         Client client;
 
         void ListenClientEvents ()
@@ -28,7 +34,11 @@ namespace Chat.Client.ConsoleApp
         void ShowMessages ()
         {
             Console.WriteLine("Unread messages:");
-            var messages = client.GetMessages().Result;
+            var request = new GetMessagesRequest
+            {
+                AfterTimeUnix = DateTimeOffset.Now.ToUnixTimeSeconds()
+            };
+            var messages = client.GetMessages(request).Result;
             foreach(var message in messages)
                 Console.WriteLine($"{message.SenderId}: {message.Content.Text}");
         }
@@ -41,7 +51,7 @@ namespace Chat.Client.ConsoleApp
                 return;
             }
             var builder = new ClientBuilder()
-                .ConfigureLogger(obj => obj.AddNLog().ConfigureNLog("nlog.config"))
+                .UseLoggerFactory(_loggerFactory)
                 .UseGrpc(copt.ServerAddress, copt.Host, copt.Port)
                 .SetUser(opt.UserId, opt.Password);
             client = builder.Build();
@@ -72,6 +82,12 @@ namespace Chat.Client.ConsoleApp
 
         void Main (ConsoleOption opt)
         {
+            _loggerFactory = new LoggerFactory();
+			_loggerFactory.AddNLog().ConfigureNLog(NlogConfigFile);
+			_logger = _loggerFactory.CreateLogger("Chat.Client.Console");
+			_cmdlogger = _loggerFactory.CreateLogger("Chat.Client.Console.Commands");
+			GrpcConnectionExtension.SetLogger(_loggerFactory);
+
             copt = opt;
             while(true)
             {
@@ -81,11 +97,12 @@ namespace Chat.Client.ConsoleApp
 					var cmd = Console.ReadLine();
 					if (string.IsNullOrWhiteSpace(cmd))
 						continue;
+                    _cmdlogger.LogTrace(cmd);
 					var args = cmd.Split(' ');
-					Parser.Default
-						  .ParseArguments<SignupOption, LoginOption, SendOption>(args)
-						  .WithParsed<SignupOption>(Signup)
-						  .WithParsed<LoginOption>(Login)
+                    Parser.Default
+                          .ParseArguments<SignupOption, LoginOption, SendOption>(args)
+                          .WithParsed<SignupOption>(Signup)
+                          .WithParsed<LoginOption>(Login)
 						  .WithParsed<SendOption>(Send)
 						  .WithNotParsed(ParseFailed);
                 }
