@@ -18,8 +18,18 @@
     <PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-beta5" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="log\internal-nlog.txt" />
+    <None Remove="data.db" />
+    <None Remove="data1.db" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="nlog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Options\" />
+    <Folder Include="Options\User\" />
+    <Folder Include="Options\Chatroom\" />
   </ItemGroup>
 </Project>

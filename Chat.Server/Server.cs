@@ -66,6 +66,15 @@ namespace Chat.Server
                 ?? throw new InvalidOperationException($"User {userId} does not exist.");
         }
 
+        public Chatroom GetChatroomNullable (long chatroomId)
+        {
+            return _context.Find<Chatroom>(chatroomId);
+        }
+		public List<Chatroom> GetChatrooms()
+		{
+            return _context.Chatrooms.ToList();
+		}
+
         public void ClearDatabase ()
         {
             _context.Database.EnsureDeleted();
