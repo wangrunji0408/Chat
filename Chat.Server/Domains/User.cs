@@ -14,12 +14,14 @@ namespace Chat.Server.Domains
 {
     public class User: DomainBase
     {
-        public long Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTimeOffset CreateTime { get; set; } = DateTimeOffset.Now;
         public DateTimeOffset LastLoginTime { get; set; }
         public ICollection<UserChatroom> UserChatrooms { get; set; }
+
+        [NotMapped]
+        public IEnumerable<long> ChatroomIds => UserChatrooms.Select(uc => uc.ChatroomId);
 
         IClientService _clientService;
         [NotMapped]
@@ -38,19 +40,6 @@ namespace Chat.Server.Domains
         internal async Task NewMessageAsync (ChatMessage message)
         {
             await _clientService?.NewMessageAsync(message);
-        }
-
-        internal Task<List<ChatMessage>> GetMessagesAfter (DateTimeOffset time)
-        {
-            return _context.Messages.Where(m => m.CreateTime >= time).ToListAsync();
-        }
-
-        internal Task<List<long>> GetChatrooomIds ()
-        {
-            return _context.Set<UserChatroom>()
-                           .Where(uc => uc.UserId == Id)
-                           .Select(uc => uc.ChatroomId)
-                           .ToListAsync();
         }
 
         public override string ToString()

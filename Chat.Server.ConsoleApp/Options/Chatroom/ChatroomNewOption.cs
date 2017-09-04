@@ -6,11 +6,17 @@ using CommandLine.Text;
 namespace Chat.Server.ConsoleApp.Options
 {
 
-    [Command("chatroom")]
+    [Command("room")]
     [Verb("new")]
     class ChatroomNewOption : OptionBase
     {
         [Option('p', "peoples", Separator = ',')]
         public IEnumerable<long> PeopleIds { get; set; }
+
+        internal override void Execute(Program app)
+        {
+            var chatroom = app.server.NewChatroom(PeopleIds).Result;
+            Console.WriteLine($"New chatroom {chatroom.Id}.");
+        }
     }
 }

@@ -6,6 +6,8 @@ namespace Chat.Server.Domains
 {
     public abstract class DomainBase
     {
+        public long Id { get; set; }
+
         protected ILogger _logger;
         protected virtual string LoggerName
         {
@@ -17,8 +19,6 @@ namespace Chat.Server.Domains
                 return $"{className} {id}";
             }
         }
-
-        internal ServerDbContext _context;
 
         public void SetServices (IServiceProvider provider)
         {

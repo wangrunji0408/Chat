@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Chat.Core.Models;
+using Chat.Server.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -9,28 +10,28 @@ namespace Chat.Server.Domains
     public class UserService
     {
         readonly ILogger _logger;
-        readonly ServerDbContext _context;
+        readonly UserRepository _userRepo;
+        readonly ChatroomRepository _chatroomRepo;
 
         public UserService(IServiceProvider provider)
         {
             _logger = provider.GetService<ILoggerFactory>()?
                               .CreateLogger<UserService>();
-            _context = provider.GetRequiredService<ServerDbContext>();
+            _userRepo = new UserRepository(provider);
+            _chatroomRepo = new ChatroomRepository(provider);
         }
 
 		public LoginResponse Login(LoginRequest request)
 		{
-			var user = _context.Find<User>(request.UserId);
+            var user = _userRepo.FindByIdAsync(request.UserId).Result;
 			if (user == null)
 				return new LoginResponse { Status = LoginResponse.Types.Status.NoSuchUser };
 			if (user.Password != request.Password)
 				return new LoginResponse { Status = LoginResponse.Types.Status.WrongPassword };
 
 			user.LastLoginTime = DateTimeOffset.Now;
-			_context.Update(user);
-			_context.SaveChanges();
-
-            _context.Find<Chatroom>(1L).NewPeople(user.Id).Wait();
+            _userRepo.Update(user);
+            _userRepo.SaveChanges();
 
 			_logger?.LogInformation($"User {request.UserId} login.");
 			return new LoginResponse
@@ -53,7 +54,7 @@ namespace Chat.Server.Domains
 					Status = SignupResponse.Types.Status.PasswordFormatWrong,
 					Detail = reason
 				};
-			if (_context.Users.Any(u => u.Username == request.Username))
+            if (_userRepo.ContainsUsernameAsync(request.Username).Result)
 				return new SignupResponse
 				{
 					Status = SignupResponse.Types.Status.UsernameExist
@@ -65,8 +66,10 @@ namespace Chat.Server.Domains
 				Password = request.Password
 			};
 
-			_context.Add(user);
-			_context.SaveChanges();
+			_userRepo.Add(user);
+			_userRepo.SaveChanges();
+
+            _chatroomRepo.FindByIdAsync(1).Result.NewPeople(user.Id);
 
 			_logger?.LogInformation($"New user {user.Id} signup.");
 			return new SignupResponse

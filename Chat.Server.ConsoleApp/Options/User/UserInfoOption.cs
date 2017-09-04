@@ -12,7 +12,13 @@ namespace Chat.Server.ConsoleApp.Options
 
         internal override void Execute(Program app)
         {
-			var user = app.server.GetUserNullable(UserId);
+            if(UserId == 0)
+            {
+                var users = app.server.GetUsersStringAsync().Result;
+                users.ForEach(Console.WriteLine);
+                return;                    
+            }
+            var user = app.server.GetUserStringAsync(UserId).Result;
 			if (user == null)
 			{
 				Console.Error.WriteLine($"User {UserId} does not exist.");

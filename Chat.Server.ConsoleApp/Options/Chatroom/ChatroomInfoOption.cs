@@ -3,7 +3,7 @@ using System;
 
 namespace Chat.Server.ConsoleApp.Options
 {
-    [Command("chatroom")]
+    [Command("room")]
     [Verb("info")]
     class ChatroomInfoOption : OptionBase
     {
@@ -14,12 +14,12 @@ namespace Chat.Server.ConsoleApp.Options
         {
             if(ChatroomId == null)
             {
-                var chatrooms = app.server.GetChatrooms();
+                var chatrooms = app.server.GetChatroomsStringAsync().Result;
                 foreach (var c in chatrooms)
                     Console.WriteLine(c);
                 return;
             }
-            var chatroom = app.server.GetChatroomNullable(ChatroomId.Value);
+            var chatroom = app.server.GetChatroomStringAsync(ChatroomId.Value).Result;
             if (chatroom == null)
             {
                 Console.Error.WriteLine($"Chatroom {ChatroomId} does not exist.");

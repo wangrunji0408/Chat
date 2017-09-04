@@ -1,4 +1,5 @@
 ﻿using System;
+using Chat.Server.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
