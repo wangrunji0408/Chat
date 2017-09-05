@@ -12,7 +12,7 @@ namespace Chat.Connection.Grpc
         {
         }
 
-        public async Task NewMessageAsync(ChatMessage message)
+        public async Task InformNewMessageAsync(ChatMessage message)
         {
             var request = new SendMessageRequest{Message = message};
             await base.NewMessageAsync(request);

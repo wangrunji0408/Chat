@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Chat.Connection.Local
 {
@@ -18,9 +19,17 @@ namespace Chat.Connection.Local
             _userId = userId;
         }
 
+
+        public IAsyncEnumerable<ChatMessage> GetMessages(GetMessagesRequest request)
+        {
+            return _server.GetMessages(request)
+						  .ToAsyncEnumerable()
+						  .SelectMany(list => list.ToAsyncEnumerable());
+        }
+
         public async Task SendMessageAsync(ChatMessage message)
         {
-            await _server.SendMessageAsync(message);
+            await _server.ReceiveNewMessageAsync(message);
         }
     }
 }

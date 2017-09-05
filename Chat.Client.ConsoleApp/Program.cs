@@ -1,97 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Chat.Client.ConsoleApp.Options;
+using Chat.Connection.Grpc;
 using Microsoft.Extensions.Logging;
 using CommandLine;
+using NLog.Extensions.Logging;
 
 namespace Chat.Client.ConsoleApp
 {
-    using Connection.Grpc;
-    using Options;
 
     class Program
     {
-        ConsoleOption copt;
-        Client client;
+		const string NlogConfigFile = "nlog.config";
+        internal ILoggerFactory LoggerFactory;
+        internal ILogger Logger;
+        internal ILogger Cmdlogger;
 
-        void ListenClientEvents ()
+        internal ConsoleOption copt;
+        internal Client Client;
+
+        internal void Setup()
         {
-            client.NewMessage += (sender, e) => Console.WriteLine($"{e.SenderId}: {e.Content.Text}");
+            LoggerFactory = new LoggerFactory();
+            LoggerFactory.AddNLog().ConfigureNLog(NlogConfigFile);
+            Logger = LoggerFactory.CreateLogger("Chat.Client.Console");
+            Cmdlogger = LoggerFactory.CreateLogger("Chat.Client.Console.Commands");
+            GrpcConnectionExtension.SetLogger(LoggerFactory);
         }
-
-        void Signup (SignupOption opt)
+        
+        internal void ParseFailed(IEnumerable<Error> obj)
         {
-            
-        }
-
-        void Login (LoginOption opt)
-        {
-            if(client != null)
-            {
-                Console.Error.WriteLine("Already login.");
-                return;
-            }
-            var builder = new ClientBuilder()
-                .ConfigureLogger(obj => obj.AddConsole())
-                .UseGrpc(copt.ServerAddress, copt.Host, copt.Port)
-                .SetUser(opt.UserId, opt.Password);
-            client = builder.Build();
-            try 
-            {
-                client.Login().Wait();
-                ListenClientEvents();
-            }
-            catch(Exception e)
-            {
-                Console.Error.WriteLine($"Failed: {e.Message}");
-                client = null;
-            }
-        }
-
-        void Send (SendOption opt)
-        {
-            client.SendTextMessage(opt.Text).Wait();
-        }
-
-		void ParseFailed(IEnumerable<Error> obj)
-		{
             Console.Error.WriteLine("Error:");
             foreach (var e in obj)
                 Console.Error.WriteLine(e);
-		}
+        }
 
-        void Main (ConsoleOption opt)
+        void ReadCommands()
         {
-            copt = opt;
             while(true)
             {
                 Console.Write("> ");
                 try
                 {
-					var cmd = Console.ReadLine();
-					if (string.IsNullOrWhiteSpace(cmd))
-						continue;
-					var args = cmd.Split(' ');
-					Parser.Default
-						  .ParseArguments<SignupOption, LoginOption, SendOption>(args)
-						  .WithParsed<SignupOption>(Signup)
-						  .WithParsed<LoginOption>(Login)
-						  .WithParsed<SendOption>(Send)
-						  .WithNotParsed(ParseFailed);
+                    var cmd = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(cmd))
+                        continue;
+                    Cmdlogger.LogTrace(cmd);
+                    var args = cmd.Split(' ');
+                    Parser.Default.ParseArguments<RoomOption, LoginOption, SignupOption>(args)
+                        .WithParsed<OptionBase>(opt => opt.Execute(this))
+                        .WithNotParsed(ParseFailed);
                 }
-				catch (Exception e)
-				{
-					Console.Error.WriteLine(e);
-				}
+                catch (Exception e)
+                {
+                    Console.Error.WriteLine("Client throws an exception. Check 'console-exception.log' for details.");
+                    Console.Error.WriteLine(e.Message);
+                    Logger.LogError(e, "Client throws an exception.");
+                }
             }
         }
-
+        
         static void Main(string[] args)
         {
             var app = new Program();
             Parser.Default
                   .ParseArguments<ConsoleOption>(args)
-                  .WithParsed(app.Main);
+                  .WithParsed(opt => opt.Execute(app));
+            app.Setup();
+            app.ReadCommands();
         }
     }
 }

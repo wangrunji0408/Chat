@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
@@ -23,7 +25,9 @@ namespace Chat.Connection.Grpc
             {
                 Message = message
             };
-            await base.SendMessageAsync(request);
+            var response = await base.SendMessageAsync(request);
+            if(response.Status != SendMessageResponse.Types.Status.Success)
+                throw new Exception($"Failed to send message. {response.Detail}");
         }
 
         public async Task<IServerService> LoginAsync(LoginRequest request)
@@ -56,6 +60,12 @@ namespace Chat.Connection.Grpc
         public async Task<SignupResponse> SignupAsync(SignupRequest request)
         {
             return await base.SignupAsync(request);
+        }
+
+        public IAsyncEnumerable<ChatMessage> GetMessages(GetMessagesRequest request)
+        {
+            var reader = base.GetMessages(request).ResponseStream;
+            return AsyncEnumerable.CreateEnumerable(() => reader);
         }
     }
 }

@@ -5,7 +5,12 @@ A chat client/server in .NetCore/C#.
 ## Basic
 
 * Platform: .Net Core 2.0
-* Libraries: gRPC
+* Dependencies:
+  * Communication: gRPC
+  * Persistance: EntityFrameworkCore
+  * Logging: Microsoft.Extensions.Logging + NLog
+  * DI: Microsoft.Extensions.DependencyInjection
+  * CommandParsing: CommandLineParser
 
 ## Usage
 
@@ -20,11 +25,11 @@ A chat client/server in .NetCore/C#.
 
 * Signup users on server
 
-  Command: `signup <username> <password>`
+  Command: `user signup <username> <password>`
 
   ```
-  > signup user1 password
-  > signup user2 password
+  > user signup user1 password
+  > user signup user2 password
   ```
 
 * Run a client
@@ -44,19 +49,46 @@ A chat client/server in .NetCore/C#.
 
   And login user2 on another client.
 
+* Enter a chatroom
+
+  Command: `room <id>`
+
+  ```
+  > room 1
+  ```
+
+  Chatroom 1 is a global room that contains all users.
+
 * Send message
 
   Command: `send <text>`
 
   ```
-  > send Hello!
+  Room 1 > send Hello!
   ```
 
   No accident, you will receive the following message on both clients.
 
   ```
-  1: Hello!
+  [Room 1 User 1] Hello!
   ```
+  You can use `q` or `exit` to leave the room.
+
+* Create chatroom on server
+
+  Command: `room new [-p PeopleId1,PeopleId2,...]`
+
+  ```
+  > room new -p 1
+  ```
+
+  This will create a chatroom with user 1. It will return:
+
+  ```
+  New chatroom 2.
+  ```
+
+  You can try to enter room 2 and send a message again in client 1. At this time, only client 1 will receive the message.
 
 That's all. 😂 More features will be added in the future.
 

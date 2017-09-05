@@ -12,12 +12,18 @@
     </content>
     <content url="file://$MODULE_DIR$/../..">
       <sourceFolder url="file://$MODULE_DIR$/../../Chat.Client" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Chat.Client.ConsoleApp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Chat.Client.Mac" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Chat.Connection.Grpc" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Chat.Connection.Local" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Chat.Core" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Chat.Server" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Chat.Server.ConsoleApp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../Chat.Test" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Chat.Client.ConsoleApp/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Chat.Client.ConsoleApp/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Chat.Client.Mac/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Chat.Client.Mac/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../Chat.Client/bin" />
       <excludeFolder url="file://$MODULE_DIR$/../../Chat.Client/obj" />
       <excludeFolder url="file://$MODULE_DIR$/../../Chat.Connection.Grpc/bin" />

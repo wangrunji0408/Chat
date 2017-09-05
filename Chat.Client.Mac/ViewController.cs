@@ -38,7 +38,7 @@ namespace Chat.Client.Mac
         partial void Send(NSButton sender)
         {
             var text = MessageField.StringValue;
-            client.SendTextMessage(text);
+            client.SendTextMessage(text, 1);
         }
 
         partial void Start(NSButton sender)

@@ -18,10 +18,11 @@ message Content
 
 message ChatMessage
 {
-	int64 senderId = 1;
-	string time = 2;
-	Content content = 3;
-	int64 chatroomId = 4;
+    int64 id = 1;
+	int64 senderId = 2;
+	int64 timeUnix = 3;
+	Content content = 4;
+	int64 chatroomId = 5;
 }
 
 message SendMessageRequest
@@ -43,14 +44,8 @@ message SendMessageResponse
 message People
 {
 	// Public
-	int32 id = 1;
-	string name = 2;
-	// Server
-	string ip = 101;
-	int32 port = 102;
-	// Private
-	map<int32, Friend> friendById = 201;
-	repeated int64 chatroomIds = 202;
+	int64 id = 1;
+	string username = 2;
 }
 
 message Friend
@@ -63,13 +58,12 @@ message Friend
 	int64 chatroomId = 21;
 }
 
-message Chatroom
+message ChatroomInfo
 {
 	int64 id = 1;
-	repeated int32 peopleIds = 2;
-	int32 hostId = 3;
+	repeated int64 peopleIds = 2;
+	int64 hostId = 3;
 	string name = 4;
-	repeated ChatMessage messages = 10;
 }
 
 message NewChatroomRequest
@@ -87,7 +81,7 @@ message GetChatroomRequest
 message ChatroomResponse
 {
 	bool success = 1;
-	Chatroom chatroom = 2;
+	ChatroomInfo chatroom = 2;
 	string detail = 3;
 }
 
@@ -171,3 +165,8 @@ message FriendNotification
 	Type type = 2;
 }
 
+message GetMessagesRequest
+{
+    int64 userId = 1;
+    int64 afterTimeUnix = 2;
+}

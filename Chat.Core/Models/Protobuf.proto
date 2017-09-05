@@ -13,6 +13,7 @@ service ChatServerService
     rpc RegisterAddress (RegisterAddressRequest) returns (Response);
 	rpc Signup (SignupRequest) returns (SignupResponse);
 	rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+    rpc GetMessages (GetMessagesRequest) returns (stream ChatMessage);
 	//rpc MakeFriend (MakeFriendRequest) returns (MakeFriendResponse);
 	//rpc GetPeoplesInfo (GetPeoplesInfoRequest) returns (stream People);
 	//rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);

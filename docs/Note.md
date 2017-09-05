@@ -1,14 +1,25 @@
-##开发文档 Note
+## 开发文档 Note
 
-###v0.4
+### v0.4
+
+完成时间：2017.09.05。累计时间：35h
 
 #### Target
 
 服务端领域类及持久化存储
 
 * 持久化：EntityFrameworkCore + SQLite
-* 配置：Microsoft.Extensions.Configuration
+* 配置：~~Microsoft.Extensions.Configuration~~
 * 日志文件：NLog
+
+#### Implement Details
+
+* 重构控制台程序，将每个命令的操作写到自己的Option类中。
+* Server实现了比较正规的DDD。
+  * 将EF封装到Repo中。尽量从逻辑上分离命令和查询。
+    * 对于命令，只能从Repo中调用FindById一次获得一个聚合，Repo实现依赖注入、加载内部关联、保证对象唯一。
+    * 对于查询，Repo暴露EF的Query接口，最终查询到的对象都是新生成的，不保证唯一性，因此不能参与领域操作，只读。
+  * Server类作为应用层。为方便测试和查询，目前对外暴露User和Chatroom对象，均为只读。
 
 ### v0.3
 

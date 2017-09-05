@@ -1,6 +1,7 @@
 ﻿using Chat.Server;
 using Chat.Client;
 using Chat.Core.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Chat.Connection.Grpc
 {
@@ -17,6 +18,10 @@ namespace Chat.Connection.Grpc
         public static ILoginService GetLoginService (string serverAddress)
         {
             return new GrpcServerServiceClient(serverAddress);
+        }
+        public static void SetLogger (ILoggerFactory loggerFactory)
+        {
+            global::Grpc.Core.GrpcEnvironment.SetLogger(new GrpcLoggerAdapter(loggerFactory));
         }
     }
 }

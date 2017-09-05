@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,11 +32,12 @@ namespace Chat.Client
             set => _serverService = value;
         }
 
-        public async Task SendTextMessage(string text)
+        public async Task SendTextMessage(string text, long roomId)
         {
 			var message = new ChatMessage
             {
                 SenderId = UserId,
+                ChatroomId = roomId,
                 Content = new Content {Text = text}
             };
             await ServerService.SendMessageAsync(message);
@@ -58,6 +61,12 @@ namespace Chat.Client
             };
             _serverService = await _loginService.LoginAsync(request);
             return _serverService != null;
+        }
+
+        public Task<List<ChatMessage>> GetMessages (GetMessagesRequest request)
+        {
+            request.UserId = UserId;
+            return _serverService.GetMessages(request).ToList();
         }
     }
 }

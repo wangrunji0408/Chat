@@ -5,10 +5,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
-    <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="xunit" Version="2.3.0-beta4-build3742" />
+    <PackageReference Include="Grpc" Version="1.6.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chat.Client\Chat.Client.csproj" />
@@ -16,5 +17,9 @@
     <ProjectReference Include="..\Chat.Core\Chat.Core.csproj" />
     <ProjectReference Include="..\Chat.Connection.Local\Chat.Connection.Local.csproj" />
     <ProjectReference Include="..\Chat.Connection.Grpc\Chat.Connection.Grpc.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Client\" />
+    <Folder Include="Server\" />
   </ItemGroup>
 </Project>

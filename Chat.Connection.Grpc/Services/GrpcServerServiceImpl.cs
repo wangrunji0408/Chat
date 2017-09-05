@@ -24,7 +24,7 @@ namespace Chat.Connection.Grpc
         {
             _server = server;
             _logger = serviceProvider.GetService<ILoggerFactory>()?
-                .CreateLogger<GrpcServerServiceImpl>();
+                .CreateLogger("Chat.GrpcServerService");
             
 			if (port == 0)
 				port = Util.FreeTcpPort();
@@ -37,12 +37,10 @@ namespace Chat.Connection.Grpc
             _logger?.LogInformation($"Start gRPC Server @ {host}:{port}");
         }
 
-        public override async Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
+        public override Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
         {
-            await Task.CompletedTask;
-
             _logger?.LogInformation($"New login request from {context.Peer}");
-            return _server.Login(request);
+            return _server.LoginAsync(request);
         }
 
         public override async Task<Response> RegisterAddress(RegisterAddressRequest request, ServerCallContext context)
@@ -62,19 +60,35 @@ namespace Chat.Connection.Grpc
         public override async Task<SendMessageResponse> SendMessage(SendMessageRequest request,
             ServerCallContext context)
         {
-            await _server.SendMessageAsync(request.Message);
-
+            try
+            {
+                await _server.ReceiveNewMessageAsync(request.Message);
+            }
+            catch (Exception e)
+            {
+                return new SendMessageResponse
+                {
+                    Status = SendMessageResponse.Types.Status.Failed,
+                    Detail = e.Message
+                };
+            }
+            
             return new SendMessageResponse
             {
                 Status = SendMessageResponse.Types.Status.Success
             };
         }
 
-        public override async Task<SignupResponse> Signup(SignupRequest request, ServerCallContext context)
+        public override Task<SignupResponse> Signup(SignupRequest request, ServerCallContext context)
         {
-			await Task.CompletedTask;
+			return _server.SignupAsync(request);
+        }
 
-			return _server.Signup(request);
+        public override async Task GetMessages(GetMessagesRequest request, IServerStreamWriter<ChatMessage> responseStream, ServerCallContext context)
+        {
+            var messages = await _server.GetMessages(request);
+            foreach (var message in messages)
+                await responseStream.WriteAsync(message);
         }
     }
 }

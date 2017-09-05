@@ -21,6 +21,8 @@ namespace Chat.Test
         protected ClientBuilder clientBuilder;
         protected Server server;
 
+	    private const long GlobalChatroomId = 1;
+
         public TestClient_Base ()
         {
             
@@ -56,10 +58,30 @@ namespace Chat.Test
 			client2.NewMessage += (sender, e) => recv2 |= e.SenderId == 2 && e.Content.Text == message;
 			await client1.Login();
 			await client2.Login();
-            await client2.SendTextMessage(message);
+            await client2.SendTextMessage(message, GlobalChatroomId);
             await Task.Delay(1000); // wait for server forwarding the message
 			Assert.True(recv1);
 			Assert.True(recv2);
+		}
+
+		[Fact]
+		public async Task GetMessageAfter()
+		{
+			await loginService.SignupAsync(new SignupRequest { Username = "user1", Password = "123456" });
+			var client1 = clientBuilder.SetUser(1, "123456").Build();
+            await client1.Login();
+			await client1.SendTextMessage("Message1", GlobalChatroomId);
+            await Task.Delay(1000);
+            var t0 = DateTimeOffset.Now;
+			await client1.SendTextMessage("Message2", GlobalChatroomId);
+			await client1.SendTextMessage("Message3", GlobalChatroomId);
+            var messages = await client1.GetMessages(new GetMessagesRequest
+            {
+                AfterTimeUnix = t0.ToUnixTimeSeconds()
+            });
+            Assert.Null(messages.Find(m => m.Content.Text == "Message1"));
+			Assert.NotNull(messages.Find(m => m.Content.Text == "Message2"));
+            Assert.NotNull(messages.Find(m => m.Content.Text == "Message3"));
 		}
     }
 
@@ -67,7 +89,7 @@ namespace Chat.Test
     {
         public TestClient_Local()
         {
-			var serverBuilder = new ServerBuilder().UseLocal();
+            var serverBuilder = new ServerBuilder().UseLocal().UseInMemory();
 			server = serverBuilder.Build();
             loginService = LocalConnectionExtension.GetLoginService(server);
 			clientBuilder = new ClientBuilder().UseLocal(server);
@@ -82,21 +104,21 @@ namespace Chat.Test
             const int port = 8080;
             string target = $"{host}:{port}";
 
-            var serverBuilder = new ServerBuilder().UseGrpc(host, port);
+            var serverBuilder = new ServerBuilder().UseGrpc(host, port).UseInMemory();
             clientBuilder = new ClientBuilder().UseGrpc(target, host: "localhost", port: 0);
             loginService = GrpcConnectionExtension.GetLoginService(target);
             server = serverBuilder.Build();
 		}
 	}
 
-	public class TestClient_Grpc_Remote : TestClient_Base
-	{
-		public TestClient_Grpc_Remote()
-		{
-            const string target = "192.168.31.23:8080";
-            const string localIP = "192.168.31.2";
-			loginService = GrpcConnectionExtension.GetLoginService(target);
-			clientBuilder = new ClientBuilder().UseGrpc(target, host: localIP, port: 0);
-		}
-	}
+	//public class TestClient_Grpc_Remote : TestClient_Base
+	//{
+	//	public TestClient_Grpc_Remote()
+	//	{
+ //           const string target = "192.168.31.23:8080";
+ //           const string localIP = "192.168.31.2";
+	//		loginService = GrpcConnectionExtension.GetLoginService(target);
+	//		clientBuilder = new ClientBuilder().UseGrpc(target, host: localIP, port: 0);
+	//	}
+	//}
 }
