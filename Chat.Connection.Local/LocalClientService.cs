@@ -16,7 +16,7 @@ namespace Chat.Connection.Local
             _client = client;
         }
 
-        public async Task NewMessageAsync(ChatMessage message)
+        public async Task InformNewMessageAsync(ChatMessage message)
         {
             await Task.CompletedTask;
             _client.InformNewMessage(message);

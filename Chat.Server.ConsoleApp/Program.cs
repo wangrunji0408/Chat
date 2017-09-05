@@ -35,12 +35,7 @@ namespace Chat.Server.ConsoleApp
         //    }
         //}
 
-		void Main(ConsoleOption opt)
-		{
-            
-		}
-
-		static void Main(string[] args)
+	    static void Main(string[] args)
 		{
 			var app = new Program();
 			Parser.Default

@@ -7,7 +7,7 @@ namespace Chat.Core.Interfaces
 
     public interface IClientService
     {
-        Task NewMessageAsync(ChatMessage message);
+        Task InformNewMessageAsync(ChatMessage message);
         // TODO Server send disconnection to client.
         //Task Disconnect();
     }

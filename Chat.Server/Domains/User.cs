@@ -54,7 +54,7 @@ namespace Chat.Server.Domains
                 _logger.LogWarning("Receive new message. But ClientService is null.");
                 return;
             }
-            await _clientService.NewMessageAsync(message);
+            await _clientService.InformNewMessageAsync(message);
         }
 
         public override string ToString()
