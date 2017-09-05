@@ -17,8 +17,9 @@ namespace Chat.Server
 	{
 		public Task<List<ChatMessage>> GetMessages(GetMessagesRequest request)
 		{
-			var time = DateTimeOffset.FromUnixTimeSeconds(request.AfterTimeUnix);
-			return _context.Messages.Where(m => m.CreateTime >= time).ToListAsync();
+			return _context.Messages
+				.Where(m => m.TimeUnix >= request.AfterTimeUnix)
+				.ToListAsync();
 		}
 
         public Task<User> FindUserAsync (long id)
@@ -52,7 +53,7 @@ namespace Chat.Server
 		{
             return _messageRepo.Query()
 						   .Where(m => m.ChatroomId == chatroomId)
-						   .OrderByDescending(m => m.Time)
+						   .OrderByDescending(m => m.TimeUnix)
 						   .Take(count)
 						   .ToListAsync();
 		}

@@ -41,7 +41,7 @@ namespace Chat.Test
         public async Task NewPeople()
         {
             var room = await server.NewChatroomAsync(new long[] {1});
-            room.NewPeople(2);
+            await server.AddPeopleToChatroom(2, userId: 2);
             Assert.Contains(2, room.UserIds);
         }
 

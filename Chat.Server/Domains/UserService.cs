@@ -54,11 +54,7 @@ namespace Chat.Server.Domains
 					Status = SignupResponse.Types.Status.UsernameExist
 				};
 
-			var user = new User
-			{
-				Username = request.Username,
-				Password = request.Password
-			};
+			var user = new User(request.Username, request.Password);
 
 			_userRepo.Add(user);
 			await _userRepo.SaveChangesAsync();
@@ -66,7 +62,7 @@ namespace Chat.Server.Domains
             _logger?.LogInformation($"New user {user.Id} signup.");
 
             var globalRoom = await _chatroomRepo.FindByIdAsync(1);
-            globalRoom.NewPeople(user.Id);
+            globalRoom.NewPeople(user);
             _chatroomRepo.Update(globalRoom);
             await _chatroomRepo.SaveChangesAsync();
 

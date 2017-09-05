@@ -11,14 +11,14 @@ namespace Chat.Server.Domains
 {
     public class Chatroom: DomainBase
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
 		public DateTimeOffset CreateTime { get; private set; } = DateTimeOffset.Now;
         internal ICollection<UserChatroom> UserChatrooms { get; set; } = new HashSet<UserChatroom>();
 
         [NotMapped]
         public IEnumerable<long> UserIds => UserChatrooms.Select(uc => uc.UserId);
 
-        public void NewMessage (ChatMessage message)
+        internal void NewMessage (ChatMessage message)
         {
 			if (message.ChatroomId != Id)
 				throw new InvalidOperationException($"Message is not for this Chatroom.");
@@ -26,19 +26,19 @@ namespace Chat.Server.Domains
 				throw new InvalidOperationException($"User {message.SenderId} is not in Chatroom {message.ChatroomId}.");
 		}
 
-        public void NewPeople (long userId)
+        internal void NewPeople (User user)
         {
-            if (UserIds.Contains(userId))
-                throw new InvalidOperationException($"User {userId} already exist in chatroom {Id}.");
+            if (UserIds.Contains(user.Id))
+                throw new InvalidOperationException($"User {user} already exist in chatroom {Id}.");
 
 			var uc = new UserChatroom
             {
-                UserId = userId,
+                UserId = user.Id,
                 ChatroomId = Id
             };
             UserChatrooms.Add(uc);
 
-            _logger?.LogInformation($"User {userId} entered.");
+            _logger?.LogInformation($"User {user.Id} entered.");
         }
 
         public override string ToString()

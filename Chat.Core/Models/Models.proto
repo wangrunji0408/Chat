@@ -20,7 +20,7 @@ message ChatMessage
 {
     int64 id = 1;
 	int64 senderId = 2;
-	string time = 3;
+	int64 timeUnix = 3;
 	Content content = 4;
 	int64 chatroomId = 5;
 }

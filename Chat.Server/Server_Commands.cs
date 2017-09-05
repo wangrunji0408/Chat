@@ -27,13 +27,21 @@ namespace Chat.Server
 
 		public async Task<Chatroom> NewChatroomAsync(IEnumerable<long> peopleIds)
 		{
-			// TODO Check people exist
+			var peoples = peopleIds.Select(id => _userRepo.GetByIdAsync(id).Result);
 			var chatroom = new Chatroom();
-			foreach (var id in peopleIds)
-				chatroom.NewPeople(id);
+			foreach (var user in peoples)
+				chatroom.NewPeople(user);
             _chatroomRepo.Add(chatroom);
             await _chatroomRepo.SaveChangesAsync();
 			return chatroom;
+		}
+
+		public async Task AddPeopleToChatroom(long chatroomId, long userId)
+		{
+			var chatroom = await _chatroomRepo.GetByIdAsync(chatroomId);
+			var people = await _userRepo.GetByIdAsync(userId);
+			chatroom.NewPeople(people);
+			await _chatroomRepo.SaveChangesAsync();
 		}
 
 		public void ClearDatabase()
@@ -56,7 +64,7 @@ namespace Chat.Server
 		public async Task ReceiveNewMessageAsync(ChatMessage message)
 		{
             _logger?.LogInformation($"New message from user {message.SenderId}.");
-            message.Time = DateTimeOffset.Now.ToString();
+			message.TimeUnix = DateTimeOffset.Now.ToUnixTimeSeconds();
 
             var chatroom = await _chatroomRepo.GetByIdAsync(message.ChatroomId);
             chatroom.NewMessage(message);

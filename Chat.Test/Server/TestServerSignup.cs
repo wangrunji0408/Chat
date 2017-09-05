@@ -24,7 +24,7 @@ namespace Chat.Test
 				UserId = 1
 			}, response);
 
-            var user = server.FindUserAsync(1).Result;
+            var user = await server.FindUserAsync(1);
             Assert.NotNull(user);
 			Assert.Equal("user1", user.Username);
 			Assert.Equal("password", user.Password);

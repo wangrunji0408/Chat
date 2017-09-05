@@ -14,11 +14,11 @@ namespace Chat.Server.Domains
 {
     public class User: DomainBase
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public DateTimeOffset CreateTime { get; set; } = DateTimeOffset.Now;
-        public DateTimeOffset LastLoginTime { get; set; }
-        public ICollection<UserChatroom> UserChatrooms { get; set; }
+        public string Username { get; private set; }
+        public string Password { get; private set; }
+        public DateTimeOffset CreateTime { get; private set; } = DateTimeOffset.Now;
+        public DateTimeOffset LastLoginTime { get; private set; }
+        internal ICollection<UserChatroom> UserChatrooms { get; private set; }
 
         [NotMapped]
         public IEnumerable<long> ChatroomIds => UserChatrooms.Select(uc => uc.ChatroomId);
@@ -33,7 +33,13 @@ namespace Chat.Server.Domains
             _clientService = clientService;
         }
 
-        internal LoginResponse Login (LoginRequest request)
+	    internal User(string username, string password)
+	    {
+		    Username = username;
+		    Password = password;
+	    }
+
+	    internal LoginResponse Login (LoginRequest request)
         {
 			if (Password != request.Password)
 				return new LoginResponse { Status = LoginResponse.Types.Status.WrongPassword };
