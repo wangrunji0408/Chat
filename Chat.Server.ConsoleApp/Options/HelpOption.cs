@@ -13,7 +13,7 @@ namespace Chat.Server.ConsoleApp.Options
         internal override void Execute(Program app)
         {
 			Console.WriteLine("Commands:");
-			foreach (var pair in ConsoleOption.optionsDict)
+			foreach (var pair in Program.optionsDict)
 			{
 				foreach (var type in pair.Value)
 				{

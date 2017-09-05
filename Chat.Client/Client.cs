@@ -32,12 +32,12 @@ namespace Chat.Client
             set => _serverService = value;
         }
 
-        public async Task SendTextMessage(string text)
+        public async Task SendTextMessage(string text, long roomId)
         {
 			var message = new ChatMessage
             {
                 SenderId = UserId,
-                ChatroomId = 1,
+                ChatroomId = roomId,
                 Content = new Content {Text = text}
             };
             await ServerService.SendMessageAsync(message);

@@ -60,8 +60,19 @@ namespace Chat.Connection.Grpc
         public override async Task<SendMessageResponse> SendMessage(SendMessageRequest request,
             ServerCallContext context)
         {
-            await _server.ReceiveNewMessageAsync(request.Message);
-
+            try
+            {
+                await _server.ReceiveNewMessageAsync(request.Message);
+            }
+            catch (Exception e)
+            {
+                return new SendMessageResponse
+                {
+                    Status = SendMessageResponse.Types.Status.Failed,
+                    Detail = e.Message
+                };
+            }
+            
             return new SendMessageResponse
             {
                 Status = SendMessageResponse.Types.Status.Success

@@ -21,6 +21,8 @@ namespace Chat.Test
         protected ClientBuilder clientBuilder;
         protected Server server;
 
+	    private const long GlobalChatroomId = 1;
+
         public TestClient_Base ()
         {
             
@@ -56,7 +58,7 @@ namespace Chat.Test
 			client2.NewMessage += (sender, e) => recv2 |= e.SenderId == 2 && e.Content.Text == message;
 			await client1.Login();
 			await client2.Login();
-            await client2.SendTextMessage(message);
+            await client2.SendTextMessage(message, GlobalChatroomId);
             await Task.Delay(1000); // wait for server forwarding the message
 			Assert.True(recv1);
 			Assert.True(recv2);
@@ -68,11 +70,11 @@ namespace Chat.Test
 			await loginService.SignupAsync(new SignupRequest { Username = "user1", Password = "123456" });
 			var client1 = clientBuilder.SetUser(1, "123456").Build();
             await client1.Login();
-			await client1.SendTextMessage("Message1");
+			await client1.SendTextMessage("Message1", GlobalChatroomId);
             await Task.Delay(1000);
             var t0 = DateTimeOffset.Now;
-			await client1.SendTextMessage("Message2");
-			await client1.SendTextMessage("Message3");
+			await client1.SendTextMessage("Message2", GlobalChatroomId);
+			await client1.SendTextMessage("Message3", GlobalChatroomId);
             var messages = await client1.GetMessages(new GetMessagesRequest
             {
                 AfterTimeUnix = t0.ToUnixTimeSeconds()

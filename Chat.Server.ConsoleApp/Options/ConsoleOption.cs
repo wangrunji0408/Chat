@@ -38,73 +38,23 @@ namespace Chat.Server.ConsoleApp.Options
 			}
 		}
 
-        static internal readonly Dictionary<string, TypeInfo[]> optionsDict;
-        static ConsoleOption()
-        {
-			var groups = from type in Assembly.GetExecutingAssembly().DefinedTypes
-                         let command = type.GetCustomAttribute<CommandAttribute>()?.Name
-                         where command != null
-						 group type by command;
-
-			optionsDict = groups.ToDictionary(g => g.Key, g => g.ToArray());
-        }
-
         internal override void Execute(Program app)
         {
-			var lf = new LoggerFactory();
-            lf.AddNLog().ConfigureNLog(Program.NlogConfigFile);
-			app._logger = lf.CreateLogger("Chat.Server.Console");
-			app._cmdlogger = lf.CreateLogger("Chat.Server.Console.Commands");
-			GrpcConnectionExtension.SetLogger(lf);
-
-			app.consoleOption = this;
-			var builder = new ServerBuilder()
-				.UseLoggerFactory(lf)
-				.UseGrpc(Host, Port);
-			if (Database == DbType.InMemory)
-				builder.UseInMemory();
-			else if (Database == DbType.SQLite)
-				builder.UseSQLite(SQLiteString);
-			app.server = builder.Build();
-
-			while (true)
-			{
-				Console.Write("> ");
-				try
-				{
-					var cmd = Console.ReadLine();
-					if (string.IsNullOrWhiteSpace(cmd))
-						continue;
-					app._cmdlogger.LogTrace(cmd);
-					var args = cmd.Split(' ');
-                    var command = args[0];
-                    var restArgs = args.Skip(1);
-
-                    if(command == "help")
-                    {
-                        new HelpOption().Execute(app);
-                        continue;
-                    }
-                    var parseResult = optionsDict.ContainsKey(command)?
-                                      Parser.Default.ParseArguments(restArgs, optionsDict[command]):
-                                      Parser.Default.ParseArguments(args, optionsDict[""]);
-					parseResult.WithParsed<OptionBase>(opt => opt.Execute(app))
-							   .WithNotParsed(ParseFailed);
-				}
-				catch (Exception e)
-				{
-					Console.Error.WriteLine("Server throws an exception. Check 'console-exception.log' for details.");
-					Console.Error.WriteLine(e.Message);
-					app._logger.LogError(e, "Server throws an exception.");
-				}
-			}
+	        var lf = new LoggerFactory();
+	        lf.AddNLog().ConfigureNLog(Program.NlogConfigFile);
+	        app._logger = lf.CreateLogger("Chat.Server.Console");
+	        app._cmdlogger = lf.CreateLogger("Chat.Server.Console.Commands");
+	        GrpcConnectionExtension.SetLogger(lf);
+	        
+	        app.consoleOption = this;
+	        var builder = new ServerBuilder()
+		        .UseLoggerFactory(lf)
+		        .UseGrpc(Host, Port);
+	        if (Database == DbType.InMemory)
+		        builder.UseInMemory();
+	        else if (Database == DbType.SQLite)
+		        builder.UseSQLite(SQLiteString);
+	        app.server = builder.Build();
         }
-
-		void ParseFailed(IEnumerable<Error> obj)
-		{
-			Console.Error.WriteLine("Error:");
-			foreach (var e in obj)
-				Console.Error.WriteLine(e);
-		}
     }
 }
