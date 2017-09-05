@@ -29,7 +29,7 @@ namespace Chat.Connection.Local
 
         public async Task SendMessageAsync(ChatMessage message)
         {
-            await _server.SendMessageAsync(message);
+            await _server.ReceiveNewMessageAsync(message);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Chat.Core.Models;
 using Chat.Server;
 using Xunit;
@@ -8,14 +9,14 @@ namespace Chat.Test
     public class TestServerSignup: TestServerBase
     {
         [Fact]
-		public void Signup()
+		public async Task Signup()
 		{
 			var t0 = DateTimeOffset.Now;
-			var response = server.Signup(new SignupRequest
+			var response = await server.SignupAsync(new SignupRequest
 			{
 				Username = "user1",
 				Password = "password"
-			});
+            });
 			var t1 = DateTimeOffset.Now;
 			Assert.Equal(new SignupResponse
 			{
@@ -33,38 +34,38 @@ namespace Chat.Test
 
         [Theory]
 		[InlineData("")]
-		public void Signup_InvalidPassword(string password)
+		public async Task Signup_InvalidPassword(string password)
 		{
-			var response = server.Signup(new SignupRequest
+			var response = await server.SignupAsync(new SignupRequest
 			{
 				Username = "user1",
 				Password = password
-			});
+            });
 			Assert.Equal(SignupResponse.Types.Status.PasswordFormatWrong, response.Status);
 		}
 
 		[Theory]
 		[InlineData("")]
-		public void Signup_InvalidUsername(string username)
+		public async Task Signup_InvalidUsername(string username)
 		{
-			var response = server.Signup(new SignupRequest
+			var response = await server.SignupAsync(new SignupRequest
 			{
 				Username = username,
 				Password = "password"
-			});
+            });
 			Assert.Equal(SignupResponse.Types.Status.UsernameFormatWrong, response.Status);
 		}
 
 		[Fact]
-		public void Signup_UsernameExist()
+		public async Task Signup_UsernameExist()
 		{
 			var request = new SignupRequest
 			{
 				Username = "user1",
 				Password = "password"
 			};
-			server.Signup(request);
-			var response = server.Signup(request);
+			await server.SignupAsync(request);
+			var response = await server.SignupAsync(request);
 			Assert.Equal(SignupResponse.Types.Status.UsernameExist, response.Status);
 		}
 	}

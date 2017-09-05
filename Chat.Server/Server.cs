@@ -17,9 +17,11 @@ namespace Chat.Server
     public partial class Server
     {
         readonly ILogger _logger;
+
         readonly ServerDbContext _context;
         readonly UserRepository _userRepo;
         readonly ChatroomRepository _chatroomRepo;
+        readonly MessageRepository _messageRepo;
 
         readonly UserService _userService;
 
@@ -33,8 +35,10 @@ namespace Chat.Server
             {
                 _logger?.LogError(e, "An error occurred when database migrate. It's normal when using InMemory database.");
             }
+
             _userRepo = new UserRepository(serviceProvider);
             _chatroomRepo = new ChatroomRepository(serviceProvider);
+            _messageRepo = new MessageRepository(serviceProvider);
 
             _userService = new UserService(serviceProvider);
             EnsureGlobalChatroomCreated();

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Chat.Server.Domains;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Chat.Server.Repositories
 {
@@ -14,12 +15,9 @@ namespace Chat.Server.Repositories
         {
         }
 
-        public override async Task<User> FindByIdAsync(long id)
+        public override IQueryable<User> Query()
         {
-			var entity = await _set.Include(c => c.UserChatrooms)
-								   .FirstOrDefaultAsync(c => c.Id == id);
-			entity?.SetServices(_provider);
-			return entity;
+            return base.Query().Include(u => u.UserChatrooms);
         }
 
         public async Task<bool> ContainsUsernameAsync (string username)
@@ -27,9 +25,12 @@ namespace Chat.Server.Repositories
             return await _set.CountAsync(u => u.Username == username) > 0;
         }
 
-		public Task<User> FindByUsername(string username)
+        public async Task<User> FindByUsernameAsync(string username)
 		{
-            return _set.FirstOrDefaultAsync(u => u.Username == username);
+            var id = await _set.Where(u => u.Username == username)
+                               .Select(u => u.Id)
+                               .FirstOrDefaultAsync();
+            return await FindByIdAsync(id);
 		}
     }
 }

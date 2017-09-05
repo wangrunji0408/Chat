@@ -12,12 +12,9 @@ namespace Chat.Server.Repositories
         {
         }
 
-        public override async Task<Chatroom> FindByIdAsync(long id)
+        public override IQueryable<Chatroom> Query()
         {
-            var entity = await _set.Include(c => c.UserChatrooms)
-                                   .FirstOrDefaultAsync(c => c.Id == id);
-			entity?.SetServices(_provider);
-			return entity;
+            return base.Query().Include(c => c.UserChatrooms);
         }
     }
 }

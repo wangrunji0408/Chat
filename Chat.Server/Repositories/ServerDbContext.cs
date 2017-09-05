@@ -34,11 +34,13 @@ namespace Chat.Server.Repositories
             modelBuilder.Entity<UserChatroom>()
                         .HasOne(uc => uc.User)
                         .WithMany(u => u.UserChatrooms)
-                        .HasForeignKey(uc => uc.UserId);
+                        .HasForeignKey(uc => uc.UserId)
+                        .IsRequired();
 			modelBuilder.Entity<UserChatroom>()
 						.HasOne(uc => uc.Chatroom)
                         .WithMany(c => c.UserChatrooms)
-                        .HasForeignKey(uc => uc.ChatroomId);
+                        .HasForeignKey(uc => uc.ChatroomId)
+                        .IsRequired();
         }
     }
 

@@ -22,7 +22,7 @@ namespace Chat.Server.ConsoleApp.Options
 				Username = Username,
 				Password = Password
 			};
-			var response = app.server.Signup(request);
+			var response = app.server.SignupAsync(request);
         }
     }
 }

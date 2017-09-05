@@ -37,12 +37,10 @@ namespace Chat.Connection.Grpc
             _logger?.LogInformation($"Start gRPC Server @ {host}:{port}");
         }
 
-        public override async Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
+        public override Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
         {
-            await Task.CompletedTask;
-
             _logger?.LogInformation($"New login request from {context.Peer}");
-            return _server.Login(request);
+            return _server.LoginAsync(request);
         }
 
         public override async Task<Response> RegisterAddress(RegisterAddressRequest request, ServerCallContext context)
@@ -62,7 +60,7 @@ namespace Chat.Connection.Grpc
         public override async Task<SendMessageResponse> SendMessage(SendMessageRequest request,
             ServerCallContext context)
         {
-            await _server.SendMessageAsync(request.Message);
+            await _server.ReceiveNewMessageAsync(request.Message);
 
             return new SendMessageResponse
             {
@@ -70,11 +68,9 @@ namespace Chat.Connection.Grpc
             };
         }
 
-        public override async Task<SignupResponse> Signup(SignupRequest request, ServerCallContext context)
+        public override Task<SignupResponse> Signup(SignupRequest request, ServerCallContext context)
         {
-			await Task.CompletedTask;
-
-			return _server.Signup(request);
+			return _server.SignupAsync(request);
         }
 
         public override async Task GetMessages(GetMessagesRequest request, IServerStreamWriter<ChatMessage> responseStream, ServerCallContext context)

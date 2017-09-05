@@ -19,7 +19,7 @@ namespace Chat.Connection.Local
         public async Task<IServerService> LoginAsync(LoginRequest request)
         {
             await Task.CompletedTask;
-            var response = _server.Login(request);
+            var response = await _server.LoginAsync(request);
             if (response.Status != LoginResponse.Types.Status.Success)
                 throw new Exception($"Failed to login: {response.Detail}");
             var userId = request.UserId;
@@ -28,10 +28,9 @@ namespace Chat.Connection.Local
             return new LocalServerService(_server, userId);
         }
 
-        public async Task<SignupResponse> SignupAsync(SignupRequest request)
+        public Task<SignupResponse> SignupAsync(SignupRequest request)
         {
-            await Task.CompletedTask;
-            return _server.Signup(request);
+            return _server.SignupAsync(request);
         }
     }
 }

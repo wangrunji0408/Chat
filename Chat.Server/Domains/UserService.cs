@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Chat.Core.Models;
 using Chat.Server.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,26 +22,19 @@ namespace Chat.Server.Domains
             _chatroomRepo = new ChatroomRepository(provider);
         }
 
-		public LoginResponse Login(LoginRequest request)
+		public async Task<LoginResponse> LoginAsync(LoginRequest request)
 		{
-            var user = _userRepo.FindByIdAsync(request.UserId).Result;
+            var user = await _userRepo.FindByIdAsync(request.UserId);
 			if (user == null)
 				return new LoginResponse { Status = LoginResponse.Types.Status.NoSuchUser };
-			if (user.Password != request.Password)
-				return new LoginResponse { Status = LoginResponse.Types.Status.WrongPassword };
-
-			user.LastLoginTime = DateTimeOffset.Now;
+            var response = user.Login(request);
             _userRepo.Update(user);
-            _userRepo.SaveChanges();
+            await _userRepo.SaveChangesAsync();
 
-			_logger?.LogInformation($"User {request.UserId} login.");
-			return new LoginResponse
-			{
-				Status = LoginResponse.Types.Status.Success
-			};
+            return response;
 		}
 
-		public SignupResponse Signup(SignupRequest request)
+		public async Task<SignupResponse> SignupAsync(SignupRequest request)
 		{
 			if (!StringCheckService.CheckUsername(request.Username, out var reason))
 				return new SignupResponse
@@ -54,7 +48,7 @@ namespace Chat.Server.Domains
 					Status = SignupResponse.Types.Status.PasswordFormatWrong,
 					Detail = reason
 				};
-            if (_userRepo.ContainsUsernameAsync(request.Username).Result)
+            if (await _userRepo.ContainsUsernameAsync(request.Username))
 				return new SignupResponse
 				{
 					Status = SignupResponse.Types.Status.UsernameExist
@@ -67,11 +61,15 @@ namespace Chat.Server.Domains
 			};
 
 			_userRepo.Add(user);
-			_userRepo.SaveChanges();
+			await _userRepo.SaveChangesAsync();
 
-            _chatroomRepo.FindByIdAsync(1).Result.NewPeople(user.Id);
+            _logger?.LogInformation($"New user {user.Id} signup.");
 
-			_logger?.LogInformation($"New user {user.Id} signup.");
+            var globalRoom = await _chatroomRepo.FindByIdAsync(1);
+            globalRoom.NewPeople(user.Id);
+            _chatroomRepo.Update(globalRoom);
+            await _chatroomRepo.SaveChangesAsync();
+
 			return new SignupResponse
 			{
 				Status = SignupResponse.Types.Status.Success,

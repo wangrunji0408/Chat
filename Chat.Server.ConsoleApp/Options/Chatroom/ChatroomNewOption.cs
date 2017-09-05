@@ -15,7 +15,7 @@ namespace Chat.Server.ConsoleApp.Options
 
         internal override void Execute(Program app)
         {
-            var chatroom = app.server.NewChatroom(PeopleIds).Result;
+            var chatroom = app.server.NewChatroomAsync(PeopleIds).Result;
             Console.WriteLine($"New chatroom {chatroom.Id}.");
         }
     }

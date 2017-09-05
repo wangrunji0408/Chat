@@ -24,22 +24,37 @@ namespace Chat.Server.Domains
         public IEnumerable<long> ChatroomIds => UserChatrooms.Select(uc => uc.ChatroomId);
 
         IClientService _clientService;
-        [NotMapped]
-        internal IClientService ClientService
+
+        internal void SetClientService (IClientService clientService)
         {
-            get => _clientService;
-            set
-            {
-				_logger?.LogInformation($"Set client.");
-                if(_clientService != null)
-                    _logger?.LogWarning($"Already has a connection, it will be reset.");
-				_clientService = value;
-            }
+			_logger?.LogInformation($"Set client service.");
+			if (_clientService != null)
+				_logger?.LogWarning($"Already has a connection, it will be reset.");
+            _clientService = clientService;
         }
 
-        internal async Task NewMessageAsync (ChatMessage message)
+        internal LoginResponse Login (LoginRequest request)
         {
-            await _clientService?.NewMessageAsync(message);
+			if (Password != request.Password)
+				return new LoginResponse { Status = LoginResponse.Types.Status.WrongPassword };
+
+			LastLoginTime = DateTimeOffset.Now;
+
+			_logger?.LogInformation($"Login.");
+			return new LoginResponse
+			{
+				Status = LoginResponse.Types.Status.Success
+			};
+        }
+
+        internal async Task ReceiveNewMessageAsync (ChatMessage message)
+        {
+            if (_clientService == null)
+            {
+                _logger.LogWarning("Receive new message. But ClientService is null.");
+                return;
+            }
+            await _clientService.NewMessageAsync(message);
         }
 
         public override string ToString()

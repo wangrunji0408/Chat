@@ -33,7 +33,7 @@ namespace Chat.Server
 
 		public async Task<string> GetChatroomStringAsync(long id)
 		{
-            var room = await _chatroomRepo.GetAsyncById(id);
+            var room = await _chatroomRepo.GetByIdAsync(id);
             return room?.ToString() ?? "null";
 		}
 
@@ -44,13 +44,13 @@ namespace Chat.Server
 
 		public async Task<string> GetUserStringAsync(long id)
 		{
-            var room = await _userRepo.GetAsyncById(id);
+            var room = await _userRepo.GetByIdAsync(id);
 			return room?.ToString() ?? "null";
 		}
 
 		public Task<List<ChatMessage>> GetRecentMessages(long chatroomId, int count)
 		{
-			return _context.Messages
+            return _messageRepo.Query()
 						   .Where(m => m.ChatroomId == chatroomId)
 						   .OrderByDescending(m => m.Time)
 						   .Take(count)

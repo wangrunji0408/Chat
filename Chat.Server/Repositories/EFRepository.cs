@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Chat.Server.Repositories
 {
     public class EFRepository<TEntity>
-        where TEntity: Domains.DomainBase
+        where TEntity:class
     {
         protected readonly DbSet<TEntity> _set;
         protected readonly DbContext _context;
@@ -23,7 +23,8 @@ namespace Chat.Server.Repositories
             _provider = provider;
             _context = provider.GetRequiredService<ServerDbContext>();
             _set = _context.Set<TEntity>();
-			_logger = provider.GetService<ILoggerFactory>()?.CreateLogger<UserRepository>();
+			_logger = provider.GetService<ILoggerFactory>()?
+                              .CreateLogger<EFRepository<TEntity>>();
 		}
 
         public void Add (TEntity entity)
@@ -41,14 +42,20 @@ namespace Chat.Server.Repositories
             _set.Remove(entity);
 		}
 
+        /// <summary>
+        /// 根据Id找到聚合根。自动加载关联Entity，并进行依赖注入。
+        /// </summary>
+        /// <param name="id">Identifier.</param>
+        /// <returns>聚合对象，可能为空。</returns>
         public virtual async Task<TEntity> FindByIdAsync (long id)
         {
             var entity = await _set.FindAsync(id);
-            entity?.SetServices(_provider);
+            await LoadRelationsAsync(entity);
+            (entity as Domains.DomainBase)?.SetServices(_provider);
             return entity;
         }
 
-        public async Task<TEntity> GetAsyncById (long id)
+        public async Task<TEntity> GetByIdAsync (long id)
         {
             return await FindByIdAsync(id)
                 ?? throw new KeyNotFoundException($"{typeof(TEntity).Name} {id} does not exist.");
@@ -56,7 +63,7 @@ namespace Chat.Server.Repositories
 
 		public async Task<bool> ContainsIdAsync(long id)
 		{
-            return await _set.CountAsync(e => e.Id == id) > 0;
+            return await _set.CountAsync(e => EF.Property<long>(e, "Id") == id) > 0;
 		}
 
         public Task<int> SaveChangesAsync ()
@@ -71,12 +78,26 @@ namespace Chat.Server.Repositories
 
         public IAsyncEnumerable<TEntity> GetAllAsync ()
         {
-            return _set.ToAsyncEnumerable();
+            return Query().ToAsyncEnumerable();
         }
 
-        public IQueryable Query ()
+        /// <summary>
+        /// Override this with _set.Include().
+        /// 只可用于查询端，不可用于命令端，因为会返回新的对象。
+        /// </summary>
+        /// <returns>The query.</returns>
+        public virtual IQueryable<TEntity> Query ()
         {
             return _set;
+        }
+
+        /// <summary>
+        /// Load all relations by default. It is called in Find/GetById.
+        /// </summary>
+        protected virtual async Task LoadRelationsAsync (TEntity entity)
+        {
+			foreach (var coll in _context.Entry(entity).Collections)
+				await coll.LoadAsync();
         }
     }
 }
