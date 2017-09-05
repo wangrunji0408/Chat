@@ -53,7 +53,9 @@ namespace Chat.Client.ConsoleApp
                 }
                 catch (Exception e)
                 {
-                    Console.Error.WriteLine(e);
+                    Console.Error.WriteLine("Client throws an exception. Check 'console-exception.log' for details.");
+                    Console.Error.WriteLine(e.Message);
+                    Logger.LogError(e, "Client throws an exception.");
                 }
             }
         }

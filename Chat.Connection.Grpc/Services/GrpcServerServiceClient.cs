@@ -25,7 +25,9 @@ namespace Chat.Connection.Grpc
             {
                 Message = message
             };
-            await base.SendMessageAsync(request);
+            var response = await base.SendMessageAsync(request);
+            if(response.Status != SendMessageResponse.Types.Status.Success)
+                throw new Exception($"Failed to send message. {response.Detail}");
         }
 
         public async Task<IServerService> LoginAsync(LoginRequest request)

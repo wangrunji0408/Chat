@@ -34,7 +34,8 @@ namespace Chat.Server.Repositories
 
 		public void Update(TEntity entity)
 		{
-			_set.Update(entity);
+		    // Entity has been tracked.
+//			_set.Update(entity);
 		}
 
 		public void Remove(TEntity entity)
