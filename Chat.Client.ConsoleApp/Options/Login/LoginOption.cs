@@ -41,7 +41,8 @@ namespace Chat.Client.ConsoleApp.Options
         
         void ListenClientEvents (Client client)
         {
-            client.NewMessage += (sender, e) => Console.WriteLine($"{e.SenderId}: {e.Content.Text}");
+            client.NewMessage += (sender, e) => Console.WriteLine(
+                $"[Room {e.ChatroomId} User {e.SenderId}] {e.Content.Text}");
         }
         
         void ShowMessages (Client client)

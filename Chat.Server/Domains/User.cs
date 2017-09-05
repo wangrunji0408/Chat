@@ -33,6 +33,11 @@ namespace Chat.Server.Domains
             _clientService = clientService;
         }
 
+	    private User()
+	    {
+		    
+	    }
+
 	    internal User(string username, string password)
 	    {
 		    Username = username;
