@@ -38,19 +38,12 @@ namespace Chat.Server
 		public async Task ReceiveNewMessageAsync(ChatMessage message)
 		{
             _logger?.LogInformation($"New message from user {message.SenderId}.");
-			message.TimeUnix = DateTimeOffset.Now.ToUnixTimeSeconds();
 
             var chatroom = await _chatroomRepo.GetByIdAsync(message.ChatroomId);
             chatroom.NewMessage(message);
 
             _messageRepo.Add(message);
             await _messageRepo.SaveChangesAsync();
-
-            await Task.WhenAll(chatroom.UserIds.Select(async id => 
-            {
-                var user = await _userRepo.GetByIdAsync(id);
-                await user.ReceiveNewMessageAsync(message);
-            }));
 		}
 		
 		public async Task<MakeFriendResponse> MakeFriends(MakeFriendRequest request)

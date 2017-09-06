@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace Chat.Server.Domains.Events
+namespace Chat.Server.Domains.Events.Chatroom
 {
-    abstract class ChatroomEvent: IDomainEvent
+    abstract class ChatroomEvent: DomainEvent
     {
         public long ChatroomId { get; protected set; }
-        public DateTimeOffset Time { get; protected set; } = DateTimeOffset.Now;
     }
 }

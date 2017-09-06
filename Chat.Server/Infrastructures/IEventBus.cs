@@ -5,7 +5,7 @@ namespace Chat.Server.Infrastructures
 {
     public interface IEventBus
     {
-        IObservable<T> GetEventStream<T>() where T : IDomainEvent;
-        void Publish<T>(T @event) where T : IDomainEvent;
+        IObservable<T> GetEventStream<T>() where T : DomainEvent;
+        void Publish<T>(T @event) where T : DomainEvent;
     }
 }

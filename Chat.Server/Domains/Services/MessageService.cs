@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Chat.Core.Models;
 using Chat.Server.Domains.Events;
+using Chat.Server.Domains.Events.Chatroom;
 using Chat.Server.Domains.Repositories;
 using Chat.Server.Infrastructures;
 using Microsoft.Extensions.DependencyInjection;

@@ -7,14 +7,14 @@ namespace Chat.Server.Infrastructures
 {
     public class EventBus: IEventBus
     {
-        private readonly Subject<IDomainEvent> subject = new Subject<IDomainEvent>();
+        private readonly Subject<DomainEvent> subject = new Subject<DomainEvent>();
 
-        public IObservable<T> GetEventStream<T>() where T : IDomainEvent
+        public IObservable<T> GetEventStream<T>() where T : DomainEvent
         {
             return subject.OfType<T>();
         }
 
-        public void Publish<T>(T @event) where T : IDomainEvent
+        public void Publish<T>(T @event) where T : DomainEvent
         {
             subject.OnNext(@event);
         }

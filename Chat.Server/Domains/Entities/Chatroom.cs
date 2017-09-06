@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Chat.Core.Models;
 using Chat.Server.Domains.Events;
+using Chat.Server.Domains.Events.Chatroom;
 using Chat.Server.Infrastructures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -30,11 +31,14 @@ namespace Chat.Server.Domains.Entities
 
         internal void NewMessage(ChatMessage message)
         {
+            message.TimeUnix = DateTimeOffset.Now.ToUnixTimeSeconds();
             if (message.ChatroomId != Id)
                 throw new InvalidOperationException($"Message is not for this Chatroom.");
             if (!UserIds.Contains(message.SenderId))
                 throw new InvalidOperationException(
                     $"User {message.SenderId} is not in Chatroom {message.ChatroomId}.");
+            _provider.GetRequiredService<IEventBus>().Publish(
+                new NewMessageEvent(message));
         }
 
         internal void NewPeople(User user)
@@ -49,7 +53,6 @@ namespace Chat.Server.Domains.Entities
             };
             UserChatrooms.Add(uc);
             
-            _logger?.LogInformation($"User {user.Id} entered.");
             _provider.GetRequiredService<IEventBus>().Publish(
                 new UserEnterChatroomEvent(Id, user.Id));
         }

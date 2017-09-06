@@ -20,32 +20,34 @@ namespace Chat.Server
         readonly MessageRepository _messageRepo;
 
         readonly UserService _userService;
+        readonly ChatroomService _chatroomService;
         readonly MessageService _messageService;
 
         readonly IServiceProvider _provider;
         readonly IEventBus _eventBus;
 
-        public Server(IServiceProvider serviceProvider)
+        public Server(IServiceProvider provider)
         {
-            _provider = serviceProvider;
-            _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server");
-            _context = serviceProvider.GetRequiredService<ServerDbContext>();
+            _provider = provider;
+            _logger = provider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server");
+            _context = provider.GetRequiredService<ServerDbContext>();
             _context.Database.EnsureCreated();
             try {_context.Database.Migrate();}
             catch(Exception e)
             {
                 _logger?.LogError(e, "An error occurred when database migrate. It's normal when using InMemory database.");
             }
-            _eventBus = serviceProvider.GetRequiredService<IEventBus>();
-            var eventLogger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server.Events");
-            _eventBus.GetEventStream<IDomainEvent>().Subscribe(e => eventLogger.LogInformation(e.ToString()));
+            _eventBus = provider.GetRequiredService<IEventBus>();
+            var eventLogger = provider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server.Events");
+            _eventBus.GetEventStream<DomainEvent>().Subscribe(e => eventLogger.LogInformation(e.ToString()));
             
-            _userRepo = new UserRepository(serviceProvider);
-            _chatroomRepo = new ChatroomRepository(serviceProvider);
-            _messageRepo = new MessageRepository(serviceProvider);
+            _userRepo = new UserRepository(provider);
+            _chatroomRepo = new ChatroomRepository(provider);
+            _messageRepo = new MessageRepository(provider);
 
-            _userService = new UserService(serviceProvider);
-            _messageService = new MessageService(serviceProvider);
+            _userService = new UserService(provider);
+            _chatroomService = new ChatroomService(provider);
+            _messageService = new MessageService(provider);
             EnsureGlobalChatroomCreated();
         }
 

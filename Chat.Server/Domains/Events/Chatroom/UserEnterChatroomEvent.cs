@@ -1,4 +1,4 @@
-﻿namespace Chat.Server.Domains.Events
+﻿namespace Chat.Server.Domains.Events.Chatroom
 {
     class UserEnterChatroomEvent: ChatroomEvent
     {
@@ -8,6 +8,13 @@
         {
             UserId = userId;
             ChatroomId = chatroomId;
+        }
+
+        public override string ToString()
+        {
+            return $"[{nameof(UserEnterChatroomEvent)} " +
+                   $"{nameof(UserId)}: {UserId}, " +
+                   $"{nameof(ChatroomId)}: {ChatroomId}]";
         }
     }
 }

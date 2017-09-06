@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
+using Chat.Server.Domains.Events.User;
+using Chat.Server.Infrastructures;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Chat.Server.Domains.Entities
@@ -160,7 +163,8 @@ namespace Chat.Server.Domains.Entities
 	    {
 		    this.GetOrAddRelationshipWith(user).SetFriend();
 		    user.GetOrAddRelationshipWith(this).SetFriend();
-		    _logger.LogInformation($"User {Id} and {user.Id} became friends.");
+		    _provider.GetRequiredService<IEventBus>().Publish(
+			    new BecameFriendsEvent(this.Id, user.Id));
 	    }
     }
 }
