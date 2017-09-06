@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Chat.Core.Models;
 using Xunit;
 
@@ -18,6 +19,14 @@ namespace Chat.Test
             client2 = clientBuilder.SetUser(2, "123456").Build();
             client1.Login().Wait();
             client2.Login().Wait();
+        }
+
+        void AssertFriend(bool isfriend, long id1, long id2)
+        {
+            var user1 = server.FindUserAsync(id1).Result;
+            var user2 = server.FindUserAsync(id2).Result;
+            Assert.Equal(isfriend, user1.IsFriend(user2));
+            Assert.Equal(isfriend, user2.IsFriend(user1));
         }
         
         [Fact]
@@ -45,6 +54,7 @@ namespace Chat.Test
             client2.MakeFriendHandler = async request => accept;
             var response = await client1.MakeFriend(2, "Hello");
             Assert.Equal(accept, response);
+            AssertFriend(true, 1, 2);
         }
         
         [Fact]
@@ -54,6 +64,7 @@ namespace Chat.Test
             client2.MakeFriendHandler = async request => refuse;
             var response = await client1.MakeFriend(2, "Hello");
             Assert.Equal(refuse, response);
+            AssertFriend(false, 1, 2);
         }
         
         [Fact]
@@ -72,6 +83,7 @@ namespace Chat.Test
         public async Task AlreadyFriend()
         {
             await server.MakeFriends(1, 2);
+            AssertFriend(true, 1, 2);
             var accept = new MakeFriendResponse {Status = MakeFriendResponse.Types.Status.Accept};
             client2.MakeFriendHandler = async request => accept;
             var response = await client1.MakeFriend(2, "Hello");

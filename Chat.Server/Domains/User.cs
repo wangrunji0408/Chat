@@ -50,7 +50,7 @@ namespace Chat.Server.Domains
 		    Password = password;
 	    }
 
-	    internal bool IsFriend(User user)
+	    public bool IsFriend(User user)
 	    {
 		    return UserRelationships.FirstOrDefault(r => r.ToUserId == user.Id)?.IsFriend ?? false;
 	    }
