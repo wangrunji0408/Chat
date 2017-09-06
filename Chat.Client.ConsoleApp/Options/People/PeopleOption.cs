@@ -1,21 +1,21 @@
 ﻿using System;
-using Chat.Client.ConsoleApp.Options.Chatroom;
 using CommandLine;
 using Microsoft.Extensions.Logging;
+using Chat.Client.ConsoleApp.Options.People;
 
 namespace Chat.Client.ConsoleApp.Options
 {
-    [Verb("room")]
-    class RoomOption: OptionBase
+    [Verb("people")]
+    class PeopleOption: OptionBase
     {
         [Value(0, Required = true)]
-        public long ChatroomId { get; set; }
+        public long PeopleId { get; set; }
         
         internal override void Execute(Program app)
         {
             while(true)
             {
-                Console.Write($"Room {ChatroomId} > ");
+                Console.Write($"People {PeopleId} > ");
                 try
                 {
                     var cmd = Console.ReadLine();
@@ -27,10 +27,10 @@ namespace Chat.Client.ConsoleApp.Options
                     if (args[0] == "q" || args[0] == "exit")
                         return;
                     
-                    Parser.Default.ParseArguments<SendOption, InfoOption>(args)
-                        .WithParsed<RoomOptionBase>(opt =>
+                    Parser.Default.ParseArguments<InfoOption, MakeFriendOption>(args)
+                        .WithParsed<PeopleOptionBase>(opt =>
                         {
-                            opt.ChatroomId = ChatroomId;
+                            opt.PeopleId = PeopleId;
                             opt.Execute(app);
                         })
                         .WithNotParsed(app.ParseFailed);
@@ -45,8 +45,8 @@ namespace Chat.Client.ConsoleApp.Options
         }
     }
 
-    abstract class RoomOptionBase : OptionBase
+    abstract class PeopleOptionBase : OptionBase
     {
-        public long ChatroomId { get; set; }
+        public long PeopleId { get; set; }
     }
 }

@@ -90,5 +90,17 @@ namespace Chat.Connection.Grpc
             foreach (var message in messages)
                 await responseStream.WriteAsync(message);
         }
+
+        public override async Task<GetChatroomInfoResponse> GetChatroomInfo(GetChatroomInfoRequest request, ServerCallContext context)
+        {
+            var info = await _server.GetChatroomInfoAsync(request.SenderId, request.ChatroomId);
+            return new GetChatroomInfoResponse{Success = true, Chatroom = info};
+        }
+
+        public override async Task<GetPeopleInfoResponse> GetPeoplesInfo(GetPeopleInfoRequest request, ServerCallContext context)
+        {
+            var info = await _server.GetPeopleInfoAsync(request.SenderId, request.TargetId);
+            return new GetPeopleInfoResponse{PeopleInfo = info};
+        }
     }
 }

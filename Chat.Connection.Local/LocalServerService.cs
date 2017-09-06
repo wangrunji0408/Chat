@@ -27,6 +27,23 @@ namespace Chat.Connection.Local
 						  .SelectMany(list => list.ToAsyncEnumerable());
         }
 
+        public async Task<GetChatroomInfoResponse> GetChatroomInfo(GetChatroomInfoRequest request)
+        {
+            var info = await _server.GetChatroomInfoAsync(request.SenderId, request.ChatroomId);
+            return new GetChatroomInfoResponse{Success = true, Chatroom = info};
+        }
+
+        public async Task<GetPeopleInfoResponse> GetPeopleInfo(GetPeopleInfoRequest request)
+        {
+            var info = await _server.GetPeopleInfoAsync(request.SenderId, request.TargetId);
+            return new GetPeopleInfoResponse{PeopleInfo = info};
+        }
+
+        public Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task SendMessageAsync(ChatMessage message)
         {
             await _server.ReceiveNewMessageAsync(message);

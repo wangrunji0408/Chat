@@ -83,6 +83,35 @@ namespace Chat.Test
 			Assert.NotNull(messages.Find(m => m.Content.Text == "Message2"));
             Assert.NotNull(messages.Find(m => m.Content.Text == "Message3"));
 		}
+	    
+	    [Fact]
+	    public async Task GetPeopleInfo()
+	    {
+		    await loginService.SignupAsync(new SignupRequest { Username = "user1", Password = "123456" });
+		    await loginService.SignupAsync(new SignupRequest { Username = "user2", Password = "123456" });
+		    var client1 = clientBuilder.SetUser(1, "123456").Build();
+		    await client1.Login();
+		    Assert.Equal(new PeopleInfo
+		    {
+			    Id = 2,
+			    Username = "user2"
+		    }, await client1.GetPeopleInfo(2));
+	    }
+	    
+	    [Fact]
+	    public async Task GetChatroomInfo()
+	    {
+		    await loginService.SignupAsync(new SignupRequest { Username = "user1", Password = "123456" });
+		    await loginService.SignupAsync(new SignupRequest { Username = "user2", Password = "123456" });
+		    var client1 = clientBuilder.SetUser(1, "123456").Build();
+		    await client1.Login();
+		    Assert.Equal(new ChatroomInfo
+		    {
+			    Id = GlobalChatroomId,
+			    Name = "Global Chatroom",
+			    PeopleIds = { 1, 2 }
+		    }, await client1.GetChatroomInfo(GlobalChatroomId));
+	    }
     }
 
     public class TestClient_Local: TestClient_Base

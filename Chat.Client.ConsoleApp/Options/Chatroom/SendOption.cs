@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace Chat.Client.ConsoleApp.Options
+namespace Chat.Client.ConsoleApp.Options.Chatroom
 {
     [Verb("send")]
     class SendOption: RoomOptionBase

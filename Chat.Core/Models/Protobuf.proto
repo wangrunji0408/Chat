@@ -15,9 +15,9 @@ service ChatServerService
     rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
     rpc GetMessages (GetMessagesRequest) returns (stream ChatMessage);
     rpc MakeFriend (MakeFriendRequest) returns (MakeFriendResponse);
-    rpc GetPeoplesInfo (GetPeoplesInfoRequest) returns (GetPeoplesInfoResponse);
+    rpc GetPeoplesInfo (GetPeopleInfoRequest) returns (GetPeopleInfoResponse);
+    rpc GetChatroomInfo (GetChatroomInfoRequest) returns (GetChatroomInfoResponse);
     //rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);
-    //rpc GetChatroom (GetChatroomRequest) returns (ChatroomResponse);
 }
 
 service ChatClientService

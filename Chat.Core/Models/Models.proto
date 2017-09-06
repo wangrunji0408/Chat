@@ -72,13 +72,13 @@ message NewChatroomRequest
 	repeated int32 peopleIds = 2;
 }
 
-message GetChatroomRequest
+message GetChatroomInfoRequest
 {
 	int64 senderId = 1;
 	int64 chatroomId = 2;
 }
 
-message ChatroomResponse
+message GetChatroomInfoResponse
 {
 	bool success = 1;
 	ChatroomInfo chatroom = 2;
@@ -144,14 +144,15 @@ message MakeFriendResponse
 	string detail = 2;
 }
 
-message GetPeoplesInfoRequest
+message GetPeopleInfoRequest
 {
-    repeated int64 peopleIds = 1;
+    int64 senderId = 1;
+    int64 targetId = 2;
 }
 
-message GetPeoplesInfoResponse
+message GetPeopleInfoResponse
 {
-    repeated PeopleInfo peopleInfos = 1;
+    PeopleInfo peopleInfo = 1;
 }
 
 message FriendNotification

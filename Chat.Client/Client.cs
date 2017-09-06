@@ -68,5 +68,29 @@ namespace Chat.Client
             request.UserId = UserId;
             return _serverService.GetMessages(request).ToList();
         }
+
+        public async Task<ChatroomInfo> GetChatroomInfo(long chatroomId)
+        {
+            var request = new GetChatroomInfoRequest
+            {
+                SenderId = UserId,
+                ChatroomId = chatroomId
+            };
+            var response = await _serverService.GetChatroomInfo(request);
+            if(response.Success == false)
+                throw new Exception($"Failed to get chatroom info. {response.Detail}");
+            return response.Chatroom;
+        }
+        
+        public async Task<PeopleInfo> GetPeopleInfo(long peopleId)
+        {
+            var request = new GetPeopleInfoRequest
+            {
+                SenderId = UserId,
+                TargetId = peopleId
+            };
+            var response = await _serverService.GetPeopleInfo(request);
+            return response.PeopleInfo;
+        }
     }
 }

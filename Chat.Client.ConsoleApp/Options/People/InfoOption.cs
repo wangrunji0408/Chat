@@ -1,14 +1,14 @@
 ﻿using System;
 using CommandLine;
 
-namespace Chat.Client.ConsoleApp.Options.Chatroom
+namespace Chat.Client.ConsoleApp.Options.People
 {
     [Verb("info")]
-    class InfoOption: RoomOptionBase
+    class InfoOption: PeopleOptionBase
     {
         internal override void Execute(Program app)
         {
-            var info = app.Client.GetChatroomInfo(ChatroomId).Result;
+            var info = app.Client.GetPeopleInfo(PeopleId).Result;
             Console.WriteLine(info);
         }
     }

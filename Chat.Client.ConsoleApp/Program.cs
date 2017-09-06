@@ -47,7 +47,7 @@ namespace Chat.Client.ConsoleApp
                         continue;
                     Cmdlogger.LogTrace(cmd);
                     var args = cmd.Split(' ');
-                    Parser.Default.ParseArguments<RoomOption, LoginOption, SignupOption>(args)
+                    Parser.Default.ParseArguments<RoomOption, PeopleOption, LoginOption, SignupOption>(args)
                         .WithParsed<OptionBase>(opt => opt.Execute(this))
                         .WithNotParsed(ParseFailed);
                 }

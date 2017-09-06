@@ -67,5 +67,20 @@ namespace Chat.Connection.Grpc
             var reader = base.GetMessages(request).ResponseStream;
             return AsyncEnumerable.CreateEnumerable(() => reader);
         }
+
+        public async Task<GetChatroomInfoResponse> GetChatroomInfo(GetChatroomInfoRequest request)
+        {
+            return await base.GetChatroomInfoAsync(request);
+        }
+
+        public async Task<GetPeopleInfoResponse> GetPeopleInfo(GetPeopleInfoRequest request)
+        {
+            return await base.GetPeoplesInfoAsync(request);
+        }
+
+        public async Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request)
+        {
+            return await base.MakeFriendAsync(request);
+        }
     }
 }

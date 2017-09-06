@@ -9,5 +9,8 @@ namespace Chat.Core.Interfaces
     {
         Task SendMessageAsync(ChatMessage message);
         IAsyncEnumerable<ChatMessage> GetMessages(GetMessagesRequest request);
+        Task<GetChatroomInfoResponse> GetChatroomInfo(GetChatroomInfoRequest request);
+        Task<GetPeopleInfoResponse> GetPeopleInfo(GetPeopleInfoRequest request);
+        Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request);
     }
 }
