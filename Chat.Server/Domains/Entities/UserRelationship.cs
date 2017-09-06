@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Chat.Server.Domains
+namespace Chat.Server.Domains.Entities
 {
     /// <summary>
     /// 用户之间的单向关系。如朋友

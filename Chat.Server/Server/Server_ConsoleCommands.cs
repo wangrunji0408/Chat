@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Chat.Core.Models;
 using Chat.Server.Domains;
+using Chat.Server.Domains.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chat.Server

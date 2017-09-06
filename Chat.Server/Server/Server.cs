@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Chat.Server.Events;
+using Chat.Server.Domains.Entities;
+using Chat.Server.Domains.Events;
+using Chat.Server.Domains.Repositories;
+using Chat.Server.Domains.Services;
+using Chat.Server.Infrastructures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chat.Server
 {
-    using Core.Interfaces;
-    using Core.Models;
-    using Domains;
-    using Repositories;
-
     public partial class Server
     {
         readonly ILogger _logger;

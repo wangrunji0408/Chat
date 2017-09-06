@@ -2,11 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Chat.Core.Models;
-using Chat.Server.Repositories;
+using Chat.Server.Domains.Entities;
+using Chat.Server.Domains.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Chat.Server.Domains
+namespace Chat.Server.Domains.Services
 {
     public class UserService
     {

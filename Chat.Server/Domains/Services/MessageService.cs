@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Chat.Core.Models;
-using Chat.Server.Events;
-using Chat.Server.Repositories;
+using Chat.Server.Domains.Events;
+using Chat.Server.Domains.Repositories;
+using Chat.Server.Infrastructures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Chat.Server.Domains
+namespace Chat.Server.Domains.Services
 {
     class MessageService
     {

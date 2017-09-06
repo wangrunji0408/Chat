@@ -1,7 +1,7 @@
 ﻿using System;
 using Chat.Core.Models;
 
-namespace Chat.Server.Repositories
+namespace Chat.Server.Domains.Repositories
 {
     public class MessageRepository: EFRepository<ChatMessage>
 	{

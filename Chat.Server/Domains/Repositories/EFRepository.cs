@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Chat.Server.Domains.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace Chat.Server.Repositories
+namespace Chat.Server.Domains.Repositories
 {
     public class EFRepository<TEntity>
         where TEntity:class
@@ -52,7 +51,7 @@ namespace Chat.Server.Repositories
         {
             var entity = await _set.FindAsync(id);
             await LoadRelationsAsync(entity);
-            (entity as Domains.DomainBase)?.SetServices(_provider);
+            (entity as DomainBase)?.SetServices(_provider);
             return entity;
         }
 

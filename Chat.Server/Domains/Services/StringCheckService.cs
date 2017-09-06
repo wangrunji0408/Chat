@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Chat.Server.Domains
+namespace Chat.Server.Domains.Services
 {
     public static class StringCheckService
     {

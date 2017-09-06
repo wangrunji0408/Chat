@@ -1,8 +1,8 @@
 ﻿using System;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
-namespace Chat.Server.Domains
+namespace Chat.Server.Domains.Entities
 {
     public abstract class DomainBase
     {

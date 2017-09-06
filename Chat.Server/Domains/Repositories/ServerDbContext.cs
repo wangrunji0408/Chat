@@ -1,15 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Chat.Server.Domains;
+﻿using System.Threading.Tasks;
 using Chat.Core.Models;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System.Linq;
+using Chat.Server.Domains.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace Chat.Server.Repositories
+namespace Chat.Server.Domains.Repositories
 {
     public class ServerDbContext: DbContext
     {

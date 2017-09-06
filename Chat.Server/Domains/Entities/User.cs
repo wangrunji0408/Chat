@@ -1,17 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using System.Collections;
-using System.Threading;
 using Microsoft.Extensions.Logging;
 
-namespace Chat.Server.Domains
+namespace Chat.Server.Domains.Entities
 {
     public class User: DomainBase
     {

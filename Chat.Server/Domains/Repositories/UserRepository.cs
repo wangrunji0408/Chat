@@ -1,12 +1,10 @@
 ﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Chat.Server.Domains;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
+using Chat.Server.Domains.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace Chat.Server.Repositories
+namespace Chat.Server.Domains.Repositories
 {
     public class UserRepository: EFRepository<User>
     {

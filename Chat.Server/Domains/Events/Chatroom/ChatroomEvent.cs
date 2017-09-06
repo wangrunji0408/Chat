@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Chat.Server.Events
+namespace Chat.Server.Domains.Events
 {
     abstract class ChatroomEvent: IDomainEvent
     {

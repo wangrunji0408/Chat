@@ -1,4 +1,4 @@
-﻿namespace Chat.Server.Events
+﻿namespace Chat.Server.Domains.Events
 {
     public interface IDomainEvent
     {

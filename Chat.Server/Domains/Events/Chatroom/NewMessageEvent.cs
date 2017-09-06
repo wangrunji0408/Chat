@@ -1,6 +1,6 @@
 ﻿using Chat.Core.Models;
 
-namespace Chat.Server.Events
+namespace Chat.Server.Domains.Events
 {
     class NewMessageEvent: ChatroomEvent
     {

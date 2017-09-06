@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Linq;
+using Chat.Server.Domains.Entities;
 using Microsoft.EntityFrameworkCore;
-using Chat.Server.Domains;
 
-namespace Chat.Server.Repositories
+namespace Chat.Server.Domains.Repositories
 {
     public class ChatroomRepository : EFRepository<Chatroom>
     {

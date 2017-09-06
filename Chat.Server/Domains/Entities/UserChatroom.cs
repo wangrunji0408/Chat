@@ -1,5 +1,4 @@
-﻿using System;
-namespace Chat.Server.Domains
+﻿namespace Chat.Server.Domains.Entities
 {
     public class UserChatroom
     {
