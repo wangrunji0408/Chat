@@ -72,18 +72,5 @@ namespace Chat.Server.Domains
 				UserId = user.Id
 			};
 		}
-
-	    public async Task<MakeFriendResponse> ApplyFriend(MakeFriendRequest request)
-	    {
-		    throw new NotImplementedException();
-	    }
-
-	    internal static void MakeFriends(User user1, User user2)
-	    {
-		    var r12 = user1.GetOrAddRelationshipWith(user2);
-		    r12.SetFriend();
-		    var r21 = user2.GetOrAddRelationshipWith(user1);
-		    r21.SetFriend();
-	    }
     }
 }

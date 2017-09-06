@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Chat.Connection.Grpc;
 using Chat.Core.Models;
 using CommandLine;
@@ -43,8 +45,30 @@ namespace Chat.Client.ConsoleApp.Options
         {
             client.NewMessage += (sender, e) => Console.WriteLine(
                 $"[Room {e.ChatroomId} User {e.SenderId}] {e.Content.Text}");
+            client.MakeFriendHandler = MakeFriend;
         }
-        
+
+        private async Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request)
+        {
+            Console.WriteLine($"User {request.SenderId} wants to become your friend.");
+            Console.WriteLine($"Greeting: {request.Greeting}");
+            while (true)
+            {
+                Console.Write($"Accept? y/[n]: ");
+                var input = Console.ReadLine();
+                if(input == "y")
+                    return new MakeFriendResponse
+                    {
+                        Status = MakeFriendResponse.Types.Status.Accept
+                    };
+                if(input == "n" || string.IsNullOrWhiteSpace(input))
+                    return new MakeFriendResponse
+                    {
+                        Status = MakeFriendResponse.Types.Status.Refuse
+                    };
+            }
+        }
+
         void ShowMessages (Client client)
         {
             Console.WriteLine("Unread messages:");

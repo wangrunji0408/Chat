@@ -52,5 +52,16 @@ namespace Chat.Server
                 await user.ReceiveNewMessageAsync(message);
             }));
 		}
+		
+		public async Task<MakeFriendResponse> MakeFriends(MakeFriendRequest request)
+		{
+			var user = await _userRepo.GetByIdAsync(request.SenderId);
+			var target = await _userRepo.FindByIdAsync(request.TargetId);
+			if(target == null)
+				return new MakeFriendResponse{Status = MakeFriendResponse.Types.Status.UserNotExist};
+			var response = await user.HandleMakeFriend(request, target);
+			await _userRepo.SaveChangesAsync();
+			return response;
+		}
 	}
 }

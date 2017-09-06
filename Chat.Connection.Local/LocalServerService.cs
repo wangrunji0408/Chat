@@ -41,7 +41,7 @@ namespace Chat.Connection.Local
 
         public Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request)
         {
-            throw new NotImplementedException();
+            return _server.MakeFriends(request);
         }
 
         public async Task SendMessageAsync(ChatMessage message)

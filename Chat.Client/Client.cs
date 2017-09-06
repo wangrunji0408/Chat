@@ -92,5 +92,18 @@ namespace Chat.Client
             var response = await _serverService.GetPeopleInfo(request);
             return response.PeopleInfo;
         }
+
+        public Func<MakeFriendRequest, Task<MakeFriendResponse>> MakeFriendHandler;
+
+        public Task<MakeFriendResponse> MakeFriend(long targetId, string greeting = "")
+        {
+            var request = new MakeFriendRequest
+            {
+                SenderId = UserId,
+                TargetId = targetId,
+                Greeting = greeting ?? ""
+            };
+            return _serverService.MakeFriend(request);
+        }
     }
 }

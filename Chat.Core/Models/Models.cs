@@ -52,17 +52,19 @@ namespace Chat.Core.Models {
             "aWwYAiABKAkiOAoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIOCgpOb1N1Y2hVc2Vy",
             "EGUSEQoNV3JvbmdQYXNzd29yZBBmIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAK",
             "CHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5n",
-            "GAMgASgJIpwBChJNYWtlRnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgO",
+            "GAMgASgJItIBChJNYWtlRnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgO",
             "Mh8uY2hhdC5NYWtlRnJpZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgC",
-            "IAEoCSJFCgZTdGF0dXMSCgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxy",
-            "ZWFkeUZyaWVuZBACEhAKDFVzZXJOb3RFeGlzdBADIjoKFEdldFBlb3BsZUlu",
-            "Zm9SZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgD",
-            "Ij0KFUdldFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJbmZvGAEgASgL",
-            "MhAuY2hhdC5QZW9wbGVJbmZvImwKEkZyaWVuZE5vdGlmaWNhdGlvbhIKCgJp",
-            "ZBgBIAEoBRIrCgR0eXBlGAIgASgOMh0uY2hhdC5GcmllbmROb3RpZmljYXRp",
-            "b24uVHlwZSIdCgRUeXBlEgkKBUxvZ2luEAASCgoGTG9nb3V0EAEiOwoSR2V0",
-            "TWVzc2FnZXNSZXF1ZXN0Eg4KBnVzZXJJZBgBIAEoAxIVCg1hZnRlclRpbWVV",
-            "bml4GAIgASgDQhOqAhBDaGF0LkNvcmUuTW9kZWxzYgZwcm90bzM="));
+            "IAEoCSJ7CgZTdGF0dXMSCgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxy",
+            "ZWFkeUZyaWVuZBACEhAKDFVzZXJOb3RFeGlzdBADEhEKDVVzZXJOb3RPbmxp",
+            "bmUQBBITCg9SZXNwb25zZVRpbWVvdXQQBRIMCghXaXRoU2VsZhAGIjoKFEdl",
+            "dFBlb3BsZUluZm9SZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdl",
+            "dElkGAIgASgDIj0KFUdldFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJ",
+            "bmZvGAEgASgLMhAuY2hhdC5QZW9wbGVJbmZvImwKEkZyaWVuZE5vdGlmaWNh",
+            "dGlvbhIKCgJpZBgBIAEoBRIrCgR0eXBlGAIgASgOMh0uY2hhdC5GcmllbmRO",
+            "b3RpZmljYXRpb24uVHlwZSIdCgRUeXBlEgkKBUxvZ2luEAASCgoGTG9nb3V0",
+            "EAEiOwoSR2V0TWVzc2FnZXNSZXF1ZXN0Eg4KBnVzZXJJZBgBIAEoAxIVCg1h",
+            "ZnRlclRpbWVVbml4GAIgASgDQhOqAhBDaGF0LkNvcmUuTW9kZWxzYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -2911,6 +2913,9 @@ namespace Chat.Core.Models {
         [pbr::OriginalName("Refuse")] Refuse = 1,
         [pbr::OriginalName("AlreadyFriend")] AlreadyFriend = 2,
         [pbr::OriginalName("UserNotExist")] UserNotExist = 3,
+        [pbr::OriginalName("UserNotOnline")] UserNotOnline = 4,
+        [pbr::OriginalName("ResponseTimeout")] ResponseTimeout = 5,
+        [pbr::OriginalName("WithSelf")] WithSelf = 6,
       }
 
     }

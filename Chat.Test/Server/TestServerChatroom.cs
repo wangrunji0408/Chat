@@ -77,6 +77,11 @@ namespace Chat.Test
                 ReceivedMessage = message;
                 return Task.CompletedTask;
             }
+
+            public Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

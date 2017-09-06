@@ -139,6 +139,9 @@ message MakeFriendResponse
 		Refuse = 1;
 		AlreadyFriend = 2;
 		UserNotExist = 3;
+		UserNotOnline = 4;
+		ResponseTimeout = 5;
+		WithSelf = 6;
 	}
 	Status status = 1;
 	string detail = 2;

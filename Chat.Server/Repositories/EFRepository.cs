@@ -97,6 +97,7 @@ namespace Chat.Server.Repositories
         /// </summary>
         protected virtual async Task LoadRelationsAsync (TEntity entity)
         {
+            if(entity == null)    return;
 			foreach (var coll in _context.Entry(entity).Collections)
 				await coll.LoadAsync();
         }

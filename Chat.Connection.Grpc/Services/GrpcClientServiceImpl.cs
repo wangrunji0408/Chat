@@ -54,5 +54,10 @@ namespace Chat.Connection.Grpc
 			_client.InformNewMessage(request.Message);
             return new SendMessageResponse{Status = Success};
         }
+
+        public override Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request, ServerCallContext context)
+        {
+            return _client.MakeFriendHandler(request);
+        }
     }
 }

@@ -21,5 +21,10 @@ namespace Chat.Connection.Local
             await Task.CompletedTask;
             _client.InformNewMessage(message);
         }
+
+        public Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request)
+        {
+            return _client.MakeFriendHandler(request);
+        }
     }
 }

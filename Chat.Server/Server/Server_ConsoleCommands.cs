@@ -31,7 +31,7 @@ namespace Chat.Server
         {
             var user1 = await _userRepo.GetByIdAsync(user1Id);
             var user2 = await _userRepo.GetByIdAsync(user2Id);
-            UserService.MakeFriends(user1, user2);
+            user1.MakeFriendsWith(user2);
             await _userRepo.SaveChangesAsync();
         }
 

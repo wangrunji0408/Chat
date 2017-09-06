@@ -102,5 +102,10 @@ namespace Chat.Connection.Grpc
             var info = await _server.GetPeopleInfoAsync(request.SenderId, request.TargetId);
             return new GetPeopleInfoResponse{PeopleInfo = info};
         }
+
+        public override Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request, ServerCallContext context)
+        {
+            return _server.MakeFriends(request);
+        }
     }
 }

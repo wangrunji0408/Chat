@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
+using System.Threading;
 using Microsoft.Extensions.Logging;
 
 namespace Chat.Server.Domains
@@ -47,6 +48,11 @@ namespace Chat.Server.Domains
 	    {
 		    Username = username;
 		    Password = password;
+	    }
+
+	    internal bool IsFriend(User user)
+	    {
+		    return UserRelationships.FirstOrDefault(r => r.ToUserId == user.Id)?.IsFriend ?? false;
 	    }
 
 	    internal LoginResponse Login (LoginRequest request)
@@ -115,6 +121,50 @@ namespace Chat.Server.Domains
 			    _logger?.LogInformation($"New relationship with user {target.Id}");
 		    }
 		    return relationship;
+	    }
+	    
+	    internal async Task<MakeFriendResponse> HandleMakeFriend(MakeFriendRequest request, User target)
+	    {
+		    if(target == this)
+			    return new MakeFriendResponse
+			    {
+				    Status = MakeFriendResponse.Types.Status.WithSelf
+			    };
+		    if(IsFriend(target))
+			    return new MakeFriendResponse
+			    {
+				    Status = MakeFriendResponse.Types.Status.AlreadyFriend
+			    };
+//			var timeout = TimeSpan.FromSeconds(5);
+			var task = target.AskClientToMakeFriend(request);
+//		    await Task.WhenAny(task, Task.Delay(timeout));
+		    await task;
+			if(!task.IsCompleted)
+				return new MakeFriendResponse
+				{
+					Status = MakeFriendResponse.Types.Status.ResponseTimeout
+				};
+		    var response = task.Result;
+		    if (response.Status == MakeFriendResponse.Types.Status.Accept)
+			    this.MakeFriendsWith(target);
+		    return response;
+	    }
+
+	    async Task<MakeFriendResponse> AskClientToMakeFriend(MakeFriendRequest request)
+	    {
+		    if (_clientService == null)
+			    return new MakeFriendResponse
+			    {
+				    Status = MakeFriendResponse.Types.Status.UserNotOnline
+			    };
+		    return await _clientService.MakeFriend(request);
+	    }
+
+	    internal void MakeFriendsWith(User user)
+	    {
+		    this.GetOrAddRelationshipWith(user).SetFriend();
+		    user.GetOrAddRelationshipWith(this).SetFriend();
+		    _logger.LogInformation($"User {Id} and {user.Id} became friends.");
 	    }
     }
 }
