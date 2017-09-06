@@ -34,6 +34,7 @@ namespace Chat.Client
 
         public async Task SendTextMessage(string text, long roomId)
         {
+            
 			var message = new ChatMessage
             {
                 SenderId = UserId,

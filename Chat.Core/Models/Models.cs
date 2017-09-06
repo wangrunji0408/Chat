@@ -23,53 +23,63 @@ namespace Chat.Core.Models {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgxNb2RlbHMucHJvdG8SBGNoYXQiKwoIUmVzcG9uc2USDwoHc3VjY2VzcxgB",
-            "IAEoCBIOCgZkZXRhaWwYAiABKAkiFwoHQ29udGVudBIMCgR0ZXh0GAEgASgJ",
-            "InEKC0NoYXRNZXNzYWdlEgoKAmlkGAEgASgDEhAKCHNlbmRlcklkGAIgASgD",
-            "EhAKCHRpbWVVbml4GAMgASgDEh4KB2NvbnRlbnQYBCABKAsyDS5jaGF0LkNv",
-            "bnRlbnQSEgoKY2hhdHJvb21JZBgFIAEoAyI4ChJTZW5kTWVzc2FnZVJlcXVl",
-            "c3QSIgoHbWVzc2FnZRgBIAEoCzIRLmNoYXQuQ2hhdE1lc3NhZ2UiegoTU2Vu",
-            "ZE1lc3NhZ2VSZXNwb25zZRIwCgZzdGF0dXMYASABKA4yIC5jaGF0LlNlbmRN",
-            "ZXNzYWdlUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSIhCgZTdGF0",
-            "dXMSCwoHU3VjY2VzcxAAEgoKBkZhaWxlZBABIioKClBlb3BsZUluZm8SCgoC",
-            "aWQYASABKAMSEAoIdXNlcm5hbWUYAiABKAkiaQoGRnJpZW5kEgwKBG15SWQY",
-            "ASABKAUSEAoIZnJpZW5kSWQYAiABKAUSDAoEdGFncxgKIAMoCRIMCgRub3Rl",
-            "GAsgASgJEg8KB2Jsb2NrZWQYFCABKAgSEgoKY2hhdHJvb21JZBgVIAEoAyJL",
-            "CgxDaGF0cm9vbUluZm8SCgoCaWQYASABKAMSEQoJcGVvcGxlSWRzGAIgAygD",
-            "Eg4KBmhvc3RJZBgDIAEoAxIMCgRuYW1lGAQgASgJIjkKEk5ld0NoYXRyb29t",
-            "UmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIRCglwZW9wbGVJZHMYAiADKAUi",
-            "PgoWR2V0Q2hhdHJvb21JbmZvUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIS",
-            "CgpjaGF0cm9vbUlkGAIgASgDImAKF0dldENoYXRyb29tSW5mb1Jlc3BvbnNl",
-            "Eg8KB3N1Y2Nlc3MYASABKAgSJAoIY2hhdHJvb20YAiABKAsyEi5jaGF0LkNo",
-            "YXRyb29tSW5mbxIOCgZkZXRhaWwYAyABKAkiMwoNU2lnbnVwUmVxdWVzdBIQ",
-            "Cgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSK5AQoOU2lnbnVw",
-            "UmVzcG9uc2USKwoGc3RhdHVzGAEgASgOMhsuY2hhdC5TaWdudXBSZXNwb25z",
-            "ZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJEg4KBnVzZXJJZBgDIAEoAyJaCgZT",
-            "dGF0dXMSCwoHU3VjY2VzcxAAEhEKDVVzZXJuYW1lRXhpc3QQZRIXChNVc2Vy",
-            "bmFtZUZvcm1hdFdyb25nEGYSFwoTUGFzc3dvcmRGb3JtYXRXcm9uZxBnIkIK",
-            "DExvZ2luUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgC",
-            "IAEoCRIOCgZ1c2VySWQYAyABKAMihQEKDUxvZ2luUmVzcG9uc2USKgoGc3Rh",
-            "dHVzGAEgASgOMhouY2hhdC5Mb2dpblJlc3BvbnNlLlN0YXR1cxIOCgZkZXRh",
-            "aWwYAiABKAkiOAoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIOCgpOb1N1Y2hVc2Vy",
-            "EGUSEQoNV3JvbmdQYXNzd29yZBBmIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAK",
-            "CHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5n",
-            "GAMgASgJItIBChJNYWtlRnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgO",
-            "Mh8uY2hhdC5NYWtlRnJpZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgC",
-            "IAEoCSJ7CgZTdGF0dXMSCgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxy",
-            "ZWFkeUZyaWVuZBACEhAKDFVzZXJOb3RFeGlzdBADEhEKDVVzZXJOb3RPbmxp",
-            "bmUQBBITCg9SZXNwb25zZVRpbWVvdXQQBRIMCghXaXRoU2VsZhAGIjoKFEdl",
-            "dFBlb3BsZUluZm9SZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdl",
-            "dElkGAIgASgDIj0KFUdldFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJ",
-            "bmZvGAEgASgLMhAuY2hhdC5QZW9wbGVJbmZvImwKEkZyaWVuZE5vdGlmaWNh",
-            "dGlvbhIKCgJpZBgBIAEoBRIrCgR0eXBlGAIgASgOMh0uY2hhdC5GcmllbmRO",
-            "b3RpZmljYXRpb24uVHlwZSIdCgRUeXBlEgkKBUxvZ2luEAASCgoGTG9nb3V0",
-            "EAEiOwoSR2V0TWVzc2FnZXNSZXF1ZXN0Eg4KBnVzZXJJZBgBIAEoAxIVCg1h",
-            "ZnRlclRpbWVVbml4GAIgASgDQhOqAhBDaGF0LkNvcmUuTW9kZWxzYgZwcm90",
-            "bzM="));
+            "IAEoCBIOCgZkZXRhaWwYAiABKAki6AIKB0NvbnRlbnQSDgoEdGV4dBhkIAEo",
+            "CUgAEiQKBWltYWdlGGUgASgLMhMuY2hhdC5Db250ZW50LkltYWdlSAASKgoI",
+            "d2l0aGRyYXcYZiABKAsyFi5jaGF0LkNvbnRlbnQuV2l0aGRyYXdIABIwCgtw",
+            "ZW9wbGVFbnRlchhnIAEoCzIZLmNoYXQuQ29udGVudC5QZW9wbGVFbnRlckgA",
+            "EjAKC3Blb3BsZUxlYXZlGGggASgLMhkuY2hhdC5Db250ZW50LlBlb3BsZUxl",
+            "YXZlSAAaFQoFSW1hZ2USDAoEZGF0YRgBIAEoDBoeCghXaXRoZHJhdxISCgp3",
+            "aXRoZHJhd0lkGAEgASgDGh8KC1Blb3BsZUVudGVyEhAKCHBlb3BsZUlkGAEg",
+            "ASgDGjQKC1Blb3BsZUxlYXZlEhAKCHBlb3BsZUlkGAEgASgDEhMKC2tpY2tP",
+            "dXRCeUlkGAIgASgDQgkKB2NvbnRlbnQicQoLQ2hhdE1lc3NhZ2USCgoCaWQY",
+            "ASABKAMSEAoIc2VuZGVySWQYAiABKAMSEAoIdGltZVVuaXgYAyABKAMSHgoH",
+            "Y29udGVudBgEIAEoCzINLmNoYXQuQ29udGVudBISCgpjaGF0cm9vbUlkGAUg",
+            "ASgDIjgKElNlbmRNZXNzYWdlUmVxdWVzdBIiCgdtZXNzYWdlGAEgASgLMhEu",
+            "Y2hhdC5DaGF0TWVzc2FnZSJ6ChNTZW5kTWVzc2FnZVJlc3BvbnNlEjAKBnN0",
+            "YXR1cxgBIAEoDjIgLmNoYXQuU2VuZE1lc3NhZ2VSZXNwb25zZS5TdGF0dXMS",
+            "DgoGZGV0YWlsGAIgASgJIiEKBlN0YXR1cxILCgdTdWNjZXNzEAASCgoGRmFp",
+            "bGVkEAEiKgoKUGVvcGxlSW5mbxIKCgJpZBgBIAEoAxIQCgh1c2VybmFtZRgC",
+            "IAEoCSJpCgZGcmllbmQSDAoEbXlJZBgBIAEoBRIQCghmcmllbmRJZBgCIAEo",
+            "BRIMCgR0YWdzGAogAygJEgwKBG5vdGUYCyABKAkSDwoHYmxvY2tlZBgUIAEo",
+            "CBISCgpjaGF0cm9vbUlkGBUgASgDIksKDENoYXRyb29tSW5mbxIKCgJpZBgB",
+            "IAEoAxIRCglwZW9wbGVJZHMYAiADKAMSDgoGaG9zdElkGAMgASgDEgwKBG5h",
+            "bWUYBCABKAkiOQoSTmV3Q2hhdHJvb21SZXF1ZXN0EhAKCHNlbmRlcklkGAEg",
+            "ASgDEhEKCXBlb3BsZUlkcxgCIAMoBSI+ChZHZXRDaGF0cm9vbUluZm9SZXF1",
+            "ZXN0EhAKCHNlbmRlcklkGAEgASgDEhIKCmNoYXRyb29tSWQYAiABKAMiYAoX",
+            "R2V0Q2hhdHJvb21JbmZvUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIkCghj",
+            "aGF0cm9vbRgCIAEoCzISLmNoYXQuQ2hhdHJvb21JbmZvEg4KBmRldGFpbBgD",
+            "IAEoCSIzCg1TaWdudXBSZXF1ZXN0EhAKCHVzZXJuYW1lGAEgASgJEhAKCHBh",
+            "c3N3b3JkGAIgASgJIrkBCg5TaWdudXBSZXNwb25zZRIrCgZzdGF0dXMYASAB",
+            "KA4yGy5jaGF0LlNpZ251cFJlc3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwYAiAB",
+            "KAkSDgoGdXNlcklkGAMgASgDIloKBlN0YXR1cxILCgdTdWNjZXNzEAASEQoN",
+            "VXNlcm5hbWVFeGlzdBBlEhcKE1VzZXJuYW1lRm9ybWF0V3JvbmcQZhIXChNQ",
+            "YXNzd29yZEZvcm1hdFdyb25nEGciQgoMTG9naW5SZXF1ZXN0EhAKCHVzZXJu",
+            "YW1lGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEg4KBnVzZXJJZBgDIAEoAyKF",
+            "AQoNTG9naW5SZXNwb25zZRIqCgZzdGF0dXMYASABKA4yGi5jaGF0LkxvZ2lu",
+            "UmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSI4CgZTdGF0dXMSCwoH",
+            "U3VjY2VzcxAAEg4KCk5vU3VjaFVzZXIQZRIRCg1Xcm9uZ1Bhc3N3b3JkEGYi",
+            "SQoRTWFrZUZyaWVuZFJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSEAoIdGFy",
+            "Z2V0SWQYAiABKAMSEAoIZ3JlZXRpbmcYAyABKAki0gEKEk1ha2VGcmllbmRS",
+            "ZXNwb25zZRIvCgZzdGF0dXMYASABKA4yHy5jaGF0Lk1ha2VGcmllbmRSZXNw",
+            "b25zZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJInsKBlN0YXR1cxIKCgZBY2Nl",
+            "cHQQABIKCgZSZWZ1c2UQARIRCg1BbHJlYWR5RnJpZW5kEAISEAoMVXNlck5v",
+            "dEV4aXN0EAMSEQoNVXNlck5vdE9ubGluZRAEEhMKD1Jlc3BvbnNlVGltZW91",
+            "dBAFEgwKCFdpdGhTZWxmEAYiOgoUR2V0UGVvcGxlSW5mb1JlcXVlc3QSEAoI",
+            "c2VuZGVySWQYASABKAMSEAoIdGFyZ2V0SWQYAiABKAMiPQoVR2V0UGVvcGxl",
+            "SW5mb1Jlc3BvbnNlEiQKCnBlb3BsZUluZm8YASABKAsyEC5jaGF0LlBlb3Bs",
+            "ZUluZm8ibAoSRnJpZW5kTm90aWZpY2F0aW9uEgoKAmlkGAEgASgFEisKBHR5",
+            "cGUYAiABKA4yHS5jaGF0LkZyaWVuZE5vdGlmaWNhdGlvbi5UeXBlIh0KBFR5",
+            "cGUSCQoFTG9naW4QABIKCgZMb2dvdXQQASI7ChJHZXRNZXNzYWdlc1JlcXVl",
+            "c3QSDgoGdXNlcklkGAEgASgDEhUKDWFmdGVyVGltZVVuaXgYAiABKANCE6oC",
+            "EENoYXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Response), global::Chat.Core.Models.Response.Parser, new[]{ "Success", "Detail" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content), global::Chat.Core.Models.Content.Parser, new[]{ "Text" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content), global::Chat.Core.Models.Content.Parser, new[]{ "Text", "Image", "Withdraw", "PeopleEnter", "PeopleLeave" }, new[]{ "Content" }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Image), global::Chat.Core.Models.Content.Types.Image.Parser, new[]{ "Data" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Withdraw), global::Chat.Core.Models.Content.Types.Withdraw.Parser, new[]{ "WithdrawId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleEnter), global::Chat.Core.Models.Content.Types.PeopleEnter.Parser, new[]{ "PeopleId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleLeave), global::Chat.Core.Models.Content.Types.PeopleLeave.Parser, new[]{ "PeopleId", "KickOutById" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatMessage), global::Chat.Core.Models.ChatMessage.Parser, new[]{ "Id", "SenderId", "TimeUnix", "Content", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageRequest), global::Chat.Core.Models.SendMessageRequest.Parser, new[]{ "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageResponse), global::Chat.Core.Models.SendMessageResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.SendMessageResponse.Types.Status) }, null),
@@ -264,7 +274,24 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Content(Content other) : this() {
-      text_ = other.text_;
+      switch (other.ContentCase) {
+        case ContentOneofCase.Text:
+          Text = other.Text;
+          break;
+        case ContentOneofCase.Image:
+          Image = other.Image.Clone();
+          break;
+        case ContentOneofCase.Withdraw:
+          Withdraw = other.Withdraw.Clone();
+          break;
+        case ContentOneofCase.PeopleEnter:
+          PeopleEnter = other.PeopleEnter.Clone();
+          break;
+        case ContentOneofCase.PeopleLeave:
+          PeopleLeave = other.PeopleLeave.Clone();
+          break;
+      }
+
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -273,14 +300,80 @@ namespace Chat.Core.Models {
     }
 
     /// <summary>Field number for the "text" field.</summary>
-    public const int TextFieldNumber = 1;
-    private string text_ = "";
+    public const int TextFieldNumber = 100;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Text {
-      get { return text_; }
+      get { return contentCase_ == ContentOneofCase.Text ? (string) content_ : ""; }
       set {
-        text_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        content_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        contentCase_ = ContentOneofCase.Text;
       }
+    }
+
+    /// <summary>Field number for the "image" field.</summary>
+    public const int ImageFieldNumber = 101;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Image Image {
+      get { return contentCase_ == ContentOneofCase.Image ? (global::Chat.Core.Models.Content.Types.Image) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Image;
+      }
+    }
+
+    /// <summary>Field number for the "withdraw" field.</summary>
+    public const int WithdrawFieldNumber = 102;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Withdraw Withdraw {
+      get { return contentCase_ == ContentOneofCase.Withdraw ? (global::Chat.Core.Models.Content.Types.Withdraw) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Withdraw;
+      }
+    }
+
+    /// <summary>Field number for the "peopleEnter" field.</summary>
+    public const int PeopleEnterFieldNumber = 103;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.PeopleEnter PeopleEnter {
+      get { return contentCase_ == ContentOneofCase.PeopleEnter ? (global::Chat.Core.Models.Content.Types.PeopleEnter) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.PeopleEnter;
+      }
+    }
+
+    /// <summary>Field number for the "peopleLeave" field.</summary>
+    public const int PeopleLeaveFieldNumber = 104;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.PeopleLeave PeopleLeave {
+      get { return contentCase_ == ContentOneofCase.PeopleLeave ? (global::Chat.Core.Models.Content.Types.PeopleLeave) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.PeopleLeave;
+      }
+    }
+
+    private object content_;
+    /// <summary>Enum of possible cases for the "content" oneof.</summary>
+    public enum ContentOneofCase {
+      None = 0,
+      Text = 100,
+      Image = 101,
+      Withdraw = 102,
+      PeopleEnter = 103,
+      PeopleLeave = 104,
+    }
+    private ContentOneofCase contentCase_ = ContentOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContentOneofCase ContentCase {
+      get { return contentCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearContent() {
+      contentCase_ = ContentOneofCase.None;
+      content_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -297,13 +390,23 @@ namespace Chat.Core.Models {
         return true;
       }
       if (Text != other.Text) return false;
+      if (!object.Equals(Image, other.Image)) return false;
+      if (!object.Equals(Withdraw, other.Withdraw)) return false;
+      if (!object.Equals(PeopleEnter, other.PeopleEnter)) return false;
+      if (!object.Equals(PeopleLeave, other.PeopleLeave)) return false;
+      if (ContentCase != other.ContentCase) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Text.Length != 0) hash ^= Text.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Text) hash ^= Text.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Image) hash ^= Image.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Withdraw) hash ^= Withdraw.GetHashCode();
+      if (contentCase_ == ContentOneofCase.PeopleEnter) hash ^= PeopleEnter.GetHashCode();
+      if (contentCase_ == ContentOneofCase.PeopleLeave) hash ^= PeopleLeave.GetHashCode();
+      hash ^= (int) contentCase_;
       return hash;
     }
 
@@ -314,17 +417,45 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Text.Length != 0) {
-        output.WriteRawTag(10);
+      if (contentCase_ == ContentOneofCase.Text) {
+        output.WriteRawTag(162, 6);
         output.WriteString(Text);
+      }
+      if (contentCase_ == ContentOneofCase.Image) {
+        output.WriteRawTag(170, 6);
+        output.WriteMessage(Image);
+      }
+      if (contentCase_ == ContentOneofCase.Withdraw) {
+        output.WriteRawTag(178, 6);
+        output.WriteMessage(Withdraw);
+      }
+      if (contentCase_ == ContentOneofCase.PeopleEnter) {
+        output.WriteRawTag(186, 6);
+        output.WriteMessage(PeopleEnter);
+      }
+      if (contentCase_ == ContentOneofCase.PeopleLeave) {
+        output.WriteRawTag(194, 6);
+        output.WriteMessage(PeopleLeave);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Text.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Text);
+      if (contentCase_ == ContentOneofCase.Text) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(Text);
+      }
+      if (contentCase_ == ContentOneofCase.Image) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Image);
+      }
+      if (contentCase_ == ContentOneofCase.Withdraw) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Withdraw);
+      }
+      if (contentCase_ == ContentOneofCase.PeopleEnter) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(PeopleEnter);
+      }
+      if (contentCase_ == ContentOneofCase.PeopleLeave) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(PeopleLeave);
       }
       return size;
     }
@@ -334,9 +465,24 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.Text.Length != 0) {
-        Text = other.Text;
+      switch (other.ContentCase) {
+        case ContentOneofCase.Text:
+          Text = other.Text;
+          break;
+        case ContentOneofCase.Image:
+          Image = other.Image;
+          break;
+        case ContentOneofCase.Withdraw:
+          Withdraw = other.Withdraw;
+          break;
+        case ContentOneofCase.PeopleEnter:
+          PeopleEnter = other.PeopleEnter;
+          break;
+        case ContentOneofCase.PeopleLeave:
+          PeopleLeave = other.PeopleLeave;
+          break;
       }
+
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -347,13 +493,552 @@ namespace Chat.Core.Models {
           default:
             input.SkipLastField();
             break;
-          case 10: {
+          case 802: {
             Text = input.ReadString();
+            break;
+          }
+          case 810: {
+            global::Chat.Core.Models.Content.Types.Image subBuilder = new global::Chat.Core.Models.Content.Types.Image();
+            if (contentCase_ == ContentOneofCase.Image) {
+              subBuilder.MergeFrom(Image);
+            }
+            input.ReadMessage(subBuilder);
+            Image = subBuilder;
+            break;
+          }
+          case 818: {
+            global::Chat.Core.Models.Content.Types.Withdraw subBuilder = new global::Chat.Core.Models.Content.Types.Withdraw();
+            if (contentCase_ == ContentOneofCase.Withdraw) {
+              subBuilder.MergeFrom(Withdraw);
+            }
+            input.ReadMessage(subBuilder);
+            Withdraw = subBuilder;
+            break;
+          }
+          case 826: {
+            global::Chat.Core.Models.Content.Types.PeopleEnter subBuilder = new global::Chat.Core.Models.Content.Types.PeopleEnter();
+            if (contentCase_ == ContentOneofCase.PeopleEnter) {
+              subBuilder.MergeFrom(PeopleEnter);
+            }
+            input.ReadMessage(subBuilder);
+            PeopleEnter = subBuilder;
+            break;
+          }
+          case 834: {
+            global::Chat.Core.Models.Content.Types.PeopleLeave subBuilder = new global::Chat.Core.Models.Content.Types.PeopleLeave();
+            if (contentCase_ == ContentOneofCase.PeopleLeave) {
+              subBuilder.MergeFrom(PeopleLeave);
+            }
+            input.ReadMessage(subBuilder);
+            PeopleLeave = subBuilder;
             break;
           }
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the Content message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class Image : pb::IMessage<Image> {
+        private static readonly pb::MessageParser<Image> _parser = new pb::MessageParser<Image>(() => new Image());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Image> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Image() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Image(Image other) : this() {
+          data_ = other.data_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Image Clone() {
+          return new Image(this);
+        }
+
+        /// <summary>Field number for the "data" field.</summary>
+        public const int DataFieldNumber = 1;
+        private pb::ByteString data_ = pb::ByteString.Empty;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public pb::ByteString Data {
+          get { return data_; }
+          set {
+            data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Image);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Image other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Data != other.Data) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Data.Length != 0) hash ^= Data.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Data.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteBytes(Data);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Data.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Image other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Data.Length != 0) {
+            Data = other.Data;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Data = input.ReadBytes();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class Withdraw : pb::IMessage<Withdraw> {
+        private static readonly pb::MessageParser<Withdraw> _parser = new pb::MessageParser<Withdraw>(() => new Withdraw());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Withdraw> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[1]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Withdraw() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Withdraw(Withdraw other) : this() {
+          withdrawId_ = other.withdrawId_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Withdraw Clone() {
+          return new Withdraw(this);
+        }
+
+        /// <summary>Field number for the "withdrawId" field.</summary>
+        public const int WithdrawIdFieldNumber = 1;
+        private long withdrawId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long WithdrawId {
+          get { return withdrawId_; }
+          set {
+            withdrawId_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Withdraw);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Withdraw other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (WithdrawId != other.WithdrawId) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (WithdrawId != 0L) hash ^= WithdrawId.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (WithdrawId != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(WithdrawId);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (WithdrawId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(WithdrawId);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Withdraw other) {
+          if (other == null) {
+            return;
+          }
+          if (other.WithdrawId != 0L) {
+            WithdrawId = other.WithdrawId;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                WithdrawId = input.ReadInt64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class PeopleEnter : pb::IMessage<PeopleEnter> {
+        private static readonly pb::MessageParser<PeopleEnter> _parser = new pb::MessageParser<PeopleEnter>(() => new PeopleEnter());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<PeopleEnter> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[2]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleEnter() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleEnter(PeopleEnter other) : this() {
+          peopleId_ = other.peopleId_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleEnter Clone() {
+          return new PeopleEnter(this);
+        }
+
+        /// <summary>Field number for the "peopleId" field.</summary>
+        public const int PeopleIdFieldNumber = 1;
+        private long peopleId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long PeopleId {
+          get { return peopleId_; }
+          set {
+            peopleId_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as PeopleEnter);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(PeopleEnter other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (PeopleId != other.PeopleId) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (PeopleId != 0L) hash ^= PeopleId.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (PeopleId != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(PeopleId);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (PeopleId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(PeopleId);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(PeopleEnter other) {
+          if (other == null) {
+            return;
+          }
+          if (other.PeopleId != 0L) {
+            PeopleId = other.PeopleId;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                PeopleId = input.ReadInt64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class PeopleLeave : pb::IMessage<PeopleLeave> {
+        private static readonly pb::MessageParser<PeopleLeave> _parser = new pb::MessageParser<PeopleLeave>(() => new PeopleLeave());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<PeopleLeave> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[3]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleLeave() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleLeave(PeopleLeave other) : this() {
+          peopleId_ = other.peopleId_;
+          kickOutById_ = other.kickOutById_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleLeave Clone() {
+          return new PeopleLeave(this);
+        }
+
+        /// <summary>Field number for the "peopleId" field.</summary>
+        public const int PeopleIdFieldNumber = 1;
+        private long peopleId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long PeopleId {
+          get { return peopleId_; }
+          set {
+            peopleId_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "kickOutById" field.</summary>
+        public const int KickOutByIdFieldNumber = 2;
+        private long kickOutById_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long KickOutById {
+          get { return kickOutById_; }
+          set {
+            kickOutById_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as PeopleLeave);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(PeopleLeave other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (PeopleId != other.PeopleId) return false;
+          if (KickOutById != other.KickOutById) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (PeopleId != 0L) hash ^= PeopleId.GetHashCode();
+          if (KickOutById != 0L) hash ^= KickOutById.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (PeopleId != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(PeopleId);
+          }
+          if (KickOutById != 0L) {
+            output.WriteRawTag(16);
+            output.WriteInt64(KickOutById);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (PeopleId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(PeopleId);
+          }
+          if (KickOutById != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(KickOutById);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(PeopleLeave other) {
+          if (other == null) {
+            return;
+          }
+          if (other.PeopleId != 0L) {
+            PeopleId = other.PeopleId;
+          }
+          if (other.KickOutById != 0L) {
+            KickOutById = other.KickOutById;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                PeopleId = input.ReadInt64();
+                break;
+              }
+              case 16: {
+                KickOutById = input.ReadInt64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
 
   }
 

@@ -27,7 +27,7 @@ namespace Chat.Server.Repositories
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ChatMessage>()
-                        .OwnsOne(m => m.Content);
+                .Ignore(m => m.Content);
 
             modelBuilder.Entity<UserChatroom>()
                         .HasKey(uc => new { uc.UserId, uc.ChatroomId });
@@ -42,7 +42,8 @@ namespace Chat.Server.Repositories
                         .HasForeignKey(uc => uc.ChatroomId)
                         .IsRequired();
 
-            modelBuilder.Entity<UserRelationship>()
+            modelBuilder
+                .Entity<UserRelationship>()
                 .HasKey(r => new {r.FromUserId, r.ToUserId});
             
             modelBuilder

@@ -89,7 +89,7 @@ namespace Chat.Server.Repositories
         /// <returns>The query.</returns>
         public virtual IQueryable<TEntity> Query ()
         {
-            return _set;
+            return _set.AsNoTracking();
         }
 
         /// <summary>
