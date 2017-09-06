@@ -16,6 +16,7 @@ namespace Chat.Server
         {
 			_serviceCollection = new ServiceCollection();
             _serviceCollection.AddSingleton<ILoggerFactory>(_loggerFactory = new LoggerFactory());
+	        _serviceCollection.AddSingleton<IEventBus, EventBus>();
         }
 
 		public Server Build()

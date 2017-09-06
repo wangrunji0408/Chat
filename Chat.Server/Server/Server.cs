@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-
+using Chat.Server.Events;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -24,9 +24,14 @@ namespace Chat.Server
         readonly MessageRepository _messageRepo;
 
         readonly UserService _userService;
+        readonly MessageService _messageService;
+
+        readonly IServiceProvider _provider;
+        readonly IEventBus _eventBus;
 
         public Server(IServiceProvider serviceProvider)
         {
+            _provider = serviceProvider;
             _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server");
             _context = serviceProvider.GetRequiredService<ServerDbContext>();
             _context.Database.EnsureCreated();
@@ -35,12 +40,16 @@ namespace Chat.Server
             {
                 _logger?.LogError(e, "An error occurred when database migrate. It's normal when using InMemory database.");
             }
-
+            _eventBus = serviceProvider.GetRequiredService<IEventBus>();
+            var eventLogger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server.Events");
+            _eventBus.GetEventStream<IDomainEvent>().Subscribe(e => eventLogger.LogInformation(e.ToString()));
+            
             _userRepo = new UserRepository(serviceProvider);
             _chatroomRepo = new ChatroomRepository(serviceProvider);
             _messageRepo = new MessageRepository(serviceProvider);
 
             _userService = new UserService(serviceProvider);
+            _messageService = new MessageService(serviceProvider);
             EnsureGlobalChatroomCreated();
         }
 

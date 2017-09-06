@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Chat.Core.Models;
 using Chat.Server.Domains;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,7 @@ namespace Chat.Server
         {
             var peoples = peopleIds.Select(id => _userRepo.GetByIdAsync(id).Result);
             var chatroom = new Chatroom();
+            chatroom.SetServices(_provider);
             foreach (var user in peoples)
                 chatroom.NewPeople(user);
             _chatroomRepo.Add(chatroom);

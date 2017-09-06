@@ -20,8 +20,11 @@ namespace Chat.Server.Domains
             }
         }
 
+        protected IServiceProvider _provider;
+
         public void SetServices (IServiceProvider provider)
         {
+            _provider = provider;
             if(_logger == null)
             {
 				_logger = provider.GetService<ILoggerFactory>()?
