@@ -51,7 +51,7 @@ namespace Chat.Server
         {
             if (_chatroomRepo.ContainsIdAsync(1).Result)
                 return;
-            var chatroom = new Chatroom();
+            var chatroom = new Chatroom("Global Chatroom");
 
             _chatroomRepo.Add(chatroom);
             _chatroomRepo.SaveChanges();

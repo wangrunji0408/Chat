@@ -64,5 +64,12 @@ namespace Chat.Server
 			var target = await _userRepo.GetByIdAsync(targetId);
 			return user.GetPeopleInfo(target);
 		}
+		
+		public async Task<ChatroomInfo> GetChatroomInfoAsync(long userId, long roomId)
+		{
+			var user = await _userRepo.GetByIdAsync(userId);
+			var room = await _chatroomRepo.GetByIdAsync(roomId);
+			return user.GetChatroomInfo(room);
+		}
 	}
 }

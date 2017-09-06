@@ -18,6 +18,19 @@ namespace Chat.Server.Domains
         [NotMapped]
         public IEnumerable<long> UserIds => UserChatrooms.Select(uc => uc.UserId);
 
+        private Chatroom()
+        {
+            
+        }
+
+        internal Chatroom(string name = "")
+        {
+            Name = name;
+//            if(peoples != null)
+//                foreach (var people in peoples)
+//                    NewPeople(people);
+        }
+        
         internal void NewMessage (ChatMessage message)
         {
 			if (message.ChatroomId != Id)
@@ -39,6 +52,11 @@ namespace Chat.Server.Domains
             UserChatrooms.Add(uc);
 
             _logger?.LogInformation($"User {user.Id} entered.");
+        }
+
+        internal bool Contains(User user)
+        {
+            return UserChatrooms.Any(uc => uc.UserId == user.Id);
         }
 
         public override string ToString()

@@ -88,6 +88,23 @@ namespace Chat.Server.Domains
 		    };
 	    }
 
+	    internal ChatroomInfo GetChatroomInfo(Chatroom chatroom)
+	    {
+		    if(!chatroom.Contains(this))
+			    return new ChatroomInfo
+			    {
+				    HostId = 0,
+				    Id = chatroom.Id,
+			    };
+		    return new ChatroomInfo
+		    {
+			    HostId = 0,
+			    Id = chatroom.Id,
+			    Name = chatroom.Name,
+			    PeopleIds = { chatroom.UserIds }
+		    };
+	    }
+
 	    internal UserRelationship GetOrAddRelationshipWith (User target)
 	    {
 		    var relationship = UserRelationships.FirstOrDefault(r => r.ToUserId == target.Id);
