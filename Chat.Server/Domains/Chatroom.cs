@@ -43,9 +43,8 @@ namespace Chat.Server.Domains
 
         public override string ToString()
         {
-            return string.Format("[Chatroom: Id={0}, Name={1}, CreateTime={2}, \n\tUserIds={3}]", 
-                                 Id, Name, CreateTime, 
-                                 string.Join(",", UserIds.Select(i => i.ToString()) ));
+            return string.Format("[Chatroom: Id={0}, Name={1}, CreateTime={2}, UserIds={3}]", 
+                                 Id, Name, CreateTime, UserIds.ToJsonString() );
         }
     }
 }

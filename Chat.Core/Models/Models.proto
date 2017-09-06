@@ -41,7 +41,7 @@ message SendMessageResponse
 	string detail = 2;
 }
 
-message People
+message PeopleInfo
 {
 	// Public
 	int64 id = 1;
@@ -146,12 +146,12 @@ message MakeFriendResponse
 
 message GetPeoplesInfoRequest
 {
-	repeated int32 ids = 1;
+    repeated int64 peopleIds = 1;
 }
 
 message GetPeoplesInfoResponse
 {
-	repeated People peoples = 1; 
+    repeated PeopleInfo peopleInfos = 1;
 }
 
 message FriendNotification

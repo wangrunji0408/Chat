@@ -14,7 +14,7 @@ namespace Chat.Server.ConsoleApp.Options.Chatroom
 
 		internal override void Execute(Program app)
 		{
-            var messages = app.server.GetRecentMessages(ChatroomId, Count).Result;
+            var messages = app.server.GetRecentMessagesAsync(ChatroomId, Count).Result;
 			messages.ForEach(Console.WriteLine);
 		}
 	}

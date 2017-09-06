@@ -23,17 +23,6 @@ namespace Chat.Server.ConsoleApp
         internal Server server;
         internal ILogger _logger;
         internal ILogger _cmdlogger;
-
-        //void ClearDatabase (DatabaseClearOption opt)
-        //{
-        //    Console.Write("Are you sure to clear database? y/[n]: ");
-        //    var input = Console.ReadLine();
-        //    if(input.ToLower() == "y")
-        //    {
-        //        server.ClearDatabase();
-        //        Console.WriteLine("Database cleared.");
-        //    }
-        //}
 	    
 	    internal static readonly Dictionary<string, TypeInfo[]> optionsDict;
 	    static Program()

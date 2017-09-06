@@ -24,17 +24,21 @@ namespace Chat.Connection.Grpc {
           string.Concat(
             "Cg5Qcm90b2J1Zi5wcm90bxIJY2hhdC5ncnBjGgxNb2RlbHMucHJvdG8iOQoW",
             "UmVnaXN0ZXJBZGRyZXNzUmVxdWVzdBIOCgZ1c2VySWQYASABKAMSDwoHYWRk",
-            "cmVzcxgCIAEoCTLCAgoRQ2hhdFNlcnZlclNlcnZpY2USMAoFTG9naW4SEi5j",
+            "cmVzcxgCIAEoCTLQAwoRQ2hhdFNlcnZlclNlcnZpY2USMAoFTG9naW4SEi5j",
             "aGF0LkxvZ2luUmVxdWVzdBoTLmNoYXQuTG9naW5SZXNwb25zZRJECg9SZWdp",
             "c3RlckFkZHJlc3MSIS5jaGF0LmdycGMuUmVnaXN0ZXJBZGRyZXNzUmVxdWVz",
             "dBoOLmNoYXQuUmVzcG9uc2USMwoGU2lnbnVwEhMuY2hhdC5TaWdudXBSZXF1",
             "ZXN0GhQuY2hhdC5TaWdudXBSZXNwb25zZRJCCgtTZW5kTWVzc2FnZRIYLmNo",
             "YXQuU2VuZE1lc3NhZ2VSZXF1ZXN0GhkuY2hhdC5TZW5kTWVzc2FnZVJlc3Bv",
             "bnNlEjwKC0dldE1lc3NhZ2VzEhguY2hhdC5HZXRNZXNzYWdlc1JlcXVlc3Qa",
-            "ES5jaGF0LkNoYXRNZXNzYWdlMAEyVgoRQ2hhdENsaWVudFNlcnZpY2USQQoK",
-            "TmV3TWVzc2FnZRIYLmNoYXQuU2VuZE1lc3NhZ2VSZXF1ZXN0GhkuY2hhdC5T",
-            "ZW5kTWVzc2FnZVJlc3BvbnNlQheqAhRDaGF0LkNvbm5lY3Rpb24uR3JwY2IG",
-            "cHJvdG8z"));
+            "ES5jaGF0LkNoYXRNZXNzYWdlMAESPwoKTWFrZUZyaWVuZBIXLmNoYXQuTWFr",
+            "ZUZyaWVuZFJlcXVlc3QaGC5jaGF0Lk1ha2VGcmllbmRSZXNwb25zZRJLCg5H",
+            "ZXRQZW9wbGVzSW5mbxIbLmNoYXQuR2V0UGVvcGxlc0luZm9SZXF1ZXN0Ghwu",
+            "Y2hhdC5HZXRQZW9wbGVzSW5mb1Jlc3BvbnNlMpcBChFDaGF0Q2xpZW50U2Vy",
+            "dmljZRJBCgpOZXdNZXNzYWdlEhguY2hhdC5TZW5kTWVzc2FnZVJlcXVlc3Qa",
+            "GS5jaGF0LlNlbmRNZXNzYWdlUmVzcG9uc2USPwoKTWFrZUZyaWVuZBIXLmNo",
+            "YXQuTWFrZUZyaWVuZFJlcXVlc3QaGC5jaGF0Lk1ha2VGcmllbmRSZXNwb25z",
+            "ZUIXqgIUQ2hhdC5Db25uZWN0aW9uLkdycGNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Chat.Core.Models.ModelsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {

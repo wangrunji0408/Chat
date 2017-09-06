@@ -8,21 +8,22 @@ option csharp_namespace = "Chat.Connection.Grpc";
 
 service ChatServerService
 {
-	rpc Login (LoginRequest) returns (LoginResponse);
-	//rpc Logout (Request) returns (Response);
+    rpc Login (LoginRequest) returns (LoginResponse);
+    //rpc Logout (Request) returns (Response);
     rpc RegisterAddress (RegisterAddressRequest) returns (Response);
-	rpc Signup (SignupRequest) returns (SignupResponse);
-	rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+    rpc Signup (SignupRequest) returns (SignupResponse);
+    rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
     rpc GetMessages (GetMessagesRequest) returns (stream ChatMessage);
-	//rpc MakeFriend (MakeFriendRequest) returns (MakeFriendResponse);
-	//rpc GetPeoplesInfo (GetPeoplesInfoRequest) returns (stream People);
-	//rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);
-	//rpc GetChatroom (GetChatroomRequest) returns (ChatroomResponse);
+    rpc MakeFriend (MakeFriendRequest) returns (MakeFriendResponse);
+    rpc GetPeoplesInfo (GetPeoplesInfoRequest) returns (GetPeoplesInfoResponse);
+    //rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);
+    //rpc GetChatroom (GetChatroomRequest) returns (ChatroomResponse);
 }
 
 service ChatClientService
 {
-	rpc NewMessage (SendMessageRequest) returns (SendMessageResponse);
+    rpc NewMessage (SendMessageRequest) returns (SendMessageResponse);
+    rpc MakeFriend (MakeFriendRequest) returns (MakeFriendResponse);
 }
 
 message RegisterAddressRequest

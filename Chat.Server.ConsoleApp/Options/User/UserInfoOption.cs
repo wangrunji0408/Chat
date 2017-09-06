@@ -18,7 +18,7 @@ namespace Chat.Server.ConsoleApp.Options
                 users.ForEach(Console.WriteLine);
                 return;                    
             }
-            var user = app.server.GetUserStringAsync(UserId).Result;
+            var user = app.server.FindUserAsync(UserId).Result;
 			if (user == null)
 			{
 				Console.Error.WriteLine($"User {UserId} does not exist.");

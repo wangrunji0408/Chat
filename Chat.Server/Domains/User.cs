@@ -19,9 +19,14 @@ namespace Chat.Server.Domains
         public DateTimeOffset CreateTime { get; private set; } = DateTimeOffset.Now;
         public DateTimeOffset LastLoginTime { get; private set; }
         internal ICollection<UserChatroom> UserChatrooms { get; private set; }
+	    internal ICollection<UserRelationship> UserRelationships { get; private set; }
 
         [NotMapped]
         public IEnumerable<long> ChatroomIds => UserChatrooms.Select(uc => uc.ChatroomId);
+
+	    [NotMapped]
+	    public IEnumerable<long> FriendIds =>
+		    UserRelationships.Where(r => r.IsFriend).Select(r => r.ToUserId);
 
         IClientService _clientService;
 
@@ -70,7 +75,29 @@ namespace Chat.Server.Domains
 
         public override string ToString()
         {
-            return string.Format("[User: Id={0}, Username={1}]", Id, Username);
+            return string.Format("[User: Id={0}, Username={1}, Friends={2}]", Id, Username,
+	            FriendIds.ToJsonString());
         }
+
+	    internal PeopleInfo GetPeopleInfo(User target)
+	    {
+		    return new PeopleInfo
+		    {
+			    Id = target.Id,
+			    Username = target.Username
+		    };
+	    }
+
+	    internal UserRelationship GetOrAddRelationshipWith (User target)
+	    {
+		    var relationship = UserRelationships.FirstOrDefault(r => r.ToUserId == target.Id);
+		    if (relationship == null)
+		    {
+			    relationship = new UserRelationship(this, target);
+			    UserRelationships.Add(relationship);
+			    _logger?.LogInformation($"New relationship with user {target.Id}");
+		    }
+		    return relationship;
+	    }
     }
 }

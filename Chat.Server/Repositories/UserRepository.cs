@@ -17,7 +17,9 @@ namespace Chat.Server.Repositories
 
         public override IQueryable<User> Query()
         {
-            return base.Query().Include(u => u.UserChatrooms);
+            return base.Query()
+                .Include(u => u.UserChatrooms)
+                .Include(u => u.UserRelationships);
         }
 
         public async Task<bool> ContainsUsernameAsync (string username)

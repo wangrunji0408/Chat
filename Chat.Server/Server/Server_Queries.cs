@@ -15,7 +15,7 @@ namespace Chat.Server
 
 	public partial class Server
 	{
-		public Task<List<ChatMessage>> GetMessages(GetMessagesRequest request)
+		public Task<List<ChatMessage>> GetMessagesAsync(GetMessagesRequest request)
 		{
 			return _context.Messages
 				.Where(m => m.TimeUnix >= request.AfterTimeUnix)
@@ -49,13 +49,20 @@ namespace Chat.Server
 			return room?.ToString() ?? "null";
 		}
 
-		public Task<List<ChatMessage>> GetRecentMessages(long chatroomId, int count)
+		public Task<List<ChatMessage>> GetRecentMessagesAsync(long chatroomId, int count)
 		{
             return _messageRepo.Query()
 						   .Where(m => m.ChatroomId == chatroomId)
 						   .OrderByDescending(m => m.TimeUnix)
 						   .Take(count)
 						   .ToListAsync();
+		}
+
+		public async Task<PeopleInfo> GetPeopleInfoAsync(long userId, long targetId)
+		{
+			var user = await _userRepo.GetByIdAsync(userId);
+			var target = await _userRepo.GetByIdAsync(targetId);
+			return user.GetPeopleInfo(target);
 		}
 	}
 }

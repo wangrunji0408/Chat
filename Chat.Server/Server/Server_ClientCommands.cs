@@ -25,32 +25,6 @@ namespace Chat.Server
 			return _userService.SignupAsync(request);
 		}
 
-		public async Task<Chatroom> NewChatroomAsync(IEnumerable<long> peopleIds)
-		{
-			var peoples = peopleIds.Select(id => _userRepo.GetByIdAsync(id).Result);
-			var chatroom = new Chatroom();
-			foreach (var user in peoples)
-				chatroom.NewPeople(user);
-            _chatroomRepo.Add(chatroom);
-            await _chatroomRepo.SaveChangesAsync();
-			return chatroom;
-		}
-
-		public async Task AddPeopleToChatroom(long chatroomId, long userId)
-		{
-			var chatroom = await _chatroomRepo.GetByIdAsync(chatroomId);
-			var people = await _userRepo.GetByIdAsync(userId);
-			chatroom.NewPeople(people);
-			await _chatroomRepo.SaveChangesAsync();
-		}
-
-		public void ClearDatabase()
-		{
-			_context.Database.EnsureDeleted();
-			_context.Database.EnsureCreated();
-			_context.Database.Migrate();
-		}
-
 		public void SetUserClient(long userId, IClientService client)
 		{
             _userRepo.GetByIdAsync(userId).Result

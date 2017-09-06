@@ -22,7 +22,7 @@ namespace Chat.Connection.Local
 
         public IAsyncEnumerable<ChatMessage> GetMessages(GetMessagesRequest request)
         {
-            return _server.GetMessages(request)
+            return _server.GetMessagesAsync(request)
 						  .ToAsyncEnumerable()
 						  .SelectMany(list => list.ToAsyncEnumerable());
         }
