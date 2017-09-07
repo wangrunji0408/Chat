@@ -6,6 +6,7 @@ using Chat.Server.Domains.Entities;
 using Chat.Server.Domains.Events.Chatroom;
 using Chat.Server.Domains.Events.User;
 using Chat.Server.Domains.Repositories;
+using Chat.Server.Infrastructure.EntityFramework;
 using Chat.Server.Infrastructure.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -15,16 +16,16 @@ namespace Chat.Server.Domains.Services
     public class UserService
     {
 	    private readonly ILogger _logger;
-	    private readonly UserRepository _userRepo;
-	    private readonly ChatroomRepository _chatroomRepo;
+	    private readonly IUserRepository _userRepo;
+	    private readonly IChatroomRepository _chatroomRepo;
 	    private readonly IEventBus _eventBus;
 
         public UserService(IServiceProvider provider)
         {
             _logger = provider.GetService<ILoggerFactory>()?
                               .CreateLogger<UserService>();
-            _userRepo = new UserRepository(provider);
-	        _chatroomRepo = new ChatroomRepository(provider);
+	        _userRepo = provider.GetRequiredService<IUserRepository>();
+	        _chatroomRepo = provider.GetRequiredService<IChatroomRepository>();
 	        _eventBus = provider.GetRequiredService<IEventBus>();
 	        
 	        _eventBus.GetEventStream<NewMessageEvent>()
@@ -35,7 +36,7 @@ namespace Chat.Server.Domains.Services
 
 	    async Task ForwardMessage(NewMessageEvent e)
 	    {
-		    var chatroom = await _chatroomRepo.FindByIdAsync(e.ChatroomId);
+		    var chatroom = await _chatroomRepo.GetByIdAsync(e.ChatroomId);
 		    await Task.WhenAll(chatroom.UserIds.Select(async id => 
 		    {
 			    var user = await _userRepo.GetByIdAsync(id);

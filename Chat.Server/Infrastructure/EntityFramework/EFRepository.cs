@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Chat.Server.Domains.Entities;
+using Chat.Server.Domains.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Chat.Server.Infrastructure.EntityFramework
 {
-    public class EFRepository<TEntity>
-        where TEntity:class
+    public class EFRepository<TEntity> : IRepository<TEntity> where TEntity:class
     {
         protected readonly DbSet<TEntity> _set;
         protected readonly DbContext _context;

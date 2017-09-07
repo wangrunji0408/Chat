@@ -4,6 +4,7 @@ using Chat.Core.Models;
 using Chat.Server.Domains.Events;
 using Chat.Server.Domains.Events.Chatroom;
 using Chat.Server.Domains.Repositories;
+using Chat.Server.Infrastructure.EntityFramework;
 using Chat.Server.Infrastructure.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -13,16 +14,17 @@ namespace Chat.Server.Domains.Services
     class MessageService
     {
         readonly ILogger _logger;
-        readonly MessageRepository _messageRepo;
+        readonly IMessageRepository _messageRepo;
+        private readonly IEventBus _eventBus;
 
         public MessageService(IServiceProvider provider)
         {
             _logger = provider.GetService<ILoggerFactory>()?
                 .CreateLogger<MessageService>();
-            _messageRepo = new MessageRepository(provider);
+            _messageRepo = provider.GetRequiredService<IMessageRepository>();
 
-            var eventBus = provider.GetRequiredService<IEventBus>();
-            eventBus.GetEventStream<UserEnterChatroomEvent>()
+            _eventBus = provider.GetRequiredService<IEventBus>();
+            _eventBus.GetEventStream<UserEnterChatroomEvent>()
                 .Subscribe(async e => await OnUserEnterChatroomEvent(e));
         }
 
@@ -40,6 +42,8 @@ namespace Chat.Server.Domains.Services
             };
             _messageRepo.Add(cm);
             await _messageRepo.SaveChangesAsync();
+            
+            _eventBus.Publish(new NewMessageEvent(cm));
         }
     }
 }

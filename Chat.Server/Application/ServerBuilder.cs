@@ -1,5 +1,6 @@
 ﻿using System;
 using Chat.Server.Domains.Repositories;
+using Chat.Server.Domains.Services;
 using Chat.Server.Infrastructure.EntityFramework;
 using Chat.Server.Infrastructure.EventBus;
 using Microsoft.EntityFrameworkCore;
@@ -11,21 +12,25 @@ namespace Chat.Server
     public sealed class ServerBuilder
     {
 		ILoggerFactory _loggerFactory;
-		readonly IServiceCollection _serviceCollection;
+		readonly IServiceCollection _container;
         ServerConnectionBuilder _connection;
 
         public ServerBuilder()
         {
-			_serviceCollection = new ServiceCollection();
-            _serviceCollection.AddSingleton<ILoggerFactory>(_loggerFactory = new LoggerFactory());
-	        _serviceCollection.AddSingleton<IEventBus, EventBus>();
+			_container = new ServiceCollection();
+            _container.AddSingleton<ILoggerFactory>(_loggerFactory = new LoggerFactory());
+	        _container.AddSingleton<IEventBus, EventBus>();
+	        _container.AddSingleton<IUserRepository, UserRepository>();
+	        _container.AddSingleton<IChatroomRepository, ChatroomRepository>();
+	        _container.AddSingleton<IMessageRepository, MessageRepository>();
+	        _container.AddSingleton<UserService>();
+	        _container.AddSingleton<ChatroomService>();
+	        _container.AddSingleton<MessageService>();
         }
 
 		public Server Build()
 		{
-			var provider = _serviceCollection.BuildServiceProvider();
-            if (provider.GetService<ServerDbContext>() == null)
-                throw new InvalidOperationException("ConfigureDbContext must be called before build.");
+			var provider = _container.BuildServiceProvider();
             var server = new Server(provider);
 			_connection?.After(server, provider);
 			return server;
@@ -45,13 +50,13 @@ namespace Chat.Server
 
 		public ServerBuilder UseLoggerFactory(ILoggerFactory factory)
 		{
-            _serviceCollection.AddSingleton(_loggerFactory = factory);
+            _container.AddSingleton(_loggerFactory = factory);
 			return this;
 		}
 
         public ServerBuilder ConfigureDbContext (Action<DbContextOptionsBuilder> optionsAction)
         {
-            _serviceCollection.AddDbContext<ServerDbContext>(optionsAction);
+            _container.AddDbContext<ServerDbContext>(optionsAction);
             return this;
         }
 

@@ -15,10 +15,9 @@ namespace Chat.Server
     {
         readonly ILogger _logger;
 
-        readonly ServerDbContext _context;
-        readonly UserRepository _userRepo;
-        readonly ChatroomRepository _chatroomRepo;
-        readonly MessageRepository _messageRepo;
+        readonly IUserRepository _userRepo;
+        readonly IChatroomRepository _chatroomRepo;
+        readonly IMessageRepository _messageRepo;
 
         readonly UserService _userService;
         readonly ChatroomService _chatroomService;
@@ -31,38 +30,36 @@ namespace Chat.Server
         {
             _provider = provider;
             _logger = provider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server");
-            _context = provider.GetRequiredService<ServerDbContext>();
-            _context.Database.EnsureCreated();
-            try {_context.Database.Migrate();}
-            catch(Exception e)
-            {
-                _logger?.LogError(e, "An error occurred when database migrate. It's normal when using InMemory database.");
-            }
+            
             _eventBus = provider.GetRequiredService<IEventBus>();
+            
             var eventLogger = provider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server.Events");
             _eventBus.GetEventStream<DomainEvent>().Subscribe(e => eventLogger.LogInformation(e.ToString()));
             
-            _userRepo = new UserRepository(provider);
-            _chatroomRepo = new ChatroomRepository(provider);
-            _messageRepo = new MessageRepository(provider);
+            _userRepo = provider.GetRequiredService<IUserRepository>();
+            _chatroomRepo = provider.GetRequiredService<IChatroomRepository>();
+            _messageRepo = provider.GetRequiredService<IMessageRepository>();
 
-            _userService = new UserService(provider);
-            _chatroomService = new ChatroomService(provider);
-            _messageService = new MessageService(provider);
-            EnsureGlobalChatroomCreated();
+            _userService = provider.GetRequiredService<UserService>();
+            _chatroomService = provider.GetRequiredService<ChatroomService>();
+            _messageService = provider.GetRequiredService<MessageService>();
+            
+            EnsureDatabaseCreated(provider);
+            _chatroomService.EnsureGlobalChatroomCreated();
         }
 
-        /// <summary>
-        /// 确保创建1号全局聊天室
-        /// </summary>
-        void EnsureGlobalChatroomCreated ()
+        private void EnsureDatabaseCreated(IServiceProvider provider)
         {
-            if (_chatroomRepo.ContainsIdAsync(1).Result)
-                return;
-            var chatroom = new Chatroom("Global Chatroom");
-
-            _chatroomRepo.Add(chatroom);
-            _chatroomRepo.SaveChanges();
+            var context = provider.GetRequiredService<ServerDbContext>();
+            context.Database.EnsureCreated();
+            try
+            {
+                context.Database.Migrate();
+            }
+            catch (Exception e)
+            {
+                _logger?.LogError(e, "An error occurred when database migrate. It's normal when using InMemory database.");
+            }
         }
     }
 }

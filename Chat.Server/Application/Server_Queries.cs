@@ -17,7 +17,7 @@ namespace Chat.Server
 	{
 		public Task<List<ChatMessage>> GetMessagesAsync(GetMessagesRequest request)
 		{
-			return _context.Messages
+			return _messageRepo.Query()
 				.Where(m => m.TimeUnix >= request.AfterTimeUnix)
 				.ToListAsync();
 		}

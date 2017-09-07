@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Chat.Core.Models;
-using Chat.Server.Domains;
 using Chat.Server.Domains.Entities;
+using Chat.Server.Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Chat.Server
 {
@@ -14,11 +13,9 @@ namespace Chat.Server
         public async Task<Chatroom> NewChatroomAsync(IEnumerable<long> peopleIds)
         {
             var peoples = peopleIds.Select(id => _userRepo.GetByIdAsync(id).Result);
-            var chatroom = new Chatroom();
-            chatroom.SetServices(_provider);
+            var chatroom = await _chatroomRepo.NewEmptyChatroom();
             foreach (var user in peoples)
                 chatroom.NewPeople(user);
-            _chatroomRepo.Add(chatroom);
             await _chatroomRepo.SaveChangesAsync();
             return chatroom;
         }
@@ -41,6 +38,7 @@ namespace Chat.Server
 
         public void ClearDatabase()
         {
+            var _context = _provider.GetRequiredService<ServerDbContext>();
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
             _context.Database.Migrate();

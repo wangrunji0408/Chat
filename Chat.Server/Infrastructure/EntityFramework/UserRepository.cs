@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Chat.Server.Domains.Entities;
-using Chat.Server.Infrastructure.EntityFramework;
+using Chat.Server.Domains.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Chat.Server.Domains.Repositories
+namespace Chat.Server.Infrastructure.EntityFramework
 {
-    public class UserRepository: EFRepository<User>
+    public class UserRepository: EFRepository<User>, IUserRepository
     {
         public UserRepository(IServiceProvider provider)
             : base(provider)
