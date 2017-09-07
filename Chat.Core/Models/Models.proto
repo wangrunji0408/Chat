@@ -39,7 +39,7 @@ message ChatMessage
 {
     int64 id = 1;
 	int64 senderId = 2;
-	int64 timeUnix = 3;
+    int64 timeUnixMs = 3;
 	Content content = 4;
 	int64 chatroomId = 5;
 }
@@ -191,6 +191,7 @@ message FriendNotification
 message GetMessagesRequest
 {
 	int64 senderId = 1;
-    int64 afterTimeUnix = 2;
+    int64 afterTimeUnixMs = 2;
 	int64 chatroomId = 3;
+    int32 count = 4;
 }

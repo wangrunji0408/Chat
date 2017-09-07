@@ -23,17 +23,19 @@ namespace Chat.Test.Client
         public async Task GetMessageAfter()
         {
             await client1.SendTextMessage("Message1", GlobalChatroomId);
-            await Task.Delay(1000);
+            await Task.Delay(100);
             var t0 = DateTimeOffset.Now;
             await client1.SendTextMessage("Message2", GlobalChatroomId);
             await client1.SendTextMessage("Message3", GlobalChatroomId);
             var messages = await client1.GetMessages(new GetMessagesRequest
             {
-                AfterTimeUnix = t0.ToUnixTimeSeconds()
+                ChatroomId = GlobalChatroomId,
+                AfterTimeUnixMs = t0.ToUnixTimeMilliseconds(),
+                Count = 3
             });
-            Assert.Null(messages.Find(m => m.Content.Text == "Message1"));
-            Assert.NotNull(messages.Find(m => m.Content.Text == "Message2"));
-            Assert.NotNull(messages.Find(m => m.Content.Text == "Message3"));
+            Assert.Equal(2, messages.Count);
+            Assert.Contains(messages, m => m.Content.Text == "Message2");
+            Assert.Contains(messages, m => m.Content.Text == "Message3");
         }
 
         [Fact]

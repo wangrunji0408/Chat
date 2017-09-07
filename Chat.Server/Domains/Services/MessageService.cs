@@ -33,6 +33,21 @@ namespace Chat.Server.Domains.Services
                 .Subscribe(async e => await StoreMessage(e));
         }
 
+        internal static bool IsValid(ChatMessage m)
+        {
+            if (m.SenderId != 0)
+            {
+                switch (m.Content.ContentCase)
+                {
+                    case Content.ContentOneofCase.PeopleEnter:
+                        return false;
+                    case Content.ContentOneofCase.PeopleLeave:
+                        return false;
+                }
+            }
+            return true;
+        }
+
         async Task StoreMessage(NewMessageEvent e)
         {
             _messageRepo.Add(e.Message);
@@ -45,7 +60,7 @@ namespace Chat.Server.Domains.Services
             {
                 ChatroomId = @event.ChatroomId,
                 SenderId = 0,
-                TimeUnix = @event.Time.ToUnixTimeSeconds(),
+                TimeUnixMs = @event.Time.ToUnixTimeMilliseconds(),
                 Content = new Content
                 {
                     PeopleEnter = new Content.Types.PeopleEnter { PeopleId = @event.UserId }
@@ -60,7 +75,7 @@ namespace Chat.Server.Domains.Services
             {
                 ChatroomId = @event.ChatroomId,
                 SenderId = 0,
-                TimeUnix = @event.Time.ToUnixTimeSeconds(),
+                TimeUnixMs = @event.Time.ToUnixTimeMilliseconds(),
                 Content = new Content
                 {
                     PeopleLeave = new Content.Types.PeopleLeave { PeopleId = @event.UserId }

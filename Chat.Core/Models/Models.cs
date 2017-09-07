@@ -31,48 +31,48 @@ namespace Chat.Core.Models {
             "YXZlSAAaFQoFSW1hZ2USDAoEZGF0YRgBIAEoDBoeCghXaXRoZHJhdxISCgp3",
             "aXRoZHJhd0lkGAEgASgDGh8KC1Blb3BsZUVudGVyEhAKCHBlb3BsZUlkGAEg",
             "ASgDGjQKC1Blb3BsZUxlYXZlEhAKCHBlb3BsZUlkGAEgASgDEhMKC2tpY2tP",
-            "dXRCeUlkGAIgASgDQgkKB2NvbnRlbnQicQoLQ2hhdE1lc3NhZ2USCgoCaWQY",
-            "ASABKAMSEAoIc2VuZGVySWQYAiABKAMSEAoIdGltZVVuaXgYAyABKAMSHgoH",
-            "Y29udGVudBgEIAEoCzINLmNoYXQuQ29udGVudBISCgpjaGF0cm9vbUlkGAUg",
-            "ASgDIjgKElNlbmRNZXNzYWdlUmVxdWVzdBIiCgdtZXNzYWdlGAEgASgLMhEu",
-            "Y2hhdC5DaGF0TWVzc2FnZSJ6ChNTZW5kTWVzc2FnZVJlc3BvbnNlEjAKBnN0",
-            "YXR1cxgBIAEoDjIgLmNoYXQuU2VuZE1lc3NhZ2VSZXNwb25zZS5TdGF0dXMS",
-            "DgoGZGV0YWlsGAIgASgJIiEKBlN0YXR1cxILCgdTdWNjZXNzEAASCgoGRmFp",
-            "bGVkEAEiKgoKUGVvcGxlSW5mbxIKCgJpZBgBIAEoAxIQCgh1c2VybmFtZRgC",
-            "IAEoCSJpCgZGcmllbmQSDAoEbXlJZBgBIAEoBRIQCghmcmllbmRJZBgCIAEo",
-            "BRIMCgR0YWdzGAogAygJEgwKBG5vdGUYCyABKAkSDwoHYmxvY2tlZBgUIAEo",
-            "CBISCgpjaGF0cm9vbUlkGBUgASgDIksKDENoYXRyb29tSW5mbxIKCgJpZBgB",
-            "IAEoAxIRCglwZW9wbGVJZHMYAiADKAMSDgoGaG9zdElkGAMgASgDEgwKBG5h",
-            "bWUYBCABKAkiOQoSTmV3Q2hhdHJvb21SZXF1ZXN0EhAKCHNlbmRlcklkGAEg",
-            "ASgDEhEKCXBlb3BsZUlkcxgCIAMoBSI+ChZHZXRDaGF0cm9vbUluZm9SZXF1",
-            "ZXN0EhAKCHNlbmRlcklkGAEgASgDEhIKCmNoYXRyb29tSWQYAiABKAMiYAoX",
-            "R2V0Q2hhdHJvb21JbmZvUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIkCghj",
-            "aGF0cm9vbRgCIAEoCzISLmNoYXQuQ2hhdHJvb21JbmZvEg4KBmRldGFpbBgD",
-            "IAEoCSIzCg1TaWdudXBSZXF1ZXN0EhAKCHVzZXJuYW1lGAEgASgJEhAKCHBh",
-            "c3N3b3JkGAIgASgJIrkBCg5TaWdudXBSZXNwb25zZRIrCgZzdGF0dXMYASAB",
-            "KA4yGy5jaGF0LlNpZ251cFJlc3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwYAiAB",
-            "KAkSDgoGdXNlcklkGAMgASgDIloKBlN0YXR1cxILCgdTdWNjZXNzEAASEQoN",
-            "VXNlcm5hbWVFeGlzdBBlEhcKE1VzZXJuYW1lRm9ybWF0V3JvbmcQZhIXChNQ",
-            "YXNzd29yZEZvcm1hdFdyb25nEGciQgoMTG9naW5SZXF1ZXN0EhAKCHVzZXJu",
-            "YW1lGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEg4KBnVzZXJJZBgDIAEoAyKF",
-            "AQoNTG9naW5SZXNwb25zZRIqCgZzdGF0dXMYASABKA4yGi5jaGF0LkxvZ2lu",
-            "UmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSI4CgZTdGF0dXMSCwoH",
-            "U3VjY2VzcxAAEg4KCk5vU3VjaFVzZXIQZRIRCg1Xcm9uZ1Bhc3N3b3JkEGYi",
-            "SQoRTWFrZUZyaWVuZFJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSEAoIdGFy",
-            "Z2V0SWQYAiABKAMSEAoIZ3JlZXRpbmcYAyABKAki0gEKEk1ha2VGcmllbmRS",
-            "ZXNwb25zZRIvCgZzdGF0dXMYASABKA4yHy5jaGF0Lk1ha2VGcmllbmRSZXNw",
-            "b25zZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJInsKBlN0YXR1cxIKCgZBY2Nl",
-            "cHQQABIKCgZSZWZ1c2UQARIRCg1BbHJlYWR5RnJpZW5kEAISEAoMVXNlck5v",
-            "dEV4aXN0EAMSEQoNVXNlck5vdE9ubGluZRAEEhMKD1Jlc3BvbnNlVGltZW91",
-            "dBAFEgwKCFdpdGhTZWxmEAYiOgoUR2V0UGVvcGxlSW5mb1JlcXVlc3QSEAoI",
-            "c2VuZGVySWQYASABKAMSEAoIdGFyZ2V0SWQYAiABKAMiPQoVR2V0UGVvcGxl",
-            "SW5mb1Jlc3BvbnNlEiQKCnBlb3BsZUluZm8YASABKAsyEC5jaGF0LlBlb3Bs",
-            "ZUluZm8ibAoSRnJpZW5kTm90aWZpY2F0aW9uEgoKAmlkGAEgASgFEisKBHR5",
-            "cGUYAiABKA4yHS5jaGF0LkZyaWVuZE5vdGlmaWNhdGlvbi5UeXBlIh0KBFR5",
-            "cGUSCQoFTG9naW4QABIKCgZMb2dvdXQQASJRChJHZXRNZXNzYWdlc1JlcXVl",
-            "c3QSEAoIc2VuZGVySWQYASABKAMSFQoNYWZ0ZXJUaW1lVW5peBgCIAEoAxIS",
-            "CgpjaGF0cm9vbUlkGAMgASgDQhOqAhBDaGF0LkNvcmUuTW9kZWxzYgZwcm90",
-            "bzM="));
+            "dXRCeUlkGAIgASgDQgkKB2NvbnRlbnQicwoLQ2hhdE1lc3NhZ2USCgoCaWQY",
+            "ASABKAMSEAoIc2VuZGVySWQYAiABKAMSEgoKdGltZVVuaXhNcxgDIAEoAxIe",
+            "Cgdjb250ZW50GAQgASgLMg0uY2hhdC5Db250ZW50EhIKCmNoYXRyb29tSWQY",
+            "BSABKAMiOAoSU2VuZE1lc3NhZ2VSZXF1ZXN0EiIKB21lc3NhZ2UYASABKAsy",
+            "ES5jaGF0LkNoYXRNZXNzYWdlInoKE1NlbmRNZXNzYWdlUmVzcG9uc2USMAoG",
+            "c3RhdHVzGAEgASgOMiAuY2hhdC5TZW5kTWVzc2FnZVJlc3BvbnNlLlN0YXR1",
+            "cxIOCgZkZXRhaWwYAiABKAkiIQoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIKCgZG",
+            "YWlsZWQQASIqCgpQZW9wbGVJbmZvEgoKAmlkGAEgASgDEhAKCHVzZXJuYW1l",
+            "GAIgASgJImkKBkZyaWVuZBIMCgRteUlkGAEgASgFEhAKCGZyaWVuZElkGAIg",
+            "ASgFEgwKBHRhZ3MYCiADKAkSDAoEbm90ZRgLIAEoCRIPCgdibG9ja2VkGBQg",
+            "ASgIEhIKCmNoYXRyb29tSWQYFSABKAMiSwoMQ2hhdHJvb21JbmZvEgoKAmlk",
+            "GAEgASgDEhEKCXBlb3BsZUlkcxgCIAMoAxIOCgZob3N0SWQYAyABKAMSDAoE",
+            "bmFtZRgEIAEoCSI5ChJOZXdDaGF0cm9vbVJlcXVlc3QSEAoIc2VuZGVySWQY",
+            "ASABKAMSEQoJcGVvcGxlSWRzGAIgAygFIj4KFkdldENoYXRyb29tSW5mb1Jl",
+            "cXVlc3QSEAoIc2VuZGVySWQYASABKAMSEgoKY2hhdHJvb21JZBgCIAEoAyJg",
+            "ChdHZXRDaGF0cm9vbUluZm9SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEiQK",
+            "CGNoYXRyb29tGAIgASgLMhIuY2hhdC5DaGF0cm9vbUluZm8SDgoGZGV0YWls",
+            "GAMgASgJIjMKDVNpZ251cFJlcXVlc3QSEAoIdXNlcm5hbWUYASABKAkSEAoI",
+            "cGFzc3dvcmQYAiABKAkiuQEKDlNpZ251cFJlc3BvbnNlEisKBnN0YXR1cxgB",
+            "IAEoDjIbLmNoYXQuU2lnbnVwUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgC",
+            "IAEoCRIOCgZ1c2VySWQYAyABKAMiWgoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIR",
+            "Cg1Vc2VybmFtZUV4aXN0EGUSFwoTVXNlcm5hbWVGb3JtYXRXcm9uZxBmEhcK",
+            "E1Bhc3N3b3JkRm9ybWF0V3JvbmcQZyJCCgxMb2dpblJlcXVlc3QSEAoIdXNl",
+            "cm5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkSDgoGdXNlcklkGAMgASgD",
+            "IoUBCg1Mb2dpblJlc3BvbnNlEioKBnN0YXR1cxgBIAEoDjIaLmNoYXQuTG9n",
+            "aW5SZXNwb25zZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJIjgKBlN0YXR1cxIL",
+            "CgdTdWNjZXNzEAASDgoKTm9TdWNoVXNlchBlEhEKDVdyb25nUGFzc3dvcmQQ",
+            "ZiJJChFNYWtlRnJpZW5kUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIQCgh0",
+            "YXJnZXRJZBgCIAEoAxIQCghncmVldGluZxgDIAEoCSLSAQoSTWFrZUZyaWVu",
+            "ZFJlc3BvbnNlEi8KBnN0YXR1cxgBIAEoDjIfLmNoYXQuTWFrZUZyaWVuZFJl",
+            "c3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwYAiABKAkiewoGU3RhdHVzEgoKBkFj",
+            "Y2VwdBAAEgoKBlJlZnVzZRABEhEKDUFscmVhZHlGcmllbmQQAhIQCgxVc2Vy",
+            "Tm90RXhpc3QQAxIRCg1Vc2VyTm90T25saW5lEAQSEwoPUmVzcG9uc2VUaW1l",
+            "b3V0EAUSDAoIV2l0aFNlbGYQBiI6ChRHZXRQZW9wbGVJbmZvUmVxdWVzdBIQ",
+            "CghzZW5kZXJJZBgBIAEoAxIQCgh0YXJnZXRJZBgCIAEoAyI9ChVHZXRQZW9w",
+            "bGVJbmZvUmVzcG9uc2USJAoKcGVvcGxlSW5mbxgBIAEoCzIQLmNoYXQuUGVv",
+            "cGxlSW5mbyJsChJGcmllbmROb3RpZmljYXRpb24SCgoCaWQYASABKAUSKwoE",
+            "dHlwZRgCIAEoDjIdLmNoYXQuRnJpZW5kTm90aWZpY2F0aW9uLlR5cGUiHQoE",
+            "VHlwZRIJCgVMb2dpbhAAEgoKBkxvZ291dBABImIKEkdldE1lc3NhZ2VzUmVx",
+            "dWVzdBIQCghzZW5kZXJJZBgBIAEoAxIXCg9hZnRlclRpbWVVbml4TXMYAiAB",
+            "KAMSEgoKY2hhdHJvb21JZBgDIAEoAxINCgVjb3VudBgEIAEoBUITqgIQQ2hh",
+            "dC5Db3JlLk1vZGVsc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -81,7 +81,7 @@ namespace Chat.Core.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Withdraw), global::Chat.Core.Models.Content.Types.Withdraw.Parser, new[]{ "WithdrawId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleEnter), global::Chat.Core.Models.Content.Types.PeopleEnter.Parser, new[]{ "PeopleId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleLeave), global::Chat.Core.Models.Content.Types.PeopleLeave.Parser, new[]{ "PeopleId", "KickOutById" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatMessage), global::Chat.Core.Models.ChatMessage.Parser, new[]{ "Id", "SenderId", "TimeUnix", "Content", "ChatroomId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatMessage), global::Chat.Core.Models.ChatMessage.Parser, new[]{ "Id", "SenderId", "TimeUnixMs", "Content", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageRequest), global::Chat.Core.Models.SendMessageRequest.Parser, new[]{ "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageResponse), global::Chat.Core.Models.SendMessageResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.SendMessageResponse.Types.Status) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo), global::Chat.Core.Models.PeopleInfo.Parser, new[]{ "Id", "Username" }, null, null, null),
@@ -99,7 +99,7 @@ namespace Chat.Core.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeopleInfoRequest), global::Chat.Core.Models.GetPeopleInfoRequest.Parser, new[]{ "SenderId", "TargetId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeopleInfoResponse), global::Chat.Core.Models.GetPeopleInfoResponse.Parser, new[]{ "PeopleInfo" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.FriendNotification), global::Chat.Core.Models.FriendNotification.Parser, new[]{ "Id", "Type" }, null, new[]{ typeof(global::Chat.Core.Models.FriendNotification.Types.Type) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetMessagesRequest), global::Chat.Core.Models.GetMessagesRequest.Parser, new[]{ "SenderId", "AfterTimeUnix", "ChatroomId" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetMessagesRequest), global::Chat.Core.Models.GetMessagesRequest.Parser, new[]{ "SenderId", "AfterTimeUnixMs", "ChatroomId", "Count" }, null, null, null)
           }));
     }
     #endregion
@@ -1069,7 +1069,7 @@ namespace Chat.Core.Models {
     public ChatMessage(ChatMessage other) : this() {
       id_ = other.id_;
       senderId_ = other.senderId_;
-      timeUnix_ = other.timeUnix_;
+      timeUnixMs_ = other.timeUnixMs_;
       Content = other.content_ != null ? other.Content.Clone() : null;
       chatroomId_ = other.chatroomId_;
     }
@@ -1101,14 +1101,14 @@ namespace Chat.Core.Models {
       }
     }
 
-    /// <summary>Field number for the "timeUnix" field.</summary>
-    public const int TimeUnixFieldNumber = 3;
-    private long timeUnix_;
+    /// <summary>Field number for the "timeUnixMs" field.</summary>
+    public const int TimeUnixMsFieldNumber = 3;
+    private long timeUnixMs_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long TimeUnix {
-      get { return timeUnix_; }
+    public long TimeUnixMs {
+      get { return timeUnixMs_; }
       set {
-        timeUnix_ = value;
+        timeUnixMs_ = value;
       }
     }
 
@@ -1149,7 +1149,7 @@ namespace Chat.Core.Models {
       }
       if (Id != other.Id) return false;
       if (SenderId != other.SenderId) return false;
-      if (TimeUnix != other.TimeUnix) return false;
+      if (TimeUnixMs != other.TimeUnixMs) return false;
       if (!object.Equals(Content, other.Content)) return false;
       if (ChatroomId != other.ChatroomId) return false;
       return true;
@@ -1160,7 +1160,7 @@ namespace Chat.Core.Models {
       int hash = 1;
       if (Id != 0L) hash ^= Id.GetHashCode();
       if (SenderId != 0L) hash ^= SenderId.GetHashCode();
-      if (TimeUnix != 0L) hash ^= TimeUnix.GetHashCode();
+      if (TimeUnixMs != 0L) hash ^= TimeUnixMs.GetHashCode();
       if (content_ != null) hash ^= Content.GetHashCode();
       if (ChatroomId != 0L) hash ^= ChatroomId.GetHashCode();
       return hash;
@@ -1181,9 +1181,9 @@ namespace Chat.Core.Models {
         output.WriteRawTag(16);
         output.WriteInt64(SenderId);
       }
-      if (TimeUnix != 0L) {
+      if (TimeUnixMs != 0L) {
         output.WriteRawTag(24);
-        output.WriteInt64(TimeUnix);
+        output.WriteInt64(TimeUnixMs);
       }
       if (content_ != null) {
         output.WriteRawTag(34);
@@ -1204,8 +1204,8 @@ namespace Chat.Core.Models {
       if (SenderId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(SenderId);
       }
-      if (TimeUnix != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TimeUnix);
+      if (TimeUnixMs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TimeUnixMs);
       }
       if (content_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Content);
@@ -1227,8 +1227,8 @@ namespace Chat.Core.Models {
       if (other.SenderId != 0L) {
         SenderId = other.SenderId;
       }
-      if (other.TimeUnix != 0L) {
-        TimeUnix = other.TimeUnix;
+      if (other.TimeUnixMs != 0L) {
+        TimeUnixMs = other.TimeUnixMs;
       }
       if (other.content_ != null) {
         if (content_ == null) {
@@ -1258,7 +1258,7 @@ namespace Chat.Core.Models {
             break;
           }
           case 24: {
-            TimeUnix = input.ReadInt64();
+            TimeUnixMs = input.ReadInt64();
             break;
           }
           case 34: {
@@ -4059,8 +4059,9 @@ namespace Chat.Core.Models {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetMessagesRequest(GetMessagesRequest other) : this() {
       senderId_ = other.senderId_;
-      afterTimeUnix_ = other.afterTimeUnix_;
+      afterTimeUnixMs_ = other.afterTimeUnixMs_;
       chatroomId_ = other.chatroomId_;
+      count_ = other.count_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4079,14 +4080,14 @@ namespace Chat.Core.Models {
       }
     }
 
-    /// <summary>Field number for the "afterTimeUnix" field.</summary>
-    public const int AfterTimeUnixFieldNumber = 2;
-    private long afterTimeUnix_;
+    /// <summary>Field number for the "afterTimeUnixMs" field.</summary>
+    public const int AfterTimeUnixMsFieldNumber = 2;
+    private long afterTimeUnixMs_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long AfterTimeUnix {
-      get { return afterTimeUnix_; }
+    public long AfterTimeUnixMs {
+      get { return afterTimeUnixMs_; }
       set {
-        afterTimeUnix_ = value;
+        afterTimeUnixMs_ = value;
       }
     }
 
@@ -4098,6 +4099,17 @@ namespace Chat.Core.Models {
       get { return chatroomId_; }
       set {
         chatroomId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "count" field.</summary>
+    public const int CountFieldNumber = 4;
+    private int count_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Count {
+      get { return count_; }
+      set {
+        count_ = value;
       }
     }
 
@@ -4115,8 +4127,9 @@ namespace Chat.Core.Models {
         return true;
       }
       if (SenderId != other.SenderId) return false;
-      if (AfterTimeUnix != other.AfterTimeUnix) return false;
+      if (AfterTimeUnixMs != other.AfterTimeUnixMs) return false;
       if (ChatroomId != other.ChatroomId) return false;
+      if (Count != other.Count) return false;
       return true;
     }
 
@@ -4124,8 +4137,9 @@ namespace Chat.Core.Models {
     public override int GetHashCode() {
       int hash = 1;
       if (SenderId != 0L) hash ^= SenderId.GetHashCode();
-      if (AfterTimeUnix != 0L) hash ^= AfterTimeUnix.GetHashCode();
+      if (AfterTimeUnixMs != 0L) hash ^= AfterTimeUnixMs.GetHashCode();
       if (ChatroomId != 0L) hash ^= ChatroomId.GetHashCode();
+      if (Count != 0) hash ^= Count.GetHashCode();
       return hash;
     }
 
@@ -4140,13 +4154,17 @@ namespace Chat.Core.Models {
         output.WriteRawTag(8);
         output.WriteInt64(SenderId);
       }
-      if (AfterTimeUnix != 0L) {
+      if (AfterTimeUnixMs != 0L) {
         output.WriteRawTag(16);
-        output.WriteInt64(AfterTimeUnix);
+        output.WriteInt64(AfterTimeUnixMs);
       }
       if (ChatroomId != 0L) {
         output.WriteRawTag(24);
         output.WriteInt64(ChatroomId);
+      }
+      if (Count != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Count);
       }
     }
 
@@ -4156,11 +4174,14 @@ namespace Chat.Core.Models {
       if (SenderId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(SenderId);
       }
-      if (AfterTimeUnix != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AfterTimeUnix);
+      if (AfterTimeUnixMs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AfterTimeUnixMs);
       }
       if (ChatroomId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(ChatroomId);
+      }
+      if (Count != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Count);
       }
       return size;
     }
@@ -4173,11 +4194,14 @@ namespace Chat.Core.Models {
       if (other.SenderId != 0L) {
         SenderId = other.SenderId;
       }
-      if (other.AfterTimeUnix != 0L) {
-        AfterTimeUnix = other.AfterTimeUnix;
+      if (other.AfterTimeUnixMs != 0L) {
+        AfterTimeUnixMs = other.AfterTimeUnixMs;
       }
       if (other.ChatroomId != 0L) {
         ChatroomId = other.ChatroomId;
+      }
+      if (other.Count != 0) {
+        Count = other.Count;
       }
     }
 
@@ -4194,11 +4218,15 @@ namespace Chat.Core.Models {
             break;
           }
           case 16: {
-            AfterTimeUnix = input.ReadInt64();
+            AfterTimeUnixMs = input.ReadInt64();
             break;
           }
           case 24: {
             ChatroomId = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            Count = input.ReadInt32();
             break;
           }
         }

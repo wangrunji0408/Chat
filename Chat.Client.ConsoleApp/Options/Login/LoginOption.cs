@@ -43,8 +43,7 @@ namespace Chat.Client.ConsoleApp.Options
         
         void ListenClientEvents (Client client)
         {
-            client.NewMessage += (sender, e) => Console.WriteLine(
-                $"[Room {e.ChatroomId} User {e.SenderId}] {e.Content.Text}");
+            client.NewMessage += (sender, e) => Console.WriteLine(e.ToReadString());
             client.MakeFriendHandler = MakeFriend;
         }
 
@@ -74,7 +73,7 @@ namespace Chat.Client.ConsoleApp.Options
             Console.WriteLine("Unread messages:");
             var request = new GetMessagesRequest
             {
-                AfterTimeUnix = DateTimeOffset.Now.ToUnixTimeSeconds()
+                AfterTimeUnixMs = DateTimeOffset.Now.ToUnixTimeMilliseconds()
             };
             var messages = client.GetMessages(request).Result;
             foreach(var message in messages)

@@ -20,7 +20,7 @@ namespace Chat.Test
         public async Task Accept()
         {
             var accept = new MakeFriendResponse {Status = MakeFriendResponse.Types.Status.Accept};
-            client2.MakeFriendHandler = async request => accept;
+            client2.MakeFriendHandler = request => Task.FromResult(accept);
             var response = await client1.MakeFriend(2, "Hello");
             Assert.Equal(accept, response);
             AssertFriend(true, 1, 2);
@@ -32,7 +32,7 @@ namespace Chat.Test
             await server.MakeFriends(1, 2);
             AssertFriend(true, 1, 2);
             var accept = new MakeFriendResponse {Status = MakeFriendResponse.Types.Status.Accept};
-            client2.MakeFriendHandler = async request => accept;
+            client2.MakeFriendHandler = request => Task.FromResult(accept);
             var response = await client1.MakeFriend(2, "Hello");
             Assert.Equal(new MakeFriendResponse
             {
@@ -44,7 +44,7 @@ namespace Chat.Test
         public async Task Refuse()
         {
             var refuse = new MakeFriendResponse {Status = MakeFriendResponse.Types.Status.Refuse};
-            client2.MakeFriendHandler = async request => refuse;
+            client2.MakeFriendHandler = request => Task.FromResult(refuse);
             var response = await client1.MakeFriend(2, "Hello");
             Assert.Equal(refuse, response);
             AssertFriend(false, 1, 2);
@@ -72,7 +72,7 @@ namespace Chat.Test
         public async Task UserNotExist()
         {
             var accept = new MakeFriendResponse {Status = MakeFriendResponse.Types.Status.Accept};
-            client2.MakeFriendHandler = async request => accept;
+            client2.MakeFriendHandler = request => Task.FromResult(accept);
             var response = await client1.MakeFriend(3, "Hello");
             Assert.Equal(new MakeFriendResponse
             {
@@ -84,7 +84,7 @@ namespace Chat.Test
         public async Task WithSelf()
         {
             var accept = new MakeFriendResponse {Status = MakeFriendResponse.Types.Status.Accept};
-            client2.MakeFriendHandler = async request => accept;
+            client2.MakeFriendHandler = request => Task.FromResult(accept);
             var response = await client1.MakeFriend(1, "Hello");
             Assert.Equal(new MakeFriendResponse
             {

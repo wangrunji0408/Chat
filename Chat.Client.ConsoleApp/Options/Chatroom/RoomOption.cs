@@ -27,7 +27,7 @@ namespace Chat.Client.ConsoleApp.Options
                     if (args[0] == "q" || args[0] == "exit")
                         return;
                     
-                    Parser.Default.ParseArguments<SendOption, InfoOption>(args)
+                    Parser.Default.ParseArguments<SendOption, InfoOption, MessageOption>(args)
                         .WithParsed<RoomOptionBase>(opt =>
                         {
                             opt.ChatroomId = ChatroomId;

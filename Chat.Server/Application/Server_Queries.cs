@@ -15,11 +15,18 @@ namespace Chat.Server
 
 	public partial class Server
 	{
-		public Task<List<ChatMessage>> GetMessagesAsync(GetMessagesRequest request)
+		public async Task<List<ChatMessage>> GetMessagesAsync(GetMessagesRequest request)
 		{
-			return _messageRepo.Query()
-				.Where(m => m.TimeUnix >= request.AfterTimeUnix)
-				.Where(m => request.ChatroomId == 0 || m.ChatroomId == request.ChatroomId)
+			var chatroom = await _chatroomRepo.FindByIdAsync(request.ChatroomId);
+			var user = await _userRepo.FindByIdAsync(request.SenderId);
+			if(chatroom == null || user == null || !chatroom.Contains(user) || request.Count <= 0)
+				return new List<ChatMessage>();
+			
+			return await _messageRepo.Query()
+				.Where(m => m.TimeUnixMs >= request.AfterTimeUnixMs)
+				.Where(m => m.ChatroomId == request.ChatroomId)
+				.OrderByDescending(m => m.TimeUnixMs)
+				.Take(request.Count)
 				.ToListAsync();
 		}
 
@@ -54,7 +61,7 @@ namespace Chat.Server
 		{
             return _messageRepo.Query()
 						   .Where(m => m.ChatroomId == chatroomId)
-						   .OrderByDescending(m => m.TimeUnix)
+						   .OrderByDescending(m => m.TimeUnixMs)
 						   .Take(count)
 						   .ToListAsync();
 		}

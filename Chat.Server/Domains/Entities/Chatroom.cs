@@ -5,8 +5,10 @@ using System.Linq;
 using Chat.Core.Models;
 using Chat.Server.Domains.Events;
 using Chat.Server.Domains.Events.Chatroom;
+using Chat.Server.Domains.Services;
 using Chat.Server.Infrastructure;
 using Chat.Server.Infrastructure.EventBus;
+using Google.Protobuf.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -32,12 +34,15 @@ namespace Chat.Server.Domains.Entities
 
         internal void NewMessage(ChatMessage message)
         {
-            message.TimeUnix = DateTimeOffset.Now.ToUnixTimeSeconds();
             if (message.ChatroomId != Id)
-                throw new InvalidOperationException($"Message is not for this Chatroom.");
+                throw new ArgumentException($"Message is not for this Chatroom.");
             if (!UserIds.Contains(message.SenderId))
-                throw new InvalidOperationException(
+                throw new ArgumentException(
                     $"User {message.SenderId} is not in Chatroom {message.ChatroomId}.");
+            if(!MessageService.IsValid(message))
+                throw new ArgumentException("Invalid message.");
+            
+            message.TimeUnixMs = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             _provider.GetRequiredService<IEventBus>().Publish(
                 new NewMessageEvent(message));
         }
