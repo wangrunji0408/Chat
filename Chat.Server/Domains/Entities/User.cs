@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
 using Chat.Server.Domains.Events.User;
-using Chat.Server.Infrastructures;
+using Chat.Server.Infrastructure;
+using Chat.Server.Infrastructure.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

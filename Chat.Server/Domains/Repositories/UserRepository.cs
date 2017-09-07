@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Chat.Server.Domains.Entities;
+using Chat.Server.Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chat.Server.Domains.Repositories

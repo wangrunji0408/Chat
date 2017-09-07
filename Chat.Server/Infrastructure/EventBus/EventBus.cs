@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Chat.Server.Domains.Events;
 
-namespace Chat.Server.Infrastructures
+namespace Chat.Server.Infrastructure.EventBus
 {
     public class EventBus: IEventBus
     {

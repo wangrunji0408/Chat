@@ -1,17 +1,32 @@
-﻿using System;
+﻿using Chat.Core.Models;
 using Chat.Server;
-using Chat.Core.Models;
-using Xunit;
 
-namespace Chat.Test
+namespace Chat.Test.Server
 {
     public abstract class TestServerBase
     {
-        protected Server.Server server;
+        protected Chat.Server.Server server;
 
         protected TestServerBase()
         {
             server = new ServerBuilder().UseInMemory().Build();
+            // ReSharper disable once VirtualMemberCallInConstructor
+            Signup2User();
+        }
+
+        protected virtual void Signup2User()
+        {
+            server.SignupAsync(new SignupRequest
+            {
+                Username = "user1",
+                Password = "password"
+            }).Wait();
+
+            server.SignupAsync(new SignupRequest
+            {
+                Username = "user2",
+                Password = "password"
+            }).Wait();
         }
     }
 }

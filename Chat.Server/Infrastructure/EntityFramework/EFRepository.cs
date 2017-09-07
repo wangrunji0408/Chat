@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Chat.Server.Domains.Repositories
+namespace Chat.Server.Infrastructure.EntityFramework
 {
     public class EFRepository<TEntity>
         where TEntity:class

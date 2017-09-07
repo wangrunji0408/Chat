@@ -6,7 +6,7 @@ using Chat.Server.Domains.Entities;
 using Chat.Server.Domains.Events.Chatroom;
 using Chat.Server.Domains.Events.User;
 using Chat.Server.Domains.Repositories;
-using Chat.Server.Infrastructures;
+using Chat.Server.Infrastructure.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

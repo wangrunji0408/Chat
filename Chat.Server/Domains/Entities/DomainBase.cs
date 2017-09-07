@@ -32,5 +32,17 @@ namespace Chat.Server.Domains.Entities
 				_logger?.LogTrace($"Created.");
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            if (GetType() != obj.GetType())
+                return false;
+            return Id == ((DomainBase) obj).Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return GetType().GetHashCode() ^ Id.GetHashCode();
+        }
     }
 }

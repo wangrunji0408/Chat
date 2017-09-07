@@ -3,7 +3,7 @@ using Chat.Core.Models;
 using Chat.Server.Domains.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Chat.Server.Domains.Repositories
+namespace Chat.Server.Infrastructure.EntityFramework
 {
     public class ServerDbContext: DbContext
     {

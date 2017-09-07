@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Chat.Server
+namespace Chat.Server.Infrastructure
 {
     public static class Extensions
     {

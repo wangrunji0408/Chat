@@ -1,6 +1,7 @@
 ﻿using System;
 using Chat.Server.Domains.Repositories;
-using Chat.Server.Infrastructures;
+using Chat.Server.Infrastructure.EntityFramework;
+using Chat.Server.Infrastructure.EventBus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

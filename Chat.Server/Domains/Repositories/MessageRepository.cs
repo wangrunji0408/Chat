@@ -1,5 +1,6 @@
 ﻿using System;
 using Chat.Core.Models;
+using Chat.Server.Infrastructure.EntityFramework;
 
 namespace Chat.Server.Domains.Repositories
 {

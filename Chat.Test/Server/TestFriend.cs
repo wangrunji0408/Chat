@@ -1,27 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Chat.Core.Models;
 using Xunit;
 
-namespace Chat.Test
+namespace Chat.Test.Server
 {
-    public class TestServerFriend: TestServerBase
+    public class TestFriend : TestServerBase
     {
-        public TestServerFriend()
-        {
-            server.SignupAsync(new SignupRequest
-            {
-                Username = "user1",
-                Password = "password"
-            }).Wait();
-
-            server.SignupAsync(new SignupRequest
-            {
-                Username = "user2",
-                Password = "password"
-            }).Wait();
-        }
-
         [Fact]
         public async Task MakeFriends()
         {
@@ -30,7 +14,7 @@ namespace Chat.Test
             var user2 = await server.FindUserAsync(2);
             Assert.Contains(2, user1.FriendIds);
             Assert.Contains(1, user2.FriendIds);
-            
+
             await Assert.ThrowsAsync<InvalidOperationException>(() => server.MakeFriends(1, 2));
         }
     }

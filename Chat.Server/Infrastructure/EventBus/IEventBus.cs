@@ -1,7 +1,7 @@
 ﻿using System;
 using Chat.Server.Domains.Events;
 
-namespace Chat.Server.Infrastructures
+namespace Chat.Server.Infrastructure.EventBus
 {
     public interface IEventBus
     {

@@ -4,7 +4,7 @@ using Chat.Core.Models;
 using Chat.Server.Domains.Events;
 using Chat.Server.Domains.Events.Chatroom;
 using Chat.Server.Domains.Repositories;
-using Chat.Server.Infrastructures;
+using Chat.Server.Infrastructure.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
