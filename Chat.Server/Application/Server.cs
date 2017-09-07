@@ -22,6 +22,7 @@ namespace Chat.Server
         readonly UserService _userService;
         readonly ChatroomService _chatroomService;
         readonly MessageService _messageService;
+        private readonly UserClientService _userClientService;
 
         readonly IServiceProvider _provider;
         readonly IEventBus _eventBus;
@@ -43,6 +44,7 @@ namespace Chat.Server
             _userService = provider.GetRequiredService<UserService>();
             _chatroomService = provider.GetRequiredService<ChatroomService>();
             _messageService = provider.GetRequiredService<MessageService>();
+            _userClientService = provider.GetRequiredService<UserClientService>();
             
             EnsureDatabaseCreated(provider);
             _chatroomService.EnsureGlobalChatroomCreated();

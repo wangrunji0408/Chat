@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using Chat.Server.Domains.Repositories;
 using Chat.Server.Domains.Services;
 using Chat.Server.Infrastructure.EntityFramework;
@@ -23,9 +25,12 @@ namespace Chat.Server
 	        _container.AddSingleton<IUserRepository, UserRepository>();
 	        _container.AddSingleton<IChatroomRepository, ChatroomRepository>();
 	        _container.AddSingleton<IMessageRepository, MessageRepository>();
-	        _container.AddSingleton<UserService>();
-	        _container.AddSingleton<ChatroomService>();
-	        _container.AddSingleton<MessageService>();
+
+	        var serviceTypes = Assembly.GetExecutingAssembly().GetTypes()
+		        .Where(type => type.Namespace == "Chat.Server.Domains.Services"
+		                       && !type.IsAbstract && type.Name.EndsWith("Service"));
+	        foreach (var service in serviceTypes)
+		        _container.AddSingleton(service);
         }
 
 		public Server Build()

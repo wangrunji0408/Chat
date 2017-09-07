@@ -27,8 +27,7 @@ namespace Chat.Server
 
 		public void SetUserClient(long userId, IClientService client)
 		{
-            _userRepo.GetByIdAsync(userId).Result
-                     .SetClientService(client);
+			_userClientService[userId] = client;
 		}
 
 		/// <summary>

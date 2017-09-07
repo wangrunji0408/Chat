@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
 using Chat.Server.Domains.Events.User;
+using Chat.Server.Domains.Services;
 using Chat.Server.Infrastructure;
 using Chat.Server.Infrastructure.EventBus;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,16 +29,6 @@ namespace Chat.Server.Domains.Entities
 	    [NotMapped]
 	    public IEnumerable<long> FriendIds =>
 		    UserRelationships.Where(r => r.IsFriend).Select(r => r.ToUserId);
-
-        IClientService _clientService;
-
-        internal void SetClientService (IClientService clientService)
-        {
-			_logger?.LogInformation($"Set client service.");
-			if (_clientService != null)
-				_logger?.LogWarning($"Already has a connection, it will be reset.");
-            _clientService = clientService;
-        }
 
 	    private User()
 	    {
@@ -67,16 +58,6 @@ namespace Chat.Server.Domains.Entities
 			{
 				Status = LoginResponse.Types.Status.Success
 			};
-        }
-
-        internal async Task ReceiveNewMessageAsync (ChatMessage message)
-        {
-            if (_clientService == null)
-            {
-                _logger.LogWarning("Receive new message. But ClientService is null.");
-                return;
-            }
-            await _clientService.InformNewMessageAsync(message);
         }
 
         public override string ToString()
@@ -135,9 +116,9 @@ namespace Chat.Server.Domains.Entities
 			    {
 				    Status = MakeFriendResponse.Types.Status.AlreadyFriend
 			    };
-//			var timeout = TimeSpan.FromSeconds(5);
+			var timeout = TimeSpan.FromSeconds(5);
 			var task = target.AskClientToMakeFriend(request);
-//		    await Task.WhenAny(task, Task.Delay(timeout));
+		    await Task.WhenAny(task, Task.Delay(timeout));
 		    await task;
 			if(!task.IsCompleted)
 				return new MakeFriendResponse
@@ -152,12 +133,13 @@ namespace Chat.Server.Domains.Entities
 
 	    async Task<MakeFriendResponse> AskClientToMakeFriend(MakeFriendRequest request)
 	    {
-		    if (_clientService == null)
+		    var client = _provider.GetRequiredService<UserClientService>()[Id];
+		    if (client == null)
 			    return new MakeFriendResponse
 			    {
 				    Status = MakeFriendResponse.Types.Status.UserNotOnline
 			    };
-		    return await _clientService.MakeFriend(request);
+		    return await client.MakeFriend(request);
 	    }
 
 	    internal void MakeFriendsWith(User user)

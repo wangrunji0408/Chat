@@ -28,21 +28,9 @@ namespace Chat.Server.Domains.Services
 	        _chatroomRepo = provider.GetRequiredService<IChatroomRepository>();
 	        _eventBus = provider.GetRequiredService<IEventBus>();
 	        
-	        _eventBus.GetEventStream<NewMessageEvent>()
-		        .Subscribe(async e => await ForwardMessage(e));
 	        _eventBus.GetEventStream<UserSignupEvent>()
 		        .Subscribe(async e => await AddNewUserToGlobalChatroom(e));
         }
-
-	    async Task ForwardMessage(NewMessageEvent e)
-	    {
-		    var chatroom = await _chatroomRepo.GetByIdAsync(e.ChatroomId);
-		    await Task.WhenAll(chatroom.UserIds.Select(async id => 
-		    {
-			    var user = await _userRepo.GetByIdAsync(id);
-			    await user.ReceiveNewMessageAsync(e.Message);
-		    }));
-	    }
 	    
 	    async Task AddNewUserToGlobalChatroom(UserSignupEvent e)
 	    {
