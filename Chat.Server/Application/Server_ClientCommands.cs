@@ -30,19 +30,10 @@ namespace Chat.Server
 			_userClientService[userId] = client;
 		}
 
-		/// <summary>
-		/// 收到一条新消息
-		/// 保存消息，通知相应聊天室，再通知聊天室的所有用户
-		/// </summary>
 		public async Task ReceiveNewMessageAsync(ChatMessage message)
 		{
-            _logger?.LogInformation($"New message from user {message.SenderId}.");
-
             var chatroom = await _chatroomRepo.GetByIdAsync(message.ChatroomId);
             chatroom.NewMessage(message);
-
-            _messageRepo.Add(message);
-            await _messageRepo.SaveChangesAsync();
 		}
 		
 		public async Task<MakeFriendResponse> MakeFriends(MakeFriendRequest request)

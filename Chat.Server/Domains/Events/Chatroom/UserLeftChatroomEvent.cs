@@ -1,18 +1,20 @@
-﻿namespace Chat.Server.Domains.Events.Chatroom
+﻿using System;
+
+namespace Chat.Server.Domains.Events.Chatroom
 {
-    class UserEnterChatroomEvent: ChatroomEvent
+    class UserLeftChatroomEvent: ChatroomEvent
     {
         public long UserId { get; protected set; }
-
-        public UserEnterChatroomEvent(long chatroomId, long userId)
+        
+        public UserLeftChatroomEvent(long chatroomId, long userId)
         {
-            UserId = userId;
             ChatroomId = chatroomId;
+            UserId = userId;
         }
-
+        
         public override string ToString()
         {
-            return $"[{nameof(UserEnterChatroomEvent)} " +
+            return $"[{nameof(UserLeftChatroomEvent)} " +
                    $"{nameof(UserId)}: {UserId}, " +
                    $"{nameof(ChatroomId)}: {ChatroomId}]";
         }

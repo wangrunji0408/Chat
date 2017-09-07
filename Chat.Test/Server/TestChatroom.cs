@@ -65,8 +65,18 @@ namespace Chat.Test.Server
         public async Task NewPeople()
         {
             var room = await server.NewChatroomAsync(new long[] {1});
-            await server.AddPeopleToChatroom(2, 2);
+            Assert.DoesNotContain(2, room.UserIds);
+            await server.AddPeopleToChatroom(room.Id, userId: 2);
             Assert.Contains(2, room.UserIds);
+        }
+        
+        [Fact]
+        public async Task RemovePeople()
+        {
+            var room = await server.NewChatroomAsync(new long[] {1, 2});
+            Assert.Contains(1, room.UserIds);
+            await server.RemovePeopleFromChatroom(room.Id, userId: 1);
+            Assert.DoesNotContain(1, room.UserIds);
         }
     }
 }

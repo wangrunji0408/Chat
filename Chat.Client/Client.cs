@@ -66,7 +66,7 @@ namespace Chat.Client
 
         public Task<List<ChatMessage>> GetMessages (GetMessagesRequest request)
         {
-            request.UserId = UserId;
+            request.SenderId = UserId;
             return _serverService.GetMessages(request).ToList();
         }
 

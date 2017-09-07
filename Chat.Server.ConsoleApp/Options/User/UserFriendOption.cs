@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace Chat.Server.ConsoleApp.Options
+namespace Chat.Server.ConsoleApp.Options.User
 {
     [Command("user")]
     [Verb("friend")]
@@ -13,7 +13,7 @@ namespace Chat.Server.ConsoleApp.Options
 
         internal override void Execute(Program app)
         {
-            app.server.MakeFriends(User1Id, User2Id);
+            app.server.MakeFriends(User1Id, User2Id).Wait();
         }
     }
 }

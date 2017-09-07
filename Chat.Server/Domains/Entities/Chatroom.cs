@@ -55,7 +55,7 @@ namespace Chat.Server.Domains.Entities
             UserChatrooms.Add(uc);
             
             _provider.GetRequiredService<IEventBus>().Publish(
-                new UserEnterChatroomEvent(Id, user.Id));
+                new UserEnteredChatroomEvent(Id, user.Id));
         }
 
         internal bool Contains(User user)
@@ -67,6 +67,17 @@ namespace Chat.Server.Domains.Entities
         {
             return string.Format("[Chatroom: Id={0}, Name={1}, CreateTime={2}, UserIds={3}]",
                 Id, Name, CreateTime, UserIds.ToJsonString());
+        }
+
+        public void RemovePeople(User user)
+        {
+            var uc = UserChatrooms.FirstOrDefault(r => r.UserId == user.Id);
+            if (uc == null)
+                throw new InvalidOperationException($"User {user} doesn't exist in chatroom {Id}.");
+            UserChatrooms.Remove(uc);
+            
+            _provider.GetRequiredService<IEventBus>().Publish(
+                new UserLeftChatroomEvent(Id, user.Id));
         }
     }
 }

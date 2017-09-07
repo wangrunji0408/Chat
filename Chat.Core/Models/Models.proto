@@ -190,6 +190,7 @@ message FriendNotification
 
 message GetMessagesRequest
 {
-    int64 userId = 1;
+	int64 senderId = 1;
     int64 afterTimeUnix = 2;
+	int64 chatroomId = 3;
 }

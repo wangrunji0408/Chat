@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,6 +43,14 @@ namespace Chat.Server
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
             _context.Database.Migrate();
+        }
+
+        public async Task RemovePeopleFromChatroom(long chatroomId, long userId)
+        {
+            var chatroom = await _chatroomRepo.GetByIdAsync(chatroomId);
+            var people = await _userRepo.GetByIdAsync(userId);
+            chatroom.RemovePeople(people);
+            await _chatroomRepo.SaveChangesAsync();
         }
     }
 }

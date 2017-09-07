@@ -1,7 +1,7 @@
-﻿using CommandLine;
-using System;
+﻿using System;
+using CommandLine;
 
-namespace Chat.Server.ConsoleApp.Options
+namespace Chat.Server.ConsoleApp.Options.Chatroom
 {
     [Command("room")]
     [Verb("info")]

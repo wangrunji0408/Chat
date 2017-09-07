@@ -69,9 +69,10 @@ namespace Chat.Core.Models {
             "SW5mb1Jlc3BvbnNlEiQKCnBlb3BsZUluZm8YASABKAsyEC5jaGF0LlBlb3Bs",
             "ZUluZm8ibAoSRnJpZW5kTm90aWZpY2F0aW9uEgoKAmlkGAEgASgFEisKBHR5",
             "cGUYAiABKA4yHS5jaGF0LkZyaWVuZE5vdGlmaWNhdGlvbi5UeXBlIh0KBFR5",
-            "cGUSCQoFTG9naW4QABIKCgZMb2dvdXQQASI7ChJHZXRNZXNzYWdlc1JlcXVl",
-            "c3QSDgoGdXNlcklkGAEgASgDEhUKDWFmdGVyVGltZVVuaXgYAiABKANCE6oC",
-            "EENoYXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
+            "cGUSCQoFTG9naW4QABIKCgZMb2dvdXQQASJRChJHZXRNZXNzYWdlc1JlcXVl",
+            "c3QSEAoIc2VuZGVySWQYASABKAMSFQoNYWZ0ZXJUaW1lVW5peBgCIAEoAxIS",
+            "CgpjaGF0cm9vbUlkGAMgASgDQhOqAhBDaGF0LkNvcmUuTW9kZWxzYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -98,7 +99,7 @@ namespace Chat.Core.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeopleInfoRequest), global::Chat.Core.Models.GetPeopleInfoRequest.Parser, new[]{ "SenderId", "TargetId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeopleInfoResponse), global::Chat.Core.Models.GetPeopleInfoResponse.Parser, new[]{ "PeopleInfo" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.FriendNotification), global::Chat.Core.Models.FriendNotification.Parser, new[]{ "Id", "Type" }, null, new[]{ typeof(global::Chat.Core.Models.FriendNotification.Types.Type) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetMessagesRequest), global::Chat.Core.Models.GetMessagesRequest.Parser, new[]{ "UserId", "AfterTimeUnix" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetMessagesRequest), global::Chat.Core.Models.GetMessagesRequest.Parser, new[]{ "SenderId", "AfterTimeUnix", "ChatroomId" }, null, null, null)
           }));
     }
     #endregion
@@ -4057,8 +4058,9 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetMessagesRequest(GetMessagesRequest other) : this() {
-      userId_ = other.userId_;
+      senderId_ = other.senderId_;
       afterTimeUnix_ = other.afterTimeUnix_;
+      chatroomId_ = other.chatroomId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4066,14 +4068,14 @@ namespace Chat.Core.Models {
       return new GetMessagesRequest(this);
     }
 
-    /// <summary>Field number for the "userId" field.</summary>
-    public const int UserIdFieldNumber = 1;
-    private long userId_;
+    /// <summary>Field number for the "senderId" field.</summary>
+    public const int SenderIdFieldNumber = 1;
+    private long senderId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long UserId {
-      get { return userId_; }
+    public long SenderId {
+      get { return senderId_; }
       set {
-        userId_ = value;
+        senderId_ = value;
       }
     }
 
@@ -4085,6 +4087,17 @@ namespace Chat.Core.Models {
       get { return afterTimeUnix_; }
       set {
         afterTimeUnix_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "chatroomId" field.</summary>
+    public const int ChatroomIdFieldNumber = 3;
+    private long chatroomId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ChatroomId {
+      get { return chatroomId_; }
+      set {
+        chatroomId_ = value;
       }
     }
 
@@ -4101,16 +4114,18 @@ namespace Chat.Core.Models {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (UserId != other.UserId) return false;
+      if (SenderId != other.SenderId) return false;
       if (AfterTimeUnix != other.AfterTimeUnix) return false;
+      if (ChatroomId != other.ChatroomId) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (UserId != 0L) hash ^= UserId.GetHashCode();
+      if (SenderId != 0L) hash ^= SenderId.GetHashCode();
       if (AfterTimeUnix != 0L) hash ^= AfterTimeUnix.GetHashCode();
+      if (ChatroomId != 0L) hash ^= ChatroomId.GetHashCode();
       return hash;
     }
 
@@ -4121,24 +4136,31 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (UserId != 0L) {
+      if (SenderId != 0L) {
         output.WriteRawTag(8);
-        output.WriteInt64(UserId);
+        output.WriteInt64(SenderId);
       }
       if (AfterTimeUnix != 0L) {
         output.WriteRawTag(16);
         output.WriteInt64(AfterTimeUnix);
+      }
+      if (ChatroomId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(ChatroomId);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (UserId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      if (SenderId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SenderId);
       }
       if (AfterTimeUnix != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(AfterTimeUnix);
+      }
+      if (ChatroomId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ChatroomId);
       }
       return size;
     }
@@ -4148,11 +4170,14 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.UserId != 0L) {
-        UserId = other.UserId;
+      if (other.SenderId != 0L) {
+        SenderId = other.SenderId;
       }
       if (other.AfterTimeUnix != 0L) {
         AfterTimeUnix = other.AfterTimeUnix;
+      }
+      if (other.ChatroomId != 0L) {
+        ChatroomId = other.ChatroomId;
       }
     }
 
@@ -4165,11 +4190,15 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            UserId = input.ReadInt64();
+            SenderId = input.ReadInt64();
             break;
           }
           case 16: {
             AfterTimeUnix = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            ChatroomId = input.ReadInt64();
             break;
           }
         }

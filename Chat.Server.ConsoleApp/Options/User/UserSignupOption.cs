@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Chat.Core.Models;
+﻿using Chat.Core.Models;
 using CommandLine;
-using CommandLine.Text;
 
-namespace Chat.Server.ConsoleApp.Options
+namespace Chat.Server.ConsoleApp.Options.User
 {
     [Command("user")]
     [Verb("signup")]

@@ -28,9 +28,22 @@ namespace Chat.Test.Client
             var room = await server.NewChatroomAsync(new long[] {1});
             var recv = false;
             client1.NewMessage += (sender, e) =>
-                recv |= e.SenderId == 0 && e.ChatroomId == 2
+                recv |= e.SenderId == 0 && e.ChatroomId == room.Id
                         && e.Content.PeopleEnter.PeopleId == 2;
             await server.AddPeopleToChatroom(room.Id, userId: 2);
+            await Task.Delay(100);
+            Assert.True(recv);
+        }
+        
+        [Fact]
+        public async Task InformPeopleLeft()
+        {
+            var room = await server.NewChatroomAsync(new long[] {1, 2});
+            var recv = false;
+            client1.NewMessage += (sender, e) =>
+                recv |= e.SenderId == 0 && e.ChatroomId == room.Id
+                        && e.Content.PeopleLeave.PeopleId == 2;
+            await server.RemovePeopleFromChatroom(room.Id, userId: 2);
             await Task.Delay(100);
             Assert.True(recv);
         }

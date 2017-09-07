@@ -24,11 +24,22 @@ namespace Chat.Server.Domains.Services
             _messageRepo = provider.GetRequiredService<IMessageRepository>();
 
             _eventBus = provider.GetRequiredService<IEventBus>();
-            _eventBus.GetEventStream<UserEnterChatroomEvent>()
-                .Subscribe(async e => await OnUserEnterChatroomEvent(e));
+            _eventBus.GetEventStream<UserEnteredChatroomEvent>()
+                .Subscribe(OnUserEnterChatroomEvent);
+            _eventBus.GetEventStream<UserLeftChatroomEvent>()
+                .Subscribe(OnUserLeftChatroomEvent);
+            
+            _eventBus.GetEventStream<NewMessageEvent>()
+                .Subscribe(async e => await StoreMessage(e));
         }
 
-        async Task OnUserEnterChatroomEvent(UserEnterChatroomEvent @event)
+        async Task StoreMessage(NewMessageEvent e)
+        {
+            _messageRepo.Add(e.Message);
+            await _messageRepo.SaveChangesAsync();
+        }
+
+        void OnUserEnterChatroomEvent(UserEnteredChatroomEvent @event)
         {
             var cm = new ChatMessage
             {
@@ -40,9 +51,21 @@ namespace Chat.Server.Domains.Services
                     PeopleEnter = new Content.Types.PeopleEnter { PeopleId = @event.UserId }
                 }
             };
-            _messageRepo.Add(cm);
-            await _messageRepo.SaveChangesAsync();
-            
+            _eventBus.Publish(new NewMessageEvent(cm));
+        }
+        
+        void OnUserLeftChatroomEvent(UserLeftChatroomEvent @event)
+        {
+            var cm = new ChatMessage
+            {
+                ChatroomId = @event.ChatroomId,
+                SenderId = 0,
+                TimeUnix = @event.Time.ToUnixTimeSeconds(),
+                Content = new Content
+                {
+                    PeopleLeave = new Content.Types.PeopleLeave { PeopleId = @event.UserId }
+                }
+            };            
             _eventBus.Publish(new NewMessageEvent(cm));
         }
     }

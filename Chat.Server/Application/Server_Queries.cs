@@ -19,6 +19,7 @@ namespace Chat.Server
 		{
 			return _messageRepo.Query()
 				.Where(m => m.TimeUnix >= request.AfterTimeUnix)
+				.Where(m => request.ChatroomId == 0 || m.ChatroomId == request.ChatroomId)
 				.ToListAsync();
 		}
 

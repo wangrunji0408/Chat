@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommandLine;
-using CommandLine.Text;
 
-namespace Chat.Server.ConsoleApp.Options
+namespace Chat.Server.ConsoleApp.Options.Chatroom
 {
-
     [Command("room")]
     [Verb("new")]
     class ChatroomNewOption : OptionBase
