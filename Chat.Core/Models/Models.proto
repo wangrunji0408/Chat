@@ -62,19 +62,32 @@ message SendMessageResponse
 
 message PeopleInfo
 {
-	// Public
+	// Public Info
 	int64 id = 1;
 	string username = 2;
-}
 
-message Friend
-{
-	int32 myId = 1;
-	int32 friendId = 2;
+	// Relationship Info
 	repeated string tags = 10;
 	string note = 11;
 	bool blocked = 20;
 	int64 chatroomId = 21;
+
+	// Role Specific Info
+	oneof roleInfo {
+		SelfInfo self = 101;
+		FriendInfo friend = 102;
+		StrangerInfo stranger = 103;
+	}
+
+	message SelfInfo {
+
+	}
+	message FriendInfo {
+
+	}
+	message StrangerInfo {
+
+	}
 }
 
 message ChatroomInfo
@@ -83,6 +96,7 @@ message ChatroomInfo
 	repeated int64 peopleIds = 2;
 	int64 hostId = 3;
 	string name = 4;
+	bool isP2P = 5;
 }
 
 message NewChatroomRequest
@@ -175,17 +189,6 @@ message GetPeopleInfoRequest
 message GetPeopleInfoResponse
 {
     PeopleInfo peopleInfo = 1;
-}
-
-message FriendNotification
-{
-	enum Type
-	{
-		Login = 0;
-		Logout = 1;
-	}
-	int32 id = 1;
-	Type type = 2;
 }
 
 message GetMessagesRequest

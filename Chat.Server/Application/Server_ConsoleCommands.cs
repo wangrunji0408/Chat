@@ -14,9 +14,9 @@ namespace Chat.Server
         public async Task<Chatroom> NewChatroomAsync(IEnumerable<long> peopleIds)
         {
             var peoples = peopleIds.Select(id => _userRepo.GetByIdAsync(id).Result);
-            var chatroom = await _chatroomRepo.NewEmptyChatroom();
+            var chatroom = await _chatroomRepo.NewEmptyChatroomAsync();
             foreach (var user in peoples)
-                chatroom.NewPeople(user);
+                chatroom.AddPeople(user);
             await _chatroomRepo.SaveChangesAsync();
             return chatroom;
         }
@@ -25,8 +25,9 @@ namespace Chat.Server
         {
             var chatroom = await _chatroomRepo.GetByIdAsync(chatroomId);
             var people = await _userRepo.GetByIdAsync(userId);
-            chatroom.NewPeople(people);
+            chatroom.AddPeople(people);
             await _chatroomRepo.SaveChangesAsync();
+            await _userRepo.SaveChangesAsync();
         }
 
         public async Task MakeFriends(long user1Id, long user2Id)

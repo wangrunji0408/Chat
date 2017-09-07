@@ -36,7 +36,7 @@ namespace Chat.Server.Domains.Services
 	    {
 		    var globalRoom = await _chatroomRepo.GetByIdAsync(1);
 		    var user = await _userRepo.GetByIdAsync(e.UserId);
-		    globalRoom.NewPeople(user);
+		    globalRoom.AddPeople(user);
 		    _chatroomRepo.Update(globalRoom);
 		    await _chatroomRepo.SaveChangesAsync();
 	    }

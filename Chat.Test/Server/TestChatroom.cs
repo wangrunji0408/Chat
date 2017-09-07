@@ -59,24 +59,56 @@ namespace Chat.Test.Server
             Assert.Equal(2, room.Id);
             Assert.Equal(new HashSet<long> {1, 2}, room.UserIds.ToHashSet());
             Assert.True(room.CreateTime > t0 && room.CreateTime < t1);
+
+            var user1 = await server.FindUserAsync(1);
+            var user2 = await server.FindUserAsync(2);
+            Assert.Contains(room.Id, user1.ChatroomIds);
+            Assert.Contains(room.Id, user2.ChatroomIds);
         }
 
         [Fact]
-        public async Task NewPeople()
+        public async Task AddPeople()
         {
             var room = await server.NewChatroomAsync(new long[] {1});
             Assert.DoesNotContain(2, room.UserIds);
             await server.AddPeopleToChatroom(room.Id, userId: 2);
             Assert.Contains(2, room.UserIds);
+            
+            var user2 = await server.FindUserAsync(2);
+            Assert.Contains(room.Id, user2.ChatroomIds);
         }
         
         [Fact]
         public async Task RemovePeople()
         {
             var room = await server.NewChatroomAsync(new long[] {1, 2});
+            var user1 = await server.FindUserAsync(1);
+            
             Assert.Contains(1, room.UserIds);
             await server.RemovePeopleFromChatroom(room.Id, userId: 1);
             Assert.DoesNotContain(1, room.UserIds);
+            Assert.DoesNotContain(room.Id, user1.ChatroomIds);
+        }
+        
+        [Fact]
+        public async Task NewP2PChatroom()
+        {
+            var room = await server.GetP2PChatroom(1, 2);
+            Assert.Contains(1, room.UserIds);
+            Assert.Contains(2, room.UserIds);
+            Assert.True(room.IsP2P);
+        }
+        
+        [Fact]
+        public async Task ThrowWhenTryToChangePeopleInP2P()
+        {
+            var room = await server.GetP2PChatroom(1, 2);
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await server.AddPeopleToChatroom(room.Id, userId: 3));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await server.RemovePeopleFromChatroom(room.Id, userId: 1));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await server.RemovePeopleFromChatroom(room.Id, userId: 2));
         }
     }
 }

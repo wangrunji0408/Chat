@@ -18,6 +18,9 @@ namespace Chat.Server.Domains.Entities
     {
         public string Name { get; private set; }
         public DateTimeOffset CreateTime { get; private set; } = DateTimeOffset.Now;
+        public bool IsP2P => P2PUser1Id != 0 && P2PUser2Id != 0;
+        internal long P2PUser1Id { get; set; }
+        internal long P2PUser2Id { get; set; }
         internal ICollection<UserChatroom> UserChatrooms { get; set; } = new HashSet<UserChatroom>();
 
         [NotMapped]
@@ -47,10 +50,12 @@ namespace Chat.Server.Domains.Entities
                 new NewMessageEvent(message));
         }
 
-        internal void NewPeople(User user)
+        internal void AddPeople(User user)
         {
             if (UserIds.Contains(user.Id))
                 throw new InvalidOperationException($"User {user} already exist in chatroom {Id}.");
+            if(IsP2P)
+                throw new InvalidOperationException($"Can't add people to P2P chatroom.");
 
             var uc = new UserChatroom
             {
@@ -58,6 +63,7 @@ namespace Chat.Server.Domains.Entities
                 ChatroomId = Id
             };
             UserChatrooms.Add(uc);
+            user.UserChatrooms.Add(uc);
             
             _provider.GetRequiredService<IEventBus>().Publish(
                 new UserEnteredChatroomEvent(Id, user.Id));
@@ -70,12 +76,14 @@ namespace Chat.Server.Domains.Entities
 
         public override string ToString()
         {
-            return string.Format("[Chatroom: Id={0}, Name={1}, CreateTime={2}, UserIds={3}]",
-                Id, Name, CreateTime, UserIds.ToJsonString());
+            return string.Format("[Chatroom: Id={0}, Name={1}, CreateTime={2}, P2P={3}, UserIds={4}]",
+                Id, Name, CreateTime, IsP2P, UserIds.ToJsonString());
         }
 
         public void RemovePeople(User user)
         {
+            if(IsP2P)
+                throw new InvalidOperationException($"Can't remove people from P2P chatroom.");
             var uc = UserChatrooms.FirstOrDefault(r => r.UserId == user.Id);
             if (uc == null)
                 throw new InvalidOperationException($"User {user} doesn't exist in chatroom {Id}.");

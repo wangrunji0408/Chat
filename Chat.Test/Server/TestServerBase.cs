@@ -27,6 +27,12 @@ namespace Chat.Test.Server
                 Username = "user2",
                 Password = "password"
             }).Wait();
+            
+            server.SignupAsync(new SignupRequest
+            {
+                Username = "user3",
+                Password = "password"
+            }).Wait();
         }
     }
 }

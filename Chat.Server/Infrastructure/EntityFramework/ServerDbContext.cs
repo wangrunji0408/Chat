@@ -20,6 +20,10 @@ namespace Chat.Server.Infrastructure.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Chatroom>()
+                .HasIndex(c => new {c.P2PUser1Id, c.P2PUser2Id});
+            
             modelBuilder.Entity<ChatMessage>()
                 .Ignore(m => m.Content);
 

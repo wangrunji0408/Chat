@@ -34,6 +34,11 @@ namespace Chat.Server
         {
             return _userRepo.FindByIdAsync(id);
         }
+		
+		public Task<Chatroom> GetP2PChatroom (long user1Id, long user2Id)
+		{
+			return _chatroomService.GetOrAddP2PChatroom(user1Id, user2Id);
+		}
 
         public Task<List<string>> GetChatroomsStringAsync ()
         {
