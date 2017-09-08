@@ -107,5 +107,13 @@ namespace Chat.Connection.Grpc
         {
             return _server.MakeFriends(request);
         }
+
+        public override async Task GetData(GetDataRequest request, IServerStreamWriter<GetDataResponse> responseStream, ServerCallContext context)
+        {
+            var responses = _server.GetDataAsync(request);
+            var enumor = responses.GetEnumerator();
+            while (await enumor.MoveNext(context.CancellationToken))
+                await responseStream.WriteAsync(enumor.Current);
+        }
     }
 }

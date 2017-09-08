@@ -29,6 +29,10 @@ namespace Chat.Connection.Grpc {
     static readonly grpc::Marshaller<global::Chat.Core.Models.GetPeopleInfoResponse> __Marshaller_GetPeopleInfoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Chat.Core.Models.GetPeopleInfoResponse.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Chat.Core.Models.GetChatroomInfoRequest> __Marshaller_GetChatroomInfoRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Chat.Core.Models.GetChatroomInfoRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Chat.Core.Models.GetChatroomInfoResponse> __Marshaller_GetChatroomInfoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Chat.Core.Models.GetChatroomInfoResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Chat.Core.Models.NewChatroomRequest> __Marshaller_NewChatroomRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Chat.Core.Models.NewChatroomRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Chat.Core.Models.NewChatroomResponse> __Marshaller_NewChatroomResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Chat.Core.Models.NewChatroomResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Chat.Core.Models.GetDataRequest> __Marshaller_GetDataRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Chat.Core.Models.GetDataRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Chat.Core.Models.GetDataResponse> __Marshaller_GetDataResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Chat.Core.Models.GetDataResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Chat.Core.Models.LoginRequest, global::Chat.Core.Models.LoginResponse> __Method_Login = new grpc::Method<global::Chat.Core.Models.LoginRequest, global::Chat.Core.Models.LoginResponse>(
         grpc::MethodType.Unary,
@@ -86,6 +90,20 @@ namespace Chat.Connection.Grpc {
         __Marshaller_GetChatroomInfoRequest,
         __Marshaller_GetChatroomInfoResponse);
 
+    static readonly grpc::Method<global::Chat.Core.Models.NewChatroomRequest, global::Chat.Core.Models.NewChatroomResponse> __Method_NewChatroom = new grpc::Method<global::Chat.Core.Models.NewChatroomRequest, global::Chat.Core.Models.NewChatroomResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "NewChatroom",
+        __Marshaller_NewChatroomRequest,
+        __Marshaller_NewChatroomResponse);
+
+    static readonly grpc::Method<global::Chat.Core.Models.GetDataRequest, global::Chat.Core.Models.GetDataResponse> __Method_GetData = new grpc::Method<global::Chat.Core.Models.GetDataRequest, global::Chat.Core.Models.GetDataResponse>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "GetData",
+        __Marshaller_GetDataRequest,
+        __Marshaller_GetDataResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -136,13 +154,17 @@ namespace Chat.Connection.Grpc {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      /// <summary>
-      ///rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);
-      /// </summary>
-      /// <param name="request">The request received from the client.</param>
-      /// <param name="context">The context of the server-side call handler being invoked.</param>
-      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::Chat.Core.Models.GetChatroomInfoResponse> GetChatroomInfo(global::Chat.Core.Models.GetChatroomInfoRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Chat.Core.Models.NewChatroomResponse> NewChatroom(global::Chat.Core.Models.NewChatroomRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task GetData(global::Chat.Core.Models.GetDataRequest request, grpc::IServerStreamWriter<global::Chat.Core.Models.GetDataResponse> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -304,49 +326,45 @@ namespace Chat.Connection.Grpc {
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetPeoplesInfo, null, options, request);
       }
-      /// <summary>
-      ///rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Chat.Core.Models.GetChatroomInfoResponse GetChatroomInfo(global::Chat.Core.Models.GetChatroomInfoRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return GetChatroomInfo(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      ///rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The response received from the server.</returns>
       public virtual global::Chat.Core.Models.GetChatroomInfoResponse GetChatroomInfo(global::Chat.Core.Models.GetChatroomInfoRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetChatroomInfo, null, options, request);
       }
-      /// <summary>
-      ///rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
-      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
-      /// <param name="cancellationToken">An optional token for canceling the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Chat.Core.Models.GetChatroomInfoResponse> GetChatroomInfoAsync(global::Chat.Core.Models.GetChatroomInfoRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
       {
         return GetChatroomInfoAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      /// <summary>
-      ///rpc NewChatroom (NewChatroomRequest) returns (ChatroomResponse);
-      /// </summary>
-      /// <param name="request">The request to send to the server.</param>
-      /// <param name="options">The options for the call.</param>
-      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::Chat.Core.Models.GetChatroomInfoResponse> GetChatroomInfoAsync(global::Chat.Core.Models.GetChatroomInfoRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetChatroomInfo, null, options, request);
+      }
+      public virtual global::Chat.Core.Models.NewChatroomResponse NewChatroom(global::Chat.Core.Models.NewChatroomRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return NewChatroom(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Chat.Core.Models.NewChatroomResponse NewChatroom(global::Chat.Core.Models.NewChatroomRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_NewChatroom, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Chat.Core.Models.NewChatroomResponse> NewChatroomAsync(global::Chat.Core.Models.NewChatroomRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return NewChatroomAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Chat.Core.Models.NewChatroomResponse> NewChatroomAsync(global::Chat.Core.Models.NewChatroomRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_NewChatroom, null, options, request);
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Chat.Core.Models.GetDataResponse> GetData(global::Chat.Core.Models.GetDataRequest request, grpc::Metadata headers = null, DateTime? deadline = null, CancellationToken cancellationToken = default(CancellationToken))
+      {
+        return GetData(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Chat.Core.Models.GetDataResponse> GetData(global::Chat.Core.Models.GetDataRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetData, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ChatServerServiceClient NewInstance(ClientBaseConfiguration configuration)
@@ -367,7 +385,9 @@ namespace Chat.Connection.Grpc {
           .AddMethod(__Method_GetMessages, serviceImpl.GetMessages)
           .AddMethod(__Method_MakeFriend, serviceImpl.MakeFriend)
           .AddMethod(__Method_GetPeoplesInfo, serviceImpl.GetPeoplesInfo)
-          .AddMethod(__Method_GetChatroomInfo, serviceImpl.GetChatroomInfo).Build();
+          .AddMethod(__Method_GetChatroomInfo, serviceImpl.GetChatroomInfo)
+          .AddMethod(__Method_NewChatroom, serviceImpl.NewChatroom)
+          .AddMethod(__Method_GetData, serviceImpl.GetData).Build();
     }
 
   }

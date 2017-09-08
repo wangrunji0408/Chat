@@ -2,7 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-
+using System.IO;
+using System.Security.Cryptography;
+using System.Threading;
+using Chat.Server.Infrastructure;
+using Google.Protobuf;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +49,16 @@ namespace Chat.Server
 			var response = await user.HandleMakeFriend(request, target);
 			await _userRepo.SaveChangesAsync();
 			return response;
+		}
+
+		public IAsyncEnumerable<GetDataResponse> GetDataAsync(GetDataRequest request)
+		{
+			BinaryReader reader;
+			if (request.RandLength != 0)
+				reader = DataService.TestData(request.Seed, request.RandLength);
+			else
+				reader = DataService.ReadFile(request.FileName);
+			return DataService.GetDataAsync(reader);
 		}
 	}
 }

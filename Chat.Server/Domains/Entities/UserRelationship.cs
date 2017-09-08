@@ -10,7 +10,6 @@ namespace Chat.Server.Domains.Entities
         public long FromUserId { get; private set; }
         public User FromUser { get; private set; }
         public long ToUserId { get; private set; }
-//        public User ToUser { get; private set; }
         
         public bool IsFriend { get; private set; }
         public bool IsBlocked { get; private set; }

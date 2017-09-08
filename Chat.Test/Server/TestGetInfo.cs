@@ -15,7 +15,7 @@ namespace Chat.Test.Server
             var info = await server.GetChatroomInfoAsync(1, 1);
             Assert.Equal(1, info.Id);
             Assert.Equal("Global Chatroom", info.Name);
-            Assert.Equal(new HashSet<long> {1, 2}, info.PeopleIds.ToHashSet());
+            Assert.Equal(new HashSet<long> {1, 2, 3}, info.PeopleIds.ToHashSet());
         }
 
         [Fact]

@@ -44,6 +44,11 @@ namespace Chat.Connection.Local
             return _server.MakeFriends(request);
         }
 
+        public IAsyncEnumerable<GetDataResponse> GetData(GetDataRequest request)
+        {
+            return _server.GetDataAsync(request);
+        }
+
         public async Task SendMessageAsync(ChatMessage message)
         {
             await _server.ReceiveNewMessageAsync(message);

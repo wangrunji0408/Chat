@@ -82,5 +82,11 @@ namespace Chat.Connection.Grpc
         {
             return await base.MakeFriendAsync(request);
         }
+
+        public IAsyncEnumerable<GetDataResponse> GetData(GetDataRequest request)
+        {
+            var reader = base.GetData(request).ResponseStream;
+            return AsyncEnumerable.CreateEnumerable(() => reader);
+        }
     }
 }

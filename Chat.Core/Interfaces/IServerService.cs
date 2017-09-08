@@ -12,5 +12,6 @@ namespace Chat.Core.Interfaces
         Task<GetChatroomInfoResponse> GetChatroomInfo(GetChatroomInfoRequest request);
         Task<GetPeopleInfoResponse> GetPeopleInfo(GetPeopleInfoRequest request);
         Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request);
+        IAsyncEnumerable<GetDataResponse> GetData(GetDataRequest request);
     }
 }

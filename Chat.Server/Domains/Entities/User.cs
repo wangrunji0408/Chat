@@ -88,7 +88,8 @@ namespace Chat.Server.Domains.Entities
 			    HostId = 0,
 			    Id = chatroom.Id,
 			    Name = chatroom.Name,
-			    PeopleIds = { chatroom.UserIds }
+			    PeopleIds = { chatroom.UserIds },
+			    IsP2P = chatroom.IsP2P
 		    };
 	    }
 

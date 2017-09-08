@@ -106,5 +106,10 @@ namespace Chat.Client
             };
             return _serverService.MakeFriend(request);
         }
+
+        public IAsyncEnumerable<GetDataResponse> GetDataAsync(GetDataRequest request)
+        {
+            return _serverService.GetData(request);
+        }
     }
 }

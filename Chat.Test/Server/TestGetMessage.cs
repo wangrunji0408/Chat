@@ -49,7 +49,7 @@ namespace Chat.Test.Server
                 Count = 3
             });
             Assert.Equal(3, list.Count);
-            Assert.Contains(list, m => m.Content.PeopleEnter?.PeopleId == 2);
+            Assert.Contains(list, m => m.Content.PeopleEnter?.PeopleId == 3);
             Assert.Contains(list, m => m.Content.Text == "r1u1");
             Assert.Contains(list, m => m.Content.Text == "r1u2");
         }
