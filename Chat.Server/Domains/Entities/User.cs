@@ -82,20 +82,12 @@ namespace Chat.Server.Domains.Entities
 
 	    internal ChatroomInfo GetChatroomInfo(Chatroom chatroom)
 	    {
-		    if(!chatroom.Contains(this))
-			    return new ChatroomInfo
-			    {
-				    HostId = 0,
-				    Id = chatroom.Id,
-			    };
-		    return new ChatroomInfo
-		    {
-			    HostId = 0,
-			    Id = chatroom.Id,
-			    Name = chatroom.Name,
-			    PeopleIds = { chatroom.UserIds },
-			    IsP2P = chatroom.IsP2P
-		    };
+		    IMapper mapper;
+		    if (chatroom.Contains(this))
+			    mapper = ChatroomInfoMapper.MemberMapper;
+		    else
+			    mapper = ChatroomInfoMapper.NonMemberMapper;
+		    return mapper.Map<Chatroom, ChatroomInfo>(chatroom);
 	    }
 
 	    internal UserRelationship GetOrAddRelationshipWith (User target)
