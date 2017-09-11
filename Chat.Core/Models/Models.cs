@@ -23,71 +23,73 @@ namespace Chat.Core.Models {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgxNb2RlbHMucHJvdG8SBGNoYXQiKwoIUmVzcG9uc2USDwoHc3VjY2VzcxgB",
-            "IAEoCBIOCgZkZXRhaWwYAiABKAki6AIKB0NvbnRlbnQSDgoEdGV4dBhkIAEo",
+            "IAEoCBIOCgZkZXRhaWwYAiABKAkinQMKB0NvbnRlbnQSDgoEdGV4dBhkIAEo",
             "CUgAEiQKBWltYWdlGGUgASgLMhMuY2hhdC5Db250ZW50LkltYWdlSAASKgoI",
             "d2l0aGRyYXcYZiABKAsyFi5jaGF0LkNvbnRlbnQuV2l0aGRyYXdIABIwCgtw",
             "ZW9wbGVFbnRlchhnIAEoCzIZLmNoYXQuQ29udGVudC5QZW9wbGVFbnRlckgA",
             "EjAKC3Blb3BsZUxlYXZlGGggASgLMhkuY2hhdC5Db250ZW50LlBlb3BsZUxl",
-            "YXZlSAAaFQoFSW1hZ2USDAoEZGF0YRgBIAEoDBoeCghXaXRoZHJhdxISCgp3",
-            "aXRoZHJhd0lkGAEgASgDGh8KC1Blb3BsZUVudGVyEhAKCHBlb3BsZUlkGAEg",
-            "ASgDGjQKC1Blb3BsZUxlYXZlEhAKCHBlb3BsZUlkGAEgASgDEhMKC2tpY2tP",
-            "dXRCeUlkGAIgASgDQgkKB2NvbnRlbnQicwoLQ2hhdE1lc3NhZ2USCgoCaWQY",
-            "ASABKAMSEAoIc2VuZGVySWQYAiABKAMSEgoKdGltZVVuaXhNcxgDIAEoAxIe",
-            "Cgdjb250ZW50GAQgASgLMg0uY2hhdC5Db250ZW50EhIKCmNoYXRyb29tSWQY",
-            "BSABKAMiOAoSU2VuZE1lc3NhZ2VSZXF1ZXN0EiIKB21lc3NhZ2UYASABKAsy",
-            "ES5jaGF0LkNoYXRNZXNzYWdlInoKE1NlbmRNZXNzYWdlUmVzcG9uc2USMAoG",
-            "c3RhdHVzGAEgASgOMiAuY2hhdC5TZW5kTWVzc2FnZVJlc3BvbnNlLlN0YXR1",
-            "cxIOCgZkZXRhaWwYAiABKAkiIQoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIKCgZG",
-            "YWlsZWQQASLuAgoKUGVvcGxlSW5mbxIKCgJpZBgBIAEoAxIQCgh1c2VybmFt",
-            "ZRgCIAEoCRIMCgR0YWdzGAogAygJEgwKBG5vdGUYCyABKAkSDwoHYmxvY2tl",
-            "ZBgUIAEoCBISCgpjaGF0cm9vbUlkGBUgASgDEikKBHNlbGYYZSABKAsyGS5j",
-            "aGF0LlBlb3BsZUluZm8uU2VsZkluZm9IABItCgZmcmllbmQYZiABKAsyGy5j",
-            "aGF0LlBlb3BsZUluZm8uRnJpZW5kSW5mb0gAEjEKCHN0cmFuZ2VyGGcgASgL",
-            "Mh0uY2hhdC5QZW9wbGVJbmZvLlN0cmFuZ2VySW5mb0gAGkoKCFNlbGZJbmZv",
-            "EiQKCHNldHRpbmdzGAEgASgLMhIuY2hhdC5Vc2VyU2V0dGluZ3MSGAoQc2ln",
-            "bnVwVGltZVVuaXhNcxgCIAEoAxoMCgpGcmllbmRJbmZvGg4KDFN0cmFuZ2Vy",
-            "SW5mb0IKCghyb2xlSW5mbyIOCgxVc2VyU2V0dGluZ3MiWgoMQ2hhdHJvb21J",
-            "bmZvEgoKAmlkGAEgASgDEhEKCXBlb3BsZUlkcxgCIAMoAxIOCgZob3N0SWQY",
-            "AyABKAMSDAoEbmFtZRgEIAEoCRINCgVpc1AyUBgFIAEoCCI5ChJOZXdDaGF0",
-            "cm9vbVJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSEQoJcGVvcGxlSWRzGAIg",
-            "AygFIkwKE05ld0NoYXRyb29tUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIk",
-            "CghjaGF0cm9vbRgCIAEoCzISLmNoYXQuQ2hhdHJvb21JbmZvIj4KFkdldENo",
-            "YXRyb29tSW5mb1JlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSEgoKY2hhdHJv",
-            "b21JZBgCIAEoAyJgChdHZXRDaGF0cm9vbUluZm9SZXNwb25zZRIPCgdzdWNj",
-            "ZXNzGAEgASgIEiQKCGNoYXRyb29tGAIgASgLMhIuY2hhdC5DaGF0cm9vbUlu",
-            "Zm8SDgoGZGV0YWlsGAMgASgJIjMKDVNpZ251cFJlcXVlc3QSEAoIdXNlcm5h",
-            "bWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiuQEKDlNpZ251cFJlc3BvbnNl",
-            "EisKBnN0YXR1cxgBIAEoDjIbLmNoYXQuU2lnbnVwUmVzcG9uc2UuU3RhdHVz",
-            "Eg4KBmRldGFpbBgCIAEoCRIOCgZ1c2VySWQYAyABKAMiWgoGU3RhdHVzEgsK",
-            "B1N1Y2Nlc3MQABIRCg1Vc2VybmFtZUV4aXN0EGUSFwoTVXNlcm5hbWVGb3Jt",
-            "YXRXcm9uZxBmEhcKE1Bhc3N3b3JkRm9ybWF0V3JvbmcQZyJCCgxMb2dpblJl",
-            "cXVlc3QSEAoIdXNlcm5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkSDgoG",
-            "dXNlcklkGAMgASgDIoUBCg1Mb2dpblJlc3BvbnNlEioKBnN0YXR1cxgBIAEo",
-            "DjIaLmNoYXQuTG9naW5SZXNwb25zZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJ",
-            "IjgKBlN0YXR1cxILCgdTdWNjZXNzEAASDgoKTm9TdWNoVXNlchBlEhEKDVdy",
-            "b25nUGFzc3dvcmQQZiJJChFNYWtlRnJpZW5kUmVxdWVzdBIQCghzZW5kZXJJ",
-            "ZBgBIAEoAxIQCgh0YXJnZXRJZBgCIAEoAxIQCghncmVldGluZxgDIAEoCSLS",
-            "AQoSTWFrZUZyaWVuZFJlc3BvbnNlEi8KBnN0YXR1cxgBIAEoDjIfLmNoYXQu",
-            "TWFrZUZyaWVuZFJlc3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwYAiABKAkiewoG",
-            "U3RhdHVzEgoKBkFjY2VwdBAAEgoKBlJlZnVzZRABEhEKDUFscmVhZHlGcmll",
-            "bmQQAhIQCgxVc2VyTm90RXhpc3QQAxIRCg1Vc2VyTm90T25saW5lEAQSEwoP",
-            "UmVzcG9uc2VUaW1lb3V0EAUSDAoIV2l0aFNlbGYQBiI6ChRHZXRQZW9wbGVJ",
-            "bmZvUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIQCgh0YXJnZXRJZBgCIAEo",
-            "AyI9ChVHZXRQZW9wbGVJbmZvUmVzcG9uc2USJAoKcGVvcGxlSW5mbxgBIAEo",
-            "CzIQLmNoYXQuUGVvcGxlSW5mbyJiChJHZXRNZXNzYWdlc1JlcXVlc3QSEAoI",
-            "c2VuZGVySWQYASABKAMSFwoPYWZ0ZXJUaW1lVW5peE1zGAIgASgDEhIKCmNo",
-            "YXRyb29tSWQYAyABKAMSDQoFY291bnQYBCABKAUiRAoOR2V0RGF0YVJlcXVl",
-            "c3QSEAoIZmlsZU5hbWUYASABKAkSDAoEc2VlZBgKIAEoBRISCgpyYW5kTGVu",
-            "Z3RoGAsgASgFIh8KD0dldERhdGFSZXNwb25zZRIMCgRkYXRhGAEgASgMQhOq",
-            "AhBDaGF0LkNvcmUuTW9kZWxzYgZwcm90bzM="));
+            "YXZlSAASKAoHY3JlYXRlZBhpIAEoCzIVLmNoYXQuQ29udGVudC5DcmVhdGVk",
+            "SAAaFQoFSW1hZ2USDAoEZGF0YRgBIAEoDBoeCghXaXRoZHJhdxISCgp3aXRo",
+            "ZHJhd0lkGAEgASgDGh8KC1Blb3BsZUVudGVyEhAKCHBlb3BsZUlkGAEgASgD",
+            "GjQKC1Blb3BsZUxlYXZlEhAKCHBlb3BsZUlkGAEgASgDEhMKC2tpY2tPdXRC",
+            "eUlkGAIgASgDGgkKB0NyZWF0ZWRCCQoHY29udGVudCJzCgtDaGF0TWVzc2Fn",
+            "ZRIKCgJpZBgBIAEoAxIQCghzZW5kZXJJZBgCIAEoAxISCgp0aW1lVW5peE1z",
+            "GAMgASgDEh4KB2NvbnRlbnQYBCABKAsyDS5jaGF0LkNvbnRlbnQSEgoKY2hh",
+            "dHJvb21JZBgFIAEoAyI4ChJTZW5kTWVzc2FnZVJlcXVlc3QSIgoHbWVzc2Fn",
+            "ZRgBIAEoCzIRLmNoYXQuQ2hhdE1lc3NhZ2UiegoTU2VuZE1lc3NhZ2VSZXNw",
+            "b25zZRIwCgZzdGF0dXMYASABKA4yIC5jaGF0LlNlbmRNZXNzYWdlUmVzcG9u",
+            "c2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSIhCgZTdGF0dXMSCwoHU3VjY2Vz",
+            "cxAAEgoKBkZhaWxlZBABIu4CCgpQZW9wbGVJbmZvEgoKAmlkGAEgASgDEhAK",
+            "CHVzZXJuYW1lGAIgASgJEgwKBHRhZ3MYCiADKAkSDAoEbm90ZRgLIAEoCRIP",
+            "CgdibG9ja2VkGBQgASgIEhIKCmNoYXRyb29tSWQYFSABKAMSKQoEc2VsZhhl",
+            "IAEoCzIZLmNoYXQuUGVvcGxlSW5mby5TZWxmSW5mb0gAEi0KBmZyaWVuZBhm",
+            "IAEoCzIbLmNoYXQuUGVvcGxlSW5mby5GcmllbmRJbmZvSAASMQoIc3RyYW5n",
+            "ZXIYZyABKAsyHS5jaGF0LlBlb3BsZUluZm8uU3RyYW5nZXJJbmZvSAAaSgoI",
+            "U2VsZkluZm8SJAoIc2V0dGluZ3MYASABKAsyEi5jaGF0LlVzZXJTZXR0aW5n",
+            "cxIYChBzaWdudXBUaW1lVW5peE1zGAIgASgDGgwKCkZyaWVuZEluZm8aDgoM",
+            "U3RyYW5nZXJJbmZvQgoKCHJvbGVJbmZvIg4KDFVzZXJTZXR0aW5ncyJaCgxD",
+            "aGF0cm9vbUluZm8SCgoCaWQYASABKAMSEQoJcGVvcGxlSWRzGAIgAygDEg4K",
+            "Bmhvc3RJZBgDIAEoAxIMCgRuYW1lGAQgASgJEg0KBWlzUDJQGAUgASgIIjkK",
+            "Ek5ld0NoYXRyb29tUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIRCglwZW9w",
+            "bGVJZHMYAiADKAUiTAoTTmV3Q2hhdHJvb21SZXNwb25zZRIPCgdzdWNjZXNz",
+            "GAEgASgIEiQKCGNoYXRyb29tGAIgASgLMhIuY2hhdC5DaGF0cm9vbUluZm8i",
+            "PgoWR2V0Q2hhdHJvb21JbmZvUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIS",
+            "CgpjaGF0cm9vbUlkGAIgASgDImAKF0dldENoYXRyb29tSW5mb1Jlc3BvbnNl",
+            "Eg8KB3N1Y2Nlc3MYASABKAgSJAoIY2hhdHJvb20YAiABKAsyEi5jaGF0LkNo",
+            "YXRyb29tSW5mbxIOCgZkZXRhaWwYAyABKAkiMwoNU2lnbnVwUmVxdWVzdBIQ",
+            "Cgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSK5AQoOU2lnbnVw",
+            "UmVzcG9uc2USKwoGc3RhdHVzGAEgASgOMhsuY2hhdC5TaWdudXBSZXNwb25z",
+            "ZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJEg4KBnVzZXJJZBgDIAEoAyJaCgZT",
+            "dGF0dXMSCwoHU3VjY2VzcxAAEhEKDVVzZXJuYW1lRXhpc3QQZRIXChNVc2Vy",
+            "bmFtZUZvcm1hdFdyb25nEGYSFwoTUGFzc3dvcmRGb3JtYXRXcm9uZxBnIkIK",
+            "DExvZ2luUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgC",
+            "IAEoCRIOCgZ1c2VySWQYAyABKAMihQEKDUxvZ2luUmVzcG9uc2USKgoGc3Rh",
+            "dHVzGAEgASgOMhouY2hhdC5Mb2dpblJlc3BvbnNlLlN0YXR1cxIOCgZkZXRh",
+            "aWwYAiABKAkiOAoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIOCgpOb1N1Y2hVc2Vy",
+            "EGUSEQoNV3JvbmdQYXNzd29yZBBmIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAK",
+            "CHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5n",
+            "GAMgASgJItIBChJNYWtlRnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgO",
+            "Mh8uY2hhdC5NYWtlRnJpZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgC",
+            "IAEoCSJ7CgZTdGF0dXMSCgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxy",
+            "ZWFkeUZyaWVuZBACEhAKDFVzZXJOb3RFeGlzdBADEhEKDVVzZXJOb3RPbmxp",
+            "bmUQBBITCg9SZXNwb25zZVRpbWVvdXQQBRIMCghXaXRoU2VsZhAGIjoKFEdl",
+            "dFBlb3BsZUluZm9SZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdl",
+            "dElkGAIgASgDIj0KFUdldFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJ",
+            "bmZvGAEgASgLMhAuY2hhdC5QZW9wbGVJbmZvImIKEkdldE1lc3NhZ2VzUmVx",
+            "dWVzdBIQCghzZW5kZXJJZBgBIAEoAxIXCg9hZnRlclRpbWVVbml4TXMYAiAB",
+            "KAMSEgoKY2hhdHJvb21JZBgDIAEoAxINCgVjb3VudBgEIAEoBSJECg5HZXRE",
+            "YXRhUmVxdWVzdBIQCghmaWxlTmFtZRgBIAEoCRIMCgRzZWVkGAogASgFEhIK",
+            "CnJhbmRMZW5ndGgYCyABKAUiHwoPR2V0RGF0YVJlc3BvbnNlEgwKBGRhdGEY",
+            "ASABKAxCE6oCEENoYXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Response), global::Chat.Core.Models.Response.Parser, new[]{ "Success", "Detail" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content), global::Chat.Core.Models.Content.Parser, new[]{ "Text", "Image", "Withdraw", "PeopleEnter", "PeopleLeave" }, new[]{ "Content" }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Image), global::Chat.Core.Models.Content.Types.Image.Parser, new[]{ "Data" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content), global::Chat.Core.Models.Content.Parser, new[]{ "Text", "Image", "Withdraw", "PeopleEnter", "PeopleLeave", "Created" }, new[]{ "Content" }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Image), global::Chat.Core.Models.Content.Types.Image.Parser, new[]{ "Data" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Withdraw), global::Chat.Core.Models.Content.Types.Withdraw.Parser, new[]{ "WithdrawId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleEnter), global::Chat.Core.Models.Content.Types.PeopleEnter.Parser, new[]{ "PeopleId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleLeave), global::Chat.Core.Models.Content.Types.PeopleLeave.Parser, new[]{ "PeopleId", "KickOutById" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleLeave), global::Chat.Core.Models.Content.Types.PeopleLeave.Parser, new[]{ "PeopleId", "KickOutById" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Created), global::Chat.Core.Models.Content.Types.Created.Parser, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatMessage), global::Chat.Core.Models.ChatMessage.Parser, new[]{ "Id", "SenderId", "TimeUnixMs", "Content", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageRequest), global::Chat.Core.Models.SendMessageRequest.Parser, new[]{ "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageResponse), global::Chat.Core.Models.SendMessageResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.SendMessageResponse.Types.Status) }, null),
@@ -302,6 +304,9 @@ namespace Chat.Core.Models {
         case ContentOneofCase.PeopleLeave:
           PeopleLeave = other.PeopleLeave.Clone();
           break;
+        case ContentOneofCase.Created:
+          Created = other.Created.Clone();
+          break;
       }
 
     }
@@ -366,6 +371,17 @@ namespace Chat.Core.Models {
       }
     }
 
+    /// <summary>Field number for the "created" field.</summary>
+    public const int CreatedFieldNumber = 105;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Created Created {
+      get { return contentCase_ == ContentOneofCase.Created ? (global::Chat.Core.Models.Content.Types.Created) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Created;
+      }
+    }
+
     private object content_;
     /// <summary>Enum of possible cases for the "content" oneof.</summary>
     public enum ContentOneofCase {
@@ -375,6 +391,7 @@ namespace Chat.Core.Models {
       Withdraw = 102,
       PeopleEnter = 103,
       PeopleLeave = 104,
+      Created = 105,
     }
     private ContentOneofCase contentCase_ = ContentOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -406,6 +423,7 @@ namespace Chat.Core.Models {
       if (!object.Equals(Withdraw, other.Withdraw)) return false;
       if (!object.Equals(PeopleEnter, other.PeopleEnter)) return false;
       if (!object.Equals(PeopleLeave, other.PeopleLeave)) return false;
+      if (!object.Equals(Created, other.Created)) return false;
       if (ContentCase != other.ContentCase) return false;
       return true;
     }
@@ -418,6 +436,7 @@ namespace Chat.Core.Models {
       if (contentCase_ == ContentOneofCase.Withdraw) hash ^= Withdraw.GetHashCode();
       if (contentCase_ == ContentOneofCase.PeopleEnter) hash ^= PeopleEnter.GetHashCode();
       if (contentCase_ == ContentOneofCase.PeopleLeave) hash ^= PeopleLeave.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Created) hash ^= Created.GetHashCode();
       hash ^= (int) contentCase_;
       return hash;
     }
@@ -449,6 +468,10 @@ namespace Chat.Core.Models {
         output.WriteRawTag(194, 6);
         output.WriteMessage(PeopleLeave);
       }
+      if (contentCase_ == ContentOneofCase.Created) {
+        output.WriteRawTag(202, 6);
+        output.WriteMessage(Created);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -468,6 +491,9 @@ namespace Chat.Core.Models {
       }
       if (contentCase_ == ContentOneofCase.PeopleLeave) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(PeopleLeave);
+      }
+      if (contentCase_ == ContentOneofCase.Created) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Created);
       }
       return size;
     }
@@ -492,6 +518,9 @@ namespace Chat.Core.Models {
           break;
         case ContentOneofCase.PeopleLeave:
           PeopleLeave = other.PeopleLeave;
+          break;
+        case ContentOneofCase.Created:
+          Created = other.Created;
           break;
       }
 
@@ -543,6 +572,15 @@ namespace Chat.Core.Models {
             }
             input.ReadMessage(subBuilder);
             PeopleLeave = subBuilder;
+            break;
+          }
+          case 842: {
+            global::Chat.Core.Models.Content.Types.Created subBuilder = new global::Chat.Core.Models.Content.Types.Created();
+            if (contentCase_ == ContentOneofCase.Created) {
+              subBuilder.MergeFrom(Created);
+            }
+            input.ReadMessage(subBuilder);
+            Created = subBuilder;
             break;
           }
         }
@@ -1043,6 +1081,95 @@ namespace Chat.Core.Models {
                 KickOutById = input.ReadInt64();
                 break;
               }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class Created : pb::IMessage<Created> {
+        private static readonly pb::MessageParser<Created> _parser = new pb::MessageParser<Created>(() => new Created());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Created> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[4]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Created() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Created(Created other) : this() {
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Created Clone() {
+          return new Created(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Created);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Created other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Created other) {
+          if (other == null) {
+            return;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
             }
           }
         }

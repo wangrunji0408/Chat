@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reactive.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Chat.Core.Models;
 using Chat.Server.Domains.Events;
@@ -24,13 +26,10 @@ namespace Chat.Server.Domains.Services
             _messageRepo = provider.GetRequiredService<IMessageRepository>();
 
             _eventBus = provider.GetRequiredService<IEventBus>();
-            _eventBus.GetEventStream<UserEnteredChatroomEvent>()
-                .Subscribe(OnUserEnterChatroomEvent);
-            _eventBus.GetEventStream<UserLeftChatroomEvent>()
-                .Subscribe(OnUserLeftChatroomEvent);
-            
-            _eventBus.GetEventStream<NewMessageEvent>()
-                .Subscribe(async e => await StoreMessage(e));
+            _eventBus.GetEventStream<ChatroomEvent>()
+                .Select(ChatroomEventMapper.Map)
+                .Where(m => m?.Content != null)
+                .Subscribe(async m => await StoreMessage(m));
         }
 
         internal static bool IsValid(ChatMessage m)
@@ -48,40 +47,10 @@ namespace Chat.Server.Domains.Services
             return true;
         }
 
-        async Task StoreMessage(NewMessageEvent e)
+        async Task StoreMessage(ChatMessage message)
         {
-            _messageRepo.Add(e.Message);
+            _messageRepo.Add(message);
             await _messageRepo.SaveChangesAsync();
-        }
-
-        void OnUserEnterChatroomEvent(UserEnteredChatroomEvent @event)
-        {
-            var cm = new ChatMessage
-            {
-                ChatroomId = @event.ChatroomId,
-                SenderId = 0,
-                TimeUnixMs = @event.Time.ToUnixTimeMilliseconds(),
-                Content = new Content
-                {
-                    PeopleEnter = new Content.Types.PeopleEnter { PeopleId = @event.UserId }
-                }
-            };
-            _eventBus.Publish(new NewMessageEvent(cm));
-        }
-        
-        void OnUserLeftChatroomEvent(UserLeftChatroomEvent @event)
-        {
-            var cm = new ChatMessage
-            {
-                ChatroomId = @event.ChatroomId,
-                SenderId = 0,
-                TimeUnixMs = @event.Time.ToUnixTimeMilliseconds(),
-                Content = new Content
-                {
-                    PeopleLeave = new Content.Types.PeopleLeave { PeopleId = @event.UserId }
-                }
-            };            
-            _eventBus.Publish(new NewMessageEvent(cm));
         }
     }
 }

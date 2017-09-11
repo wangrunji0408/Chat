@@ -13,26 +13,30 @@ message Response
 
 message Content
 {
-	message Image {
+    message Image {
 		bytes data = 1;
-	}
-	message Withdraw {
+    }
+    message Withdraw {
 		int64 withdrawId = 1;
-	}
-	message PeopleEnter {
+    }
+    message PeopleEnter {
 		int64 peopleId = 1;
-	}
-	message PeopleLeave {
+    }
+    message PeopleLeave {
 		int64 peopleId = 1;
 		int64 kickOutById = 2;
-	}
-	oneof content {
+    }
+    message Created {
+
+    }
+    oneof content {
 		string text = 100;
 		Image image = 101;
 		Withdraw withdraw = 102;
 		PeopleEnter peopleEnter = 103;
 		PeopleLeave peopleLeave = 104;
-	}
+        Created created = 105;
+    }
 }
 
 message ChatMessage
