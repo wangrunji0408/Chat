@@ -30,13 +30,28 @@ namespace Chat.Server.Domains.Services
 	        
 	        _eventBus.GetEventStream<UserSignupEvent>()
 		        .Subscribe(async e => await AddNewUserToGlobalChatroom(e));
+	        _eventBus.GetEventStream<UserEnteredChatroomEvent>()
+		        .Subscribe(async e =>
+		        {
+			        var room = await _chatroomRepo.GetByIdAsync(e.ChatroomId);
+			        var user = await _userRepo.GetByIdAsync(e.UserId);
+			        user.UserChatrooms.Add(room.UserChatrooms.First(uc => uc.UserId == e.UserId));
+			        await _userRepo.SaveChangesAsync();
+		        });
+	        _eventBus.GetEventStream<UserLeftChatroomEvent>()
+		        .Subscribe(async e =>
+		        {
+			        var room = await _chatroomRepo.GetByIdAsync(e.ChatroomId);
+			        var user = await _userRepo.GetByIdAsync(e.UserId);
+			        user.UserChatrooms.Remove(user.UserChatrooms.First(uc => uc.ChatroomId == e.ChatroomId));
+			        await _userRepo.SaveChangesAsync();
+		        });
         }
 	    
 	    async Task AddNewUserToGlobalChatroom(UserSignupEvent e)
 	    {
 		    var globalRoom = await _chatroomRepo.GetByIdAsync(1);
-		    var user = await _userRepo.GetByIdAsync(e.UserId);
-		    globalRoom.AddPeople(user);
+		    globalRoom.AddPeople(e.UserId, operatorId: 0);
 		    _chatroomRepo.Update(globalRoom);
 		    await _chatroomRepo.SaveChangesAsync();
 	    }

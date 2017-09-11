@@ -34,10 +34,9 @@ namespace Chat.Server
 			_userClientService[userId] = client;
 		}
 
-		public async Task ReceiveNewMessageAsync(ChatMessage message)
+		public async Task<ChatroomResponse> ReceiveNewMessageAsync(ChatMessage message)
 		{
-            var chatroom = await _chatroomRepo.GetByIdAsync(message.ChatroomId);
-            chatroom.NewMessage(message);
+			return await _chatroomService.HandleNewMessageAsync(message);
 		}
 		
 		public async Task<MakeFriendResponse> MakeFriends(MakeFriendRequest request)

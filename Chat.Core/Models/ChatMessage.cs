@@ -14,6 +14,12 @@ namespace Chat.Core.Models
             set => Content = JsonParser.Default.Parse<Content>(value);
         }
 
+        public string ContentCase
+        {
+            get => Content.ContentCase.ToString();
+            set { }
+        }
+
         public string ToReadString()
         {
             var builder = new StringBuilder();

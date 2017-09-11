@@ -13,21 +13,12 @@ namespace Chat.Server
     {
         public async Task<Chatroom> NewChatroomAsync(IEnumerable<long> peopleIds)
         {
-            var peoples = peopleIds.Select(id => _userRepo.GetByIdAsync(id).Result);
-            var chatroom = await _chatroomRepo.NewEmptyChatroomAsync("", creatorId: 0);
-            foreach (var user in peoples)
-                chatroom.AddPeople(user);
-            await _chatroomRepo.SaveChangesAsync();
-            return chatroom;
+            return await _chatroomService.NewChatroomAsync(peopleIds, "", 0);
         }
 
         public async Task AddPeopleToChatroom(long chatroomId, long userId)
         {
-            var chatroom = await _chatroomRepo.GetByIdAsync(chatroomId);
-            var people = await _userRepo.GetByIdAsync(userId);
-            chatroom.AddPeople(people);
-            await _chatroomRepo.SaveChangesAsync();
-            await _userRepo.SaveChangesAsync();
+            await _chatroomService.AddPeoplesToChatroom(chatroomId, new long[]{userId}, 0);
         }
 
         public async Task MakeFriends(long user1Id, long user2Id)
@@ -48,10 +39,12 @@ namespace Chat.Server
 
         public async Task RemovePeopleFromChatroom(long chatroomId, long userId)
         {
-            var chatroom = await _chatroomRepo.GetByIdAsync(chatroomId);
-            var people = await _userRepo.GetByIdAsync(userId);
-            chatroom.RemovePeople(people);
-            await _chatroomRepo.SaveChangesAsync();
+            await _chatroomService.RemovePeoplesFromChatroom(chatroomId, new long[]{userId}, 0);
+        }
+        
+        public async Task DismissChatroomAsync(long chatroomId)
+        {
+            await _chatroomService.DismissChatroom(chatroomId, 0);
         }
     }
 }

@@ -16,6 +16,10 @@ message Content
     message Image {
 		bytes data = 1;
     }
+    message File {
+        string name = 1;
+        string path = 2;
+    }
     message Withdraw {
 		int64 withdrawId = 1;
     }
@@ -29,13 +33,53 @@ message Content
     message Created {
 		int64 creatorId = 1;
     }
+    message New {
+        repeated int64 peopleIds = 1;
+        string name = 2;
+    }
+    message Dismiss {
+
+    }
+    message AddPeople {
+        repeated int64 peopleIds = 1;
+    }
+    message RemovePeople {
+        repeated int64 peopleIds = 1;
+    }
+    message Apply {
+        string message = 1;
+    }
+    message Quit {
+        string message = 1;
+    }
+    message Announce {
+        string message = 1;
+    }
+    message SetProperty {
+        string key = 1;
+        string value = 2;
+    }
     oneof content {
+        // Message
 		string text = 100;
 		Image image = 101;
-		Withdraw withdraw = 102;
+        File file = 102;
+
+        // Event Only
 		PeopleEnter peopleEnter = 103;
 		PeopleLeave peopleLeave = 104;
         Created created = 105;
+
+        // Command & Event
+        New new = 200;
+        Dismiss dismiss = 201;
+        AddPeople addPeople = 202;
+        RemovePeople removePeople = 203;
+        Apply apply = 204;
+        Quit quit = 205;
+        Announce announce = 206;
+        SetProperty setPeoperty = 207;
+        Withdraw withdraw = 208;
     }
 }
 
@@ -46,6 +90,12 @@ message ChatMessage
     int64 timeUnixMs = 3;
 	Content content = 4;
 	int64 chatroomId = 5;
+}
+
+message ChatroomResponse {
+    bool success = 1;
+    string detail = 2;
+    int64 chatroomId = 3;
 }
 
 message SendMessageRequest

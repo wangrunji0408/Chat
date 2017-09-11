@@ -13,15 +13,16 @@ namespace Chat.Test.Server
         [MemberData(nameof(GetValidMessages))]
         public async Task ValidMessage(ChatMessage message)
         {
-            await server.ReceiveNewMessageAsync(message);
+            var response = await server.ReceiveNewMessageAsync(message);
+            Assert.True(response.Success);
         }
         
         [Theory]
         [MemberData(nameof(GetInvalidMessages))]
         public async Task InvalidMessage(ChatMessage message)
         {
-            await Assert.ThrowsAnyAsync<Exception>(
-                async () => await server.ReceiveNewMessageAsync(message));
+            var response = await server.ReceiveNewMessageAsync(message);
+            Assert.False(response.Success);
         }
 
         public static IEnumerable<object[]> GetInvalidMessages()

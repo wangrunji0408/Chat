@@ -22,6 +22,7 @@ namespace Chat.Server.Domains.Entities
         public bool IsP2P => P2PUser1Id != 0 && P2PUser2Id != 0;
         internal long P2PUser1Id { get; set; }
         internal long P2PUser2Id { get; set; }
+        public bool IsActive { get; set; } = true;
         internal ICollection<UserChatroom> UserChatrooms { get; set; } = new HashSet<UserChatroom>();
 
         [NotMapped]
@@ -39,6 +40,7 @@ namespace Chat.Server.Domains.Entities
 
         internal void NewMessage(ChatMessage message)
         {
+            EnsureActive();
             if (message.ChatroomId != Id)
                 throw new ArgumentException($"Message is not for this Chatroom.");
             if (!UserIds.Contains(message.SenderId))
@@ -52,23 +54,24 @@ namespace Chat.Server.Domains.Entities
                 new NewMessageEvent(message));
         }
 
-        internal void AddPeople(User user)
+        internal void AddPeople(long userId, long operatorId)
         {
-            if (UserIds.Contains(user.Id))
-                throw new InvalidOperationException($"User {user} already exist in chatroom {Id}.");
+            EnsureActive();
+            EnsureAdmin(operatorId);
+            if (UserIds.Contains(userId))
+                throw new InvalidOperationException($"User {userId} already exist in chatroom {Id}.");
             if(IsP2P)
                 throw new InvalidOperationException($"Can't add people to P2P chatroom.");
 
             var uc = new UserChatroom
             {
-                UserId = user.Id,
+                UserId = userId,
                 ChatroomId = Id
             };
             UserChatrooms.Add(uc);
-            user.UserChatrooms.Add(uc);
             
             _provider.GetRequiredService<IEventBus>().Publish(
-                new UserEnteredChatroomEvent(Id, user.Id));
+                new UserEnteredChatroomEvent(Id, userId));
         }
 
         internal bool Contains(User user)
@@ -82,17 +85,54 @@ namespace Chat.Server.Domains.Entities
                 Id, Name, CreateTime, IsP2P, UserIds.ToJsonString());
         }
 
-        public void RemovePeople(User user)
+        public void RemovePeople(long userId, long operatorId)
         {
+            EnsureActive();
+            EnsureAdmin(operatorId);
             if(IsP2P)
                 throw new InvalidOperationException($"Can't remove people from P2P chatroom.");
-            var uc = UserChatrooms.FirstOrDefault(r => r.UserId == user.Id);
+            var uc = UserChatrooms.FirstOrDefault(r => r.UserId == userId);
             if (uc == null)
-                throw new InvalidOperationException($"User {user} doesn't exist in chatroom {Id}.");
+                throw new InvalidOperationException($"User {userId} doesn't exist in chatroom {Id}.");
             UserChatrooms.Remove(uc);
             
             _provider.GetRequiredService<IEventBus>().Publish(
-                new UserLeftChatroomEvent(Id, user.Id));
+                new UserLeftChatroomEvent(Id, userId));
+        }
+
+        public void Quit(long userId)
+        {
+            EnsureActive();
+            if(IsP2P)
+                throw new InvalidOperationException($"Can't quit from P2P chatroom.");
+            var uc = UserChatrooms.FirstOrDefault(r => r.UserId == userId);
+            if (uc == null)
+                throw new InvalidOperationException($"User {userId} doesn't exist in chatroom {Id}.");
+            UserChatrooms.Remove(uc);
+
+            _provider.GetRequiredService<IEventBus>().Publish(
+                new UserLeftChatroomEvent(Id, userId));
+        }
+
+        void EnsureActive()
+        {
+            if(!IsActive)
+                throw new InvalidOperationException($"Chatroom {Id} is not active.");
+        }
+
+        void EnsureAdmin(long userId)
+        {
+            if(userId != 0)
+                throw new InvalidOperationException($"Permission denied.");
+        }
+
+        public void DismissBy(long userId)
+        {
+            EnsureActive();
+            EnsureAdmin(userId);
+            IsActive = false;
+            _provider.GetRequiredService<IEventBus>().Publish(
+                new DismissedEvent(Id, userId));
         }
     }
 }

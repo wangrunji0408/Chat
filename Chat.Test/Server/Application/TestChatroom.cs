@@ -110,5 +110,19 @@ namespace Chat.Test.Server
             await Assert.ThrowsAsync<InvalidOperationException>(
                 async () => await server.RemovePeopleFromChatroom(room.Id, userId: 2));
         }
+        
+        [Fact]
+        public async Task DismissChatroom()
+        {
+            var room = await server.NewChatroomAsync(new long[] {1, 2});
+            await server.DismissChatroomAsync(room.Id);
+            Assert.False(room.IsActive);
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await server.AddPeopleToChatroom(room.Id, userId: 3));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await server.RemovePeopleFromChatroom(room.Id, userId: 1));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await server.RemovePeopleFromChatroom(room.Id, userId: 2));
+        }
     }
 }
