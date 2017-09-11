@@ -35,7 +35,8 @@ namespace Chat.Server.Domains.Services
                 
                 cfg.CreateMap<NewChatroomEvent, Content>()
                     .IncludeBase<ChatroomEvent, Content>()
-                    .ForMember(c => c.Created, opt => opt.UseValue(new Content.Types.Created()));
+                    .ForMember(c => c.Created, opt => opt.MapFrom(e => e));
+                cfg.CreateMap<NewChatroomEvent, Content.Types.Created>();
                 
                 cfg.CreateMap<UserEnteredChatroomEvent, Content>()
                     .IncludeBase<ChatroomEvent, Content>()

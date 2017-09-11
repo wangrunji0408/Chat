@@ -23,7 +23,7 @@ namespace Chat.Core.Models {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgxNb2RlbHMucHJvdG8SBGNoYXQiKwoIUmVzcG9uc2USDwoHc3VjY2VzcxgB",
-            "IAEoCBIOCgZkZXRhaWwYAiABKAkinQMKB0NvbnRlbnQSDgoEdGV4dBhkIAEo",
+            "IAEoCBIOCgZkZXRhaWwYAiABKAkisAMKB0NvbnRlbnQSDgoEdGV4dBhkIAEo",
             "CUgAEiQKBWltYWdlGGUgASgLMhMuY2hhdC5Db250ZW50LkltYWdlSAASKgoI",
             "d2l0aGRyYXcYZiABKAsyFi5jaGF0LkNvbnRlbnQuV2l0aGRyYXdIABIwCgtw",
             "ZW9wbGVFbnRlchhnIAEoCzIZLmNoYXQuQ29udGVudC5QZW9wbGVFbnRlckgA",
@@ -32,55 +32,56 @@ namespace Chat.Core.Models {
             "SAAaFQoFSW1hZ2USDAoEZGF0YRgBIAEoDBoeCghXaXRoZHJhdxISCgp3aXRo",
             "ZHJhd0lkGAEgASgDGh8KC1Blb3BsZUVudGVyEhAKCHBlb3BsZUlkGAEgASgD",
             "GjQKC1Blb3BsZUxlYXZlEhAKCHBlb3BsZUlkGAEgASgDEhMKC2tpY2tPdXRC",
-            "eUlkGAIgASgDGgkKB0NyZWF0ZWRCCQoHY29udGVudCJzCgtDaGF0TWVzc2Fn",
-            "ZRIKCgJpZBgBIAEoAxIQCghzZW5kZXJJZBgCIAEoAxISCgp0aW1lVW5peE1z",
-            "GAMgASgDEh4KB2NvbnRlbnQYBCABKAsyDS5jaGF0LkNvbnRlbnQSEgoKY2hh",
-            "dHJvb21JZBgFIAEoAyI4ChJTZW5kTWVzc2FnZVJlcXVlc3QSIgoHbWVzc2Fn",
-            "ZRgBIAEoCzIRLmNoYXQuQ2hhdE1lc3NhZ2UiegoTU2VuZE1lc3NhZ2VSZXNw",
-            "b25zZRIwCgZzdGF0dXMYASABKA4yIC5jaGF0LlNlbmRNZXNzYWdlUmVzcG9u",
-            "c2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSIhCgZTdGF0dXMSCwoHU3VjY2Vz",
-            "cxAAEgoKBkZhaWxlZBABIu4CCgpQZW9wbGVJbmZvEgoKAmlkGAEgASgDEhAK",
-            "CHVzZXJuYW1lGAIgASgJEgwKBHRhZ3MYCiADKAkSDAoEbm90ZRgLIAEoCRIP",
-            "CgdibG9ja2VkGBQgASgIEhIKCmNoYXRyb29tSWQYFSABKAMSKQoEc2VsZhhl",
-            "IAEoCzIZLmNoYXQuUGVvcGxlSW5mby5TZWxmSW5mb0gAEi0KBmZyaWVuZBhm",
-            "IAEoCzIbLmNoYXQuUGVvcGxlSW5mby5GcmllbmRJbmZvSAASMQoIc3RyYW5n",
-            "ZXIYZyABKAsyHS5jaGF0LlBlb3BsZUluZm8uU3RyYW5nZXJJbmZvSAAaSgoI",
-            "U2VsZkluZm8SJAoIc2V0dGluZ3MYASABKAsyEi5jaGF0LlVzZXJTZXR0aW5n",
-            "cxIYChBzaWdudXBUaW1lVW5peE1zGAIgASgDGgwKCkZyaWVuZEluZm8aDgoM",
-            "U3RyYW5nZXJJbmZvQgoKCHJvbGVJbmZvIg4KDFVzZXJTZXR0aW5ncyJaCgxD",
-            "aGF0cm9vbUluZm8SCgoCaWQYASABKAMSEQoJcGVvcGxlSWRzGAIgAygDEg4K",
-            "Bmhvc3RJZBgDIAEoAxIMCgRuYW1lGAQgASgJEg0KBWlzUDJQGAUgASgIIjkK",
-            "Ek5ld0NoYXRyb29tUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIRCglwZW9w",
-            "bGVJZHMYAiADKAUiTAoTTmV3Q2hhdHJvb21SZXNwb25zZRIPCgdzdWNjZXNz",
-            "GAEgASgIEiQKCGNoYXRyb29tGAIgASgLMhIuY2hhdC5DaGF0cm9vbUluZm8i",
-            "PgoWR2V0Q2hhdHJvb21JbmZvUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIS",
-            "CgpjaGF0cm9vbUlkGAIgASgDImAKF0dldENoYXRyb29tSW5mb1Jlc3BvbnNl",
-            "Eg8KB3N1Y2Nlc3MYASABKAgSJAoIY2hhdHJvb20YAiABKAsyEi5jaGF0LkNo",
-            "YXRyb29tSW5mbxIOCgZkZXRhaWwYAyABKAkiMwoNU2lnbnVwUmVxdWVzdBIQ",
-            "Cgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSK5AQoOU2lnbnVw",
-            "UmVzcG9uc2USKwoGc3RhdHVzGAEgASgOMhsuY2hhdC5TaWdudXBSZXNwb25z",
-            "ZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJEg4KBnVzZXJJZBgDIAEoAyJaCgZT",
-            "dGF0dXMSCwoHU3VjY2VzcxAAEhEKDVVzZXJuYW1lRXhpc3QQZRIXChNVc2Vy",
-            "bmFtZUZvcm1hdFdyb25nEGYSFwoTUGFzc3dvcmRGb3JtYXRXcm9uZxBnIkIK",
-            "DExvZ2luUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgC",
-            "IAEoCRIOCgZ1c2VySWQYAyABKAMihQEKDUxvZ2luUmVzcG9uc2USKgoGc3Rh",
-            "dHVzGAEgASgOMhouY2hhdC5Mb2dpblJlc3BvbnNlLlN0YXR1cxIOCgZkZXRh",
-            "aWwYAiABKAkiOAoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIOCgpOb1N1Y2hVc2Vy",
-            "EGUSEQoNV3JvbmdQYXNzd29yZBBmIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAK",
-            "CHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5n",
-            "GAMgASgJItIBChJNYWtlRnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgO",
-            "Mh8uY2hhdC5NYWtlRnJpZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgC",
-            "IAEoCSJ7CgZTdGF0dXMSCgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxy",
-            "ZWFkeUZyaWVuZBACEhAKDFVzZXJOb3RFeGlzdBADEhEKDVVzZXJOb3RPbmxp",
-            "bmUQBBITCg9SZXNwb25zZVRpbWVvdXQQBRIMCghXaXRoU2VsZhAGIjoKFEdl",
-            "dFBlb3BsZUluZm9SZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdl",
-            "dElkGAIgASgDIj0KFUdldFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJ",
-            "bmZvGAEgASgLMhAuY2hhdC5QZW9wbGVJbmZvImIKEkdldE1lc3NhZ2VzUmVx",
-            "dWVzdBIQCghzZW5kZXJJZBgBIAEoAxIXCg9hZnRlclRpbWVVbml4TXMYAiAB",
-            "KAMSEgoKY2hhdHJvb21JZBgDIAEoAxINCgVjb3VudBgEIAEoBSJECg5HZXRE",
-            "YXRhUmVxdWVzdBIQCghmaWxlTmFtZRgBIAEoCRIMCgRzZWVkGAogASgFEhIK",
-            "CnJhbmRMZW5ndGgYCyABKAUiHwoPR2V0RGF0YVJlc3BvbnNlEgwKBGRhdGEY",
-            "ASABKAxCE6oCEENoYXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
+            "eUlkGAIgASgDGhwKB0NyZWF0ZWQSEQoJY3JlYXRvcklkGAEgASgDQgkKB2Nv",
+            "bnRlbnQicwoLQ2hhdE1lc3NhZ2USCgoCaWQYASABKAMSEAoIc2VuZGVySWQY",
+            "AiABKAMSEgoKdGltZVVuaXhNcxgDIAEoAxIeCgdjb250ZW50GAQgASgLMg0u",
+            "Y2hhdC5Db250ZW50EhIKCmNoYXRyb29tSWQYBSABKAMiOAoSU2VuZE1lc3Nh",
+            "Z2VSZXF1ZXN0EiIKB21lc3NhZ2UYASABKAsyES5jaGF0LkNoYXRNZXNzYWdl",
+            "InoKE1NlbmRNZXNzYWdlUmVzcG9uc2USMAoGc3RhdHVzGAEgASgOMiAuY2hh",
+            "dC5TZW5kTWVzc2FnZVJlc3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwYAiABKAki",
+            "IQoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIKCgZGYWlsZWQQASLuAgoKUGVvcGxl",
+            "SW5mbxIKCgJpZBgBIAEoAxIQCgh1c2VybmFtZRgCIAEoCRIMCgR0YWdzGAog",
+            "AygJEgwKBG5vdGUYCyABKAkSDwoHYmxvY2tlZBgUIAEoCBISCgpjaGF0cm9v",
+            "bUlkGBUgASgDEikKBHNlbGYYZSABKAsyGS5jaGF0LlBlb3BsZUluZm8uU2Vs",
+            "ZkluZm9IABItCgZmcmllbmQYZiABKAsyGy5jaGF0LlBlb3BsZUluZm8uRnJp",
+            "ZW5kSW5mb0gAEjEKCHN0cmFuZ2VyGGcgASgLMh0uY2hhdC5QZW9wbGVJbmZv",
+            "LlN0cmFuZ2VySW5mb0gAGkoKCFNlbGZJbmZvEiQKCHNldHRpbmdzGAEgASgL",
+            "MhIuY2hhdC5Vc2VyU2V0dGluZ3MSGAoQc2lnbnVwVGltZVVuaXhNcxgCIAEo",
+            "AxoMCgpGcmllbmRJbmZvGg4KDFN0cmFuZ2VySW5mb0IKCghyb2xlSW5mbyIO",
+            "CgxVc2VyU2V0dGluZ3MiWgoMQ2hhdHJvb21JbmZvEgoKAmlkGAEgASgDEhEK",
+            "CXBlb3BsZUlkcxgCIAMoAxIOCgZob3N0SWQYAyABKAMSDAoEbmFtZRgEIAEo",
+            "CRINCgVpc1AyUBgFIAEoCCI5ChJOZXdDaGF0cm9vbVJlcXVlc3QSEAoIc2Vu",
+            "ZGVySWQYASABKAMSEQoJcGVvcGxlSWRzGAIgAygFIkwKE05ld0NoYXRyb29t",
+            "UmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIkCghjaGF0cm9vbRgCIAEoCzIS",
+            "LmNoYXQuQ2hhdHJvb21JbmZvIj4KFkdldENoYXRyb29tSW5mb1JlcXVlc3QS",
+            "EAoIc2VuZGVySWQYASABKAMSEgoKY2hhdHJvb21JZBgCIAEoAyJgChdHZXRD",
+            "aGF0cm9vbUluZm9SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEiQKCGNoYXRy",
+            "b29tGAIgASgLMhIuY2hhdC5DaGF0cm9vbUluZm8SDgoGZGV0YWlsGAMgASgJ",
+            "IjMKDVNpZ251cFJlcXVlc3QSEAoIdXNlcm5hbWUYASABKAkSEAoIcGFzc3dv",
+            "cmQYAiABKAkiuQEKDlNpZ251cFJlc3BvbnNlEisKBnN0YXR1cxgBIAEoDjIb",
+            "LmNoYXQuU2lnbnVwUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCRIO",
+            "CgZ1c2VySWQYAyABKAMiWgoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIRCg1Vc2Vy",
+            "bmFtZUV4aXN0EGUSFwoTVXNlcm5hbWVGb3JtYXRXcm9uZxBmEhcKE1Bhc3N3",
+            "b3JkRm9ybWF0V3JvbmcQZyJCCgxMb2dpblJlcXVlc3QSEAoIdXNlcm5hbWUY",
+            "ASABKAkSEAoIcGFzc3dvcmQYAiABKAkSDgoGdXNlcklkGAMgASgDIoUBCg1M",
+            "b2dpblJlc3BvbnNlEioKBnN0YXR1cxgBIAEoDjIaLmNoYXQuTG9naW5SZXNw",
+            "b25zZS5TdGF0dXMSDgoGZGV0YWlsGAIgASgJIjgKBlN0YXR1cxILCgdTdWNj",
+            "ZXNzEAASDgoKTm9TdWNoVXNlchBlEhEKDVdyb25nUGFzc3dvcmQQZiJJChFN",
+            "YWtlRnJpZW5kUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIQCgh0YXJnZXRJ",
+            "ZBgCIAEoAxIQCghncmVldGluZxgDIAEoCSLSAQoSTWFrZUZyaWVuZFJlc3Bv",
+            "bnNlEi8KBnN0YXR1cxgBIAEoDjIfLmNoYXQuTWFrZUZyaWVuZFJlc3BvbnNl",
+            "LlN0YXR1cxIOCgZkZXRhaWwYAiABKAkiewoGU3RhdHVzEgoKBkFjY2VwdBAA",
+            "EgoKBlJlZnVzZRABEhEKDUFscmVhZHlGcmllbmQQAhIQCgxVc2VyTm90RXhp",
+            "c3QQAxIRCg1Vc2VyTm90T25saW5lEAQSEwoPUmVzcG9uc2VUaW1lb3V0EAUS",
+            "DAoIV2l0aFNlbGYQBiI6ChRHZXRQZW9wbGVJbmZvUmVxdWVzdBIQCghzZW5k",
+            "ZXJJZBgBIAEoAxIQCgh0YXJnZXRJZBgCIAEoAyI9ChVHZXRQZW9wbGVJbmZv",
+            "UmVzcG9uc2USJAoKcGVvcGxlSW5mbxgBIAEoCzIQLmNoYXQuUGVvcGxlSW5m",
+            "byJiChJHZXRNZXNzYWdlc1JlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSFwoP",
+            "YWZ0ZXJUaW1lVW5peE1zGAIgASgDEhIKCmNoYXRyb29tSWQYAyABKAMSDQoF",
+            "Y291bnQYBCABKAUiRAoOR2V0RGF0YVJlcXVlc3QSEAoIZmlsZU5hbWUYASAB",
+            "KAkSDAoEc2VlZBgKIAEoBRISCgpyYW5kTGVuZ3RoGAsgASgFIh8KD0dldERh",
+            "dGFSZXNwb25zZRIMCgRkYXRhGAEgASgMQhOqAhBDaGF0LkNvcmUuTW9kZWxz",
+            "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -89,7 +90,7 @@ namespace Chat.Core.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Withdraw), global::Chat.Core.Models.Content.Types.Withdraw.Parser, new[]{ "WithdrawId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleEnter), global::Chat.Core.Models.Content.Types.PeopleEnter.Parser, new[]{ "PeopleId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleLeave), global::Chat.Core.Models.Content.Types.PeopleLeave.Parser, new[]{ "PeopleId", "KickOutById" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Created), global::Chat.Core.Models.Content.Types.Created.Parser, null, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Created), global::Chat.Core.Models.Content.Types.Created.Parser, new[]{ "CreatorId" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatMessage), global::Chat.Core.Models.ChatMessage.Parser, new[]{ "Id", "SenderId", "TimeUnixMs", "Content", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageRequest), global::Chat.Core.Models.SendMessageRequest.Parser, new[]{ "Message" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageResponse), global::Chat.Core.Models.SendMessageResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.SendMessageResponse.Types.Status) }, null),
@@ -1111,11 +1112,23 @@ namespace Chat.Core.Models {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Created(Created other) : this() {
+          creatorId_ = other.creatorId_;
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public Created Clone() {
           return new Created(this);
+        }
+
+        /// <summary>Field number for the "creatorId" field.</summary>
+        public const int CreatorIdFieldNumber = 1;
+        private long creatorId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long CreatorId {
+          get { return creatorId_; }
+          set {
+            creatorId_ = value;
+          }
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1131,12 +1144,14 @@ namespace Chat.Core.Models {
           if (ReferenceEquals(other, this)) {
             return true;
           }
+          if (CreatorId != other.CreatorId) return false;
           return true;
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
+          if (CreatorId != 0L) hash ^= CreatorId.GetHashCode();
           return hash;
         }
 
@@ -1147,11 +1162,18 @@ namespace Chat.Core.Models {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
+          if (CreatorId != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(CreatorId);
+          }
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
+          if (CreatorId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(CreatorId);
+          }
           return size;
         }
 
@@ -1159,6 +1181,9 @@ namespace Chat.Core.Models {
         public void MergeFrom(Created other) {
           if (other == null) {
             return;
+          }
+          if (other.CreatorId != 0L) {
+            CreatorId = other.CreatorId;
           }
         }
 
@@ -1170,6 +1195,10 @@ namespace Chat.Core.Models {
               default:
                 input.SkipLastField();
                 break;
+              case 8: {
+                CreatorId = input.ReadInt64();
+                break;
+              }
             }
           }
         }

@@ -35,7 +35,7 @@ namespace Chat.Server.Domains.Services
         {
             if (_chatroomRepo.ContainsIdAsync(1).Result)
                 return;
-            var chatroom = new Chatroom("Global Chatroom");
+            var chatroom = new Chatroom("Global Chatroom", creatorId: 0);
 
             _chatroomRepo.Add(chatroom);
             _chatroomRepo.SaveChanges();
@@ -48,7 +48,7 @@ namespace Chat.Server.Domains.Services
                 return room;
             var user1 = await _userRepo.GetByIdAsync(user1Id);
             var user2 = await _userRepo.GetByIdAsync(user2Id);
-            room = await _chatroomRepo.NewEmptyChatroomAsync();
+            room = await _chatroomRepo.NewEmptyChatroomAsync("", creatorId: 0);
             room.AddPeople(user1);
             room.AddPeople(user2);
             room.P2PUser1Id = Math.Min(user1.Id, user2.Id);

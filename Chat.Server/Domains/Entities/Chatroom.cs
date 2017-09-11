@@ -18,6 +18,7 @@ namespace Chat.Server.Domains.Entities
     {
         public string Name { get; private set; }
         public DateTimeOffset CreateTime { get; private set; } = DateTimeOffset.Now;
+        public long CreatorId { get; private set; }
         public bool IsP2P => P2PUser1Id != 0 && P2PUser2Id != 0;
         internal long P2PUser1Id { get; set; }
         internal long P2PUser2Id { get; set; }
@@ -30,9 +31,10 @@ namespace Chat.Server.Domains.Entities
         {
         }
 
-        internal Chatroom(string name = "")
+        internal Chatroom(string name, long creatorId)
         {
             Name = name;
+            CreatorId = creatorId;
         }
 
         internal void NewMessage(ChatMessage message)

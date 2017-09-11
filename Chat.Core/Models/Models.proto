@@ -27,7 +27,7 @@ message Content
 		int64 kickOutById = 2;
     }
     message Created {
-
+		int64 creatorId = 1;
     }
     oneof content {
 		string text = 100;

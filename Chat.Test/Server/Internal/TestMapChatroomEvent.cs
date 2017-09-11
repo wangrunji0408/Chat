@@ -11,13 +11,13 @@ namespace Chat.Test.Server.Internal
         [Fact]
         public void MapNewChatroomEvent()
         {
-            var e = new NewChatroomEvent(1);
+            var e = new NewChatroomEvent(2, creatorId: 1);
             var m = ChatroomEventMapper.Map(e);
             Assert.Equal(new ChatMessage
             {
-                ChatroomId = 1,
+                ChatroomId = 2,
                 TimeUnixMs = e.Time.ToUnixTimeMilliseconds(),
-                Content = new Content{Created = new Content.Types.Created()}
+                Content = new Content{Created = new Content.Types.Created{CreatorId = 1}}
             }, m);
         }
         

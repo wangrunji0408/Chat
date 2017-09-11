@@ -39,7 +39,7 @@ namespace Chat.Server.Domains.Repositories
     
     public interface IChatroomRepository: IRepository<Chatroom>
     {
-        Task<Chatroom> NewEmptyChatroomAsync(string name = "");
+        Task<Chatroom> NewEmptyChatroomAsync(string name, long creatorId);
         Task<Chatroom> FindP2PChatroomAsync(long user1Id, long user2Id);
     }
     

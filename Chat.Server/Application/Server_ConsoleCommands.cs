@@ -14,7 +14,7 @@ namespace Chat.Server
         public async Task<Chatroom> NewChatroomAsync(IEnumerable<long> peopleIds)
         {
             var peoples = peopleIds.Select(id => _userRepo.GetByIdAsync(id).Result);
-            var chatroom = await _chatroomRepo.NewEmptyChatroomAsync();
+            var chatroom = await _chatroomRepo.NewEmptyChatroomAsync("", creatorId: 0);
             foreach (var user in peoples)
                 chatroom.AddPeople(user);
             await _chatroomRepo.SaveChangesAsync();

@@ -21,16 +21,16 @@ namespace Chat.Server.Infrastructure.EntityFramework
             return base.Query().Include(c => c.UserChatrooms);
         }
 
-        public async Task<Chatroom> NewEmptyChatroomAsync(string name)
+        public async Task<Chatroom> NewEmptyChatroomAsync(string name, long creatorId)
         {
             if(name == null)
                 throw new ArgumentNullException(nameof(name));
-            var chatroom = new Chatroom(name);
+            var chatroom = new Chatroom(name, creatorId);
             chatroom.SetServices(_provider);
             Add(chatroom);
             await SaveChangesAsync();
             _provider.GetRequiredService<IEventBus>().Publish(
-                new NewChatroomEvent(chatroom.Id));
+                new NewChatroomEvent(chatroom.Id, creatorId));
             return chatroom;
         }
         

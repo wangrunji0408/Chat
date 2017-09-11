@@ -2,9 +2,12 @@
 {
     class NewChatroomEvent: ChatroomEvent
     {
-        public NewChatroomEvent(long chatroomId)
+        public long CreatorId { get; }
+        
+        public NewChatroomEvent(long chatroomId, long creatorId)
         {
             ChatroomId = chatroomId;
+            CreatorId = creatorId;
         }
     }
 }
