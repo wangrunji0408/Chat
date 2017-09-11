@@ -41,11 +41,9 @@ namespace Chat.Test.Client
         [Fact]
         public async Task GetPeopleInfo()
         {
-            Assert.Equal(new PeopleInfo
-            {
-                Id = 2,
-                Username = "user2"
-            }, await client1.GetPeopleInfo(2));
+            var info = await client1.GetPeopleInfo(2);
+            Assert.Equal(2, info.Id);
+            Assert.Equal("user2", info.Username);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Chat.Server.Domains.Entities;
+using Chat.Server.Domains.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -75,14 +76,14 @@ namespace Chat.Server
 		{
 			var user = await _userRepo.GetByIdAsync(userId);
 			var target = await _userRepo.GetByIdAsync(targetId);
-			return user.GetPeopleInfo(target);
+			return GetInfoService.GetPeopleInfo(user, target);
 		}
 		
 		public async Task<ChatroomInfo> GetChatroomInfoAsync(long userId, long roomId)
 		{
 			var user = await _userRepo.GetByIdAsync(userId);
 			var room = await _chatroomRepo.GetByIdAsync(roomId);
-			return user.GetChatroomInfo(room);
+			return GetInfoService.GetChatroomInfo(user, room);
 		}
 	}
 }

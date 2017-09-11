@@ -39,8 +39,6 @@ namespace Chat.Server
 
 	    private void ConfigAutoMapper(IMapperConfigurationExpression cfg)
 	    {
-		    cfg.CreateMap<User, PeopleInfo>();
-		    cfg.CreateMap<Chatroom, ChatroomInfo>();
 	    }
 
 	    public Server Build()

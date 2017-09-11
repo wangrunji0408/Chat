@@ -9,7 +9,6 @@ using Chat.Core.Models;
 using Chat.Server.Domains.Events.User;
 using Chat.Server.Domains.Services;
 using Chat.Server.Infrastructure;
-using Chat.Server.Infrastructure.AutoMapper;
 using Chat.Server.Infrastructure.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -67,29 +66,7 @@ namespace Chat.Server.Domains.Entities
             return string.Format("[User: Id={0}, Username={1}, Friends={2}]", Id, Username,
 	            FriendIds.ToJsonString());
         }
-
-	    internal PeopleInfo GetPeopleInfo(User target)
-	    {
-		    IMapper mapper;
-		    if(target.Id == Id)
-		    	mapper = PeopleInfoMapper.SelfMapper;
-		    else if (IsFriend(target))
-			    mapper = PeopleInfoMapper.FriendMapper;
-		    else
-			    mapper = PeopleInfoMapper.StrangerMapper;
-		    return mapper.Map<User, PeopleInfo>(target);
-	    }
-
-	    internal ChatroomInfo GetChatroomInfo(Chatroom chatroom)
-	    {
-		    IMapper mapper;
-		    if (chatroom.Contains(this))
-			    mapper = ChatroomInfoMapper.MemberMapper;
-		    else
-			    mapper = ChatroomInfoMapper.NonMemberMapper;
-		    return mapper.Map<Chatroom, ChatroomInfo>(chatroom);
-	    }
-
+	    
 	    internal UserRelationship GetOrAddRelationshipWith (User target)
 	    {
 		    var relationship = UserRelationships.FirstOrDefault(r => r.ToUserId == target.Id);
@@ -104,7 +81,7 @@ namespace Chat.Server.Domains.Entities
 	    
 	    internal async Task<MakeFriendResponse> HandleMakeFriend(MakeFriendRequest request, User target)
 	    {
-		    if(target == this)
+		    if(target.Id == Id)
 			    return new MakeFriendResponse
 			    {
 				    Status = MakeFriendResponse.Types.Status.WithSelf
@@ -117,7 +94,6 @@ namespace Chat.Server.Domains.Entities
 			var timeout = TimeSpan.FromSeconds(5);
 			var task = target.AskClientToMakeFriend(request);
 		    await Task.WhenAny(task, Task.Delay(timeout));
-		    await task;
 			if(!task.IsCompleted)
 				return new MakeFriendResponse
 				{

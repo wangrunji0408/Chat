@@ -6,11 +6,14 @@ A chat client/server in .NetCore/C#.
 
 * Platform: .Net Core 2.0
 * Dependencies:
-  * Communication: gRPC
-  * Persistance: EntityFrameworkCore
-  * Logging: Microsoft.Extensions.Logging + NLog
-  * DI: Microsoft.Extensions.DependencyInjection
-  * CommandParsing: CommandLineParser
+  * Communication: `gRPC` + `Protobuf`
+  * Persistance: `EntityFrameworkCore`
+  * ObjectMapping: `AutoMapper`
+  * EventBus: `System.Reactive`
+  * Logging: `Microsoft.Extensions.Logging` +` NLog`
+  * DI: `Microsoft.Extensions.DependencyInjection`
+  * CommandParsing: `CommandLineParser`
+  * Testing: `xUnit`
 
 ## Usage
 

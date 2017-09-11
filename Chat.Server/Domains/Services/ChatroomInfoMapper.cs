@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using Chat.Core.Models;
 using Chat.Server.Domains.Entities;
-using Google.Protobuf.Collections;
 
-namespace Chat.Server.Infrastructure.AutoMapper
+namespace Chat.Server.Domains.Services
 {
     static class ChatroomInfoMapper
     {
