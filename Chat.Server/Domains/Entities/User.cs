@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
 using Chat.Server.Domains.Events.User;
 using Chat.Server.Domains.Services;
 using Chat.Server.Infrastructure;
+using Chat.Server.Infrastructure.AutoMapper;
 using Chat.Server.Infrastructure.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -68,11 +70,14 @@ namespace Chat.Server.Domains.Entities
 
 	    internal PeopleInfo GetPeopleInfo(User target)
 	    {
-		    return new PeopleInfo
-		    {
-			    Id = target.Id,
-			    Username = target.Username
-		    };
+		    IMapper mapper;
+		    if(target.Id == Id)
+		    	mapper = PeopleInfoMapper.SelfMapper;
+		    else if (IsFriend(target))
+			    mapper = PeopleInfoMapper.FriendMapper;
+		    else
+			    mapper = PeopleInfoMapper.StrangerMapper;
+		    return mapper.Map<User, PeopleInfo>(target);
 	    }
 
 	    internal ChatroomInfo GetChatroomInfo(Chatroom chatroom)

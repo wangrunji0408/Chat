@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using AutoMapper;
+using Chat.Core.Models;
+using Chat.Server.Domains.Entities;
 using Chat.Server.Domains.Repositories;
 using Chat.Server.Domains.Services;
 using Chat.Server.Infrastructure.EntityFramework;
@@ -25,6 +28,7 @@ namespace Chat.Server
 	        _container.AddSingleton<IUserRepository, UserRepository>();
 	        _container.AddSingleton<IChatroomRepository, ChatroomRepository>();
 	        _container.AddSingleton<IMessageRepository, MessageRepository>();
+	        _container.AddAutoMapper(ConfigAutoMapper);
 
 	        var serviceTypes = Assembly.GetExecutingAssembly().GetTypes()
 		        .Where(type => type.Namespace == "Chat.Server.Domains.Services"
@@ -33,7 +37,13 @@ namespace Chat.Server
 		        _container.AddSingleton(service);
         }
 
-		public Server Build()
+	    private void ConfigAutoMapper(IMapperConfigurationExpression cfg)
+	    {
+		    cfg.CreateMap<User, PeopleInfo>();
+		    cfg.CreateMap<Chatroom, ChatroomInfo>();
+	    }
+
+	    public Server Build()
 		{
 			var provider = _container.BuildServiceProvider();
             var server = new Server(provider);
