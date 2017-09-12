@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using CommandLine;
 
-namespace Chat.Server.ConsoleApp.Options.Chatroom
+namespace Chat.Client.ConsoleApp.Options.Chatroom
 {
-    [Command("room")]
     [Verb("new")]
-    class NewOption : OptionBase
+    class NewOption: RoomOptionBase
     {
         [Option('p', "peoples", Separator = ',')]
         public IEnumerable<long> PeopleIds { get; set; }
         [Option('n', "name", Default = "")]
         public string Name { get; set; }
-
+        
         internal override void Execute(Program app)
         {
-            var room = app.server.NewChatroomAsync(PeopleIds, Name).Result;
-            Console.WriteLine($"New chatroom {room.Id}.");
+            var id = Chatroom.NewChatroom(PeopleIds, Name).Result;
+            Console.WriteLine($"Success to create chatroom. Id = {id}.");
         }
     }
 }

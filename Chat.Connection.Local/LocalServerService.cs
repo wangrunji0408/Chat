@@ -49,11 +49,9 @@ namespace Chat.Connection.Local
             return _server.GetDataAsync(request);
         }
 
-        public async Task SendMessageAsync(ChatMessage message)
+        public async Task<SendMessageResponse> SendMessageAsync(ChatMessage message)
         {
-            var response = await _server.ReceiveNewMessageAsync(message);
-            if(!response.Success)
-                throw new Exception($"Failed to send message. {response.Detail}");
+            return await _server.ReceiveNewMessageAsync(message);
         }
     }
 }

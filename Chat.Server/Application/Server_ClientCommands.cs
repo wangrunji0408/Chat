@@ -66,7 +66,7 @@ namespace Chat.Server
 			};
 		}
 		
-		public async Task<ChatroomResponse> ReceiveNewMessageAsync(ChatMessage message)
+		public async Task<SendMessageResponse> ReceiveNewMessageAsync(ChatMessage message)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace Chat.Server
                     case Content.ContentOneofCase.New:
                         var newArgs = message.Content.New;
                         ca = await ca.NewChatroomAsync(newArgs.PeopleIds, newArgs.Name);
-                        return new ChatroomResponse{Success = true, ChatroomId = ca.ChatroomId};
+                        return new SendMessageResponse{Success = true, ChatroomId = ca.ChatroomId};
                         
                     case Content.ContentOneofCase.Dismiss:
                         await ca.DismissAsync();
@@ -94,7 +94,7 @@ namespace Chat.Server
                         break;
                         
                     case Content.ContentOneofCase.RemovePeople:
-                        var removeArgs = message.Content.AddPeople;
+                        var removeArgs = message.Content.RemovePeople;
                         await ca.RemovePeoplesAsync(removeArgs.PeopleIds);
                         break;
                         
@@ -116,14 +116,14 @@ namespace Chat.Server
             }
             catch (Exception e)
             {
-	            _logger.LogWarning($"Invalid message: {message}\nThrows: {e.Message}");
-                return new ChatroomResponse
+	            _logger.LogWarning(e, $"Invalid message: {message}\nThrows: {e.Message}");
+                return new SendMessageResponse
                 {
                     Success = false,
                     Detail = e.Message
                 };
             }
-            return new ChatroomResponse {Success = true};
+            return new SendMessageResponse {Success = true};
         }
 	}
 }

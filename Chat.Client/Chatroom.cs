@@ -12,6 +12,12 @@ namespace Chat.Client
         internal long UserId { get; set; }
         internal long RoomId { get; set; }
         internal IServerService ServerService { get; set; }
+
+        void ThrowIfFailed(SendMessageResponse response)
+        {
+            if(!response.Success)
+                throw new Exception($"Failed. {response.Detail}");
+        }
         
         public async Task SendTextAsync(string text)
         {
@@ -21,7 +27,7 @@ namespace Chat.Client
                 ChatroomId = RoomId,
                 Content = new Content {Text = text}
             };
-            await ServerService.SendMessageAsync(message);
+            ThrowIfFailed(await ServerService.SendMessageAsync(message));
         }
         
         public async Task DismissAsync()
@@ -35,7 +41,7 @@ namespace Chat.Client
                     Dismiss = new Content.Types.Dismiss()
                 }
             };
-            await ServerService.SendMessageAsync(message);
+            ThrowIfFailed(await ServerService.SendMessageAsync(message));
         }
 
         public async Task AddPeoplesAsync(IEnumerable<long> peopleIds)
@@ -49,7 +55,7 @@ namespace Chat.Client
                     AddPeople = new Content.Types.AddPeople{ PeopleIds = { peopleIds } }
                 }
             };
-            await ServerService.SendMessageAsync(message);
+            ThrowIfFailed(await ServerService.SendMessageAsync(message));
         }
         
         public async Task RemovePeoplesAsync(IEnumerable<long> peopleIds)
@@ -63,7 +69,7 @@ namespace Chat.Client
                     RemovePeople = new Content.Types.RemovePeople{ PeopleIds = { peopleIds } }
                 }
             };
-            await ServerService.SendMessageAsync(message);
+            ThrowIfFailed(await ServerService.SendMessageAsync(message));
         }
         
         public async Task<ChatroomInfo> GetInfoAsync()
@@ -89,6 +95,22 @@ namespace Chat.Client
                 Count = count
             };
             return await ServerService.GetMessages(request).ToList();
+        }
+        
+        public async Task<long> NewChatroom(IEnumerable<long> peopleIds, string name = "")
+        {
+            var message = new ChatMessage
+            {
+                SenderId = UserId,
+                ChatroomId = RoomId,
+                Content = new Content
+                {
+                    New = new Content.Types.New{PeopleIds = { peopleIds}, Name = name}
+                }
+            };
+            var rsp = await ServerService.SendMessageAsync(message);
+            ThrowIfFailed(rsp);
+            return rsp.ChatroomId;
         }
     }
 }

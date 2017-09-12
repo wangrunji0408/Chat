@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Chat.Core.Models;
+using Chat.Server.Domains.Entities;
 using Chat.Server.Domains.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,11 +33,21 @@ namespace Chat.Server.Application
         
         public async Task<ChatroomApplication> NewChatroomAsync(IEnumerable<long> peopleIds, string name = "")
         {
-            if(!peopleIds.All(id => _userRepo.ContainsIdAsync(id).Result))
-                throw new ArgumentException("User not exist.");
+            peopleIds = peopleIds.ToArray();
+            if (OperatorId != 0)
+            {
+                var user = await _userRepo.GetByIdAsync(OperatorId);
+                if(!peopleIds.Contains(user.Id))
+                    throw new ArgumentException("All users must contain yourself.");
+                if(!peopleIds.All(id => id == user.Id || user.IsFriend(id)))
+                    throw new ArgumentException("All users must be your friend.");
+            }
+            
             var chatroom = await _chatroomRepo.NewEmptyChatroomAsync(name, OperatorId);
-            foreach (var user in peopleIds)
-                chatroom.AddPeople(user, 0);
+            foreach (var userId in peopleIds)
+                chatroom.AddPeople(userId, 0);
+            if(OperatorId != 0)
+                chatroom.SetRole(OperatorId, UserChatroom.UserRole.Admin, 0);
             await _chatroomRepo.SaveChangesAsync();
             return new ChatroomApplication(_provider)
             {
@@ -86,6 +97,14 @@ namespace Chat.Server.Application
         {
             var chatroom = await _chatroomRepo.GetByIdAsync(ChatroomId);
             chatroom.Quit(OperatorId);
+            await _chatroomRepo.SaveChangesAsync();
+        }
+
+        public async Task SetRole(long userId, string role)
+        {
+            var chatroom = await _chatroomRepo.GetByIdAsync(ChatroomId);
+            var roleEnum = (UserChatroom.UserRole)Enum.Parse(typeof(UserChatroom.UserRole), role);
+            chatroom.SetRole(userId, roleEnum, OperatorId);
             await _chatroomRepo.SaveChangesAsync();
         }
     }

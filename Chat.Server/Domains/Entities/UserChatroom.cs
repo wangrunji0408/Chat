@@ -1,6 +1,6 @@
 ﻿namespace Chat.Server.Domains.Entities
 {
-    public class UserChatroom
+    class UserChatroom
     {
         public long UserId { get; set; }
         public User User { get; set; }
@@ -17,9 +17,14 @@
 
         public UserRole Role { get; set; } = UserRole.Normal;
         public bool IsBlocked { get; set; }
-            
-        public UserChatroom()
+
+        public override string ToString()
         {
+            return $"[UserChatroom {nameof(UserId)}: {UserId}, " +
+                   $"{nameof(ChatroomId)}: {ChatroomId}, " +
+                   $"{nameof(NameInChatroom)}: {NameInChatroom}, " +
+                   $"{nameof(Role)}: {Role}, " +
+                   $"{nameof(IsBlocked)}: {IsBlocked}]";
         }
     }
 }

@@ -11,9 +11,9 @@ namespace Chat.Server
 {
     public partial class Server
     {
-        public async Task<Chatroom> NewChatroomAsync(IEnumerable<long> peopleIds)
+        public async Task<Chatroom> NewChatroomAsync(IEnumerable<long> peopleIds, string name = "")
         {
-            var ca = await GetChatroomApplication(0, 0).NewChatroomAsync(peopleIds);
+            var ca = await GetChatroomApplication(0, 0).NewChatroomAsync(peopleIds, name);
             return await _chatroomRepo.GetByIdAsync(ca.ChatroomId);
         }
         

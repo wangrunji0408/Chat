@@ -23,7 +23,7 @@ namespace Chat.Server.Domains.Entities
         internal long P2PUser1Id { get; set; }
         internal long P2PUser2Id { get; set; }
         public bool IsActive { get; set; } = true;
-        internal ICollection<UserChatroom> UserChatrooms { get; set; } = new HashSet<UserChatroom>();
+        internal ICollection<UserChatroom> UserChatrooms { get; private set; } = new HashSet<UserChatroom>();
 
         [NotMapped]
         public IEnumerable<long> UserIds => UserChatrooms.Select(uc => uc.UserId);
@@ -59,11 +59,10 @@ namespace Chat.Server.Domains.Entities
         internal void AddPeople(long userId, long operatorId)
         {
             EnsureActive();
+            EnsureNotP2P();
             EnsureAdmin(operatorId);
             if (UserIds.Contains(userId))
                 throw new InvalidOperationException($"User {userId} already exist in chatroom {Id}.");
-            if(IsP2P)
-                throw new InvalidOperationException($"Can't add people to P2P chatroom.");
 
             var uc = new UserChatroom
             {
@@ -83,16 +82,16 @@ namespace Chat.Server.Domains.Entities
 
         public override string ToString()
         {
-            return string.Format("[Chatroom: Id={0}, Name={1}, CreateTime={2}, P2P={3}, UserIds={4}]",
-                Id, Name, CreateTime, IsP2P, UserIds.ToJsonString());
+            return string.Format("[Chatroom: Id={0}, Name={1}, CreateTime={2}, P2P={3}, Users={{ \n\t{4} }}]",
+                Id, Name, CreateTime, IsP2P, string.Join(",\n\t", UserChatrooms));
         }
 
-        public void RemovePeople(long userId, long operatorId)
+        internal void RemovePeople(long userId, long operatorId)
         {
             EnsureActive();
+            EnsureNotP2P();
             EnsureAdmin(operatorId);
-            if(IsP2P)
-                throw new InvalidOperationException($"Can't remove people from P2P chatroom.");
+
             var uc = GetUserChatroom(userId);
             if (uc == null)
                 throw new InvalidOperationException($"User {userId} doesn't exist in chatroom {Id}.");
@@ -102,11 +101,11 @@ namespace Chat.Server.Domains.Entities
                 new UserLeftChatroomEvent(Id, userId));
         }
 
-        public void Quit(long userId)
+        internal void Quit(long userId)
         {
             EnsureActive();
-            if(IsP2P)
-                throw new InvalidOperationException($"Can't quit from P2P chatroom.");
+            EnsureNotP2P();
+
             var uc = GetUserChatroom(userId);
             if (uc == null)
                 throw new InvalidOperationException($"User {userId} doesn't exist in chatroom {Id}.");
@@ -128,18 +127,35 @@ namespace Chat.Server.Domains.Entities
                 throw new InvalidOperationException($"Permission denied.");
         }
 
-        UserChatroom GetUserChatroom(long userId)
+        void EnsureNotP2P()
+        {
+            if(IsP2P)
+                throw new InvalidOperationException($"Is P2P chatroom.");
+        }
+
+        internal UserChatroom GetUserChatroom(long userId)
         {
             return UserChatrooms.FirstOrDefault(uc => uc.UserId == userId);
         }
 
-        public void DismissBy(long userId)
+        internal void DismissBy(long userId)
         {
             EnsureActive();
+            EnsureNotP2P();
             EnsureAdmin(userId);
+            
             IsActive = false;
             _provider.GetRequiredService<IEventBus>().Publish(
                 new DismissedEvent(Id, userId));
+        }
+
+        internal void SetRole(long userId, UserChatroom.UserRole roleEnum, long operatorId)
+        {
+            EnsureActive();
+            EnsureNotP2P();
+            EnsureAdmin(operatorId);
+            
+            GetUserChatroom(userId).Role = roleEnum;
         }
     }
 }

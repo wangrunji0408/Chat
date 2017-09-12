@@ -19,15 +19,13 @@ namespace Chat.Connection.Grpc
         {
         }
 
-        public async Task SendMessageAsync(ChatMessage message)
+        public async Task<SendMessageResponse> SendMessageAsync(ChatMessage message)
         {
             var request = new SendMessageRequest
             {
                 Message = message
             };
-            var response = await base.SendMessageAsync(request);
-            if(!response.Success)
-                throw new Exception($"Failed to send message. {response.Detail}");
+            return await base.SendMessageAsync(request);
         }
 
         public async Task<IServerService> LoginAsync(LoginRequest request)

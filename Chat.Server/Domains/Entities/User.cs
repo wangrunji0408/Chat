@@ -46,6 +46,11 @@ namespace Chat.Server.Domains.Entities
 	    {
 		    return UserRelationships.FirstOrDefault(r => r.ToUserId == user.Id)?.IsFriend ?? false;
 	    }
+	    
+	    public bool IsFriend(long userId)
+	    {
+		    return UserRelationships.FirstOrDefault(r => r.ToUserId == userId)?.IsFriend ?? false;
+	    }
 
 	    internal LoginResponse Login (LoginRequest request)
         {
