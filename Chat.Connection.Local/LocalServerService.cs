@@ -41,7 +41,7 @@ namespace Chat.Connection.Local
 
         public Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request)
         {
-            return _server.MakeFriends(request);
+            return _server.MakeFriendsAsync(request);
         }
 
         public IAsyncEnumerable<GetDataResponse> GetData(GetDataRequest request)
@@ -51,7 +51,9 @@ namespace Chat.Connection.Local
 
         public async Task SendMessageAsync(ChatMessage message)
         {
-            await _server.ReceiveNewMessageAsync(message);
+            var response = await _server.ReceiveNewMessageAsync(message);
+            if(!response.Success)
+                throw new Exception($"Failed to send message. {response.Detail}");
         }
     }
 }

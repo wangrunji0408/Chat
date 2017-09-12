@@ -54,7 +54,6 @@ namespace Chat.Server.Domains.Entities
 
 			LastLoginTime = DateTimeOffset.Now;
 
-			_logger?.LogInformation($"Login.");
 			return new LoginResponse
 			{
 				Status = LoginResponse.Types.Status.Success

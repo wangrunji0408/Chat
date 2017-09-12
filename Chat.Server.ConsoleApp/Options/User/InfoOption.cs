@@ -5,7 +5,7 @@ namespace Chat.Server.ConsoleApp.Options.User
 {
     [Command("user")]
     [Verb("info")]
-    class UserInfoOption : OptionBase
+    class InfoOption : OptionBase
     {
         [Value(0)]
         public long UserId { get; set; }
@@ -18,7 +18,7 @@ namespace Chat.Server.ConsoleApp.Options.User
                 users.ForEach(Console.WriteLine);
                 return;                    
             }
-            var user = app.server.FindUserAsync(UserId).Result;
+            var user = app.server.GetUserStringAsync(UserId).Result;
 			if (user == null)
 			{
 				Console.Error.WriteLine($"User {UserId} does not exist.");

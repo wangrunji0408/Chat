@@ -13,15 +13,11 @@ namespace Chat.Server
     {
         public async Task<Chatroom> NewChatroomAsync(IEnumerable<long> peopleIds)
         {
-            return await _chatroomService.NewChatroomAsync(peopleIds, "", 0);
+            var ca = await GetChatroomApplication(0, 0).NewChatroomAsync(peopleIds);
+            return await _chatroomRepo.GetByIdAsync(ca.ChatroomId);
         }
-
-        public async Task AddPeopleToChatroom(long chatroomId, long userId)
-        {
-            await _chatroomService.AddPeoplesToChatroom(chatroomId, new long[]{userId}, 0);
-        }
-
-        public async Task MakeFriends(long user1Id, long user2Id)
+        
+        public async Task MakeFriendsAsync(long user1Id, long user2Id)
         {
             var user1 = await _userRepo.GetByIdAsync(user1Id);
             var user2 = await _userRepo.GetByIdAsync(user2Id);
@@ -35,16 +31,6 @@ namespace Chat.Server
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
             _context.Database.Migrate();
-        }
-
-        public async Task RemovePeopleFromChatroom(long chatroomId, long userId)
-        {
-            await _chatroomService.RemovePeoplesFromChatroom(chatroomId, new long[]{userId}, 0);
-        }
-        
-        public async Task DismissChatroomAsync(long chatroomId)
-        {
-            await _chatroomService.DismissChatroom(chatroomId, 0);
         }
     }
 }

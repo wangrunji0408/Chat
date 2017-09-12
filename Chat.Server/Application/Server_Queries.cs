@@ -31,12 +31,17 @@ namespace Chat.Server
 				.ToListAsync();
 		}
 
-        public Task<User> FindUserAsync (long id)
+        internal Task<User> FindUserAsync (long id)
         {
             return _userRepo.FindByIdAsync(id);
         }
 		
-		public Task<Chatroom> GetP2PChatroom (long user1Id, long user2Id)
+		internal Task<Chatroom> FindChatroomAsync (long id)
+		{
+			return _chatroomRepo.FindByIdAsync(id);
+		}
+		
+		internal Task<Chatroom> GetP2PChatroom (long user1Id, long user2Id)
 		{
 			return _chatroomService.GetOrAddP2PChatroom(user1Id, user2Id);
 		}

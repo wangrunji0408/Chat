@@ -10,7 +10,7 @@ namespace Chat.Client.ConsoleApp.Options.Chatroom
 
         internal override void Execute(Program app)
         {
-            app.Client.SendTextMessage(Text, ChatroomId).Wait();
+            Chatroom.SendTextAsync(Text).Wait();
         }
     }
 }

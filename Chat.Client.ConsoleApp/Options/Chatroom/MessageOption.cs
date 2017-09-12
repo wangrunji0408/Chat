@@ -13,14 +13,7 @@ namespace Chat.Client.ConsoleApp.Options.Chatroom
         
         internal override void Execute(Program app)
         {
-            var request = new GetMessagesRequest
-            {
-                ChatroomId = ChatroomId,
-                AfterTimeUnixMs = 0,
-                Count = Count
-            };
-            var messages = app.Client.GetMessages(request).Result;
-            messages = messages.OrderBy(m => m.TimeUnixMs).ToList();
+            var messages = Chatroom.GetRecentMessagesAsync(Count).Result;
             messages.ForEach(e => Console.WriteLine(e.ToReadString()));
         }
     }

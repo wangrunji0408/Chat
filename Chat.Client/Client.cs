@@ -32,17 +32,14 @@ namespace Chat.Client
             set => _serverService = value;
         }
 
-        public async Task SendTextMessage(string text, long roomId)
+        public Chatroom GetChatroom(long roomId)
         {
-            
-			var message = new ChatMessage
+            return new Chatroom()
             {
-                SenderId = UserId,
-                ChatroomId = roomId,
-                Content = new Content {Text = text}
+                UserId = UserId,
+                RoomId = roomId,
+                ServerService = _serverService
             };
-            await ServerService.SendMessageAsync(message);
-            _logger?.LogInformation($"Sent message.");
         }
 
         public void InformNewMessage(ChatMessage message)
@@ -68,19 +65,6 @@ namespace Chat.Client
         {
             request.SenderId = UserId;
             return _serverService.GetMessages(request).ToList();
-        }
-
-        public async Task<ChatroomInfo> GetChatroomInfo(long chatroomId)
-        {
-            var request = new GetChatroomInfoRequest
-            {
-                SenderId = UserId,
-                ChatroomId = chatroomId
-            };
-            var response = await _serverService.GetChatroomInfo(request);
-            if(response.Success == false)
-                throw new Exception($"Failed to get chatroom info. {response.Detail}");
-            return response.Chatroom;
         }
         
         public async Task<PeopleInfo> GetPeopleInfo(long peopleId)

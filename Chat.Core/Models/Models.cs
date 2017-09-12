@@ -53,51 +53,50 @@ namespace Chat.Core.Models {
             "dBISCgpjaGF0cm9vbUlkGAUgASgDIkcKEENoYXRyb29tUmVzcG9uc2USDwoH",
             "c3VjY2VzcxgBIAEoCBIOCgZkZXRhaWwYAiABKAkSEgoKY2hhdHJvb21JZBgD",
             "IAEoAyI4ChJTZW5kTWVzc2FnZVJlcXVlc3QSIgoHbWVzc2FnZRgBIAEoCzIR",
-            "LmNoYXQuQ2hhdE1lc3NhZ2UiegoTU2VuZE1lc3NhZ2VSZXNwb25zZRIwCgZz",
-            "dGF0dXMYASABKA4yIC5jaGF0LlNlbmRNZXNzYWdlUmVzcG9uc2UuU3RhdHVz",
-            "Eg4KBmRldGFpbBgCIAEoCSIhCgZTdGF0dXMSCwoHU3VjY2VzcxAAEgoKBkZh",
-            "aWxlZBABIu4CCgpQZW9wbGVJbmZvEgoKAmlkGAEgASgDEhAKCHVzZXJuYW1l",
-            "GAIgASgJEgwKBHRhZ3MYCiADKAkSDAoEbm90ZRgLIAEoCRIPCgdibG9ja2Vk",
-            "GBQgASgIEhIKCmNoYXRyb29tSWQYFSABKAMSKQoEc2VsZhhlIAEoCzIZLmNo",
-            "YXQuUGVvcGxlSW5mby5TZWxmSW5mb0gAEi0KBmZyaWVuZBhmIAEoCzIbLmNo",
-            "YXQuUGVvcGxlSW5mby5GcmllbmRJbmZvSAASMQoIc3RyYW5nZXIYZyABKAsy",
-            "HS5jaGF0LlBlb3BsZUluZm8uU3RyYW5nZXJJbmZvSAAaSgoIU2VsZkluZm8S",
-            "JAoIc2V0dGluZ3MYASABKAsyEi5jaGF0LlVzZXJTZXR0aW5ncxIYChBzaWdu",
-            "dXBUaW1lVW5peE1zGAIgASgDGgwKCkZyaWVuZEluZm8aDgoMU3RyYW5nZXJJ",
-            "bmZvQgoKCHJvbGVJbmZvIg4KDFVzZXJTZXR0aW5ncyJaCgxDaGF0cm9vbUlu",
-            "Zm8SCgoCaWQYASABKAMSEQoJcGVvcGxlSWRzGAIgAygDEg4KBmhvc3RJZBgD",
-            "IAEoAxIMCgRuYW1lGAQgASgJEg0KBWlzUDJQGAUgASgIIjkKEk5ld0NoYXRy",
-            "b29tUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIRCglwZW9wbGVJZHMYAiAD",
-            "KAUiTAoTTmV3Q2hhdHJvb21SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEiQK",
-            "CGNoYXRyb29tGAIgASgLMhIuY2hhdC5DaGF0cm9vbUluZm8iPgoWR2V0Q2hh",
-            "dHJvb21JbmZvUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxISCgpjaGF0cm9v",
-            "bUlkGAIgASgDImAKF0dldENoYXRyb29tSW5mb1Jlc3BvbnNlEg8KB3N1Y2Nl",
-            "c3MYASABKAgSJAoIY2hhdHJvb20YAiABKAsyEi5jaGF0LkNoYXRyb29tSW5m",
-            "bxIOCgZkZXRhaWwYAyABKAkiMwoNU2lnbnVwUmVxdWVzdBIQCgh1c2VybmFt",
-            "ZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSK5AQoOU2lnbnVwUmVzcG9uc2US",
-            "KwoGc3RhdHVzGAEgASgOMhsuY2hhdC5TaWdudXBSZXNwb25zZS5TdGF0dXMS",
-            "DgoGZGV0YWlsGAIgASgJEg4KBnVzZXJJZBgDIAEoAyJaCgZTdGF0dXMSCwoH",
-            "U3VjY2VzcxAAEhEKDVVzZXJuYW1lRXhpc3QQZRIXChNVc2VybmFtZUZvcm1h",
-            "dFdyb25nEGYSFwoTUGFzc3dvcmRGb3JtYXRXcm9uZxBnIkIKDExvZ2luUmVx",
-            "dWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIOCgZ1",
-            "c2VySWQYAyABKAMihQEKDUxvZ2luUmVzcG9uc2USKgoGc3RhdHVzGAEgASgO",
-            "MhouY2hhdC5Mb2dpblJlc3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwYAiABKAki",
-            "OAoGU3RhdHVzEgsKB1N1Y2Nlc3MQABIOCgpOb1N1Y2hVc2VyEGUSEQoNV3Jv",
-            "bmdQYXNzd29yZBBmIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAKCHNlbmRlcklk",
-            "GAEgASgDEhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5nGAMgASgJItIB",
-            "ChJNYWtlRnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgOMh8uY2hhdC5N",
-            "YWtlRnJpZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSJ7CgZT",
-            "dGF0dXMSCgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxyZWFkeUZyaWVu",
-            "ZBACEhAKDFVzZXJOb3RFeGlzdBADEhEKDVVzZXJOb3RPbmxpbmUQBBITCg9S",
-            "ZXNwb25zZVRpbWVvdXQQBRIMCghXaXRoU2VsZhAGIjoKFEdldFBlb3BsZUlu",
-            "Zm9SZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgD",
-            "Ij0KFUdldFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJbmZvGAEgASgL",
-            "MhAuY2hhdC5QZW9wbGVJbmZvImIKEkdldE1lc3NhZ2VzUmVxdWVzdBIQCghz",
-            "ZW5kZXJJZBgBIAEoAxIXCg9hZnRlclRpbWVVbml4TXMYAiABKAMSEgoKY2hh",
-            "dHJvb21JZBgDIAEoAxINCgVjb3VudBgEIAEoBSJECg5HZXREYXRhUmVxdWVz",
-            "dBIQCghmaWxlTmFtZRgBIAEoCRIMCgRzZWVkGAogASgFEhIKCnJhbmRMZW5n",
-            "dGgYCyABKAUiHwoPR2V0RGF0YVJlc3BvbnNlEgwKBGRhdGEYASABKAxCE6oC",
-            "EENoYXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
+            "LmNoYXQuQ2hhdE1lc3NhZ2UiSgoTU2VuZE1lc3NhZ2VSZXNwb25zZRIPCgdz",
+            "dWNjZXNzGAEgASgIEg4KBmRldGFpbBgCIAEoCRISCgpjaGF0cm9vbUlkGAMg",
+            "ASgDIu4CCgpQZW9wbGVJbmZvEgoKAmlkGAEgASgDEhAKCHVzZXJuYW1lGAIg",
+            "ASgJEgwKBHRhZ3MYCiADKAkSDAoEbm90ZRgLIAEoCRIPCgdibG9ja2VkGBQg",
+            "ASgIEhIKCmNoYXRyb29tSWQYFSABKAMSKQoEc2VsZhhlIAEoCzIZLmNoYXQu",
+            "UGVvcGxlSW5mby5TZWxmSW5mb0gAEi0KBmZyaWVuZBhmIAEoCzIbLmNoYXQu",
+            "UGVvcGxlSW5mby5GcmllbmRJbmZvSAASMQoIc3RyYW5nZXIYZyABKAsyHS5j",
+            "aGF0LlBlb3BsZUluZm8uU3RyYW5nZXJJbmZvSAAaSgoIU2VsZkluZm8SJAoI",
+            "c2V0dGluZ3MYASABKAsyEi5jaGF0LlVzZXJTZXR0aW5ncxIYChBzaWdudXBU",
+            "aW1lVW5peE1zGAIgASgDGgwKCkZyaWVuZEluZm8aDgoMU3RyYW5nZXJJbmZv",
+            "QgoKCHJvbGVJbmZvIg4KDFVzZXJTZXR0aW5ncyJaCgxDaGF0cm9vbUluZm8S",
+            "CgoCaWQYASABKAMSEQoJcGVvcGxlSWRzGAIgAygDEg4KBmhvc3RJZBgDIAEo",
+            "AxIMCgRuYW1lGAQgASgJEg0KBWlzUDJQGAUgASgIIjkKEk5ld0NoYXRyb29t",
+            "UmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIRCglwZW9wbGVJZHMYAiADKAUi",
+            "TAoTTmV3Q2hhdHJvb21SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEiQKCGNo",
+            "YXRyb29tGAIgASgLMhIuY2hhdC5DaGF0cm9vbUluZm8iPgoWR2V0Q2hhdHJv",
+            "b21JbmZvUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxISCgpjaGF0cm9vbUlk",
+            "GAIgASgDImAKF0dldENoYXRyb29tSW5mb1Jlc3BvbnNlEg8KB3N1Y2Nlc3MY",
+            "ASABKAgSJAoIY2hhdHJvb20YAiABKAsyEi5jaGF0LkNoYXRyb29tSW5mbxIO",
+            "CgZkZXRhaWwYAyABKAkiMwoNU2lnbnVwUmVxdWVzdBIQCgh1c2VybmFtZRgB",
+            "IAEoCRIQCghwYXNzd29yZBgCIAEoCSK5AQoOU2lnbnVwUmVzcG9uc2USKwoG",
+            "c3RhdHVzGAEgASgOMhsuY2hhdC5TaWdudXBSZXNwb25zZS5TdGF0dXMSDgoG",
+            "ZGV0YWlsGAIgASgJEg4KBnVzZXJJZBgDIAEoAyJaCgZTdGF0dXMSCwoHU3Vj",
+            "Y2VzcxAAEhEKDVVzZXJuYW1lRXhpc3QQZRIXChNVc2VybmFtZUZvcm1hdFdy",
+            "b25nEGYSFwoTUGFzc3dvcmRGb3JtYXRXcm9uZxBnIkIKDExvZ2luUmVxdWVz",
+            "dBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIOCgZ1c2Vy",
+            "SWQYAyABKAMihQEKDUxvZ2luUmVzcG9uc2USKgoGc3RhdHVzGAEgASgOMhou",
+            "Y2hhdC5Mb2dpblJlc3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwYAiABKAkiOAoG",
+            "U3RhdHVzEgsKB1N1Y2Nlc3MQABIOCgpOb1N1Y2hVc2VyEGUSEQoNV3JvbmdQ",
+            "YXNzd29yZBBmIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAKCHNlbmRlcklkGAEg",
+            "ASgDEhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5nGAMgASgJItIBChJN",
+            "YWtlRnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgOMh8uY2hhdC5NYWtl",
+            "RnJpZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSJ7CgZTdGF0",
+            "dXMSCgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxyZWFkeUZyaWVuZBAC",
+            "EhAKDFVzZXJOb3RFeGlzdBADEhEKDVVzZXJOb3RPbmxpbmUQBBITCg9SZXNw",
+            "b25zZVRpbWVvdXQQBRIMCghXaXRoU2VsZhAGIjoKFEdldFBlb3BsZUluZm9S",
+            "ZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgDIj0K",
+            "FUdldFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJbmZvGAEgASgLMhAu",
+            "Y2hhdC5QZW9wbGVJbmZvImIKEkdldE1lc3NhZ2VzUmVxdWVzdBIQCghzZW5k",
+            "ZXJJZBgBIAEoAxIXCg9hZnRlclRpbWVVbml4TXMYAiABKAMSEgoKY2hhdHJv",
+            "b21JZBgDIAEoAxINCgVjb3VudBgEIAEoBSJECg5HZXREYXRhUmVxdWVzdBIQ",
+            "CghmaWxlTmFtZRgBIAEoCRIMCgRzZWVkGAogASgFEhIKCnJhbmRMZW5ndGgY",
+            "CyABKAUiHwoPR2V0RGF0YVJlc3BvbnNlEgwKBGRhdGEYASABKAxCE6oCEENo",
+            "YXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -119,7 +118,7 @@ namespace Chat.Core.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatMessage), global::Chat.Core.Models.ChatMessage.Parser, new[]{ "Id", "SenderId", "TimeUnixMs", "Content", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomResponse), global::Chat.Core.Models.ChatroomResponse.Parser, new[]{ "Success", "Detail", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageRequest), global::Chat.Core.Models.SendMessageRequest.Parser, new[]{ "Message" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageResponse), global::Chat.Core.Models.SendMessageResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.SendMessageResponse.Types.Status) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageResponse), global::Chat.Core.Models.SendMessageResponse.Parser, new[]{ "Success", "Detail", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo), global::Chat.Core.Models.PeopleInfo.Parser, new[]{ "Id", "Username", "Tags", "Note", "Blocked", "ChatroomId", "Self", "Friend", "Stranger" }, new[]{ "RoleInfo" }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo.Types.SelfInfo), global::Chat.Core.Models.PeopleInfo.Types.SelfInfo.Parser, new[]{ "Settings", "SignupTimeUnixMs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo.Types.FriendInfo), global::Chat.Core.Models.PeopleInfo.Types.FriendInfo.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo), global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo.Parser, null, null, null, null)}),
@@ -3212,8 +3211,9 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SendMessageResponse(SendMessageResponse other) : this() {
-      status_ = other.status_;
+      success_ = other.success_;
       detail_ = other.detail_;
+      chatroomId_ = other.chatroomId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3221,14 +3221,14 @@ namespace Chat.Core.Models {
       return new SendMessageResponse(this);
     }
 
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 1;
-    private global::Chat.Core.Models.SendMessageResponse.Types.Status status_ = 0;
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Chat.Core.Models.SendMessageResponse.Types.Status Status {
-      get { return status_; }
+    public bool Success {
+      get { return success_; }
       set {
-        status_ = value;
+        success_ = value;
       }
     }
 
@@ -3240,6 +3240,17 @@ namespace Chat.Core.Models {
       get { return detail_; }
       set {
         detail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "chatroomId" field.</summary>
+    public const int ChatroomIdFieldNumber = 3;
+    private long chatroomId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ChatroomId {
+      get { return chatroomId_; }
+      set {
+        chatroomId_ = value;
       }
     }
 
@@ -3256,16 +3267,18 @@ namespace Chat.Core.Models {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Status != other.Status) return false;
+      if (Success != other.Success) return false;
       if (Detail != other.Detail) return false;
+      if (ChatroomId != other.ChatroomId) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Status != 0) hash ^= Status.GetHashCode();
+      if (Success != false) hash ^= Success.GetHashCode();
       if (Detail.Length != 0) hash ^= Detail.GetHashCode();
+      if (ChatroomId != 0L) hash ^= ChatroomId.GetHashCode();
       return hash;
     }
 
@@ -3276,24 +3289,31 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Status != 0) {
+      if (Success != false) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) Status);
+        output.WriteBool(Success);
       }
       if (Detail.Length != 0) {
         output.WriteRawTag(18);
         output.WriteString(Detail);
+      }
+      if (ChatroomId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(ChatroomId);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Status != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      if (Success != false) {
+        size += 1 + 1;
       }
       if (Detail.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Detail);
+      }
+      if (ChatroomId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ChatroomId);
       }
       return size;
     }
@@ -3303,11 +3323,14 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.Status != 0) {
-        Status = other.Status;
+      if (other.Success != false) {
+        Success = other.Success;
       }
       if (other.Detail.Length != 0) {
         Detail = other.Detail;
+      }
+      if (other.ChatroomId != 0L) {
+        ChatroomId = other.ChatroomId;
       }
     }
 
@@ -3320,28 +3343,20 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            status_ = (global::Chat.Core.Models.SendMessageResponse.Types.Status) input.ReadEnum();
+            Success = input.ReadBool();
             break;
           }
           case 18: {
             Detail = input.ReadString();
             break;
           }
+          case 24: {
+            ChatroomId = input.ReadInt64();
+            break;
+          }
         }
       }
     }
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the SendMessageResponse message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum Status {
-        [pbr::OriginalName("Success")] Success = 0,
-        [pbr::OriginalName("Failed")] Failed = 1,
-      }
-
-    }
-    #endregion
 
   }
 

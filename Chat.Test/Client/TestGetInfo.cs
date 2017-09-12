@@ -16,17 +16,18 @@ namespace Chat.Test.Client
                 Id = GlobalChatroomId,
                 Name = "Global Chatroom",
                 PeopleIds = {1, 2}
-            }, await client1.GetChatroomInfo(GlobalChatroomId));
+            }, await client1.GetChatroom(GlobalChatroomId).GetInfoAsync());
         }
 
         [Fact]
         public async Task GetMessageAfter()
         {
-            await client1.SendTextMessage("Message1", GlobalChatroomId);
+            var room = client1.GetChatroom(GlobalChatroomId);
+            await room.SendTextAsync("Message1");
             await Task.Delay(100);
             var t0 = DateTimeOffset.Now;
-            await client1.SendTextMessage("Message2", GlobalChatroomId);
-            await client1.SendTextMessage("Message3", GlobalChatroomId);
+            await room.SendTextAsync("Message2");
+            await room.SendTextAsync("Message3");
             var messages = await client1.GetMessages(new GetMessagesRequest
             {
                 ChatroomId = GlobalChatroomId,

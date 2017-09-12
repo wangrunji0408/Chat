@@ -6,8 +6,8 @@ using CommandLine;
 namespace Chat.Server.ConsoleApp.Options.Chatroom
 {
     [Command("room")]
-    [Verb("add")]
-    class ChatroomAddPeopleOption : OptionBase
+    [Verb("remove")]
+    class RemovePeopleOption : OptionBase
     {
         [Value(0)]
         public long ChatroomId { get; set; }
@@ -16,11 +16,9 @@ namespace Chat.Server.ConsoleApp.Options.Chatroom
 
         internal override void Execute(Program app)
         {
-            foreach (var peopleId in PeopleIds)
-            {
-                app.server.AddPeopleToChatroom(ChatroomId, peopleId).Wait();
-            }
-            Console.WriteLine($"People {PeopleIds.ToJsonString()} added to chatroom {ChatroomId}.");
+            app.server.GetChatroomApplication(ChatroomId, 0)
+                .RemovePeoplesAsync(PeopleIds).Wait();
+            Console.WriteLine($"People {PeopleIds.ToJsonString()} removed from chatroom {ChatroomId}.");
         }
     }
 }

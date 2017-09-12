@@ -26,7 +26,7 @@ namespace Chat.Connection.Grpc
                 Message = message
             };
             var response = await base.SendMessageAsync(request);
-            if(response.Status != SendMessageResponse.Types.Status.Success)
+            if(!response.Success)
                 throw new Exception($"Failed to send message. {response.Detail}");
         }
 

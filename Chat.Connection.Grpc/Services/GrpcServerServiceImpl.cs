@@ -68,15 +68,12 @@ namespace Chat.Connection.Grpc
             {
                 return new SendMessageResponse
                 {
-                    Status = SendMessageResponse.Types.Status.Failed,
+                    Success = true,
                     Detail = e.Message
                 };
             }
             
-            return new SendMessageResponse
-            {
-                Status = SendMessageResponse.Types.Status.Success
-            };
+            return new SendMessageResponse { Success = true };
         }
 
         public override Task<SignupResponse> Signup(SignupRequest request, ServerCallContext context)
@@ -105,7 +102,7 @@ namespace Chat.Connection.Grpc
 
         public override Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request, ServerCallContext context)
         {
-            return _server.MakeFriends(request);
+            return _server.MakeFriendsAsync(request);
         }
 
         public override async Task GetData(GetDataRequest request, IServerStreamWriter<GetDataResponse> responseStream, ServerCallContext context)

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading;
+using Chat.Server.Application;
+using Chat.Server.Domains.Entities;
 using Chat.Server.Infrastructure;
 using Google.Protobuf;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,13 +35,8 @@ namespace Chat.Server
 		{
 			_userClientService[userId] = client;
 		}
-
-		public async Task<ChatroomResponse> ReceiveNewMessageAsync(ChatMessage message)
-		{
-			return await _chatroomService.HandleNewMessageAsync(message);
-		}
 		
-		public async Task<MakeFriendResponse> MakeFriends(MakeFriendRequest request)
+		public async Task<MakeFriendResponse> MakeFriendsAsync(MakeFriendRequest request)
 		{
 			var user = await _userRepo.GetByIdAsync(request.SenderId);
 			var target = await _userRepo.FindByIdAsync(request.TargetId);
@@ -59,5 +56,74 @@ namespace Chat.Server
 				reader = DataService.ReadFile(request.FileName);
 			return DataService.GetDataAsync(reader);
 		}
+
+		public ChatroomApplication GetChatroomApplication(long roomId, long operatorId)
+		{
+			return new ChatroomApplication(_provider)
+			{
+				ChatroomId = roomId,
+				OperatorId = operatorId
+			};
+		}
+		
+		public async Task<ChatroomResponse> ReceiveNewMessageAsync(ChatMessage message)
+        {
+            try
+            {
+	            var ca = GetChatroomApplication(message.ChatroomId, message.SenderId);
+                switch (message.Content.ContentCase)
+                {
+                    case Content.ContentOneofCase.Text:
+                    case Content.ContentOneofCase.Image:
+                    case Content.ContentOneofCase.File:
+                        await ca.NewMessageAsync(message);
+                        break;
+                        
+                    case Content.ContentOneofCase.New:
+                        var newArgs = message.Content.New;
+                        ca = await ca.NewChatroomAsync(newArgs.PeopleIds, newArgs.Name);
+                        return new ChatroomResponse{Success = true, ChatroomId = ca.ChatroomId};
+                        
+                    case Content.ContentOneofCase.Dismiss:
+                        await ca.DismissAsync();
+                        break;
+                        
+                    case Content.ContentOneofCase.AddPeople:
+                        var addArgs = message.Content.AddPeople;
+                        await ca.AddPeoplesAsync(addArgs.PeopleIds);
+                        break;
+                        
+                    case Content.ContentOneofCase.RemovePeople:
+                        var removeArgs = message.Content.AddPeople;
+                        await ca.RemovePeoplesAsync(removeArgs.PeopleIds);
+                        break;
+                        
+                    case Content.ContentOneofCase.Apply:
+                        break;
+                    case Content.ContentOneofCase.Quit:
+	                    await ca.QuitAsync();
+                        break;
+
+                    case Content.ContentOneofCase.Announce:
+                        break;
+                    case Content.ContentOneofCase.SetPeoperty:
+                        break;
+                    case Content.ContentOneofCase.Withdraw:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            catch (Exception e)
+            {
+	            _logger.LogWarning($"Invalid message: {message}\nThrows: {e.Message}");
+                return new ChatroomResponse
+                {
+                    Success = false,
+                    Detail = e.Message
+                };
+            }
+            return new ChatroomResponse {Success = true};
+        }
 	}
 }

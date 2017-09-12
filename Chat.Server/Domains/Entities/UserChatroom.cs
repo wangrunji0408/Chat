@@ -10,6 +10,14 @@
 
         public string NameInChatroom { get; set; }
 
+        public enum UserRole
+        {
+            Normal, Admin
+        }
+
+        public UserRole Role { get; set; } = UserRole.Normal;
+        public bool IsBlocked { get; set; }
+            
         public UserChatroom()
         {
         }

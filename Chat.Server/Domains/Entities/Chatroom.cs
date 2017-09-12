@@ -41,6 +41,8 @@ namespace Chat.Server.Domains.Entities
         internal void NewMessage(ChatMessage message)
         {
             EnsureActive();
+            if(GetUserChatroom(message.SenderId).IsBlocked)
+                throw new InvalidOperationException($"User {message.SenderId} is blocked.");
             if (message.ChatroomId != Id)
                 throw new ArgumentException($"Message is not for this Chatroom.");
             if (!UserIds.Contains(message.SenderId))
@@ -91,7 +93,7 @@ namespace Chat.Server.Domains.Entities
             EnsureAdmin(operatorId);
             if(IsP2P)
                 throw new InvalidOperationException($"Can't remove people from P2P chatroom.");
-            var uc = UserChatrooms.FirstOrDefault(r => r.UserId == userId);
+            var uc = GetUserChatroom(userId);
             if (uc == null)
                 throw new InvalidOperationException($"User {userId} doesn't exist in chatroom {Id}.");
             UserChatrooms.Remove(uc);
@@ -105,7 +107,7 @@ namespace Chat.Server.Domains.Entities
             EnsureActive();
             if(IsP2P)
                 throw new InvalidOperationException($"Can't quit from P2P chatroom.");
-            var uc = UserChatrooms.FirstOrDefault(r => r.UserId == userId);
+            var uc = GetUserChatroom(userId);
             if (uc == null)
                 throw new InvalidOperationException($"User {userId} doesn't exist in chatroom {Id}.");
             UserChatrooms.Remove(uc);
@@ -122,8 +124,13 @@ namespace Chat.Server.Domains.Entities
 
         void EnsureAdmin(long userId)
         {
-            if(userId != 0)
+            if(userId != 0 && GetUserChatroom(userId).Role != UserChatroom.UserRole.Admin)
                 throw new InvalidOperationException($"Permission denied.");
+        }
+
+        UserChatroom GetUserChatroom(long userId)
+        {
+            return UserChatrooms.FirstOrDefault(uc => uc.UserId == userId);
         }
 
         public void DismissBy(long userId)

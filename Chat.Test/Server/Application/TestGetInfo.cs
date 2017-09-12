@@ -52,7 +52,7 @@ namespace Chat.Test.Server
         [Fact]
         public async Task GetPeopleInfo_Friend()
         {
-            await server.MakeFriends(1, 2);
+            await server.MakeFriendsAsync(1, 2);
             var user = await server.FindUserAsync(2);
             var info = await server.GetPeopleInfoAsync(1, 2);
             AssertGetPeopleInfoBasic(user, info);

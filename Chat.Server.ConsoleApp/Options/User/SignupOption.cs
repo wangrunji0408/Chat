@@ -5,7 +5,7 @@ namespace Chat.Server.ConsoleApp.Options.User
 {
     [Command("user")]
     [Verb("signup")]
-    class UserSignupOption : OptionBase
+    class SignupOption : OptionBase
     {
         [Value(0)]
         public string Username { get; set; }

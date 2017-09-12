@@ -105,13 +105,9 @@ message SendMessageRequest
 
 message SendMessageResponse
 {
-	enum Status
-	{
-		Success = 0;
-		Failed = 1;
-	}
-	Status status = 1;
+	bool success = 1;
 	string detail = 2;
+	int64 chatroomId = 3;
 }
 
 message PeopleInfo

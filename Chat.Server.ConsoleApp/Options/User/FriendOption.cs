@@ -4,7 +4,7 @@ namespace Chat.Server.ConsoleApp.Options.User
 {
     [Command("user")]
     [Verb("friend")]
-    class UserFriendOption: OptionBase
+    class FriendOption: OptionBase
     {
         [Value(0)]
         public long User1Id { get; set; }
@@ -13,7 +13,7 @@ namespace Chat.Server.ConsoleApp.Options.User
 
         internal override void Execute(Program app)
         {
-            app.server.MakeFriends(User1Id, User2Id).Wait();
+            app.server.MakeFriendsAsync(User1Id, User2Id).Wait();
         }
     }
 }

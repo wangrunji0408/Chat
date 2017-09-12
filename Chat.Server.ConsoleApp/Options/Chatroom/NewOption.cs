@@ -6,15 +6,18 @@ namespace Chat.Server.ConsoleApp.Options.Chatroom
 {
     [Command("room")]
     [Verb("new")]
-    class ChatroomNewOption : OptionBase
+    class NewOption : OptionBase
     {
         [Option('p', "peoples", Separator = ',')]
         public IEnumerable<long> PeopleIds { get; set; }
+        [Option('n', "name", Default = "")]
+        public string Name { get; set; }
 
         internal override void Execute(Program app)
         {
-            var chatroom = app.server.NewChatroomAsync(PeopleIds).Result;
-            Console.WriteLine($"New chatroom {chatroom.Id}.");
+            var id = app.server.GetChatroomApplication(roomId: 0, operatorId: 0)
+                .NewChatroomAsync(PeopleIds, Name).Result;
+            Console.WriteLine($"New chatroom {id}.");
         }
     }
 }

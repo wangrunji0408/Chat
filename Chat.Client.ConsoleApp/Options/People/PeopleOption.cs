@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using Chat.Client.ConsoleApp.Options.People;
@@ -13,6 +15,10 @@ namespace Chat.Client.ConsoleApp.Options
         
         internal override void Execute(Program app)
         {
+            var suboptions = Assembly.GetExecutingAssembly().DefinedTypes
+                .Where(t => t.IsSubclassOf(typeof(PeopleOptionBase)))
+                .ToArray();
+            
             while(true)
             {
                 Console.Write($"People {PeopleId} > ");
@@ -27,7 +33,7 @@ namespace Chat.Client.ConsoleApp.Options
                     if (args[0] == "q" || args[0] == "exit")
                         return;
                     
-                    Parser.Default.ParseArguments<InfoOption, MakeFriendOption>(args)
+                    Parser.Default.ParseArguments(args, suboptions)
                         .WithParsed<PeopleOptionBase>(opt =>
                         {
                             opt.PeopleId = PeopleId;

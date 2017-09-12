@@ -29,7 +29,7 @@ namespace Chat.Test
         [Fact]
         public async Task AlreadyFriend()
         {
-            await server.MakeFriends(1, 2);
+            await server.MakeFriendsAsync(1, 2);
             AssertFriend(true, 1, 2);
             var accept = new MakeFriendResponse {Status = MakeFriendResponse.Types.Status.Accept};
             client2.MakeFriendHandler = request => Task.FromResult(accept);

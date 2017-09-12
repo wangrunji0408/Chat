@@ -8,7 +8,7 @@ namespace Chat.Client.ConsoleApp.Options.Chatroom
     {
         internal override void Execute(Program app)
         {
-            var info = app.Client.GetChatroomInfo(ChatroomId).Result;
+            var info = Chatroom.GetInfoAsync().Result;
             Console.WriteLine(info);
         }
     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using Chat.Client.ConsoleApp.Options.Chatroom;
 using CommandLine;
 using Microsoft.Extensions.Logging;
@@ -13,6 +15,11 @@ namespace Chat.Client.ConsoleApp.Options
         
         internal override void Execute(Program app)
         {
+            var suboptions = Assembly.GetExecutingAssembly().DefinedTypes
+                .Where(t => t.IsSubclassOf(typeof(RoomOptionBase)))
+                .ToArray();
+            
+            var chatroom = app.Client.GetChatroom(ChatroomId);
             while(true)
             {
                 Console.Write($"Room {ChatroomId} > ");
@@ -27,10 +34,11 @@ namespace Chat.Client.ConsoleApp.Options
                     if (args[0] == "q" || args[0] == "exit")
                         return;
                     
-                    Parser.Default.ParseArguments<SendOption, InfoOption, MessageOption>(args)
+                    Parser.Default.ParseArguments(args, suboptions)
                         .WithParsed<RoomOptionBase>(opt =>
                         {
                             opt.ChatroomId = ChatroomId;
+                            opt.Chatroom = chatroom;
                             opt.Execute(app);
                         })
                         .WithNotParsed(app.ParseFailed);
@@ -48,5 +56,6 @@ namespace Chat.Client.ConsoleApp.Options
     abstract class RoomOptionBase : OptionBase
     {
         public long ChatroomId { get; set; }
+        public Chat.Client.Chatroom Chatroom { get; set; }
     }
 }

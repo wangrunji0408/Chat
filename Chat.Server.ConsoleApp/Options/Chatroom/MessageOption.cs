@@ -5,7 +5,7 @@ namespace Chat.Server.ConsoleApp.Options.Chatroom
 {
 	[Command("room")]
 	[Verb("message")]
-	class ChatroomMessageOption : OptionBase
+	class MessageOption : OptionBase
 	{
 		[Value(0)]
 		public long ChatroomId { get; set; }

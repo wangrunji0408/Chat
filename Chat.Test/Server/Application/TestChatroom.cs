@@ -70,8 +70,9 @@ namespace Chat.Test.Server
         public async Task AddPeople()
         {
             var room = await server.NewChatroomAsync(new long[] {1});
+            var ca = server.GetChatroomApplication(room.Id, 0);
             Assert.DoesNotContain(2, room.UserIds);
-            await server.AddPeopleToChatroom(room.Id, userId: 2);
+            await ca.AddPeopleAsync(userId: 2);
             Assert.Contains(2, room.UserIds);
             
             var user2 = await server.FindUserAsync(2);
@@ -82,10 +83,11 @@ namespace Chat.Test.Server
         public async Task RemovePeople()
         {
             var room = await server.NewChatroomAsync(new long[] {1, 2});
+            var ca = server.GetChatroomApplication(room.Id, 0);
             var user1 = await server.FindUserAsync(1);
             
             Assert.Contains(1, room.UserIds);
-            await server.RemovePeopleFromChatroom(room.Id, userId: 1);
+            await ca.RemovePeopleAsync(userId: 1);
             Assert.DoesNotContain(1, room.UserIds);
             Assert.DoesNotContain(room.Id, user1.ChatroomIds);
         }
@@ -103,26 +105,30 @@ namespace Chat.Test.Server
         public async Task ThrowWhenTryToChangePeopleInP2P()
         {
             var room = await server.GetP2PChatroom(1, 2);
+            var ca = server.GetChatroomApplication(room.Id, 0);
+
             await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await server.AddPeopleToChatroom(room.Id, userId: 3));
+                async () => await ca.AddPeopleAsync(userId: 3));
             await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await server.RemovePeopleFromChatroom(room.Id, userId: 1));
+                async () => await ca.RemovePeopleAsync(userId: 1));
             await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await server.RemovePeopleFromChatroom(room.Id, userId: 2));
+                async () => await ca.RemovePeopleAsync(userId: 2));
         }
         
         [Fact]
         public async Task DismissChatroom()
         {
             var room = await server.NewChatroomAsync(new long[] {1, 2});
-            await server.DismissChatroomAsync(room.Id);
+            var ca = server.GetChatroomApplication(room.Id, 0);
+
+            await ca.DismissAsync();
             Assert.False(room.IsActive);
             await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await server.AddPeopleToChatroom(room.Id, userId: 3));
+                async () => await ca.AddPeopleAsync(userId: 3));
             await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await server.RemovePeopleFromChatroom(room.Id, userId: 1));
+                async () => await ca.RemovePeopleAsync(userId: 1));
             await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await server.RemovePeopleFromChatroom(room.Id, userId: 2));
+                async () => await ca.RemovePeopleAsync(userId: 2));
         }
     }
 }
