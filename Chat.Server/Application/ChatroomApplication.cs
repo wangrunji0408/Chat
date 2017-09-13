@@ -107,5 +107,12 @@ namespace Chat.Server.Application
             chatroom.SetRole(userId, roleEnum, OperatorId);
             await _chatroomRepo.SaveChangesAsync();
         }
+        
+        public async Task ChangeName(string value)
+        {
+            var chatroom = await _chatroomRepo.GetByIdAsync(ChatroomId);
+            chatroom.SetName(value, OperatorId);
+            await _chatroomRepo.SaveChangesAsync();
+        }
     }
 }

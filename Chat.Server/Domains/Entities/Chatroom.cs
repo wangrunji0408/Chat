@@ -53,7 +53,7 @@ namespace Chat.Server.Domains.Entities
             
             message.TimeUnixMs = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             _provider.GetRequiredService<IEventBus>().Publish(
-                new NewMessageEvent(message));
+                new NewMessageEvent{ChatroomId = Id, OperatorId = message.SenderId, Message = message});
         }
 
         internal void AddPeople(long userId, long operatorId)
@@ -72,7 +72,7 @@ namespace Chat.Server.Domains.Entities
             UserChatrooms.Add(uc);
             
             _provider.GetRequiredService<IEventBus>().Publish(
-                new UserEnteredChatroomEvent(Id, userId));
+                new UserEnteredEvent{ChatroomId = Id, UserId = userId, OperatorId = operatorId});
         }
 
         internal bool Contains(User user)
@@ -98,7 +98,7 @@ namespace Chat.Server.Domains.Entities
             UserChatrooms.Remove(uc);
             
             _provider.GetRequiredService<IEventBus>().Publish(
-                new UserLeftChatroomEvent(Id, userId));
+                new UserLeftEvent{ChatroomId = Id, UserId = userId, OperatorId = operatorId});
         }
 
         internal void Quit(long userId)
@@ -112,7 +112,7 @@ namespace Chat.Server.Domains.Entities
             UserChatrooms.Remove(uc);
 
             _provider.GetRequiredService<IEventBus>().Publish(
-                new UserLeftChatroomEvent(Id, userId));
+                new UserLeftEvent{ChatroomId = Id, UserId = userId, OperatorId = userId});
         }
 
         void EnsureActive()
@@ -146,7 +146,7 @@ namespace Chat.Server.Domains.Entities
             
             IsActive = false;
             _provider.GetRequiredService<IEventBus>().Publish(
-                new DismissedEvent(Id, userId));
+                new DismissedEvent{ChatroomId = Id, OperatorId = userId});
         }
 
         internal void SetRole(long userId, UserChatroom.UserRole roleEnum, long operatorId)
@@ -156,6 +156,27 @@ namespace Chat.Server.Domains.Entities
             EnsureAdmin(operatorId);
             
             GetUserChatroom(userId).Role = roleEnum;
+            _provider.GetRequiredService<IEventBus>().Publish(
+                new SetRoleEvent{ChatroomId = Id, OperatorId = operatorId, UserId = userId, NewRole = roleEnum.ToString()});
+        }
+
+        internal void SetName(string value, long operatorId)
+        {
+            EnsureActive();
+            EnsureNotP2P();
+            EnsureAdmin(operatorId);
+            
+            if (Name == value)
+                return;
+            Name = value;
+            _provider.GetRequiredService<IEventBus>().Publish(
+                new PropertyChangedEvent
+                {
+                    ChatroomId = Id, 
+                    OperatorId = operatorId, 
+                    Key = "Name", 
+                    Value = value
+                });
         }
     }
 }

@@ -174,9 +174,12 @@ namespace Chat.Test.Server
                 async () => await ca.RemovePeopleAsync(userId: 2));
             await Assert.ThrowsAsync<InvalidOperationException>(
                 async () => await ca.DismissAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await ca.ChangeName("haha"));
             await server.GetChatroomApplication(room.Id, 0).SetRole(1, "Admin");
             await ca.AddPeopleAsync(userId: 3);
             await ca.RemovePeopleAsync(userId: 2);
+            await ca.ChangeName("haha");
             await ca.DismissAsync();
         }
         
@@ -203,6 +206,15 @@ namespace Chat.Test.Server
             Assert.Contains(room.Id, user.ChatroomIds);
             await ca.QuitAsync();
             Assert.DoesNotContain(room.Id, user.ChatroomIds);
+        }
+        
+        [Fact]
+        public async Task ChangeName()
+        {
+            var room = await server.NewChatroomAsync(new long[] {1, 2});
+            var ca = server.GetChatroomApplication(room.Id, 0);
+            await ca.ChangeName("haha");
+            Assert.Equal("haha", room.Name);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Chat.Test.Server.Internal
         [Fact]
         public void MapNewChatroomEvent()
         {
-            var e = new NewChatroomEvent(2, creatorId: 1);
+            var e = new NewChatroomEvent{ChatroomId = 2, OperatorId = 1};
             var m = ChatroomEventMapper.Map(e);
             Assert.Equal(new ChatMessage
             {
@@ -31,7 +31,7 @@ namespace Chat.Test.Server.Internal
                 TimeUnixMs = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
                 Content = new Content{Text = "Hello!"}
             };
-            var e = new NewMessageEvent(message);
+            var e = new NewMessageEvent{ChatroomId = 2, OperatorId = 1, Message = message};
             var m = ChatroomEventMapper.Map(e);
             Assert.Equal(message, m);
         }
@@ -39,7 +39,7 @@ namespace Chat.Test.Server.Internal
         [Fact]
         public void MapUserEnteredChatroomEvent()
         {
-            var e = new UserEnteredChatroomEvent(chatroomId: 1, userId: 2);
+            var e = new UserEnteredEvent{ChatroomId = 1, UserId = 2, OperatorId = 0};
             var m = ChatroomEventMapper.Map(e);
             Assert.Equal(new ChatMessage
             {
@@ -53,7 +53,7 @@ namespace Chat.Test.Server.Internal
         [Fact]
         public void MapUserLeftChatroomEvent()
         {
-            var e = new UserLeftChatroomEvent(chatroomId: 1, userId: 2);
+            var e = new UserLeftEvent{ChatroomId = 1, UserId = 2, OperatorId = 0};
             var m = ChatroomEventMapper.Map(e);
             Assert.Equal(new ChatMessage
             {
@@ -61,6 +61,30 @@ namespace Chat.Test.Server.Internal
                 SenderId = 0,
                 ChatroomId = 1,
                 Content = new Content{PeopleLeave = new Content.Types.PeopleLeave{PeopleId = 2}}
+            }, m);
+        }
+        
+        [Fact]
+        public void MapPropertyChangedEvent()
+        {
+            var e = new PropertyChangedEvent
+            {
+                ChatroomId = 1, 
+                OperatorId = 2, 
+                Key = "Name",
+                Value = "New Chatroom",
+            };
+            var m = ChatroomEventMapper.Map(e);
+            Assert.Equal(new ChatMessage
+            {
+                TimeUnixMs = e.Time.ToUnixTimeMilliseconds(),
+                SenderId = 0,
+                ChatroomId = 1,
+                Content = new Content{SetPeoperty = new Content.Types.SetProperty
+                {
+                    Key = "Name",
+                    Value = "New Chatroom"
+                }}
             }, m);
         }
     }

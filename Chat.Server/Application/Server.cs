@@ -1,5 +1,4 @@
 ﻿using System;
-using Chat.Server.Domains.Entities;
 using Chat.Server.Domains.Events;
 using Chat.Server.Domains.Repositories;
 using Chat.Server.Domains.Services;
@@ -8,6 +7,7 @@ using Chat.Server.Infrastructure.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Chat.Server
 {
@@ -35,7 +35,8 @@ namespace Chat.Server
             _eventBus = provider.GetRequiredService<IEventBus>();
             
             var eventLogger = provider.GetService<ILoggerFactory>()?.CreateLogger("Chat.Server.Events");
-            _eventBus.GetEventStream<DomainEvent>().Subscribe(e => eventLogger.LogInformation(e.ToString()));
+            _eventBus.GetEventStream<DomainEvent>().Subscribe(e => eventLogger.LogInformation(
+                e.GetType().Name + " " + JsonConvert.SerializeObject(e)));
             
             _userRepo = provider.GetRequiredService<IUserRepository>();
             _chatroomRepo = provider.GetRequiredService<IChatroomRepository>();

@@ -78,7 +78,7 @@ namespace Chat.Server.Domains.Entities
 		    {
 			    relationship = new UserRelationship(this, target);
 			    UserRelationships.Add(relationship);
-			    _logger?.LogInformation($"New relationship with user {target.Id}");
+			    Logger?.LogInformation($"New relationship with user {target.Id}");
 		    }
 		    return relationship;
 	    }
@@ -125,7 +125,7 @@ namespace Chat.Server.Domains.Entities
 		    this.GetOrAddRelationshipWith(user).SetFriend();
 		    user.GetOrAddRelationshipWith(this).SetFriend();
 		    _provider.GetRequiredService<IEventBus>().Publish(
-			    new BecameFriendsEvent(this.Id, user.Id));
+			    new BecameFriendsEvent{UserId = Id, User2Id = user.Id});
 	    }
     }
 }

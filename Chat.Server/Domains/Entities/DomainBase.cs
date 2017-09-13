@@ -6,9 +6,12 @@ namespace Chat.Server.Domains.Entities
 {
     public abstract class DomainBase
     {
-        public long Id { get; set; }
+        public long Id { get; internal set; }
 
-        protected ILogger _logger;
+        private ILogger _logger;
+        protected ILogger Logger => _logger ??
+            (_logger = _provider.GetService<ILoggerFactory>()?
+                               .CreateLogger(LoggerName));
         protected virtual string LoggerName
         {
             get
@@ -25,12 +28,6 @@ namespace Chat.Server.Domains.Entities
         public void SetServices (IServiceProvider provider)
         {
             _provider = provider;
-            if(_logger == null)
-            {
-				_logger = provider.GetService<ILoggerFactory>()?
-							  .CreateLogger(LoggerName);
-				_logger?.LogTrace($"Created.");
-            }
         }
 
         public override bool Equals(object obj)

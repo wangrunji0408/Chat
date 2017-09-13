@@ -38,9 +38,11 @@ namespace Chat.Server.Domains.Services
             {
                 switch (m.Content.ContentCase)
                 {
-                    case Content.ContentOneofCase.PeopleEnter:
-                        return false;
-                    case Content.ContentOneofCase.PeopleLeave:
+                    case Content.ContentOneofCase.Text:
+                    case Content.ContentOneofCase.Image:
+                    case Content.ContentOneofCase.File:
+                        return true;
+                    default:
                         return false;
                 }
             }

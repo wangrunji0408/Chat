@@ -2,6 +2,16 @@
 {
     abstract class UserEvent: DomainEvent
     {
-        public long UserId { get; protected set; }
+        public long UserId { get; set; }
+    }
+    class BecameFriendsEvent : UserEvent
+    {
+        public long User2Id { get; set; }
+    }
+    class UserLoginEvent : UserEvent
+    {
+    }
+    class UserSignupEvent : UserEvent
+    { 
     }
 }

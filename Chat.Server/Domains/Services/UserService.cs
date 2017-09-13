@@ -30,7 +30,7 @@ namespace Chat.Server.Domains.Services
 	        
 	        _eventBus.GetEventStream<UserSignupEvent>()
 		        .Subscribe(async e => await AddNewUserToGlobalChatroom(e));
-	        _eventBus.GetEventStream<UserEnteredChatroomEvent>()
+	        _eventBus.GetEventStream<UserEnteredEvent>()
 		        .Subscribe(async e =>
 		        {
 			        var room = await _chatroomRepo.GetByIdAsync(e.ChatroomId);
@@ -38,7 +38,7 @@ namespace Chat.Server.Domains.Services
 			        user.UserChatrooms.Add(room.UserChatrooms.First(uc => uc.UserId == e.UserId));
 			        await _userRepo.SaveChangesAsync();
 		        });
-	        _eventBus.GetEventStream<UserLeftChatroomEvent>()
+	        _eventBus.GetEventStream<UserLeftEvent>()
 		        .Subscribe(async e =>
 		        {
 			        var room = await _chatroomRepo.GetByIdAsync(e.ChatroomId);
@@ -64,7 +64,7 @@ namespace Chat.Server.Domains.Services
             var response = user.Login(request);
             _userRepo.Update(user);
             await _userRepo.SaveChangesAsync();
-			_eventBus.Publish(new UserLoginEvent(user.Id));
+			_eventBus.Publish(new UserLoginEvent{UserId = user.Id});
             return response;
 		}
 
@@ -93,7 +93,7 @@ namespace Chat.Server.Domains.Services
 			_userRepo.Add(user);
 			await _userRepo.SaveChangesAsync();
 
-			_eventBus.Publish(new UserSignupEvent(user.Id));
+			_eventBus.Publish(new UserSignupEvent{UserId = user.Id});
 
 			return new SignupResponse
 			{

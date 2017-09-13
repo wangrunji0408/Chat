@@ -30,7 +30,7 @@ namespace Chat.Server.Infrastructure.EntityFramework
             Add(chatroom);
             await SaveChangesAsync();
             _provider.GetRequiredService<IEventBus>().Publish(
-                new NewChatroomEvent(chatroom.Id, creatorId));
+                new NewChatroomEvent{ChatroomId = chatroom.Id, OperatorId = creatorId});
             return chatroom;
         }
         
