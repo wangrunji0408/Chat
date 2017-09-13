@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Chat.Server.Domains.Services
 {
-    public class UserService
+    public class UserService: DomainService
     {
 	    private readonly ILogger _logger;
 	    private readonly IUserRepository _userRepo;
@@ -28,24 +28,24 @@ namespace Chat.Server.Domains.Services
 	        _chatroomRepo = provider.GetRequiredService<IChatroomRepository>();
 	        _eventBus = provider.GetRequiredService<IEventBus>();
 	        
-	        _eventBus.GetEventStream<UserSignupEvent>()
-		        .Subscribe(async e => await AddNewUserToGlobalChatroom(e));
-	        _eventBus.GetEventStream<UserEnteredEvent>()
+	        Subcriptions.Add(_eventBus.GetEventStream<UserSignupEvent>()
+		        .Subscribe(async e => await AddNewUserToGlobalChatroom(e)));
+	        Subcriptions.Add(_eventBus.GetEventStream<UserEnteredEvent>()
 		        .Subscribe(async e =>
 		        {
 			        var room = await _chatroomRepo.GetByIdAsync(e.ChatroomId);
 			        var user = await _userRepo.GetByIdAsync(e.UserId);
 			        user.UserChatrooms.Add(room.UserChatrooms.First(uc => uc.UserId == e.UserId));
 			        await _userRepo.SaveChangesAsync();
-		        });
-	        _eventBus.GetEventStream<UserLeftEvent>()
+		        }));
+	        Subcriptions.Add(_eventBus.GetEventStream<UserLeftEvent>()
 		        .Subscribe(async e =>
 		        {
 			        var room = await _chatroomRepo.GetByIdAsync(e.ChatroomId);
 			        var user = await _userRepo.GetByIdAsync(e.UserId);
 			        user.UserChatrooms.Remove(user.UserChatrooms.First(uc => uc.ChatroomId == e.ChatroomId));
 			        await _userRepo.SaveChangesAsync();
-		        });
+		        }));
         }
 	    
 	    async Task AddNewUserToGlobalChatroom(UserSignupEvent e)

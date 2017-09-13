@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Chat.Server.Domains.Services
 {
-    class MessageService
+    class MessageService: DomainService
     {
         readonly ILogger _logger;
         readonly IMessageRepository _messageRepo;
@@ -26,10 +26,10 @@ namespace Chat.Server.Domains.Services
             _messageRepo = provider.GetRequiredService<IMessageRepository>();
 
             _eventBus = provider.GetRequiredService<IEventBus>();
-            _eventBus.GetEventStream<ChatroomEvent>()
+            Subcriptions.Add(_eventBus.GetEventStream<ChatroomEvent>()
                 .Select(ChatroomEventMapper.Map)
                 .Where(m => m?.Content != null)
-                .Subscribe(async m => await StoreMessage(m));
+                .Subscribe(async m => await StoreMessage(m)));
         }
 
         internal static bool IsValid(ChatMessage m)

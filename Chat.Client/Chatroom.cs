@@ -9,8 +9,8 @@ namespace Chat.Client
 {
     public class Chatroom
     {
-        internal long UserId { get; set; }
-        internal long RoomId { get; set; }
+        public long UserId { get; internal set; }
+        public long RoomId { get; internal set; }
         internal IServerService ServerService { get; set; }
 
         void ThrowIfFailed(SendMessageResponse response)
@@ -97,7 +97,7 @@ namespace Chat.Client
             return await ServerService.GetMessages(request).ToList();
         }
         
-        public async Task<long> NewChatroom(IEnumerable<long> peopleIds, string name = "")
+        public async Task<Chatroom> NewChatroom(IEnumerable<long> peopleIds, string name = "")
         {
             var message = new ChatMessage
             {
@@ -110,7 +110,45 @@ namespace Chat.Client
             };
             var rsp = await ServerService.SendMessageAsync(message);
             ThrowIfFailed(rsp);
-            return rsp.ChatroomId;
+            return new Chatroom
+            {
+                RoomId = rsp.ChatroomId,
+                UserId = UserId,
+                ServerService = ServerService
+            };
+        }
+        
+        public async Task QuitAsync()
+        {
+            var message = new ChatMessage
+            {
+                SenderId = UserId,
+                ChatroomId = RoomId,
+                Content = new Content
+                {
+                    Quit = new Content.Types.Quit()
+                }
+            };
+            ThrowIfFailed(await ServerService.SendMessageAsync(message));
+        }
+
+        public async Task ChangeNameAsync(string value)
+        {
+            await SetPropertyAsync("Name", value);
+        }
+        
+        async Task SetPropertyAsync(string key, string value)
+        {
+            var message = new ChatMessage
+            {
+                SenderId = UserId,
+                ChatroomId = RoomId,
+                Content = new Content 
+                { 
+                    SetPeoperty = new Content.Types.SetProperty { Key = key, Value = value } 
+                }
+            };
+            ThrowIfFailed(await ServerService.SendMessageAsync(message));
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Threading.Tasks;
-using Chat.Core.Models;
 using Chat.Server.Domains.Entities;
 using Chat.Server.Domains.Events.User;
 using Chat.Server.Domains.Repositories;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Chat.Server.Domains.Services
 {
-    class ChatroomService
+    class ChatroomService : DomainService
     {
         readonly ILogger _logger;
         readonly IChatroomRepository _chatroomRepo;
@@ -27,10 +27,10 @@ namespace Chat.Server.Domains.Services
             _userRepo = provider.GetRequiredService<IUserRepository>();
             _eventBus = provider.GetRequiredService<IEventBus>();
 
-            _eventBus.GetEventStream<BecameFriendsEvent>().Subscribe(
-                async e => await GetOrAddP2PChatroom(e.UserId, e.User2Id));
+            Subcriptions.Add(_eventBus.GetEventStream<BecameFriendsEvent>().Subscribe(
+                async e => await GetOrAddP2PChatroom(e.UserId, e.User2Id)));            
         }
-        
+
         /// <summary>
         /// 确保创建1号全局聊天室
         /// </summary>

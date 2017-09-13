@@ -107,7 +107,12 @@ namespace Chat.Server
                     case Content.ContentOneofCase.Announce:
                         break;
                     case Content.ContentOneofCase.SetPeoperty:
-                        break;
+	                    var spArgs = message.Content.SetPeoperty;
+	                    if (spArgs.Key == "Name")
+		                    await ca.ChangeName(spArgs.Value);
+	                    else
+	                    	throw new ArgumentException("PropertyName");
+	                    break;
                     case Content.ContentOneofCase.Withdraw:
                         break;
                     default:

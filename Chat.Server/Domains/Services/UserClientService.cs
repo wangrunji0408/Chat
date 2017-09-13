@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Chat.Server.Domains.Services
 {
-    class UserClientService
+    class UserClientService: DomainService
     {
         private Dictionary<long, IClientService> dict
             = new Dictionary<long, IClientService>();
@@ -29,10 +29,10 @@ namespace Chat.Server.Domains.Services
             _chatroomRepo = provider.GetRequiredService<IChatroomRepository>();
             _eventBus = provider.GetRequiredService<IEventBus>();
             
-            _eventBus.GetEventStream<ChatroomEvent>()
+            Subcriptions.Add(_eventBus.GetEventStream<ChatroomEvent>()
                 .Select(ChatroomEventMapper.Map)
                 .Where(m => m?.Content != null)
-                .Subscribe(async m => await ForwardMessage(m));
+                .Subscribe(async m => await ForwardMessage(m)));
         }
         
         internal IClientService this[long userId]
