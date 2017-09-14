@@ -78,7 +78,7 @@ namespace Chat.Core.Models {
             "KAUSDgoGdXNlcklkGAMgASgDIkIKDExvZ2luUmVxdWVzdBIQCgh1c2VybmFt",
             "ZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIOCgZ1c2VySWQYAyABKAMiTwoN",
             "TG9naW5SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEg4KBmRldGFpbBgCIAEo",
-            "CRINCgV0b2tlbhgDIAEoDBIOCgZ1c2VySWQYBCABKAMiSQoRTWFrZUZyaWVu",
+            "CRINCgV0b2tlbhgDIAEoCRIOCgZ1c2VySWQYBCABKAMiSQoRTWFrZUZyaWVu",
             "ZFJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSEAoIdGFyZ2V0SWQYAiABKAMS",
             "EAoIZ3JlZXRpbmcYAyABKAki0gEKEk1ha2VGcmllbmRSZXNwb25zZRIvCgZz",
             "dGF0dXMYASABKA4yHy5jaGF0Lk1ha2VGcmllbmRSZXNwb25zZS5TdGF0dXMS",
@@ -5582,9 +5582,9 @@ namespace Chat.Core.Models {
 
     /// <summary>Field number for the "token" field.</summary>
     public const int TokenFieldNumber = 3;
-    private pb::ByteString token_ = pb::ByteString.Empty;
+    private string token_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString Token {
+    public string Token {
       get { return token_; }
       set {
         token_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
@@ -5649,7 +5649,7 @@ namespace Chat.Core.Models {
       }
       if (Token.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteBytes(Token);
+        output.WriteString(Token);
       }
       if (UserId != 0L) {
         output.WriteRawTag(32);
@@ -5667,7 +5667,7 @@ namespace Chat.Core.Models {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Detail);
       }
       if (Token.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Token);
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
       }
       if (UserId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
@@ -5711,7 +5711,7 @@ namespace Chat.Core.Models {
             break;
           }
           case 26: {
-            Token = input.ReadBytes();
+            Token = input.ReadString();
             break;
           }
           case 32: {

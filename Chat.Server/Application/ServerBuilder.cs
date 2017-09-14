@@ -35,7 +35,8 @@ namespace Chat.Server
 			        opt.Password.RequireDigit = false;
 			        opt.Password.RequireUppercase = false;
 			        // TODO
-		        }).AddEntityFrameworkStores<ServerDbContext>()
+		        })
+		        .AddEntityFrameworkStores<ServerDbContext>()
 		        .AddDefaultTokenProviders();
 	        
 	        

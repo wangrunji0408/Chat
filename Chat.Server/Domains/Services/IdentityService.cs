@@ -75,6 +75,13 @@ namespace Chat.Server.Domains.Services
 		    await _chatroomRepo.SaveChangesAsync();
 	    }
 
+	    public async Task<bool> VertifyTokenAsync(long userId, string token)
+	    {
+		    var iuser = await _userManager.FindByIdAsync(userId.ToString());
+		    return await _userManager.VerifyUserTokenAsync(
+			    iuser, TokenOptions.DefaultProvider, "login", token);
+	    }
+
 		public async Task<LoginResponse> LoginAsync(LoginRequest request)
 		{
 			var iuser = await _userManager.FindByNameAsync(request.Username);
@@ -91,14 +98,16 @@ namespace Chat.Server.Domains.Services
 					Success = false,
 					Detail = "Wrong password"
 				};
-			var token = await _userManager.CreateSecurityTokenAsync(iuser);
+			
+			var token = await _userManager.GenerateUserTokenAsync(
+				iuser, TokenOptions.DefaultProvider, "login");
 			
 			_eventBus.Publish(new UserLoginEvent{UserId = iuser.Id});
             return new LoginResponse
             {
 	            Success = true, 
 	            UserId = iuser.Id,
-	            Token = ByteString.CopyFrom(token)
+	            Token = token
             };
 		}
 

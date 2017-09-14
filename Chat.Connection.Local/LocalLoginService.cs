@@ -23,7 +23,7 @@ namespace Chat.Connection.Local
             var userId = token.UserId;
             var client = new LocalClientService(Client);
             _server.SetUserClient(userId, client);
-            return new LocalServerService(_server, userId);
+            return new LocalServerService(_server, userId, token.Token);
         }
 
         public async Task<LoginResponse> LoginAsync(LoginRequest request)

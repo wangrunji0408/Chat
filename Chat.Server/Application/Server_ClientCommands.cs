@@ -21,6 +21,11 @@ namespace Chat.Server
 
 	public partial class Server
 	{
+		public Task<bool> VertifyTokenAsync(long userId, string token)
+		{
+			return _identityService.VertifyTokenAsync(userId, token);
+		}
+		
 		public Task<LoginResponse> LoginAsync(LoginRequest request)
 		{
 			return _identityService.LoginAsync(request);

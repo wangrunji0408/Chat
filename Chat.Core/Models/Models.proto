@@ -203,7 +203,7 @@ message LoginResponse
 {
     bool success = 1;
 	string detail = 2;
-    bytes token = 3;
+    string token = 3;
     int64 userId = 4;
 }
 
