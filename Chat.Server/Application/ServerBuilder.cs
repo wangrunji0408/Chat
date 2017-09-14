@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using AutoMapper;
-using Chat.Core.Models;
-using Chat.Server.Domains.Entities;
 using Chat.Server.Domains.Repositories;
-using Chat.Server.Domains.Services;
 using Chat.Server.Infrastructure.EntityFramework;
 using Chat.Server.Infrastructure.EventBus;
+using Chat.Server.Infrastructure.Identity;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -22,14 +22,14 @@ namespace Chat.Server
 
         public ServerBuilder()
         {
-			_container = new ServiceCollection();
+		    _container = new ServiceCollection();
             _container.AddSingleton<ILoggerFactory>(_loggerFactory = new LoggerFactory());
 	        _container.AddSingleton<IEventBus, EventBus>();
 	        _container.AddSingleton<IUserRepository, UserRepository>();
 	        _container.AddSingleton<IChatroomRepository, ChatroomRepository>();
 	        _container.AddSingleton<IMessageRepository, MessageRepository>();
-	        _container.AddAutoMapper(ConfigAutoMapper);
-
+	        
+	        
 	        var serviceTypes = Assembly.GetExecutingAssembly().GetTypes()
 		        .Where(type => type.Namespace == "Chat.Server.Domains.Services"
 		                       && !type.IsAbstract && type.Name.EndsWith("Service"));
@@ -37,12 +37,18 @@ namespace Chat.Server
 		        _container.AddSingleton(service);
         }
 
-	    private void ConfigAutoMapper(IMapperConfigurationExpression cfg)
-	    {
-	    }
-
 	    public Server Build()
 		{
+			_container.AddIdentity<ChatIdentityUser, ChatIdentityRole>(opt =>
+				{
+					opt.Password.RequiredLength = 8;
+					opt.Password.RequireNonAlphanumeric = false;
+					opt.Password.RequireDigit = false;
+					opt.Password.RequireUppercase = false;
+					// TODO
+				}).AddEntityFrameworkStores<IdentityDbContext<ChatIdentityUser, ChatIdentityRole, long>>()
+				.AddDefaultTokenProviders();
+			
 			var provider = _container.BuildServiceProvider();
             var server = new Server(provider);
 			_connection?.After(server, provider);
@@ -70,6 +76,7 @@ namespace Chat.Server
         public ServerBuilder ConfigureDbContext (Action<DbContextOptionsBuilder> optionsAction)
         {
             _container.AddDbContext<ServerDbContext>(optionsAction);
+	        _container.AddDbContext<IdentityDbContext<ChatIdentityUser, ChatIdentityRole, long>>(optionsAction);
             return this;
         }
 

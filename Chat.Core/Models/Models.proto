@@ -186,15 +186,9 @@ message SignupRequest
 
 message SignupResponse
 {
-	enum Status
-	{
-		Success = 0;
-		UsernameExist = 101;
-		UsernameFormatWrong = 102;
-		PasswordFormatWrong = 103;
-	}
-	Status status = 1;
+    bool success = 1;
 	string detail = 2;
+    int32 errorCode = 4;
 	int64 userId = 3;
 }
 
@@ -207,14 +201,10 @@ message LoginRequest
 
 message LoginResponse
 {
-	enum Status
-	{
-		Success = 0;
-		NoSuchUser = 101;
-		WrongPassword = 102;
-	}
-	Status status = 1;
+    bool success = 1;
 	string detail = 2;
+    bytes token = 3;
+    int64 userId = 4;
 }
 
 message MakeFriendRequest

@@ -21,7 +21,7 @@ namespace Chat.Test.Server
                 Username = "user1",
                 Password = password
             });
-            Assert.Equal(SignupResponse.Types.Status.PasswordFormatWrong, response.Status);
+            Assert.False(response.Success);
         }
 
         [Theory]
@@ -33,7 +33,7 @@ namespace Chat.Test.Server
                 Username = username,
                 Password = "password"
             });
-            Assert.Equal(SignupResponse.Types.Status.UsernameFormatWrong, response.Status);
+            Assert.False(response.Success);
         }
 
         [Fact]
@@ -43,19 +43,18 @@ namespace Chat.Test.Server
             var response = await server.SignupAsync(new SignupRequest
             {
                 Username = "user1",
-                Password = "password"
+                Password = "password123"
             });
             var t1 = DateTimeOffset.Now;
             Assert.Equal(new SignupResponse
             {
-                Status = SignupResponse.Types.Status.Success,
+                Success = true,
                 UserId = 1
             }, response);
 
             var user = await server.FindUserAsync(1);
             Assert.NotNull(user);
             Assert.Equal("user1", user.Username);
-            Assert.Equal("password", user.Password);
             Assert.Equal(1, user.Id);
             Assert.True(user.CreateTime > t0 && user.CreateTime < t1);
         }
@@ -70,7 +69,7 @@ namespace Chat.Test.Server
             };
             await server.SignupAsync(request);
             var response = await server.SignupAsync(request);
-            Assert.Equal(SignupResponse.Types.Status.UsernameExist, response.Status);
+            Assert.False(response.Success);
         }
     }
 }

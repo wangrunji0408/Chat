@@ -12,25 +12,15 @@ namespace Chat.Client
     public class Client
     {
         private readonly ILogger _logger;
-        private readonly ILoginService _loginService;
+        internal IServerService _serverService;
 
-        private IServerService _serverService;
-
-        public Client(IServiceProvider serviceProvider)
+        public Client(IServiceProvider provider)
         {
-            _loginService = serviceProvider.GetRequiredService<ILoginService>();
-            _logger = serviceProvider.GetService<ILoggerFactory>()?.CreateLogger($"Client {UserId}");
+            _logger = provider.GetService<ILoggerFactory>()?
+                                     .CreateLogger($"Client {UserId}");
         }
 
         public long UserId { get; internal set; }
-        internal string Password { get; set; }
-
-        private IServerService ServerService
-        {
-            get => _serverService ??
-                   throw new NullReferenceException("The client has not login. ServerService is null.");
-            set => _serverService = value;
-        }
 
         public Chatroom GetChatroom(long roomId)
         {
@@ -49,17 +39,6 @@ namespace Chat.Client
         }
 
         public event EventHandler<ChatMessage> NewMessage;
-
-        public async Task<bool> Login()
-        {
-            var request = new LoginRequest
-            {
-                UserId = UserId,
-                Password = Password
-            };
-            _serverService = await _loginService.LoginAsync(request);
-            return _serverService != null;
-        }
 
         public Task<List<ChatMessage>> GetMessages (GetMessagesRequest request)
         {

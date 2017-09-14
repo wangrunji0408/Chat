@@ -1,12 +1,15 @@
 ﻿using System.Threading.Tasks;
 using Chat.Core.Models;
 using Chat.Server.Domains.Entities;
+using Chat.Server.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Chat.Server.Infrastructure.EntityFramework
 {
     public class ServerDbContext: DbContext
     {
+        public DbSet<ChatIdentityUser> IdentityUsers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Chatroom> Chatrooms { get; set; }
         public DbSet<ChatMessage> Messages { get; set; }

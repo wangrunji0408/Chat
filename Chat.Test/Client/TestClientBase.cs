@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Chat.Client;
 using Chat.Core.Interfaces;
 using Chat.Core.Models;
+using Xunit;
 
 namespace Chat.Test.Client
 {
@@ -19,7 +21,7 @@ namespace Chat.Test.Client
         {
             Setup();
             // ReSharper disable once VirtualMemberCallInConstructor
-            SignupAndLogin();
+            SignupAndLoginAsync().Wait();
         }
 
         private void Setup()
@@ -30,14 +32,14 @@ namespace Chat.Test.Client
             server = setup.server;
         }
 
-        protected virtual void SignupAndLogin()
+        protected virtual async Task SignupAndLoginAsync()
         {
-            loginService.SignupAsync(new SignupRequest {Username = "user1", Password = "123456"}).Wait();
-            loginService.SignupAsync(new SignupRequest {Username = "user2", Password = "123456"}).Wait();
-            client1 = clientBuilder.SetUser(1, "123456").Build();
-            client2 = clientBuilder.SetUser(2, "123456").Build();
-            client1.Login().Wait();
-            client2.Login().Wait();
+            var rsp1 = await loginService.SignupAsync(new SignupRequest {Username = "user1", Password = "password123"});
+            var rsp2 = await loginService.SignupAsync(new SignupRequest {Username = "user2", Password = "password123"});
+            Assert.True(rsp1.Success, rsp1.Detail);
+            Assert.True(rsp2.Success, rsp2.Detail);
+            client1 = await clientBuilder.Login("user1", "password123");
+            client2 = await clientBuilder.Login("user2", "password123");
         }
     }
 }

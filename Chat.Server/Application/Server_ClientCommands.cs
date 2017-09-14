@@ -23,12 +23,12 @@ namespace Chat.Server
 	{
 		public Task<LoginResponse> LoginAsync(LoginRequest request)
 		{
-			return _userService.LoginAsync(request);
+			return _identityService.LoginAsync(request);
 		}
 
 		public Task<SignupResponse> SignupAsync(SignupRequest request)
 		{
-			return _userService.SignupAsync(request);
+			return _identityService.SignupAsync(request);
 		}
 
 		public void SetUserClient(long userId, IClientService client)

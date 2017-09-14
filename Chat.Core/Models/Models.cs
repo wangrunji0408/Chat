@@ -73,30 +73,26 @@ namespace Chat.Core.Models {
             "GAIgASgDImAKF0dldENoYXRyb29tSW5mb1Jlc3BvbnNlEg8KB3N1Y2Nlc3MY",
             "ASABKAgSJAoIY2hhdHJvb20YAiABKAsyEi5jaGF0LkNoYXRyb29tSW5mbxIO",
             "CgZkZXRhaWwYAyABKAkiMwoNU2lnbnVwUmVxdWVzdBIQCgh1c2VybmFtZRgB",
-            "IAEoCRIQCghwYXNzd29yZBgCIAEoCSK5AQoOU2lnbnVwUmVzcG9uc2USKwoG",
-            "c3RhdHVzGAEgASgOMhsuY2hhdC5TaWdudXBSZXNwb25zZS5TdGF0dXMSDgoG",
-            "ZGV0YWlsGAIgASgJEg4KBnVzZXJJZBgDIAEoAyJaCgZTdGF0dXMSCwoHU3Vj",
-            "Y2VzcxAAEhEKDVVzZXJuYW1lRXhpc3QQZRIXChNVc2VybmFtZUZvcm1hdFdy",
-            "b25nEGYSFwoTUGFzc3dvcmRGb3JtYXRXcm9uZxBnIkIKDExvZ2luUmVxdWVz",
-            "dBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIOCgZ1c2Vy",
-            "SWQYAyABKAMihQEKDUxvZ2luUmVzcG9uc2USKgoGc3RhdHVzGAEgASgOMhou",
-            "Y2hhdC5Mb2dpblJlc3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwYAiABKAkiOAoG",
-            "U3RhdHVzEgsKB1N1Y2Nlc3MQABIOCgpOb1N1Y2hVc2VyEGUSEQoNV3JvbmdQ",
-            "YXNzd29yZBBmIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAKCHNlbmRlcklkGAEg",
-            "ASgDEhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5nGAMgASgJItIBChJN",
-            "YWtlRnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgOMh8uY2hhdC5NYWtl",
-            "RnJpZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSJ7CgZTdGF0",
-            "dXMSCgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxyZWFkeUZyaWVuZBAC",
-            "EhAKDFVzZXJOb3RFeGlzdBADEhEKDVVzZXJOb3RPbmxpbmUQBBITCg9SZXNw",
-            "b25zZVRpbWVvdXQQBRIMCghXaXRoU2VsZhAGIjoKFEdldFBlb3BsZUluZm9S",
-            "ZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgDIj0K",
-            "FUdldFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJbmZvGAEgASgLMhAu",
-            "Y2hhdC5QZW9wbGVJbmZvImIKEkdldE1lc3NhZ2VzUmVxdWVzdBIQCghzZW5k",
-            "ZXJJZBgBIAEoAxIXCg9hZnRlclRpbWVVbml4TXMYAiABKAMSEgoKY2hhdHJv",
-            "b21JZBgDIAEoAxINCgVjb3VudBgEIAEoBSJECg5HZXREYXRhUmVxdWVzdBIQ",
-            "CghmaWxlTmFtZRgBIAEoCRIMCgRzZWVkGAogASgFEhIKCnJhbmRMZW5ndGgY",
-            "CyABKAUiHwoPR2V0RGF0YVJlc3BvbnNlEgwKBGRhdGEYASABKAxCE6oCEENo",
-            "YXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
+            "IAEoCRIQCghwYXNzd29yZBgCIAEoCSJUCg5TaWdudXBSZXNwb25zZRIPCgdz",
+            "dWNjZXNzGAEgASgIEg4KBmRldGFpbBgCIAEoCRIRCgllcnJvckNvZGUYBCAB",
+            "KAUSDgoGdXNlcklkGAMgASgDIkIKDExvZ2luUmVxdWVzdBIQCgh1c2VybmFt",
+            "ZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIOCgZ1c2VySWQYAyABKAMiTwoN",
+            "TG9naW5SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEg4KBmRldGFpbBgCIAEo",
+            "CRINCgV0b2tlbhgDIAEoDBIOCgZ1c2VySWQYBCABKAMiSQoRTWFrZUZyaWVu",
+            "ZFJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSEAoIdGFyZ2V0SWQYAiABKAMS",
+            "EAoIZ3JlZXRpbmcYAyABKAki0gEKEk1ha2VGcmllbmRSZXNwb25zZRIvCgZz",
+            "dGF0dXMYASABKA4yHy5jaGF0Lk1ha2VGcmllbmRSZXNwb25zZS5TdGF0dXMS",
+            "DgoGZGV0YWlsGAIgASgJInsKBlN0YXR1cxIKCgZBY2NlcHQQABIKCgZSZWZ1",
+            "c2UQARIRCg1BbHJlYWR5RnJpZW5kEAISEAoMVXNlck5vdEV4aXN0EAMSEQoN",
+            "VXNlck5vdE9ubGluZRAEEhMKD1Jlc3BvbnNlVGltZW91dBAFEgwKCFdpdGhT",
+            "ZWxmEAYiOgoUR2V0UGVvcGxlSW5mb1JlcXVlc3QSEAoIc2VuZGVySWQYASAB",
+            "KAMSEAoIdGFyZ2V0SWQYAiABKAMiPQoVR2V0UGVvcGxlSW5mb1Jlc3BvbnNl",
+            "EiQKCnBlb3BsZUluZm8YASABKAsyEC5jaGF0LlBlb3BsZUluZm8iYgoSR2V0",
+            "TWVzc2FnZXNSZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhcKD2FmdGVyVGlt",
+            "ZVVuaXhNcxgCIAEoAxISCgpjaGF0cm9vbUlkGAMgASgDEg0KBWNvdW50GAQg",
+            "ASgFIkQKDkdldERhdGFSZXF1ZXN0EhAKCGZpbGVOYW1lGAEgASgJEgwKBHNl",
+            "ZWQYCiABKAUSEgoKcmFuZExlbmd0aBgLIAEoBSIfCg9HZXREYXRhUmVzcG9u",
+            "c2USDAoEZGF0YRgBIAEoDEITqgIQQ2hhdC5Db3JlLk1vZGVsc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -129,9 +125,9 @@ namespace Chat.Core.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetChatroomInfoRequest), global::Chat.Core.Models.GetChatroomInfoRequest.Parser, new[]{ "SenderId", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetChatroomInfoResponse), global::Chat.Core.Models.GetChatroomInfoResponse.Parser, new[]{ "Success", "Chatroom", "Detail" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SignupRequest), global::Chat.Core.Models.SignupRequest.Parser, new[]{ "Username", "Password" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SignupResponse), global::Chat.Core.Models.SignupResponse.Parser, new[]{ "Status", "Detail", "UserId" }, null, new[]{ typeof(global::Chat.Core.Models.SignupResponse.Types.Status) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SignupResponse), global::Chat.Core.Models.SignupResponse.Parser, new[]{ "Success", "Detail", "ErrorCode", "UserId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.LoginRequest), global::Chat.Core.Models.LoginRequest.Parser, new[]{ "Username", "Password", "UserId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.LoginResponse), global::Chat.Core.Models.LoginResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.LoginResponse.Types.Status) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.LoginResponse), global::Chat.Core.Models.LoginResponse.Parser, new[]{ "Success", "Detail", "Token", "UserId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.MakeFriendRequest), global::Chat.Core.Models.MakeFriendRequest.Parser, new[]{ "SenderId", "TargetId", "Greeting" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.MakeFriendResponse), global::Chat.Core.Models.MakeFriendResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.MakeFriendResponse.Types.Status) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeopleInfoRequest), global::Chat.Core.Models.GetPeopleInfoRequest.Parser, new[]{ "SenderId", "TargetId" }, null, null, null),
@@ -5177,8 +5173,9 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SignupResponse(SignupResponse other) : this() {
-      status_ = other.status_;
+      success_ = other.success_;
       detail_ = other.detail_;
+      errorCode_ = other.errorCode_;
       userId_ = other.userId_;
     }
 
@@ -5187,14 +5184,14 @@ namespace Chat.Core.Models {
       return new SignupResponse(this);
     }
 
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 1;
-    private global::Chat.Core.Models.SignupResponse.Types.Status status_ = 0;
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Chat.Core.Models.SignupResponse.Types.Status Status {
-      get { return status_; }
+    public bool Success {
+      get { return success_; }
       set {
-        status_ = value;
+        success_ = value;
       }
     }
 
@@ -5206,6 +5203,17 @@ namespace Chat.Core.Models {
       get { return detail_; }
       set {
         detail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "errorCode" field.</summary>
+    public const int ErrorCodeFieldNumber = 4;
+    private int errorCode_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ErrorCode {
+      get { return errorCode_; }
+      set {
+        errorCode_ = value;
       }
     }
 
@@ -5233,8 +5241,9 @@ namespace Chat.Core.Models {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Status != other.Status) return false;
+      if (Success != other.Success) return false;
       if (Detail != other.Detail) return false;
+      if (ErrorCode != other.ErrorCode) return false;
       if (UserId != other.UserId) return false;
       return true;
     }
@@ -5242,8 +5251,9 @@ namespace Chat.Core.Models {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Status != 0) hash ^= Status.GetHashCode();
+      if (Success != false) hash ^= Success.GetHashCode();
       if (Detail.Length != 0) hash ^= Detail.GetHashCode();
+      if (ErrorCode != 0) hash ^= ErrorCode.GetHashCode();
       if (UserId != 0L) hash ^= UserId.GetHashCode();
       return hash;
     }
@@ -5255,9 +5265,9 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Status != 0) {
+      if (Success != false) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) Status);
+        output.WriteBool(Success);
       }
       if (Detail.Length != 0) {
         output.WriteRawTag(18);
@@ -5267,16 +5277,23 @@ namespace Chat.Core.Models {
         output.WriteRawTag(24);
         output.WriteInt64(UserId);
       }
+      if (ErrorCode != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(ErrorCode);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Status != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      if (Success != false) {
+        size += 1 + 1;
       }
       if (Detail.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Detail);
+      }
+      if (ErrorCode != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ErrorCode);
       }
       if (UserId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
@@ -5289,11 +5306,14 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.Status != 0) {
-        Status = other.Status;
+      if (other.Success != false) {
+        Success = other.Success;
       }
       if (other.Detail.Length != 0) {
         Detail = other.Detail;
+      }
+      if (other.ErrorCode != 0) {
+        ErrorCode = other.ErrorCode;
       }
       if (other.UserId != 0L) {
         UserId = other.UserId;
@@ -5309,7 +5329,7 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            status_ = (global::Chat.Core.Models.SignupResponse.Types.Status) input.ReadEnum();
+            Success = input.ReadBool();
             break;
           }
           case 18: {
@@ -5320,23 +5340,13 @@ namespace Chat.Core.Models {
             UserId = input.ReadInt64();
             break;
           }
+          case 32: {
+            ErrorCode = input.ReadInt32();
+            break;
+          }
         }
       }
     }
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the SignupResponse message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum Status {
-        [pbr::OriginalName("Success")] Success = 0,
-        [pbr::OriginalName("UsernameExist")] UsernameExist = 101,
-        [pbr::OriginalName("UsernameFormatWrong")] UsernameFormatWrong = 102,
-        [pbr::OriginalName("PasswordFormatWrong")] PasswordFormatWrong = 103,
-      }
-
-    }
-    #endregion
 
   }
 
@@ -5537,8 +5547,10 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public LoginResponse(LoginResponse other) : this() {
-      status_ = other.status_;
+      success_ = other.success_;
       detail_ = other.detail_;
+      token_ = other.token_;
+      userId_ = other.userId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5546,14 +5558,14 @@ namespace Chat.Core.Models {
       return new LoginResponse(this);
     }
 
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 1;
-    private global::Chat.Core.Models.LoginResponse.Types.Status status_ = 0;
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Chat.Core.Models.LoginResponse.Types.Status Status {
-      get { return status_; }
+    public bool Success {
+      get { return success_; }
       set {
-        status_ = value;
+        success_ = value;
       }
     }
 
@@ -5565,6 +5577,28 @@ namespace Chat.Core.Models {
       get { return detail_; }
       set {
         detail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "token" field.</summary>
+    public const int TokenFieldNumber = 3;
+    private pb::ByteString token_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Token {
+      get { return token_; }
+      set {
+        token_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 4;
+    private long userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
       }
     }
 
@@ -5581,16 +5615,20 @@ namespace Chat.Core.Models {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Status != other.Status) return false;
+      if (Success != other.Success) return false;
       if (Detail != other.Detail) return false;
+      if (Token != other.Token) return false;
+      if (UserId != other.UserId) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Status != 0) hash ^= Status.GetHashCode();
+      if (Success != false) hash ^= Success.GetHashCode();
       if (Detail.Length != 0) hash ^= Detail.GetHashCode();
+      if (Token.Length != 0) hash ^= Token.GetHashCode();
+      if (UserId != 0L) hash ^= UserId.GetHashCode();
       return hash;
     }
 
@@ -5601,24 +5639,38 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Status != 0) {
+      if (Success != false) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) Status);
+        output.WriteBool(Success);
       }
       if (Detail.Length != 0) {
         output.WriteRawTag(18);
         output.WriteString(Detail);
+      }
+      if (Token.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteBytes(Token);
+      }
+      if (UserId != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(UserId);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Status != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      if (Success != false) {
+        size += 1 + 1;
       }
       if (Detail.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Detail);
+      }
+      if (Token.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Token);
+      }
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
       }
       return size;
     }
@@ -5628,11 +5680,17 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.Status != 0) {
-        Status = other.Status;
+      if (other.Success != false) {
+        Success = other.Success;
       }
       if (other.Detail.Length != 0) {
         Detail = other.Detail;
+      }
+      if (other.Token.Length != 0) {
+        Token = other.Token;
+      }
+      if (other.UserId != 0L) {
+        UserId = other.UserId;
       }
     }
 
@@ -5645,29 +5703,24 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            status_ = (global::Chat.Core.Models.LoginResponse.Types.Status) input.ReadEnum();
+            Success = input.ReadBool();
             break;
           }
           case 18: {
             Detail = input.ReadString();
             break;
           }
+          case 26: {
+            Token = input.ReadBytes();
+            break;
+          }
+          case 32: {
+            UserId = input.ReadInt64();
+            break;
+          }
         }
       }
     }
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the LoginResponse message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum Status {
-        [pbr::OriginalName("Success")] Success = 0,
-        [pbr::OriginalName("NoSuchUser")] NoSuchUser = 101,
-        [pbr::OriginalName("WrongPassword")] WrongPassword = 102,
-      }
-
-    }
-    #endregion
 
   }
 

@@ -19,7 +19,7 @@ namespace Chat.Server
         readonly IChatroomRepository _chatroomRepo;
         readonly IMessageRepository _messageRepo;
 
-        readonly UserService _userService;
+        readonly IdentityService _identityService;
         readonly ChatroomService _chatroomService;
         readonly MessageService _messageService;
         private readonly UserClientService _userClientService;
@@ -42,7 +42,7 @@ namespace Chat.Server
             _chatroomRepo = provider.GetRequiredService<IChatroomRepository>();
             _messageRepo = provider.GetRequiredService<IMessageRepository>();
 
-            _userService = provider.GetRequiredService<UserService>();
+            _identityService = provider.GetRequiredService<IdentityService>();
             _chatroomService = provider.GetRequiredService<ChatroomService>();
             _messageService = provider.GetRequiredService<MessageService>();
             _userClientService = provider.GetRequiredService<UserClientService>();

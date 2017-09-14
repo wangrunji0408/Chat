@@ -11,8 +11,8 @@ namespace Chat.Client.ConsoleApp.Options
     [Verb("login")]
     class LoginOption: OptionBase
     {
-        [Value(0, MetaName = "UserID")]
-        public long UserId { get; set; }
+        [Value(0, MetaName = "Username")]
+        public string Username { get; set; }
         [Value(1, MetaName = "Password")]
         public string Password { get; set; }
 
@@ -25,12 +25,10 @@ namespace Chat.Client.ConsoleApp.Options
             }
             var builder = new ClientBuilder()
                 .UseLoggerFactory(app.LoggerFactory)
-                .UseGrpc(app.copt.ServerAddress, app.copt.Host, app.copt.Port)
-                .SetUser(UserId, Password);
-            app.Client = builder.Build();
+                .UseGrpc(app.copt.ServerAddress, app.copt.Host, app.copt.Port);
             try 
             {
-                app.Client.Login().Wait();
+                app.Client = builder.Login(Username, Password).Result;
                 ListenClientEvents(app.Client);
                 ShowMessages(app.Client);
             }

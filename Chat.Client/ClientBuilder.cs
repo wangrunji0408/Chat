@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Chat.Core.Interfaces;
+using Chat.Core.Models;
 
 namespace Chat.Client
 {
     public sealed class ClientBuilder
     {
-        long _userId;
-        string _username;
-        string _password;
         ILoggerFactory _loggerFactory;
         readonly IServiceCollection _serviceCollection;
         ClientConnectionBuilder _connection;
@@ -21,26 +20,22 @@ namespace Chat.Client
             _serviceCollection.AddSingleton(_loggerFactory);
         }
 
-        public Client Build()
+        public async Task<Client> Login(string username, string password)
         {
-            var loginService = _connection.Before();
-            _serviceCollection.AddSingleton(loginService);
-            var provider = _serviceCollection.BuildServiceProvider();
-            var client = new Client(provider)
+            var request = new LoginRequest
             {
-                UserId = _userId,
-                Password = _password,
+                Username = username,
+                Password = password
             };
+            var loginService = _connection.Before();
+            var response = await loginService.LoginAsync(request);
+            if(!response.Success)
+                throw new Exception($"Failed to login. {response.Detail}");
+            var provider = _serviceCollection.BuildServiceProvider();
+            var client = new Client(provider){UserId = response.UserId};
             _connection.After(client, provider);
+            client._serverService = await loginService.GetService(response);
             return client;
-        }
-
-        public ClientBuilder SetUser (long userId, string password)
-        {
-            //_username = username;
-            _userId = userId;
-            _password = password;
-            return this;
         }
 
         public ClientBuilder SetConnection (ClientConnectionBuilder connection)

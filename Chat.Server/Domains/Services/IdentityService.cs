@@ -6,24 +6,30 @@ using Chat.Server.Domains.Entities;
 using Chat.Server.Domains.Events.Chatroom;
 using Chat.Server.Domains.Events.User;
 using Chat.Server.Domains.Repositories;
-using Chat.Server.Infrastructure.EntityFramework;
 using Chat.Server.Infrastructure.EventBus;
+using Chat.Server.Infrastructure.Identity;
+using Google.Protobuf;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Chat.Server.Domains.Services
 {
-    public class UserService: DomainService
+    public class IdentityService: DomainService
     {
 	    private readonly ILogger _logger;
 	    private readonly IUserRepository _userRepo;
 	    private readonly IChatroomRepository _chatroomRepo;
 	    private readonly IEventBus _eventBus;
+	    private readonly UserManager<ChatIdentityUser> _userManager;
+	    private readonly SignInManager<ChatIdentityUser> _signInManager;
 
-        public UserService(IServiceProvider provider)
+        public IdentityService(IServiceProvider provider)
         {
             _logger = provider.GetService<ILoggerFactory>()?
-                              .CreateLogger<UserService>();
+                              .CreateLogger<IdentityService>();
+	        _userManager = provider.GetRequiredService<UserManager<ChatIdentityUser>>();
+	        _signInManager = provider.GetRequiredService<SignInManager<ChatIdentityUser>>();
 	        _userRepo = provider.GetRequiredService<IUserRepository>();
 	        _chatroomRepo = provider.GetRequiredService<IChatroomRepository>();
 	        _eventBus = provider.GetRequiredService<IEventBus>();
@@ -46,7 +52,20 @@ namespace Chat.Server.Domains.Services
 			        user.UserChatrooms.Remove(user.UserChatrooms.First(uc => uc.ChatroomId == e.ChatroomId));
 			        await _userRepo.SaveChangesAsync();
 		        }));
+//	        EnsureAddAdmin().Wait();
         }
+
+	    async Task EnsureAddAdmin()
+	    {
+		    if(await _userManager.FindByNameAsync("Admin") != null)
+			    return;
+		    await _userManager.CreateAsync(new ChatIdentityUser("Admin"), "admin12345");
+		    var admin = await _userManager.FindByNameAsync("Admin");
+		    if(admin == null)
+			    throw new Exception("Failed to create admin.");
+//		    if(admin.Id != 0)
+//			    throw new Exception($"Admin's ID is not 0, is {admin.Id}.");
+	    }
 	    
 	    async Task AddNewUserToGlobalChatroom(UserSignupEvent e)
 	    {
@@ -58,38 +77,43 @@ namespace Chat.Server.Domains.Services
 
 		public async Task<LoginResponse> LoginAsync(LoginRequest request)
 		{
-            var user = await _userRepo.FindByIdAsync(request.UserId);
-			if (user == null)
-				return new LoginResponse { Status = LoginResponse.Types.Status.NoSuchUser };
-            var response = user.Login(request);
-            _userRepo.Update(user);
-            await _userRepo.SaveChangesAsync();
-			_eventBus.Publish(new UserLoginEvent{UserId = user.Id});
-            return response;
+			var iuser = await _userManager.FindByNameAsync(request.Username);
+			if(iuser == null)
+				return new LoginResponse
+				{
+					Success = false,
+					Detail = "No such user"
+				};
+			var result = await _signInManager.CheckPasswordSignInAsync(iuser, request.Password, false);
+			if(!result.Succeeded)
+				return new LoginResponse
+				{
+					Success = false,
+					Detail = "Wrong password"
+				};
+			var token = await _userManager.CreateSecurityTokenAsync(iuser);
+			
+			_eventBus.Publish(new UserLoginEvent{UserId = iuser.Id});
+            return new LoginResponse
+            {
+	            Success = true, 
+	            UserId = iuser.Id,
+	            Token = ByteString.CopyFrom(token)
+            };
 		}
 
 		public async Task<SignupResponse> SignupAsync(SignupRequest request)
 		{
-			if (!StringCheckService.CheckUsername(request.Username, out var reason))
+			var iuser = new ChatIdentityUser(request.Username);
+			var result = await _userManager.CreateAsync(iuser, request.Password);
+			if(!result.Succeeded)
 				return new SignupResponse
 				{
-					Status = SignupResponse.Types.Status.UsernameFormatWrong,
-					Detail = reason
+					Success = false,
+					Detail = string.Join("\n", result.Errors.Select(e => e.Description))
 				};
-			if (!StringCheckService.CheckPassword(request.Password, out reason))
-				return new SignupResponse
-				{
-					Status = SignupResponse.Types.Status.PasswordFormatWrong,
-					Detail = reason
-				};
-            if (await _userRepo.ContainsUsernameAsync(request.Username))
-				return new SignupResponse
-				{
-					Status = SignupResponse.Types.Status.UsernameExist
-				};
-
-			var user = new User(request.Username, request.Password);
-
+			iuser = await _userManager.FindByNameAsync(request.Username);
+			var user = new User(iuser.Id, iuser.UserName);
 			_userRepo.Add(user);
 			await _userRepo.SaveChangesAsync();
 
@@ -97,7 +121,7 @@ namespace Chat.Server.Domains.Services
 
 			return new SignupResponse
 			{
-				Status = SignupResponse.Types.Status.Success,
+				Success = true,
 				UserId = user.Id
 			};
 		}

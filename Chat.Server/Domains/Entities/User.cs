@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using Chat.Core.Interfaces;
 using Chat.Core.Models;
 using Chat.Server.Domains.Events.User;
 using Chat.Server.Domains.Services;
@@ -18,7 +16,6 @@ namespace Chat.Server.Domains.Entities
     public class User: DomainBase
     {
         public string Username { get; private set; }
-        public string Password { get; private set; }
         public DateTimeOffset CreateTime { get; private set; } = DateTimeOffset.Now;
         public DateTimeOffset LastLoginTime { get; private set; }
         internal ICollection<UserChatroom> UserChatrooms { get; private set; }
@@ -36,10 +33,10 @@ namespace Chat.Server.Domains.Entities
 		    
 	    }
 
-	    internal User(string username, string password)
+	    internal User(long id, string username)
 	    {
+		    Id = id;
 		    Username = username;
-		    Password = password;
 	    }
 
 	    public bool IsFriend(User user)
@@ -51,19 +48,6 @@ namespace Chat.Server.Domains.Entities
 	    {
 		    return UserRelationships.FirstOrDefault(r => r.ToUserId == userId)?.IsFriend ?? false;
 	    }
-
-	    internal LoginResponse Login (LoginRequest request)
-        {
-			if (Password != request.Password)
-				return new LoginResponse { Status = LoginResponse.Types.Status.WrongPassword };
-
-			LastLoginTime = DateTimeOffset.Now;
-
-			return new LoginResponse
-			{
-				Status = LoginResponse.Types.Status.Success
-			};
-        }
 
         public override string ToString()
         {

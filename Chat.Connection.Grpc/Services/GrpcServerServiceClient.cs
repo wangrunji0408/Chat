@@ -28,20 +28,6 @@ namespace Chat.Connection.Grpc
             return await base.SendMessageAsync(request);
         }
 
-        public async Task<IServerService> LoginAsync(LoginRequest request)
-        {
-            if(logged)
-                throw new InvalidOperationException("Can only be login once.");
-            var response = await base.LoginAsync(request);
-            if(response.Status != LoginResponse.Types.Status.Success)
-                throw new Exception($"Failed to login. [{response.Status}] {response.Detail}");
-            logged = true;
-            userId = request.UserId;
-
-            await RegisterClient();
-
-            return this;
-        }
 
         async Task RegisterClient ()
         {
@@ -53,6 +39,25 @@ namespace Chat.Connection.Grpc
 			var response = await base.RegisterAddressAsync(request);
 			if (response.Success == false)
 				throw new Exception($"Failed to register client service. {response.Detail}");
+        }
+
+        public async Task<IServerService> GetService(LoginResponse token)
+        {
+            if(!token.Success)
+                throw new Exception($"Failed to login. {token.Detail}");
+            logged = true;
+            userId = token.UserId;
+
+            await RegisterClient();
+
+            return this;
+        }
+
+        public async Task<LoginResponse> LoginAsync(LoginRequest request)
+        {
+            if(logged)
+                throw new InvalidOperationException("Can only be login once.");
+            return await base.LoginAsync(request);
         }
 
         public async Task<SignupResponse> SignupAsync(SignupRequest request)
