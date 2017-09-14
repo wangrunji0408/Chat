@@ -14,8 +14,8 @@ namespace Chat.Client.ConsoleApp.Options.Chatroom
         
         internal override void Execute(Program app)
         {
-            var id = Chatroom.NewChatroom(PeopleIds, Name).Result;
-            Console.WriteLine($"Success to create chatroom. Id = {id}.");
+            var room = Chatroom.NewChatroom(PeopleIds, Name).Result;
+            Console.WriteLine($"Success to create chatroom. Id = {room.RoomId}.");
         }
     }
 }

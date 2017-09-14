@@ -28,6 +28,15 @@ namespace Chat.Server
 	        _container.AddSingleton<IUserRepository, UserRepository>();
 	        _container.AddSingleton<IChatroomRepository, ChatroomRepository>();
 	        _container.AddSingleton<IMessageRepository, MessageRepository>();
+	        _container.AddIdentity<ChatIdentityUser, ChatIdentityRole>(opt =>
+		        {
+			        opt.Password.RequiredLength = 8;
+			        opt.Password.RequireNonAlphanumeric = false;
+			        opt.Password.RequireDigit = false;
+			        opt.Password.RequireUppercase = false;
+			        // TODO
+		        }).AddEntityFrameworkStores<ServerDbContext>()
+		        .AddDefaultTokenProviders();
 	        
 	        
 	        var serviceTypes = Assembly.GetExecutingAssembly().GetTypes()
@@ -39,17 +48,8 @@ namespace Chat.Server
 
 	    public Server Build()
 		{
-			_container.AddIdentity<ChatIdentityUser, ChatIdentityRole>(opt =>
-				{
-					opt.Password.RequiredLength = 8;
-					opt.Password.RequireNonAlphanumeric = false;
-					opt.Password.RequireDigit = false;
-					opt.Password.RequireUppercase = false;
-					// TODO
-				}).AddEntityFrameworkStores<IdentityDbContext<ChatIdentityUser, ChatIdentityRole, long>>()
-				.AddDefaultTokenProviders();
-			
 			var provider = _container.BuildServiceProvider();
+			EnsureDatabaseCreated(provider);
             var server = new Server(provider);
 			_connection?.After(server, provider);
 			return server;
@@ -76,7 +76,7 @@ namespace Chat.Server
         public ServerBuilder ConfigureDbContext (Action<DbContextOptionsBuilder> optionsAction)
         {
             _container.AddDbContext<ServerDbContext>(optionsAction);
-	        _container.AddDbContext<IdentityDbContext<ChatIdentityUser, ChatIdentityRole, long>>(optionsAction);
+//	        _container.AddDbContext<IdentityDbContext<ChatIdentityUser, ChatIdentityRole, long>>(optionsAction);
             return this;
         }
 
@@ -89,6 +89,23 @@ namespace Chat.Server
 		{
             return ConfigureDbContext(builder => builder.UseInMemoryDatabase(name));
 		}
+	    
+	    private void EnsureDatabaseCreated(IServiceProvider provider)
+	    {
+		    foreach (var context in provider.GetServices<DbContext>())
+		    {
+			    context.Database.EnsureCreated();
+			    try
+			    {
+				    context.Database.Migrate();
+			    }
+			    catch (Exception e)
+			    {
+				    _loggerFactory.CreateLogger<ServerBuilder>()
+					    .LogError(e, "An error occurred when database migrate. It's normal when using InMemory database.");
+			    }
+		    }
+	    }
     }
 
     public abstract class ServerConnectionBuilder

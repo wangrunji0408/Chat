@@ -1,4 +1,5 @@
-﻿using Chat.Core.Models;
+﻿using System;
+using Chat.Core.Models;
 using CommandLine;
 
 namespace Chat.Server.ConsoleApp.Options.User
@@ -19,7 +20,9 @@ namespace Chat.Server.ConsoleApp.Options.User
 				Username = Username,
 				Password = Password
 			};
-			var response = app.server.SignupAsync(request);
+			var response = app.server.SignupAsync(request).Result;
+	        if(!response.Success)
+		        Console.WriteLine($"Failed to signup. {response.Detail}");
         }
     }
 }

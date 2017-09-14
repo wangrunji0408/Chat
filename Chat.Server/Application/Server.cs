@@ -47,22 +47,7 @@ namespace Chat.Server
             _messageService = provider.GetRequiredService<MessageService>();
             _userClientService = provider.GetRequiredService<UserClientService>();
             
-            EnsureDatabaseCreated(provider);
             _chatroomService.EnsureGlobalChatroomCreated();
-        }
-
-        private void EnsureDatabaseCreated(IServiceProvider provider)
-        {
-            var context = provider.GetRequiredService<ServerDbContext>();
-            context.Database.EnsureCreated();
-            try
-            {
-                context.Database.Migrate();
-            }
-            catch (Exception e)
-            {
-                _logger?.LogError(e, "An error occurred when database migrate. It's normal when using InMemory database.");
-            }
         }
     }
 }
