@@ -28,7 +28,7 @@ namespace Chat.Client.ConsoleApp.Options
                 .UseGrpc(app.copt.ServerAddress, app.copt.Host, app.copt.Port);
             try 
             {
-                app.Client = builder.Login(Username, Password).Result;
+                app.Client = builder.LoginAsync(Username, Password).Result;
                 ListenClientEvents(app.Client);
                 ShowMessages(app.Client);
             }

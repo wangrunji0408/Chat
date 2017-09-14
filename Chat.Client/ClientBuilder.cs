@@ -20,7 +20,7 @@ namespace Chat.Client
             _serviceCollection.AddSingleton(_loggerFactory);
         }
 
-        public async Task<Client> Login(string username, string password)
+        public async Task<Client> LoginAsync(string username, string password)
         {
             var request = new LoginRequest
             {
@@ -36,6 +36,19 @@ namespace Chat.Client
             _connection.After(client, provider);
             client._serverService = await loginService.GetService(response);
             return client;
+        }
+        
+        public async Task SignupAsync(string username, string password)
+        {
+            var request = new SignupRequest
+            {
+                Username = username,
+                Password = password
+            };
+            var loginService = _connection.Before();
+            var response = await loginService.SignupAsync(request);
+            if(!response.Success)
+                throw new Exception($"Failed to signup. {response.Detail}");
         }
 
         public ClientBuilder SetConnection (ClientConnectionBuilder connection)

@@ -14,7 +14,6 @@ namespace Chat.Test.Client
         protected Chat.Client.Client client1;
         protected Chat.Client.Client client2;
         protected ClientBuilder clientBuilder;
-        protected ILoginService loginService;
         protected Chat.Server.Server server;
 
         public TestClientBase()
@@ -27,19 +26,16 @@ namespace Chat.Test.Client
         private void Setup()
         {
             var setup = new TSetup();
-            loginService = setup.loginService;
             clientBuilder = setup.clientBuilder;
             server = setup.server;
         }
 
         protected virtual async Task SignupAndLoginAsync()
         {
-            var rsp1 = await loginService.SignupAsync(new SignupRequest {Username = "user1", Password = "password123"});
-            var rsp2 = await loginService.SignupAsync(new SignupRequest {Username = "user2", Password = "password123"});
-            Assert.True(rsp1.Success, rsp1.Detail);
-            Assert.True(rsp2.Success, rsp2.Detail);
-            client1 = await clientBuilder.Login("user1", "password123");
-            client2 = await clientBuilder.Login("user2", "password123");
+            await clientBuilder.SignupAsync("user1", "password123");
+            await clientBuilder.SignupAsync("user2", "password123");
+            client1 = await clientBuilder.LoginAsync("user1", "password123");
+            client2 = await clientBuilder.LoginAsync("user2", "password123");
         }
     }
 }

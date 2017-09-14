@@ -46,4 +46,13 @@ namespace Chat.Test.Client
     public class TestGetDataGrpcLocal : TestGetData<GrpcLocalSetup>
     {
     }
+    
+    public class TestTokenLocal : TestToken<LocalSetup>
+    {
+    }
+    
+    [Collection("GrpcLocal")]
+    public class TestTokenGrpcLocal : TestToken<GrpcLocalSetup>
+    {
+    }
 }

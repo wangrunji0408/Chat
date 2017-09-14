@@ -16,22 +16,22 @@ namespace Chat.Test.Client
         [Fact]
         public async Task Signup()
         {
-            var rsp = await loginService.SignupAsync(new SignupRequest {Username = "user1", Password = "password123"});
-            Assert.True(rsp.Success, rsp.Detail);
+            await clientBuilder.SignupAsync("user1", "password123");
         }
         
         [Fact]
         public async Task Login()
         {
-            await loginService.SignupAsync(new SignupRequest {Username = "user1", Password = "password123"});
-            client1 = await clientBuilder.Login("user1", "password123");
+            await clientBuilder.SignupAsync("user1", "password123");
+            client1 = await clientBuilder.LoginAsync("user1", "password123");
         }
 
         [Fact]
         public async Task Login_WrongPassword()
         {
-            await loginService.SignupAsync(new SignupRequest {Username = "user1", Password = "password123"});
-            await Assert.ThrowsAsync<Exception>(async () => client1 = await clientBuilder.Login("user1", "password"));
+            await clientBuilder.SignupAsync("user1", "password123");
+            await Assert.ThrowsAsync<Exception>(async () => 
+                await clientBuilder.LoginAsync("user1", "password"));
         }
     }
 }

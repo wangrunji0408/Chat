@@ -13,12 +13,17 @@ namespace Chat.Connection.Local
     {
         readonly long _userId;
         readonly Server _server;
-        private readonly string _token;
+        private string _token;
         
         internal LocalServerService(Server server, long userId, string token)
         {
             _server = server;
             _userId = userId;
+            _token = token;
+        }
+
+        internal void SetToken(string token)
+        {
             _token = token;
         }
 

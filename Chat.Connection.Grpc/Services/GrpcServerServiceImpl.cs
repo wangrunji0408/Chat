@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -37,6 +38,24 @@ namespace Chat.Connection.Grpc
             _logger?.LogInformation($"Start gRPC Server @ {host}:{port}");
         }
 
+        string GetValue(IEnumerable<Metadata.Entry> list, string key)
+        {
+            return list
+                .Where(e => e.Key == key)
+                .Select(e => e.Value)
+                .FirstOrDefault();
+        }
+        
+        async Task<long> VertifyTokenAsync(ServerCallContext context)
+        {
+            var token = GetValue(context.RequestHeaders, "token");
+            var id = long.Parse(GetValue(context.RequestHeaders, "id"));
+            var ok = await _server.VertifyTokenAsync(id, token);
+            if(!ok)
+                throw new RpcException(new Status(StatusCode.Unauthenticated, "Failed to vertify token."));
+            return id;
+        }
+        
         public override Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
         {
             _logger?.LogInformation($"New login request from {context.Peer}");
@@ -45,8 +64,7 @@ namespace Chat.Connection.Grpc
 
         public override async Task<Response> RegisterAddress(RegisterAddressRequest request, ServerCallContext context)
         {
-			await Task.CompletedTask;
-
+            await VertifyTokenAsync(context);
 			var target = request.Address;
             //var target = context.Peer;
             //target = target.Remove(target.LastIndexOf(':') + 1) + port;
@@ -60,6 +78,8 @@ namespace Chat.Connection.Grpc
         public override async Task<SendMessageResponse> SendMessage(SendMessageRequest request,
             ServerCallContext context)
         {
+            var id = await VertifyTokenAsync(context);
+            request.Message.SenderId = id;
             return await _server.ReceiveNewMessageAsync(request.Message);
         }
 
@@ -70,6 +90,7 @@ namespace Chat.Connection.Grpc
 
         public override async Task GetMessages(GetMessagesRequest request, IServerStreamWriter<ChatMessage> responseStream, ServerCallContext context)
         {
+            await VertifyTokenAsync(context);
             var messages = await _server.GetMessagesAsync(request);
             foreach (var message in messages)
                 await responseStream.WriteAsync(message);
@@ -77,23 +98,27 @@ namespace Chat.Connection.Grpc
 
         public override async Task<GetChatroomInfoResponse> GetChatroomInfo(GetChatroomInfoRequest request, ServerCallContext context)
         {
+            await VertifyTokenAsync(context);
             var info = await _server.GetChatroomInfoAsync(request.SenderId, request.ChatroomId);
             return new GetChatroomInfoResponse{Success = true, Chatroom = info};
         }
 
         public override async Task<GetPeopleInfoResponse> GetPeoplesInfo(GetPeopleInfoRequest request, ServerCallContext context)
         {
+            await VertifyTokenAsync(context);
             var info = await _server.GetPeopleInfoAsync(request.SenderId, request.TargetId);
             return new GetPeopleInfoResponse{PeopleInfo = info};
         }
 
-        public override Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request, ServerCallContext context)
+        public override async Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request, ServerCallContext context)
         {
-            return _server.MakeFriendsAsync(request);
+            await VertifyTokenAsync(context);
+            return await _server.MakeFriendsAsync(request);
         }
 
         public override async Task GetData(GetDataRequest request, IServerStreamWriter<GetDataResponse> responseStream, ServerCallContext context)
         {
+            await VertifyTokenAsync(context);
             var responses = _server.GetDataAsync(request);
             var enumor = responses.GetEnumerator();
             while (await enumor.MoveNext(context.CancellationToken))
