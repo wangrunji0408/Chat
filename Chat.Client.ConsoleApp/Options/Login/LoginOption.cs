@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Chat.Client.ConsoleApp.Options.Chatroom;
+using Chat.Client.ConsoleApp.Options.People;
 using Chat.Connection.Grpc;
 using Chat.Core.Models;
 using CommandLine;
@@ -9,7 +11,7 @@ using Microsoft.Extensions.Logging;
 namespace Chat.Client.ConsoleApp.Options
 {
     [Verb("login")]
-    class LoginOption: OptionBase
+    class LoginOption: RootOptionBase
     {
         [Value(0, MetaName = "Username")]
         public string Username { get; set; }
@@ -18,17 +20,9 @@ namespace Chat.Client.ConsoleApp.Options
 
         internal override void Execute(Program app)
         {
-            if(app.Client != null)
-            {
-                Console.Error.WriteLine("Already login.");
-                return;
-            }
-            var builder = new ClientBuilder()
-                .UseLoggerFactory(app.LoggerFactory)
-                .UseGrpc(app.copt.ServerAddress, app.copt.Host, app.copt.Port);
             try 
             {
-                app.Client = builder.LoginAsync(Username, Password).Result;
+                app.Client = app.Builder.LoginAsync(Username, Password).Result;
                 ListenClientEvents(app.Client);
                 ShowMessages(app.Client);
             }
@@ -36,6 +30,35 @@ namespace Chat.Client.ConsoleApp.Options
             {
                 Console.Error.WriteLine($"Failed: {e.Message}");
                 app.Client = null;
+                return;
+            }
+            ReadCommands(app);
+        }
+        
+        void ReadCommands(Program app)
+        {
+            while(true)
+            {
+                Console.Write($"{Username} > ");
+                try
+                {
+                    var cmd = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(cmd))
+                        continue;
+                    app.Cmdlogger.LogTrace(cmd);
+                    var args = cmd.Split(' ');
+                    if (args[0] == "q" || args[0] == "exit")
+                        return;
+                    Parser.Default.ParseArguments<RoomOption, PeopleOption>(args)
+                        .WithParsed<OptionBase>(opt => opt.Execute(app))
+                        .WithNotParsed(app.ParseFailed);
+                }
+                catch (Exception e)
+                {
+                    Console.Error.WriteLine("Client throws an exception. Check 'console-exception.log' for details.");
+                    Console.Error.WriteLine(e.Message);
+                    app.Logger.LogError(e, "Client throws an exception.");
+                }
             }
         }
         

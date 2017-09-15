@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Chat.Client.ConsoleApp.Options;
+using Chat.Client.ConsoleApp.Options.Chatroom;
 using Chat.Connection.Grpc;
 using Microsoft.Extensions.Logging;
 using CommandLine;
@@ -17,6 +20,7 @@ namespace Chat.Client.ConsoleApp
         internal ILogger Cmdlogger;
 
         internal ConsoleOption copt;
+        internal ClientBuilder Builder;
         internal Client Client;
 
         internal void Setup()
@@ -26,6 +30,9 @@ namespace Chat.Client.ConsoleApp
             Logger = LoggerFactory.CreateLogger("Chat.Client.Console");
             Cmdlogger = LoggerFactory.CreateLogger("Chat.Client.Console.Commands");
             GrpcConnectionExtension.SetLogger(LoggerFactory);
+            Builder = new ClientBuilder()
+                .UseLoggerFactory(LoggerFactory)
+                .UseGrpc(copt.ServerAddress, copt.Host, copt.Port);
         }
         
         internal void ParseFailed(IEnumerable<Error> obj)
@@ -37,6 +44,10 @@ namespace Chat.Client.ConsoleApp
 
         void ReadCommands()
         {
+            var suboptions = Assembly.GetExecutingAssembly().DefinedTypes
+                .Where(t => t.IsSubclassOf(typeof(RootOptionBase)))
+                .ToArray();
+            
             while(true)
             {
                 Console.Write("> ");
@@ -47,8 +58,8 @@ namespace Chat.Client.ConsoleApp
                         continue;
                     Cmdlogger.LogTrace(cmd);
                     var args = cmd.Split(' ');
-                    Parser.Default.ParseArguments<RoomOption, PeopleOption, LoginOption, SignupOption>(args)
-                        .WithParsed<OptionBase>(opt => opt.Execute(this))
+                    Parser.Default.ParseArguments(args, suboptions)
+                        .WithParsed<RootOptionBase>(opt => opt.Execute(this))
                         .WithNotParsed(ParseFailed);
                 }
                 catch (Exception e)
