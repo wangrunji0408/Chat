@@ -16,7 +16,7 @@ namespace Chat.Server.ConsoleApp.Options.Chatroom
         internal override void Execute(Program app)
         {
             app.server.GetChatroomApplication(ChatroomId, 0)
-                .SetRole(UserId, Role).Wait();
+                .SetRoleAsync(UserId, Role).Wait();
         }
     }
 }

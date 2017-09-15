@@ -100,7 +100,7 @@ namespace Chat.Server.Application
             await _chatroomRepo.SaveChangesAsync();
         }
 
-        public async Task SetRole(long userId, string role)
+        public async Task SetRoleAsync(long userId, string role)
         {
             var chatroom = await _chatroomRepo.GetByIdAsync(ChatroomId);
             var roleEnum = (UserChatroom.UserRole)Enum.Parse(typeof(UserChatroom.UserRole), role);
@@ -108,10 +108,17 @@ namespace Chat.Server.Application
             await _chatroomRepo.SaveChangesAsync();
         }
         
-        public async Task ChangeName(string value)
+        public async Task ChangeNameAsync(string value)
         {
             var chatroom = await _chatroomRepo.GetByIdAsync(ChatroomId);
             chatroom.SetName(value, OperatorId);
+            await _chatroomRepo.SaveChangesAsync();
+        }
+        
+        public async Task BlockAsync(long userId)
+        {
+            var chatroom = await _chatroomRepo.GetByIdAsync(ChatroomId);
+            chatroom.Block(userId, OperatorId);
             await _chatroomRepo.SaveChangesAsync();
         }
     }

@@ -114,7 +114,7 @@ namespace Chat.Server
                     case Content.ContentOneofCase.SetPeoperty:
 	                    var spArgs = message.Content.SetPeoperty;
 	                    if (spArgs.Key == "Name")
-		                    await ca.ChangeName(spArgs.Value);
+		                    await ca.ChangeNameAsync(spArgs.Value);
 	                    else
 	                    	throw new ArgumentException("PropertyName");
 	                    break;

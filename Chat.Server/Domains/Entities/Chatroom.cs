@@ -135,7 +135,10 @@ namespace Chat.Server.Domains.Entities
 
         internal UserChatroom GetUserChatroom(long userId)
         {
-            return UserChatrooms.FirstOrDefault(uc => uc.UserId == userId);
+            var u = UserChatrooms.FirstOrDefault(uc => uc.UserId == userId);
+            if(u == null)
+                throw new InvalidOperationException("User not exist.");
+            return u;
         }
 
         internal void DismissBy(long userId)
@@ -176,6 +179,23 @@ namespace Chat.Server.Domains.Entities
                     OperatorId = operatorId, 
                     Key = "Name", 
                     Value = value
+                });
+        }
+        
+        internal void Block(long userId, long operatorId)
+        {
+            EnsureActive();
+            EnsureNotP2P();
+            EnsureAdmin(operatorId);
+
+            GetUserChatroom(userId).IsBlocked = true;
+
+            _provider.GetRequiredService<IEventBus>().Publish(
+                new UserBlockedEvent
+                {
+                    ChatroomId = Id, 
+                    OperatorId = operatorId, 
+                    UserId = userId
                 });
         }
     }

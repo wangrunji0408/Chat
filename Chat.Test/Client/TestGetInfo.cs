@@ -9,17 +9,6 @@ namespace Chat.Test.Client
         where TSetup : SetupBase, new()
     {
         [Fact]
-        public async Task GetChatroomInfo()
-        {
-            Assert.Equal(new ChatroomInfo
-            {
-                Id = GlobalChatroomId,
-                Name = "Global Chatroom",
-                PeopleIds = {1, 2}
-            }, await client1.GetChatroom(GlobalChatroomId).GetInfoAsync());
-        }
-
-        [Fact]
         public async Task GetMessageAfter()
         {
             var room = client1.GetChatroom(GlobalChatroomId);

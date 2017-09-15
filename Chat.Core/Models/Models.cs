@@ -63,36 +63,39 @@ namespace Chat.Core.Models {
             "aGF0LlBlb3BsZUluZm8uU3RyYW5nZXJJbmZvSAAaSgoIU2VsZkluZm8SJAoI",
             "c2V0dGluZ3MYASABKAsyEi5jaGF0LlVzZXJTZXR0aW5ncxIYChBzaWdudXBU",
             "aW1lVW5peE1zGAIgASgDGgwKCkZyaWVuZEluZm8aDgoMU3RyYW5nZXJJbmZv",
-            "QgoKCHJvbGVJbmZvIg4KDFVzZXJTZXR0aW5ncyJaCgxDaGF0cm9vbUluZm8S",
-            "CgoCaWQYASABKAMSEQoJcGVvcGxlSWRzGAIgAygDEg4KBmhvc3RJZBgDIAEo",
-            "AxIMCgRuYW1lGAQgASgJEg0KBWlzUDJQGAUgASgIIjkKEk5ld0NoYXRyb29t",
-            "UmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxIRCglwZW9wbGVJZHMYAiADKAUi",
-            "TAoTTmV3Q2hhdHJvb21SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEiQKCGNo",
-            "YXRyb29tGAIgASgLMhIuY2hhdC5DaGF0cm9vbUluZm8iPgoWR2V0Q2hhdHJv",
-            "b21JbmZvUmVxdWVzdBIQCghzZW5kZXJJZBgBIAEoAxISCgpjaGF0cm9vbUlk",
-            "GAIgASgDImAKF0dldENoYXRyb29tSW5mb1Jlc3BvbnNlEg8KB3N1Y2Nlc3MY",
-            "ASABKAgSJAoIY2hhdHJvb20YAiABKAsyEi5jaGF0LkNoYXRyb29tSW5mbxIO",
-            "CgZkZXRhaWwYAyABKAkiMwoNU2lnbnVwUmVxdWVzdBIQCgh1c2VybmFtZRgB",
-            "IAEoCRIQCghwYXNzd29yZBgCIAEoCSJUCg5TaWdudXBSZXNwb25zZRIPCgdz",
-            "dWNjZXNzGAEgASgIEg4KBmRldGFpbBgCIAEoCRIRCgllcnJvckNvZGUYBCAB",
-            "KAUSDgoGdXNlcklkGAMgASgDIkIKDExvZ2luUmVxdWVzdBIQCgh1c2VybmFt",
-            "ZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIOCgZ1c2VySWQYAyABKAMiTwoN",
-            "TG9naW5SZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEg4KBmRldGFpbBgCIAEo",
-            "CRINCgV0b2tlbhgDIAEoCRIOCgZ1c2VySWQYBCABKAMiSQoRTWFrZUZyaWVu",
-            "ZFJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSEAoIdGFyZ2V0SWQYAiABKAMS",
-            "EAoIZ3JlZXRpbmcYAyABKAki0gEKEk1ha2VGcmllbmRSZXNwb25zZRIvCgZz",
-            "dGF0dXMYASABKA4yHy5jaGF0Lk1ha2VGcmllbmRSZXNwb25zZS5TdGF0dXMS",
-            "DgoGZGV0YWlsGAIgASgJInsKBlN0YXR1cxIKCgZBY2NlcHQQABIKCgZSZWZ1",
-            "c2UQARIRCg1BbHJlYWR5RnJpZW5kEAISEAoMVXNlck5vdEV4aXN0EAMSEQoN",
-            "VXNlck5vdE9ubGluZRAEEhMKD1Jlc3BvbnNlVGltZW91dBAFEgwKCFdpdGhT",
-            "ZWxmEAYiOgoUR2V0UGVvcGxlSW5mb1JlcXVlc3QSEAoIc2VuZGVySWQYASAB",
-            "KAMSEAoIdGFyZ2V0SWQYAiABKAMiPQoVR2V0UGVvcGxlSW5mb1Jlc3BvbnNl",
-            "EiQKCnBlb3BsZUluZm8YASABKAsyEC5jaGF0LlBlb3BsZUluZm8iYgoSR2V0",
-            "TWVzc2FnZXNSZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgDEhcKD2FmdGVyVGlt",
-            "ZVVuaXhNcxgCIAEoAxISCgpjaGF0cm9vbUlkGAMgASgDEg0KBWNvdW50GAQg",
-            "ASgFIkQKDkdldERhdGFSZXF1ZXN0EhAKCGZpbGVOYW1lGAEgASgJEgwKBHNl",
-            "ZWQYCiABKAUSEgoKcmFuZExlbmd0aBgLIAEoBSIfCg9HZXREYXRhUmVzcG9u",
-            "c2USDAoEZGF0YRgBIAEoDEITqgIQQ2hhdC5Db3JlLk1vZGVsc2IGcHJvdG8z"));
+            "QgoKCHJvbGVJbmZvIg4KDFVzZXJTZXR0aW5ncyLGAQoMQ2hhdHJvb21JbmZv",
+            "EgoKAmlkGAEgASgDEjAKB3Blb3BsZXMYAiADKAsyHy5jaGF0LkNoYXRyb29t",
+            "SW5mby5QZW9wbGVJblJvb20SDAoEbmFtZRgEIAEoCRINCgVpc1AyUBgFIAEo",
+            "CBIQCghpc0FjdGl2ZRgGIAEoCBpJCgxQZW9wbGVJblJvb20SCgoCaWQYASAB",
+            "KAMSDAoEbmFtZRgCIAEoCRIRCglpc0Jsb2NrZWQYAyABKAgSDAoEcm9sZRgE",
+            "IAEoCSI5ChJOZXdDaGF0cm9vbVJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMS",
+            "EQoJcGVvcGxlSWRzGAIgAygFIkwKE05ld0NoYXRyb29tUmVzcG9uc2USDwoH",
+            "c3VjY2VzcxgBIAEoCBIkCghjaGF0cm9vbRgCIAEoCzISLmNoYXQuQ2hhdHJv",
+            "b21JbmZvIj4KFkdldENoYXRyb29tSW5mb1JlcXVlc3QSEAoIc2VuZGVySWQY",
+            "ASABKAMSEgoKY2hhdHJvb21JZBgCIAEoAyJgChdHZXRDaGF0cm9vbUluZm9S",
+            "ZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEiQKCGNoYXRyb29tGAIgASgLMhIu",
+            "Y2hhdC5DaGF0cm9vbUluZm8SDgoGZGV0YWlsGAMgASgJIjMKDVNpZ251cFJl",
+            "cXVlc3QSEAoIdXNlcm5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiVAoO",
+            "U2lnbnVwUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIOCgZkZXRhaWwYAiAB",
+            "KAkSEQoJZXJyb3JDb2RlGAQgASgFEg4KBnVzZXJJZBgDIAEoAyJCCgxMb2dp",
+            "blJlcXVlc3QSEAoIdXNlcm5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkS",
+            "DgoGdXNlcklkGAMgASgDIk8KDUxvZ2luUmVzcG9uc2USDwoHc3VjY2VzcxgB",
+            "IAEoCBIOCgZkZXRhaWwYAiABKAkSDQoFdG9rZW4YAyABKAkSDgoGdXNlcklk",
+            "GAQgASgDIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgD",
+            "EhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5nGAMgASgJItIBChJNYWtl",
+            "RnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgOMh8uY2hhdC5NYWtlRnJp",
+            "ZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSJ7CgZTdGF0dXMS",
+            "CgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxyZWFkeUZyaWVuZBACEhAK",
+            "DFVzZXJOb3RFeGlzdBADEhEKDVVzZXJOb3RPbmxpbmUQBBITCg9SZXNwb25z",
+            "ZVRpbWVvdXQQBRIMCghXaXRoU2VsZhAGIjoKFEdldFBlb3BsZUluZm9SZXF1",
+            "ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgDIj0KFUdl",
+            "dFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJbmZvGAEgASgLMhAuY2hh",
+            "dC5QZW9wbGVJbmZvImIKEkdldE1lc3NhZ2VzUmVxdWVzdBIQCghzZW5kZXJJ",
+            "ZBgBIAEoAxIXCg9hZnRlclRpbWVVbml4TXMYAiABKAMSEgoKY2hhdHJvb21J",
+            "ZBgDIAEoAxINCgVjb3VudBgEIAEoBSJECg5HZXREYXRhUmVxdWVzdBIQCghm",
+            "aWxlTmFtZRgBIAEoCRIMCgRzZWVkGAogASgFEhIKCnJhbmRMZW5ndGgYCyAB",
+            "KAUiHwoPR2V0RGF0YVJlc3BvbnNlEgwKBGRhdGEYASABKAxCE6oCEENoYXQu",
+            "Q29yZS5Nb2RlbHNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -119,7 +122,7 @@ namespace Chat.Core.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo.Types.FriendInfo), global::Chat.Core.Models.PeopleInfo.Types.FriendInfo.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo), global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo.Parser, null, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.UserSettings), global::Chat.Core.Models.UserSettings.Parser, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomInfo), global::Chat.Core.Models.ChatroomInfo.Parser, new[]{ "Id", "PeopleIds", "HostId", "Name", "IsP2P" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomInfo), global::Chat.Core.Models.ChatroomInfo.Parser, new[]{ "Id", "Peoples", "Name", "IsP2P", "IsActive" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom), global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom.Parser, new[]{ "Id", "Name", "IsBlocked", "Role" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.NewChatroomRequest), global::Chat.Core.Models.NewChatroomRequest.Parser, new[]{ "SenderId", "PeopleIds" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.NewChatroomResponse), global::Chat.Core.Models.NewChatroomResponse.Parser, new[]{ "Success", "Chatroom" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetChatroomInfoRequest), global::Chat.Core.Models.GetChatroomInfoRequest.Parser, new[]{ "SenderId", "ChatroomId" }, null, null, null),
@@ -4194,10 +4197,10 @@ namespace Chat.Core.Models {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ChatroomInfo(ChatroomInfo other) : this() {
       id_ = other.id_;
-      peopleIds_ = other.peopleIds_.Clone();
-      hostId_ = other.hostId_;
+      peoples_ = other.peoples_.Clone();
       name_ = other.name_;
       isP2P_ = other.isP2P_;
+      isActive_ = other.isActive_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4216,25 +4219,14 @@ namespace Chat.Core.Models {
       }
     }
 
-    /// <summary>Field number for the "peopleIds" field.</summary>
-    public const int PeopleIdsFieldNumber = 2;
-    private static readonly pb::FieldCodec<long> _repeated_peopleIds_codec
-        = pb::FieldCodec.ForInt64(18);
-    private readonly pbc::RepeatedField<long> peopleIds_ = new pbc::RepeatedField<long>();
+    /// <summary>Field number for the "peoples" field.</summary>
+    public const int PeoplesFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom> _repeated_peoples_codec
+        = pb::FieldCodec.ForMessage(18, global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom.Parser);
+    private readonly pbc::RepeatedField<global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom> peoples_ = new pbc::RepeatedField<global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<long> PeopleIds {
-      get { return peopleIds_; }
-    }
-
-    /// <summary>Field number for the "hostId" field.</summary>
-    public const int HostIdFieldNumber = 3;
-    private long hostId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long HostId {
-      get { return hostId_; }
-      set {
-        hostId_ = value;
-      }
+    public pbc::RepeatedField<global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom> Peoples {
+      get { return peoples_; }
     }
 
     /// <summary>Field number for the "name" field.</summary>
@@ -4259,6 +4251,17 @@ namespace Chat.Core.Models {
       }
     }
 
+    /// <summary>Field number for the "isActive" field.</summary>
+    public const int IsActiveFieldNumber = 6;
+    private bool isActive_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsActive {
+      get { return isActive_; }
+      set {
+        isActive_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ChatroomInfo);
@@ -4273,10 +4276,10 @@ namespace Chat.Core.Models {
         return true;
       }
       if (Id != other.Id) return false;
-      if(!peopleIds_.Equals(other.peopleIds_)) return false;
-      if (HostId != other.HostId) return false;
+      if(!peoples_.Equals(other.peoples_)) return false;
       if (Name != other.Name) return false;
       if (IsP2P != other.IsP2P) return false;
+      if (IsActive != other.IsActive) return false;
       return true;
     }
 
@@ -4284,10 +4287,10 @@ namespace Chat.Core.Models {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0L) hash ^= Id.GetHashCode();
-      hash ^= peopleIds_.GetHashCode();
-      if (HostId != 0L) hash ^= HostId.GetHashCode();
+      hash ^= peoples_.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (IsP2P != false) hash ^= IsP2P.GetHashCode();
+      if (IsActive != false) hash ^= IsActive.GetHashCode();
       return hash;
     }
 
@@ -4302,11 +4305,7 @@ namespace Chat.Core.Models {
         output.WriteRawTag(8);
         output.WriteInt64(Id);
       }
-      peopleIds_.WriteTo(output, _repeated_peopleIds_codec);
-      if (HostId != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(HostId);
-      }
+      peoples_.WriteTo(output, _repeated_peoples_codec);
       if (Name.Length != 0) {
         output.WriteRawTag(34);
         output.WriteString(Name);
@@ -4314,6 +4313,10 @@ namespace Chat.Core.Models {
       if (IsP2P != false) {
         output.WriteRawTag(40);
         output.WriteBool(IsP2P);
+      }
+      if (IsActive != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(IsActive);
       }
     }
 
@@ -4323,14 +4326,14 @@ namespace Chat.Core.Models {
       if (Id != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
       }
-      size += peopleIds_.CalculateSize(_repeated_peopleIds_codec);
-      if (HostId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(HostId);
-      }
+      size += peoples_.CalculateSize(_repeated_peoples_codec);
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
       if (IsP2P != false) {
+        size += 1 + 1;
+      }
+      if (IsActive != false) {
         size += 1 + 1;
       }
       return size;
@@ -4344,15 +4347,15 @@ namespace Chat.Core.Models {
       if (other.Id != 0L) {
         Id = other.Id;
       }
-      peopleIds_.Add(other.peopleIds_);
-      if (other.HostId != 0L) {
-        HostId = other.HostId;
-      }
+      peoples_.Add(other.peoples_);
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
       if (other.IsP2P != false) {
         IsP2P = other.IsP2P;
+      }
+      if (other.IsActive != false) {
+        IsActive = other.IsActive;
       }
     }
 
@@ -4368,13 +4371,8 @@ namespace Chat.Core.Models {
             Id = input.ReadInt64();
             break;
           }
-          case 18:
-          case 16: {
-            peopleIds_.AddEntriesFrom(input, _repeated_peopleIds_codec);
-            break;
-          }
-          case 24: {
-            HostId = input.ReadInt64();
+          case 18: {
+            peoples_.AddEntriesFrom(input, _repeated_peoples_codec);
             break;
           }
           case 34: {
@@ -4385,9 +4383,221 @@ namespace Chat.Core.Models {
             IsP2P = input.ReadBool();
             break;
           }
+          case 48: {
+            IsActive = input.ReadBool();
+            break;
+          }
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the ChatroomInfo message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class PeopleInRoom : pb::IMessage<PeopleInRoom> {
+        private static readonly pb::MessageParser<PeopleInRoom> _parser = new pb::MessageParser<PeopleInRoom>(() => new PeopleInRoom());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<PeopleInRoom> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.ChatroomInfo.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleInRoom() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleInRoom(PeopleInRoom other) : this() {
+          id_ = other.id_;
+          name_ = other.name_;
+          isBlocked_ = other.isBlocked_;
+          role_ = other.role_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleInRoom Clone() {
+          return new PeopleInRoom(this);
+        }
+
+        /// <summary>Field number for the "id" field.</summary>
+        public const int IdFieldNumber = 1;
+        private long id_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long Id {
+          get { return id_; }
+          set {
+            id_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "name" field.</summary>
+        public const int NameFieldNumber = 2;
+        private string name_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Name {
+          get { return name_; }
+          set {
+            name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "isBlocked" field.</summary>
+        public const int IsBlockedFieldNumber = 3;
+        private bool isBlocked_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool IsBlocked {
+          get { return isBlocked_; }
+          set {
+            isBlocked_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "role" field.</summary>
+        public const int RoleFieldNumber = 4;
+        private string role_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Role {
+          get { return role_; }
+          set {
+            role_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as PeopleInRoom);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(PeopleInRoom other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Id != other.Id) return false;
+          if (Name != other.Name) return false;
+          if (IsBlocked != other.IsBlocked) return false;
+          if (Role != other.Role) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Id != 0L) hash ^= Id.GetHashCode();
+          if (Name.Length != 0) hash ^= Name.GetHashCode();
+          if (IsBlocked != false) hash ^= IsBlocked.GetHashCode();
+          if (Role.Length != 0) hash ^= Role.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Id != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(Id);
+          }
+          if (Name.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(Name);
+          }
+          if (IsBlocked != false) {
+            output.WriteRawTag(24);
+            output.WriteBool(IsBlocked);
+          }
+          if (Role.Length != 0) {
+            output.WriteRawTag(34);
+            output.WriteString(Role);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Id != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+          }
+          if (Name.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+          }
+          if (IsBlocked != false) {
+            size += 1 + 1;
+          }
+          if (Role.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Role);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(PeopleInRoom other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Id != 0L) {
+            Id = other.Id;
+          }
+          if (other.Name.Length != 0) {
+            Name = other.Name;
+          }
+          if (other.IsBlocked != false) {
+            IsBlocked = other.IsBlocked;
+          }
+          if (other.Role.Length != 0) {
+            Role = other.Role;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                Id = input.ReadInt64();
+                break;
+              }
+              case 18: {
+                Name = input.ReadString();
+                break;
+              }
+              case 24: {
+                IsBlocked = input.ReadBool();
+                break;
+              }
+              case 34: {
+                Role = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
 
   }
 

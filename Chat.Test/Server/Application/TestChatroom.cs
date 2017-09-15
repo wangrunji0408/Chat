@@ -175,11 +175,11 @@ namespace Chat.Test.Server
             await Assert.ThrowsAsync<InvalidOperationException>(
                 async () => await ca.DismissAsync());
             await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await ca.ChangeName("haha"));
-            await server.GetChatroomApplication(room.Id, 0).SetRole(1, "Admin");
+                async () => await ca.ChangeNameAsync("haha"));
+            await server.GetChatroomApplication(room.Id, 0).SetRoleAsync(1, "Admin");
             await ca.AddPeopleAsync(userId: 3);
             await ca.RemovePeopleAsync(userId: 2);
-            await ca.ChangeName("haha");
+            await ca.ChangeNameAsync("haha");
             await ca.DismissAsync();
         }
         
@@ -191,7 +191,7 @@ namespace Chat.Test.Server
 
             Assert.Equal(UserChatroom.UserRole.Normal, room.GetUserChatroom(1).Role);
             Assert.Equal(UserChatroom.UserRole.Normal, room.GetUserChatroom(2).Role);
-            await ca.SetRole(1, "Admin");
+            await ca.SetRoleAsync(1, "Admin");
             Assert.Equal(UserChatroom.UserRole.Admin, room.GetUserChatroom(1).Role);
             Assert.Equal(UserChatroom.UserRole.Normal, room.GetUserChatroom(2).Role);
             
@@ -213,7 +213,7 @@ namespace Chat.Test.Server
         {
             var room = await server.NewChatroomAsync(new long[] {1, 2});
             var ca = server.GetChatroomApplication(room.Id, 0);
-            await ca.ChangeName("haha");
+            await ca.ChangeNameAsync("haha");
             Assert.Equal("haha", room.Name);
         }
     }

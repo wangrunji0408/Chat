@@ -8,38 +8,8 @@ using Xunit;
 
 namespace Chat.Test.Server
 {
-    public class TestGetInfo : TestServerBase
+    public class TestGetPeopleInfo : TestServerBase
     {
-        [Fact]
-        public async Task GetChatroomInfo()
-        {
-            var info = await server.GetChatroomInfoAsync(1, 1);
-            Assert.Equal(1, info.Id);
-            Assert.Equal("Global Chatroom", info.Name);
-            Assert.Equal(new long[]{1, 2, 3}, info.PeopleIds);
-        }
-
-        [Fact]
-        public async Task GetChatroomInfo_NotInside()
-        {
-            var room = await server.NewChatroomAsync(new long[] {2});
-            var info = await server.GetChatroomInfoAsync(1, room.Id);
-            Assert.Equal(room.Id, info.Id);
-            Assert.Equal("", info.Name);
-            Assert.Equal(0, info.PeopleIds.Count);
-        }
-        
-        [Fact]
-        public async Task GetChatroomInfo_P2P()
-        {
-            var room = await server.GetP2PChatroom(1, 2);
-            var info = await server.GetChatroomInfoAsync(1, room.Id);
-            Assert.Equal(room.Id, info.Id);
-            Assert.Equal("", info.Name);
-            Assert.True(info.IsP2P);
-            Assert.Equal(new long[]{1, 2}, info.PeopleIds);
-        }
-
         [Fact]
         public async Task GetPeopleInfo_Stranger()
         {

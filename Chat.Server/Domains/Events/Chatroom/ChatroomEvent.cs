@@ -37,4 +37,7 @@ namespace Chat.Server.Domains.Events.Chatroom
     {
         public string NewRole { get; set; }
     }
+    class UserBlockedEvent : ChatroomUserEvent
+    {
+    }
 }

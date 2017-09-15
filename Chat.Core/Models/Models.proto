@@ -148,10 +148,17 @@ message UserSettings {
 message ChatroomInfo
 {
 	int64 id = 1;
-	repeated int64 peopleIds = 2;
-	int64 hostId = 3;
+    repeated PeopleInRoom peoples = 2;
 	string name = 4;
 	bool isP2P = 5;
+    bool isActive = 6;
+
+    message PeopleInRoom {
+        int64 id = 1;
+        string name = 2;
+        bool isBlocked = 3;
+        string role = 4;
+    }
 }
 
 message NewChatroomRequest
