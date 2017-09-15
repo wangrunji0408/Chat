@@ -6,7 +6,8 @@ namespace Chat.Core.Interfaces
 {
     public interface ILoginService
     {
-        Task<IServerService> LoginAsync(LoginRequest request);
+        Task<IServerService> GetService(LoginResponse token);
+        Task<LoginResponse> LoginAsync(LoginRequest request);
         Task<SignupResponse> SignupAsync(SignupRequest request);
     }
 }

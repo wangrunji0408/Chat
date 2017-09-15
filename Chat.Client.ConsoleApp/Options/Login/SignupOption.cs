@@ -4,7 +4,7 @@ using CommandLine;
 namespace Chat.Client.ConsoleApp.Options
 {
 	[Verb("signup")]
-	class SignupOption: OptionBase
+	class SignupOption: RootOptionBase
 	{
         [Value(0, MetaName = "Username")]
 		public string Username { get; set; }
@@ -13,7 +13,7 @@ namespace Chat.Client.ConsoleApp.Options
 
 		internal override void Execute(Program app)
 		{
-			base.Execute(app);
+			app.Builder.SignupAsync(Username, Password).Wait();
 		}
 	}
 }

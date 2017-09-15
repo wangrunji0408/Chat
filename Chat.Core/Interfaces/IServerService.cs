@@ -7,7 +7,11 @@ namespace Chat.Core.Interfaces
 {
     public interface IServerService
     {
-        Task SendMessageAsync(ChatMessage message);
+        Task<SendMessageResponse> SendMessageAsync(ChatMessage message);
         IAsyncEnumerable<ChatMessage> GetMessages(GetMessagesRequest request);
+        Task<GetChatroomInfoResponse> GetChatroomInfo(GetChatroomInfoRequest request);
+        Task<GetPeopleInfoResponse> GetPeopleInfo(GetPeopleInfoRequest request);
+        Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request);
+        IAsyncEnumerable<GetDataResponse> GetData(GetDataRequest request);
     }
 }

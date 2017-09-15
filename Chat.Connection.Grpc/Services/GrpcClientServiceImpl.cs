@@ -9,19 +9,15 @@ using Microsoft.Extensions.Logging;
 
 namespace Chat.Connection.Grpc
 {
-    
-    using Client;
-    using static SendMessageResponse.Types.Status;
-    
     class GrpcClientServiceImpl: ChatClientService.ChatClientServiceBase
     {
-        private readonly Client _client;
+        private readonly Client.Client _client;
         private readonly ILogger _logger;
         internal string Host { get; private set; }
         internal int Port { get; private set; }
                            
         public GrpcClientServiceImpl(
-            Client client,
+            Client.Client client,
             IServiceProvider serviceProvider,
             string host, int port)
         {
@@ -49,10 +45,20 @@ namespace Chat.Connection.Grpc
 
         public override async Task<SendMessageResponse> NewMessage(SendMessageRequest request, ServerCallContext context)
         {
-			await Task.CompletedTask;
+            try
+            {
+                _client.InformNewMessage(request.Message);
+            }
+            catch (Exception e)
+            {
+                return new SendMessageResponse{Success = false, Detail = e.Message};
+            }
+            return new SendMessageResponse{Success = true};
+        }
 
-			_client.InformNewMessage(request.Message);
-            return new SendMessageResponse{Status = Success};
+        public override Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request, ServerCallContext context)
+        {
+            return _client.MakeFriendHandler(request);
         }
     }
 }

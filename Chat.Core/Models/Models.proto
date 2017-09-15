@@ -13,16 +13,89 @@ message Response
 
 message Content
 {
-	string text = 1;
+    message Image {
+		bytes data = 1;
+    }
+    message File {
+        string name = 1;
+        string path = 2;
+    }
+    message Withdraw {
+		int64 withdrawId = 1;
+    }
+    message PeopleEnter {
+		int64 peopleId = 1;
+    }
+    message PeopleLeave {
+		int64 peopleId = 1;
+		int64 kickOutById = 2;
+    }
+    message Created {
+		int64 creatorId = 1;
+    }
+    message New {
+        repeated int64 peopleIds = 1;
+        string name = 2;
+    }
+    message Dismiss {
+
+    }
+    message AddPeople {
+        repeated int64 peopleIds = 1;
+    }
+    message RemovePeople {
+        repeated int64 peopleIds = 1;
+    }
+    message Apply {
+        string message = 1;
+    }
+    message Quit {
+        string message = 1;
+    }
+    message Announce {
+        string message = 1;
+    }
+    message SetProperty {
+        string key = 1;
+        string value = 2;
+    }
+    oneof content {
+        // Message
+		string text = 100;
+		Image image = 101;
+        File file = 102;
+
+        // Event Only
+		PeopleEnter peopleEnter = 103;
+		PeopleLeave peopleLeave = 104;
+        Created created = 105;
+
+        // Command & Event
+        New new = 200;
+        Dismiss dismiss = 201;
+        AddPeople addPeople = 202;
+        RemovePeople removePeople = 203;
+        Apply apply = 204;
+        Quit quit = 205;
+        Announce announce = 206;
+        SetProperty setPeoperty = 207;
+        Withdraw withdraw = 208;
+    }
 }
 
 message ChatMessage
 {
     int64 id = 1;
 	int64 senderId = 2;
-	int64 timeUnix = 3;
+    int64 timeUnixMs = 3;
 	Content content = 4;
 	int64 chatroomId = 5;
+}
+
+message ChatroomResponse {
+    bool success = 1;
+    string detail = 2;
+    int64 chatroomId = 3;
 }
 
 message SendMessageRequest
@@ -32,38 +105,60 @@ message SendMessageRequest
 
 message SendMessageResponse
 {
-	enum Status
-	{
-		Success = 0;
-		Failed = 1;
-	}
-	Status status = 1;
+	bool success = 1;
 	string detail = 2;
+	int64 chatroomId = 3;
 }
 
-message People
+message PeopleInfo
 {
-	// Public
+	// Public Info
 	int64 id = 1;
 	string username = 2;
-}
 
-message Friend
-{
-	int32 myId = 1;
-	int32 friendId = 2;
+	// Relationship Info
 	repeated string tags = 10;
 	string note = 11;
 	bool blocked = 20;
 	int64 chatroomId = 21;
+
+	// Role Specific Info
+	oneof roleInfo {
+		SelfInfo self = 101;
+		FriendInfo friend = 102;
+		StrangerInfo stranger = 103;
+	}
+
+	message SelfInfo {
+        UserSettings settings = 1;
+        int64 signupTimeUnixMs = 2;
+	}
+	message FriendInfo {
+
+	}
+	message StrangerInfo {
+
+	}
+}
+
+message UserSettings {
+
 }
 
 message ChatroomInfo
 {
 	int64 id = 1;
-	repeated int64 peopleIds = 2;
-	int64 hostId = 3;
+    repeated PeopleInRoom peoples = 2;
 	string name = 4;
+	bool isP2P = 5;
+    bool isActive = 6;
+
+    message PeopleInRoom {
+        int64 id = 1;
+        string name = 2;
+        bool isBlocked = 3;
+        string role = 4;
+    }
 }
 
 message NewChatroomRequest
@@ -72,13 +167,18 @@ message NewChatroomRequest
 	repeated int32 peopleIds = 2;
 }
 
-message GetChatroomRequest
+message NewChatroomResponse {
+    bool success = 1;
+    ChatroomInfo chatroom = 2;
+}
+
+message GetChatroomInfoRequest
 {
 	int64 senderId = 1;
 	int64 chatroomId = 2;
 }
 
-message ChatroomResponse
+message GetChatroomInfoResponse
 {
 	bool success = 1;
 	ChatroomInfo chatroom = 2;
@@ -93,15 +193,9 @@ message SignupRequest
 
 message SignupResponse
 {
-	enum Status
-	{
-		Success = 0;
-		UsernameExist = 101;
-		UsernameFormatWrong = 102;
-		PasswordFormatWrong = 103;
-	}
-	Status status = 1;
+    bool success = 1;
 	string detail = 2;
+    int32 errorCode = 4;
 	int64 userId = 3;
 }
 
@@ -114,14 +208,10 @@ message LoginRequest
 
 message LoginResponse
 {
-	enum Status
-	{
-		Success = 0;
-		NoSuchUser = 101;
-		WrongPassword = 102;
-	}
-	Status status = 1;
+    bool success = 1;
 	string detail = 2;
+    string token = 3;
+    int64 userId = 4;
 }
 
 message MakeFriendRequest
@@ -139,34 +229,39 @@ message MakeFriendResponse
 		Refuse = 1;
 		AlreadyFriend = 2;
 		UserNotExist = 3;
+		UserNotOnline = 4;
+		ResponseTimeout = 5;
+		WithSelf = 6;
 	}
 	Status status = 1;
 	string detail = 2;
 }
 
-message GetPeoplesInfoRequest
+message GetPeopleInfoRequest
 {
-	repeated int32 ids = 1;
+    int64 senderId = 1;
+    int64 targetId = 2;
 }
 
-message GetPeoplesInfoResponse
+message GetPeopleInfoResponse
 {
-	repeated People peoples = 1; 
-}
-
-message FriendNotification
-{
-	enum Type
-	{
-		Login = 0;
-		Logout = 1;
-	}
-	int32 id = 1;
-	Type type = 2;
+    PeopleInfo peopleInfo = 1;
 }
 
 message GetMessagesRequest
 {
-    int64 userId = 1;
-    int64 afterTimeUnix = 2;
+	int64 senderId = 1;
+    int64 afterTimeUnixMs = 2;
+	int64 chatroomId = 3;
+    int32 count = 4;
+}
+
+message GetDataRequest {
+    string fileName = 1;
+    int32 seed = 10;
+    int32 randLength = 11;
+}
+
+message GetDataResponse {
+    bytes data = 1;
 }

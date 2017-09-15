@@ -23,69 +23,121 @@ namespace Chat.Core.Models {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgxNb2RlbHMucHJvdG8SBGNoYXQiKwoIUmVzcG9uc2USDwoHc3VjY2VzcxgB",
-            "IAEoCBIOCgZkZXRhaWwYAiABKAkiFwoHQ29udGVudBIMCgR0ZXh0GAEgASgJ",
-            "InEKC0NoYXRNZXNzYWdlEgoKAmlkGAEgASgDEhAKCHNlbmRlcklkGAIgASgD",
-            "EhAKCHRpbWVVbml4GAMgASgDEh4KB2NvbnRlbnQYBCABKAsyDS5jaGF0LkNv",
-            "bnRlbnQSEgoKY2hhdHJvb21JZBgFIAEoAyI4ChJTZW5kTWVzc2FnZVJlcXVl",
-            "c3QSIgoHbWVzc2FnZRgBIAEoCzIRLmNoYXQuQ2hhdE1lc3NhZ2UiegoTU2Vu",
-            "ZE1lc3NhZ2VSZXNwb25zZRIwCgZzdGF0dXMYASABKA4yIC5jaGF0LlNlbmRN",
-            "ZXNzYWdlUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSIhCgZTdGF0",
-            "dXMSCwoHU3VjY2VzcxAAEgoKBkZhaWxlZBABIiYKBlBlb3BsZRIKCgJpZBgB",
-            "IAEoAxIQCgh1c2VybmFtZRgCIAEoCSJpCgZGcmllbmQSDAoEbXlJZBgBIAEo",
-            "BRIQCghmcmllbmRJZBgCIAEoBRIMCgR0YWdzGAogAygJEgwKBG5vdGUYCyAB",
-            "KAkSDwoHYmxvY2tlZBgUIAEoCBISCgpjaGF0cm9vbUlkGBUgASgDIksKDENo",
-            "YXRyb29tSW5mbxIKCgJpZBgBIAEoAxIRCglwZW9wbGVJZHMYAiADKAMSDgoG",
-            "aG9zdElkGAMgASgDEgwKBG5hbWUYBCABKAkiOQoSTmV3Q2hhdHJvb21SZXF1",
-            "ZXN0EhAKCHNlbmRlcklkGAEgASgDEhEKCXBlb3BsZUlkcxgCIAMoBSI6ChJH",
-            "ZXRDaGF0cm9vbVJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMSEgoKY2hhdHJv",
-            "b21JZBgCIAEoAyJZChBDaGF0cm9vbVJlc3BvbnNlEg8KB3N1Y2Nlc3MYASAB",
-            "KAgSJAoIY2hhdHJvb20YAiABKAsyEi5jaGF0LkNoYXRyb29tSW5mbxIOCgZk",
-            "ZXRhaWwYAyABKAkiMwoNU2lnbnVwUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEo",
-            "CRIQCghwYXNzd29yZBgCIAEoCSK5AQoOU2lnbnVwUmVzcG9uc2USKwoGc3Rh",
-            "dHVzGAEgASgOMhsuY2hhdC5TaWdudXBSZXNwb25zZS5TdGF0dXMSDgoGZGV0",
-            "YWlsGAIgASgJEg4KBnVzZXJJZBgDIAEoAyJaCgZTdGF0dXMSCwoHU3VjY2Vz",
-            "cxAAEhEKDVVzZXJuYW1lRXhpc3QQZRIXChNVc2VybmFtZUZvcm1hdFdyb25n",
-            "EGYSFwoTUGFzc3dvcmRGb3JtYXRXcm9uZxBnIkIKDExvZ2luUmVxdWVzdBIQ",
-            "Cgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIOCgZ1c2VySWQY",
-            "AyABKAMihQEKDUxvZ2luUmVzcG9uc2USKgoGc3RhdHVzGAEgASgOMhouY2hh",
-            "dC5Mb2dpblJlc3BvbnNlLlN0YXR1cxIOCgZkZXRhaWwYAiABKAkiOAoGU3Rh",
-            "dHVzEgsKB1N1Y2Nlc3MQABIOCgpOb1N1Y2hVc2VyEGUSEQoNV3JvbmdQYXNz",
-            "d29yZBBmIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgD",
-            "EhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5nGAMgASgJIpwBChJNYWtl",
+            "IAEoCBIOCgZkZXRhaWwYAiABKAkiyAgKB0NvbnRlbnQSDgoEdGV4dBhkIAEo",
+            "CUgAEiQKBWltYWdlGGUgASgLMhMuY2hhdC5Db250ZW50LkltYWdlSAASIgoE",
+            "ZmlsZRhmIAEoCzISLmNoYXQuQ29udGVudC5GaWxlSAASMAoLcGVvcGxlRW50",
+            "ZXIYZyABKAsyGS5jaGF0LkNvbnRlbnQuUGVvcGxlRW50ZXJIABIwCgtwZW9w",
+            "bGVMZWF2ZRhoIAEoCzIZLmNoYXQuQ29udGVudC5QZW9wbGVMZWF2ZUgAEigK",
+            "B2NyZWF0ZWQYaSABKAsyFS5jaGF0LkNvbnRlbnQuQ3JlYXRlZEgAEiEKA25l",
+            "dxjIASABKAsyES5jaGF0LkNvbnRlbnQuTmV3SAASKQoHZGlzbWlzcxjJASAB",
+            "KAsyFS5jaGF0LkNvbnRlbnQuRGlzbWlzc0gAEi0KCWFkZFBlb3BsZRjKASAB",
+            "KAsyFy5jaGF0LkNvbnRlbnQuQWRkUGVvcGxlSAASMwoMcmVtb3ZlUGVvcGxl",
+            "GMsBIAEoCzIaLmNoYXQuQ29udGVudC5SZW1vdmVQZW9wbGVIABIlCgVhcHBs",
+            "eRjMASABKAsyEy5jaGF0LkNvbnRlbnQuQXBwbHlIABIjCgRxdWl0GM0BIAEo",
+            "CzISLmNoYXQuQ29udGVudC5RdWl0SAASKwoIYW5ub3VuY2UYzgEgASgLMhYu",
+            "Y2hhdC5Db250ZW50LkFubm91bmNlSAASMQoLc2V0UGVvcGVydHkYzwEgASgL",
+            "MhkuY2hhdC5Db250ZW50LlNldFByb3BlcnR5SAASKwoId2l0aGRyYXcY0AEg",
+            "ASgLMhYuY2hhdC5Db250ZW50LldpdGhkcmF3SAAaFQoFSW1hZ2USDAoEZGF0",
+            "YRgBIAEoDBoiCgRGaWxlEgwKBG5hbWUYASABKAkSDAoEcGF0aBgCIAEoCRoe",
+            "CghXaXRoZHJhdxISCgp3aXRoZHJhd0lkGAEgASgDGh8KC1Blb3BsZUVudGVy",
+            "EhAKCHBlb3BsZUlkGAEgASgDGjQKC1Blb3BsZUxlYXZlEhAKCHBlb3BsZUlk",
+            "GAEgASgDEhMKC2tpY2tPdXRCeUlkGAIgASgDGhwKB0NyZWF0ZWQSEQoJY3Jl",
+            "YXRvcklkGAEgASgDGiYKA05ldxIRCglwZW9wbGVJZHMYASADKAMSDAoEbmFt",
+            "ZRgCIAEoCRoJCgdEaXNtaXNzGh4KCUFkZFBlb3BsZRIRCglwZW9wbGVJZHMY",
+            "ASADKAMaIQoMUmVtb3ZlUGVvcGxlEhEKCXBlb3BsZUlkcxgBIAMoAxoYCgVB",
+            "cHBseRIPCgdtZXNzYWdlGAEgASgJGhcKBFF1aXQSDwoHbWVzc2FnZRgBIAEo",
+            "CRobCghBbm5vdW5jZRIPCgdtZXNzYWdlGAEgASgJGikKC1NldFByb3BlcnR5",
+            "EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCUIJCgdjb250ZW50InMKC0No",
+            "YXRNZXNzYWdlEgoKAmlkGAEgASgDEhAKCHNlbmRlcklkGAIgASgDEhIKCnRp",
+            "bWVVbml4TXMYAyABKAMSHgoHY29udGVudBgEIAEoCzINLmNoYXQuQ29udGVu",
+            "dBISCgpjaGF0cm9vbUlkGAUgASgDIkcKEENoYXRyb29tUmVzcG9uc2USDwoH",
+            "c3VjY2VzcxgBIAEoCBIOCgZkZXRhaWwYAiABKAkSEgoKY2hhdHJvb21JZBgD",
+            "IAEoAyI4ChJTZW5kTWVzc2FnZVJlcXVlc3QSIgoHbWVzc2FnZRgBIAEoCzIR",
+            "LmNoYXQuQ2hhdE1lc3NhZ2UiSgoTU2VuZE1lc3NhZ2VSZXNwb25zZRIPCgdz",
+            "dWNjZXNzGAEgASgIEg4KBmRldGFpbBgCIAEoCRISCgpjaGF0cm9vbUlkGAMg",
+            "ASgDIu4CCgpQZW9wbGVJbmZvEgoKAmlkGAEgASgDEhAKCHVzZXJuYW1lGAIg",
+            "ASgJEgwKBHRhZ3MYCiADKAkSDAoEbm90ZRgLIAEoCRIPCgdibG9ja2VkGBQg",
+            "ASgIEhIKCmNoYXRyb29tSWQYFSABKAMSKQoEc2VsZhhlIAEoCzIZLmNoYXQu",
+            "UGVvcGxlSW5mby5TZWxmSW5mb0gAEi0KBmZyaWVuZBhmIAEoCzIbLmNoYXQu",
+            "UGVvcGxlSW5mby5GcmllbmRJbmZvSAASMQoIc3RyYW5nZXIYZyABKAsyHS5j",
+            "aGF0LlBlb3BsZUluZm8uU3RyYW5nZXJJbmZvSAAaSgoIU2VsZkluZm8SJAoI",
+            "c2V0dGluZ3MYASABKAsyEi5jaGF0LlVzZXJTZXR0aW5ncxIYChBzaWdudXBU",
+            "aW1lVW5peE1zGAIgASgDGgwKCkZyaWVuZEluZm8aDgoMU3RyYW5nZXJJbmZv",
+            "QgoKCHJvbGVJbmZvIg4KDFVzZXJTZXR0aW5ncyLGAQoMQ2hhdHJvb21JbmZv",
+            "EgoKAmlkGAEgASgDEjAKB3Blb3BsZXMYAiADKAsyHy5jaGF0LkNoYXRyb29t",
+            "SW5mby5QZW9wbGVJblJvb20SDAoEbmFtZRgEIAEoCRINCgVpc1AyUBgFIAEo",
+            "CBIQCghpc0FjdGl2ZRgGIAEoCBpJCgxQZW9wbGVJblJvb20SCgoCaWQYASAB",
+            "KAMSDAoEbmFtZRgCIAEoCRIRCglpc0Jsb2NrZWQYAyABKAgSDAoEcm9sZRgE",
+            "IAEoCSI5ChJOZXdDaGF0cm9vbVJlcXVlc3QSEAoIc2VuZGVySWQYASABKAMS",
+            "EQoJcGVvcGxlSWRzGAIgAygFIkwKE05ld0NoYXRyb29tUmVzcG9uc2USDwoH",
+            "c3VjY2VzcxgBIAEoCBIkCghjaGF0cm9vbRgCIAEoCzISLmNoYXQuQ2hhdHJv",
+            "b21JbmZvIj4KFkdldENoYXRyb29tSW5mb1JlcXVlc3QSEAoIc2VuZGVySWQY",
+            "ASABKAMSEgoKY2hhdHJvb21JZBgCIAEoAyJgChdHZXRDaGF0cm9vbUluZm9S",
+            "ZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEiQKCGNoYXRyb29tGAIgASgLMhIu",
+            "Y2hhdC5DaGF0cm9vbUluZm8SDgoGZGV0YWlsGAMgASgJIjMKDVNpZ251cFJl",
+            "cXVlc3QSEAoIdXNlcm5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiVAoO",
+            "U2lnbnVwUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIOCgZkZXRhaWwYAiAB",
+            "KAkSEQoJZXJyb3JDb2RlGAQgASgFEg4KBnVzZXJJZBgDIAEoAyJCCgxMb2dp",
+            "blJlcXVlc3QSEAoIdXNlcm5hbWUYASABKAkSEAoIcGFzc3dvcmQYAiABKAkS",
+            "DgoGdXNlcklkGAMgASgDIk8KDUxvZ2luUmVzcG9uc2USDwoHc3VjY2VzcxgB",
+            "IAEoCBIOCgZkZXRhaWwYAiABKAkSDQoFdG9rZW4YAyABKAkSDgoGdXNlcklk",
+            "GAQgASgDIkkKEU1ha2VGcmllbmRSZXF1ZXN0EhAKCHNlbmRlcklkGAEgASgD",
+            "EhAKCHRhcmdldElkGAIgASgDEhAKCGdyZWV0aW5nGAMgASgJItIBChJNYWtl",
             "RnJpZW5kUmVzcG9uc2USLwoGc3RhdHVzGAEgASgOMh8uY2hhdC5NYWtlRnJp",
-            "ZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSJFCgZTdGF0dXMS",
+            "ZW5kUmVzcG9uc2UuU3RhdHVzEg4KBmRldGFpbBgCIAEoCSJ7CgZTdGF0dXMS",
             "CgoGQWNjZXB0EAASCgoGUmVmdXNlEAESEQoNQWxyZWFkeUZyaWVuZBACEhAK",
-            "DFVzZXJOb3RFeGlzdBADIiQKFUdldFBlb3BsZXNJbmZvUmVxdWVzdBILCgNp",
-            "ZHMYASADKAUiNwoWR2V0UGVvcGxlc0luZm9SZXNwb25zZRIdCgdwZW9wbGVz",
-            "GAEgAygLMgwuY2hhdC5QZW9wbGUibAoSRnJpZW5kTm90aWZpY2F0aW9uEgoK",
-            "AmlkGAEgASgFEisKBHR5cGUYAiABKA4yHS5jaGF0LkZyaWVuZE5vdGlmaWNh",
-            "dGlvbi5UeXBlIh0KBFR5cGUSCQoFTG9naW4QABIKCgZMb2dvdXQQASI7ChJH",
-            "ZXRNZXNzYWdlc1JlcXVlc3QSDgoGdXNlcklkGAEgASgDEhUKDWFmdGVyVGlt",
-            "ZVVuaXgYAiABKANCE6oCEENoYXQuQ29yZS5Nb2RlbHNiBnByb3RvMw=="));
+            "DFVzZXJOb3RFeGlzdBADEhEKDVVzZXJOb3RPbmxpbmUQBBITCg9SZXNwb25z",
+            "ZVRpbWVvdXQQBRIMCghXaXRoU2VsZhAGIjoKFEdldFBlb3BsZUluZm9SZXF1",
+            "ZXN0EhAKCHNlbmRlcklkGAEgASgDEhAKCHRhcmdldElkGAIgASgDIj0KFUdl",
+            "dFBlb3BsZUluZm9SZXNwb25zZRIkCgpwZW9wbGVJbmZvGAEgASgLMhAuY2hh",
+            "dC5QZW9wbGVJbmZvImIKEkdldE1lc3NhZ2VzUmVxdWVzdBIQCghzZW5kZXJJ",
+            "ZBgBIAEoAxIXCg9hZnRlclRpbWVVbml4TXMYAiABKAMSEgoKY2hhdHJvb21J",
+            "ZBgDIAEoAxINCgVjb3VudBgEIAEoBSJECg5HZXREYXRhUmVxdWVzdBIQCghm",
+            "aWxlTmFtZRgBIAEoCRIMCgRzZWVkGAogASgFEhIKCnJhbmRMZW5ndGgYCyAB",
+            "KAUiHwoPR2V0RGF0YVJlc3BvbnNlEgwKBGRhdGEYASABKAxCE6oCEENoYXQu",
+            "Q29yZS5Nb2RlbHNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Response), global::Chat.Core.Models.Response.Parser, new[]{ "Success", "Detail" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content), global::Chat.Core.Models.Content.Parser, new[]{ "Text" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatMessage), global::Chat.Core.Models.ChatMessage.Parser, new[]{ "Id", "SenderId", "TimeUnix", "Content", "ChatroomId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content), global::Chat.Core.Models.Content.Parser, new[]{ "Text", "Image", "File", "PeopleEnter", "PeopleLeave", "Created", "New", "Dismiss", "AddPeople", "RemovePeople", "Apply", "Quit", "Announce", "SetPeoperty", "Withdraw" }, new[]{ "Content" }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Image), global::Chat.Core.Models.Content.Types.Image.Parser, new[]{ "Data" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.File), global::Chat.Core.Models.Content.Types.File.Parser, new[]{ "Name", "Path" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Withdraw), global::Chat.Core.Models.Content.Types.Withdraw.Parser, new[]{ "WithdrawId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleEnter), global::Chat.Core.Models.Content.Types.PeopleEnter.Parser, new[]{ "PeopleId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.PeopleLeave), global::Chat.Core.Models.Content.Types.PeopleLeave.Parser, new[]{ "PeopleId", "KickOutById" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Created), global::Chat.Core.Models.Content.Types.Created.Parser, new[]{ "CreatorId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.New), global::Chat.Core.Models.Content.Types.New.Parser, new[]{ "PeopleIds", "Name" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Dismiss), global::Chat.Core.Models.Content.Types.Dismiss.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.AddPeople), global::Chat.Core.Models.Content.Types.AddPeople.Parser, new[]{ "PeopleIds" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.RemovePeople), global::Chat.Core.Models.Content.Types.RemovePeople.Parser, new[]{ "PeopleIds" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Apply), global::Chat.Core.Models.Content.Types.Apply.Parser, new[]{ "Message" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Quit), global::Chat.Core.Models.Content.Types.Quit.Parser, new[]{ "Message" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.Announce), global::Chat.Core.Models.Content.Types.Announce.Parser, new[]{ "Message" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Content.Types.SetProperty), global::Chat.Core.Models.Content.Types.SetProperty.Parser, new[]{ "Key", "Value" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatMessage), global::Chat.Core.Models.ChatMessage.Parser, new[]{ "Id", "SenderId", "TimeUnixMs", "Content", "ChatroomId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomResponse), global::Chat.Core.Models.ChatroomResponse.Parser, new[]{ "Success", "Detail", "ChatroomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageRequest), global::Chat.Core.Models.SendMessageRequest.Parser, new[]{ "Message" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageResponse), global::Chat.Core.Models.SendMessageResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.SendMessageResponse.Types.Status) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.People), global::Chat.Core.Models.People.Parser, new[]{ "Id", "Username" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.Friend), global::Chat.Core.Models.Friend.Parser, new[]{ "MyId", "FriendId", "Tags", "Note", "Blocked", "ChatroomId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomInfo), global::Chat.Core.Models.ChatroomInfo.Parser, new[]{ "Id", "PeopleIds", "HostId", "Name" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SendMessageResponse), global::Chat.Core.Models.SendMessageResponse.Parser, new[]{ "Success", "Detail", "ChatroomId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo), global::Chat.Core.Models.PeopleInfo.Parser, new[]{ "Id", "Username", "Tags", "Note", "Blocked", "ChatroomId", "Self", "Friend", "Stranger" }, new[]{ "RoleInfo" }, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo.Types.SelfInfo), global::Chat.Core.Models.PeopleInfo.Types.SelfInfo.Parser, new[]{ "Settings", "SignupTimeUnixMs" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo.Types.FriendInfo), global::Chat.Core.Models.PeopleInfo.Types.FriendInfo.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo), global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo.Parser, null, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.UserSettings), global::Chat.Core.Models.UserSettings.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomInfo), global::Chat.Core.Models.ChatroomInfo.Parser, new[]{ "Id", "Peoples", "Name", "IsP2P", "IsActive" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom), global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom.Parser, new[]{ "Id", "Name", "IsBlocked", "Role" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.NewChatroomRequest), global::Chat.Core.Models.NewChatroomRequest.Parser, new[]{ "SenderId", "PeopleIds" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetChatroomRequest), global::Chat.Core.Models.GetChatroomRequest.Parser, new[]{ "SenderId", "ChatroomId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.ChatroomResponse), global::Chat.Core.Models.ChatroomResponse.Parser, new[]{ "Success", "Chatroom", "Detail" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.NewChatroomResponse), global::Chat.Core.Models.NewChatroomResponse.Parser, new[]{ "Success", "Chatroom" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetChatroomInfoRequest), global::Chat.Core.Models.GetChatroomInfoRequest.Parser, new[]{ "SenderId", "ChatroomId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetChatroomInfoResponse), global::Chat.Core.Models.GetChatroomInfoResponse.Parser, new[]{ "Success", "Chatroom", "Detail" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SignupRequest), global::Chat.Core.Models.SignupRequest.Parser, new[]{ "Username", "Password" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SignupResponse), global::Chat.Core.Models.SignupResponse.Parser, new[]{ "Status", "Detail", "UserId" }, null, new[]{ typeof(global::Chat.Core.Models.SignupResponse.Types.Status) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.SignupResponse), global::Chat.Core.Models.SignupResponse.Parser, new[]{ "Success", "Detail", "ErrorCode", "UserId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.LoginRequest), global::Chat.Core.Models.LoginRequest.Parser, new[]{ "Username", "Password", "UserId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.LoginResponse), global::Chat.Core.Models.LoginResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.LoginResponse.Types.Status) }, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.LoginResponse), global::Chat.Core.Models.LoginResponse.Parser, new[]{ "Success", "Detail", "Token", "UserId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.MakeFriendRequest), global::Chat.Core.Models.MakeFriendRequest.Parser, new[]{ "SenderId", "TargetId", "Greeting" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.MakeFriendResponse), global::Chat.Core.Models.MakeFriendResponse.Parser, new[]{ "Status", "Detail" }, null, new[]{ typeof(global::Chat.Core.Models.MakeFriendResponse.Types.Status) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeoplesInfoRequest), global::Chat.Core.Models.GetPeoplesInfoRequest.Parser, new[]{ "Ids" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeoplesInfoResponse), global::Chat.Core.Models.GetPeoplesInfoResponse.Parser, new[]{ "Peoples" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.FriendNotification), global::Chat.Core.Models.FriendNotification.Parser, new[]{ "Id", "Type" }, null, new[]{ typeof(global::Chat.Core.Models.FriendNotification.Types.Type) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetMessagesRequest), global::Chat.Core.Models.GetMessagesRequest.Parser, new[]{ "UserId", "AfterTimeUnix" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeopleInfoRequest), global::Chat.Core.Models.GetPeopleInfoRequest.Parser, new[]{ "SenderId", "TargetId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetPeopleInfoResponse), global::Chat.Core.Models.GetPeopleInfoResponse.Parser, new[]{ "PeopleInfo" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetMessagesRequest), global::Chat.Core.Models.GetMessagesRequest.Parser, new[]{ "SenderId", "AfterTimeUnixMs", "ChatroomId", "Count" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetDataRequest), global::Chat.Core.Models.GetDataRequest.Parser, new[]{ "FileName", "Seed", "RandLength" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Chat.Core.Models.GetDataResponse), global::Chat.Core.Models.GetDataResponse.Parser, new[]{ "Data" }, null, null, null)
           }));
     }
     #endregion
@@ -261,7 +313,54 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Content(Content other) : this() {
-      text_ = other.text_;
+      switch (other.ContentCase) {
+        case ContentOneofCase.Text:
+          Text = other.Text;
+          break;
+        case ContentOneofCase.Image:
+          Image = other.Image.Clone();
+          break;
+        case ContentOneofCase.File:
+          File = other.File.Clone();
+          break;
+        case ContentOneofCase.PeopleEnter:
+          PeopleEnter = other.PeopleEnter.Clone();
+          break;
+        case ContentOneofCase.PeopleLeave:
+          PeopleLeave = other.PeopleLeave.Clone();
+          break;
+        case ContentOneofCase.Created:
+          Created = other.Created.Clone();
+          break;
+        case ContentOneofCase.New:
+          New = other.New.Clone();
+          break;
+        case ContentOneofCase.Dismiss:
+          Dismiss = other.Dismiss.Clone();
+          break;
+        case ContentOneofCase.AddPeople:
+          AddPeople = other.AddPeople.Clone();
+          break;
+        case ContentOneofCase.RemovePeople:
+          RemovePeople = other.RemovePeople.Clone();
+          break;
+        case ContentOneofCase.Apply:
+          Apply = other.Apply.Clone();
+          break;
+        case ContentOneofCase.Quit:
+          Quit = other.Quit.Clone();
+          break;
+        case ContentOneofCase.Announce:
+          Announce = other.Announce.Clone();
+          break;
+        case ContentOneofCase.SetPeoperty:
+          SetPeoperty = other.SetPeoperty.Clone();
+          break;
+        case ContentOneofCase.Withdraw:
+          Withdraw = other.Withdraw.Clone();
+          break;
+      }
+
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -270,14 +369,209 @@ namespace Chat.Core.Models {
     }
 
     /// <summary>Field number for the "text" field.</summary>
-    public const int TextFieldNumber = 1;
-    private string text_ = "";
+    public const int TextFieldNumber = 100;
+    /// <summary>
+    /// Message
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Text {
-      get { return text_; }
+      get { return contentCase_ == ContentOneofCase.Text ? (string) content_ : ""; }
       set {
-        text_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        content_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        contentCase_ = ContentOneofCase.Text;
       }
+    }
+
+    /// <summary>Field number for the "image" field.</summary>
+    public const int ImageFieldNumber = 101;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Image Image {
+      get { return contentCase_ == ContentOneofCase.Image ? (global::Chat.Core.Models.Content.Types.Image) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Image;
+      }
+    }
+
+    /// <summary>Field number for the "file" field.</summary>
+    public const int FileFieldNumber = 102;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.File File {
+      get { return contentCase_ == ContentOneofCase.File ? (global::Chat.Core.Models.Content.Types.File) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.File;
+      }
+    }
+
+    /// <summary>Field number for the "peopleEnter" field.</summary>
+    public const int PeopleEnterFieldNumber = 103;
+    /// <summary>
+    /// Event Only
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.PeopleEnter PeopleEnter {
+      get { return contentCase_ == ContentOneofCase.PeopleEnter ? (global::Chat.Core.Models.Content.Types.PeopleEnter) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.PeopleEnter;
+      }
+    }
+
+    /// <summary>Field number for the "peopleLeave" field.</summary>
+    public const int PeopleLeaveFieldNumber = 104;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.PeopleLeave PeopleLeave {
+      get { return contentCase_ == ContentOneofCase.PeopleLeave ? (global::Chat.Core.Models.Content.Types.PeopleLeave) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.PeopleLeave;
+      }
+    }
+
+    /// <summary>Field number for the "created" field.</summary>
+    public const int CreatedFieldNumber = 105;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Created Created {
+      get { return contentCase_ == ContentOneofCase.Created ? (global::Chat.Core.Models.Content.Types.Created) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Created;
+      }
+    }
+
+    /// <summary>Field number for the "new" field.</summary>
+    public const int NewFieldNumber = 200;
+    /// <summary>
+    /// Command &amp; Event
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.New New {
+      get { return contentCase_ == ContentOneofCase.New ? (global::Chat.Core.Models.Content.Types.New) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.New;
+      }
+    }
+
+    /// <summary>Field number for the "dismiss" field.</summary>
+    public const int DismissFieldNumber = 201;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Dismiss Dismiss {
+      get { return contentCase_ == ContentOneofCase.Dismiss ? (global::Chat.Core.Models.Content.Types.Dismiss) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Dismiss;
+      }
+    }
+
+    /// <summary>Field number for the "addPeople" field.</summary>
+    public const int AddPeopleFieldNumber = 202;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.AddPeople AddPeople {
+      get { return contentCase_ == ContentOneofCase.AddPeople ? (global::Chat.Core.Models.Content.Types.AddPeople) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.AddPeople;
+      }
+    }
+
+    /// <summary>Field number for the "removePeople" field.</summary>
+    public const int RemovePeopleFieldNumber = 203;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.RemovePeople RemovePeople {
+      get { return contentCase_ == ContentOneofCase.RemovePeople ? (global::Chat.Core.Models.Content.Types.RemovePeople) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.RemovePeople;
+      }
+    }
+
+    /// <summary>Field number for the "apply" field.</summary>
+    public const int ApplyFieldNumber = 204;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Apply Apply {
+      get { return contentCase_ == ContentOneofCase.Apply ? (global::Chat.Core.Models.Content.Types.Apply) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Apply;
+      }
+    }
+
+    /// <summary>Field number for the "quit" field.</summary>
+    public const int QuitFieldNumber = 205;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Quit Quit {
+      get { return contentCase_ == ContentOneofCase.Quit ? (global::Chat.Core.Models.Content.Types.Quit) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Quit;
+      }
+    }
+
+    /// <summary>Field number for the "announce" field.</summary>
+    public const int AnnounceFieldNumber = 206;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Announce Announce {
+      get { return contentCase_ == ContentOneofCase.Announce ? (global::Chat.Core.Models.Content.Types.Announce) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Announce;
+      }
+    }
+
+    /// <summary>Field number for the "setPeoperty" field.</summary>
+    public const int SetPeopertyFieldNumber = 207;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.SetProperty SetPeoperty {
+      get { return contentCase_ == ContentOneofCase.SetPeoperty ? (global::Chat.Core.Models.Content.Types.SetProperty) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.SetPeoperty;
+      }
+    }
+
+    /// <summary>Field number for the "withdraw" field.</summary>
+    public const int WithdrawFieldNumber = 208;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.Content.Types.Withdraw Withdraw {
+      get { return contentCase_ == ContentOneofCase.Withdraw ? (global::Chat.Core.Models.Content.Types.Withdraw) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.Withdraw;
+      }
+    }
+
+    private object content_;
+    /// <summary>Enum of possible cases for the "content" oneof.</summary>
+    public enum ContentOneofCase {
+      None = 0,
+      Text = 100,
+      Image = 101,
+      File = 102,
+      PeopleEnter = 103,
+      PeopleLeave = 104,
+      Created = 105,
+      New = 200,
+      Dismiss = 201,
+      AddPeople = 202,
+      RemovePeople = 203,
+      Apply = 204,
+      Quit = 205,
+      Announce = 206,
+      SetPeoperty = 207,
+      Withdraw = 208,
+    }
+    private ContentOneofCase contentCase_ = ContentOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ContentOneofCase ContentCase {
+      get { return contentCase_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void ClearContent() {
+      contentCase_ = ContentOneofCase.None;
+      content_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -294,13 +588,43 @@ namespace Chat.Core.Models {
         return true;
       }
       if (Text != other.Text) return false;
+      if (!object.Equals(Image, other.Image)) return false;
+      if (!object.Equals(File, other.File)) return false;
+      if (!object.Equals(PeopleEnter, other.PeopleEnter)) return false;
+      if (!object.Equals(PeopleLeave, other.PeopleLeave)) return false;
+      if (!object.Equals(Created, other.Created)) return false;
+      if (!object.Equals(New, other.New)) return false;
+      if (!object.Equals(Dismiss, other.Dismiss)) return false;
+      if (!object.Equals(AddPeople, other.AddPeople)) return false;
+      if (!object.Equals(RemovePeople, other.RemovePeople)) return false;
+      if (!object.Equals(Apply, other.Apply)) return false;
+      if (!object.Equals(Quit, other.Quit)) return false;
+      if (!object.Equals(Announce, other.Announce)) return false;
+      if (!object.Equals(SetPeoperty, other.SetPeoperty)) return false;
+      if (!object.Equals(Withdraw, other.Withdraw)) return false;
+      if (ContentCase != other.ContentCase) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Text.Length != 0) hash ^= Text.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Text) hash ^= Text.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Image) hash ^= Image.GetHashCode();
+      if (contentCase_ == ContentOneofCase.File) hash ^= File.GetHashCode();
+      if (contentCase_ == ContentOneofCase.PeopleEnter) hash ^= PeopleEnter.GetHashCode();
+      if (contentCase_ == ContentOneofCase.PeopleLeave) hash ^= PeopleLeave.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Created) hash ^= Created.GetHashCode();
+      if (contentCase_ == ContentOneofCase.New) hash ^= New.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Dismiss) hash ^= Dismiss.GetHashCode();
+      if (contentCase_ == ContentOneofCase.AddPeople) hash ^= AddPeople.GetHashCode();
+      if (contentCase_ == ContentOneofCase.RemovePeople) hash ^= RemovePeople.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Apply) hash ^= Apply.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Quit) hash ^= Quit.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Announce) hash ^= Announce.GetHashCode();
+      if (contentCase_ == ContentOneofCase.SetPeoperty) hash ^= SetPeoperty.GetHashCode();
+      if (contentCase_ == ContentOneofCase.Withdraw) hash ^= Withdraw.GetHashCode();
+      hash ^= (int) contentCase_;
       return hash;
     }
 
@@ -311,17 +635,115 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Text.Length != 0) {
-        output.WriteRawTag(10);
+      if (contentCase_ == ContentOneofCase.Text) {
+        output.WriteRawTag(162, 6);
         output.WriteString(Text);
+      }
+      if (contentCase_ == ContentOneofCase.Image) {
+        output.WriteRawTag(170, 6);
+        output.WriteMessage(Image);
+      }
+      if (contentCase_ == ContentOneofCase.File) {
+        output.WriteRawTag(178, 6);
+        output.WriteMessage(File);
+      }
+      if (contentCase_ == ContentOneofCase.PeopleEnter) {
+        output.WriteRawTag(186, 6);
+        output.WriteMessage(PeopleEnter);
+      }
+      if (contentCase_ == ContentOneofCase.PeopleLeave) {
+        output.WriteRawTag(194, 6);
+        output.WriteMessage(PeopleLeave);
+      }
+      if (contentCase_ == ContentOneofCase.Created) {
+        output.WriteRawTag(202, 6);
+        output.WriteMessage(Created);
+      }
+      if (contentCase_ == ContentOneofCase.New) {
+        output.WriteRawTag(194, 12);
+        output.WriteMessage(New);
+      }
+      if (contentCase_ == ContentOneofCase.Dismiss) {
+        output.WriteRawTag(202, 12);
+        output.WriteMessage(Dismiss);
+      }
+      if (contentCase_ == ContentOneofCase.AddPeople) {
+        output.WriteRawTag(210, 12);
+        output.WriteMessage(AddPeople);
+      }
+      if (contentCase_ == ContentOneofCase.RemovePeople) {
+        output.WriteRawTag(218, 12);
+        output.WriteMessage(RemovePeople);
+      }
+      if (contentCase_ == ContentOneofCase.Apply) {
+        output.WriteRawTag(226, 12);
+        output.WriteMessage(Apply);
+      }
+      if (contentCase_ == ContentOneofCase.Quit) {
+        output.WriteRawTag(234, 12);
+        output.WriteMessage(Quit);
+      }
+      if (contentCase_ == ContentOneofCase.Announce) {
+        output.WriteRawTag(242, 12);
+        output.WriteMessage(Announce);
+      }
+      if (contentCase_ == ContentOneofCase.SetPeoperty) {
+        output.WriteRawTag(250, 12);
+        output.WriteMessage(SetPeoperty);
+      }
+      if (contentCase_ == ContentOneofCase.Withdraw) {
+        output.WriteRawTag(130, 13);
+        output.WriteMessage(Withdraw);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Text.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Text);
+      if (contentCase_ == ContentOneofCase.Text) {
+        size += 2 + pb::CodedOutputStream.ComputeStringSize(Text);
+      }
+      if (contentCase_ == ContentOneofCase.Image) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Image);
+      }
+      if (contentCase_ == ContentOneofCase.File) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(File);
+      }
+      if (contentCase_ == ContentOneofCase.PeopleEnter) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(PeopleEnter);
+      }
+      if (contentCase_ == ContentOneofCase.PeopleLeave) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(PeopleLeave);
+      }
+      if (contentCase_ == ContentOneofCase.Created) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Created);
+      }
+      if (contentCase_ == ContentOneofCase.New) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(New);
+      }
+      if (contentCase_ == ContentOneofCase.Dismiss) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Dismiss);
+      }
+      if (contentCase_ == ContentOneofCase.AddPeople) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(AddPeople);
+      }
+      if (contentCase_ == ContentOneofCase.RemovePeople) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RemovePeople);
+      }
+      if (contentCase_ == ContentOneofCase.Apply) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Apply);
+      }
+      if (contentCase_ == ContentOneofCase.Quit) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Quit);
+      }
+      if (contentCase_ == ContentOneofCase.Announce) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Announce);
+      }
+      if (contentCase_ == ContentOneofCase.SetPeoperty) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(SetPeoperty);
+      }
+      if (contentCase_ == ContentOneofCase.Withdraw) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Withdraw);
       }
       return size;
     }
@@ -331,9 +753,54 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.Text.Length != 0) {
-        Text = other.Text;
+      switch (other.ContentCase) {
+        case ContentOneofCase.Text:
+          Text = other.Text;
+          break;
+        case ContentOneofCase.Image:
+          Image = other.Image;
+          break;
+        case ContentOneofCase.File:
+          File = other.File;
+          break;
+        case ContentOneofCase.PeopleEnter:
+          PeopleEnter = other.PeopleEnter;
+          break;
+        case ContentOneofCase.PeopleLeave:
+          PeopleLeave = other.PeopleLeave;
+          break;
+        case ContentOneofCase.Created:
+          Created = other.Created;
+          break;
+        case ContentOneofCase.New:
+          New = other.New;
+          break;
+        case ContentOneofCase.Dismiss:
+          Dismiss = other.Dismiss;
+          break;
+        case ContentOneofCase.AddPeople:
+          AddPeople = other.AddPeople;
+          break;
+        case ContentOneofCase.RemovePeople:
+          RemovePeople = other.RemovePeople;
+          break;
+        case ContentOneofCase.Apply:
+          Apply = other.Apply;
+          break;
+        case ContentOneofCase.Quit:
+          Quit = other.Quit;
+          break;
+        case ContentOneofCase.Announce:
+          Announce = other.Announce;
+          break;
+        case ContentOneofCase.SetPeoperty:
+          SetPeoperty = other.SetPeoperty;
+          break;
+        case ContentOneofCase.Withdraw:
+          Withdraw = other.Withdraw;
+          break;
       }
+
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -344,13 +811,1847 @@ namespace Chat.Core.Models {
           default:
             input.SkipLastField();
             break;
-          case 10: {
+          case 802: {
             Text = input.ReadString();
+            break;
+          }
+          case 810: {
+            global::Chat.Core.Models.Content.Types.Image subBuilder = new global::Chat.Core.Models.Content.Types.Image();
+            if (contentCase_ == ContentOneofCase.Image) {
+              subBuilder.MergeFrom(Image);
+            }
+            input.ReadMessage(subBuilder);
+            Image = subBuilder;
+            break;
+          }
+          case 818: {
+            global::Chat.Core.Models.Content.Types.File subBuilder = new global::Chat.Core.Models.Content.Types.File();
+            if (contentCase_ == ContentOneofCase.File) {
+              subBuilder.MergeFrom(File);
+            }
+            input.ReadMessage(subBuilder);
+            File = subBuilder;
+            break;
+          }
+          case 826: {
+            global::Chat.Core.Models.Content.Types.PeopleEnter subBuilder = new global::Chat.Core.Models.Content.Types.PeopleEnter();
+            if (contentCase_ == ContentOneofCase.PeopleEnter) {
+              subBuilder.MergeFrom(PeopleEnter);
+            }
+            input.ReadMessage(subBuilder);
+            PeopleEnter = subBuilder;
+            break;
+          }
+          case 834: {
+            global::Chat.Core.Models.Content.Types.PeopleLeave subBuilder = new global::Chat.Core.Models.Content.Types.PeopleLeave();
+            if (contentCase_ == ContentOneofCase.PeopleLeave) {
+              subBuilder.MergeFrom(PeopleLeave);
+            }
+            input.ReadMessage(subBuilder);
+            PeopleLeave = subBuilder;
+            break;
+          }
+          case 842: {
+            global::Chat.Core.Models.Content.Types.Created subBuilder = new global::Chat.Core.Models.Content.Types.Created();
+            if (contentCase_ == ContentOneofCase.Created) {
+              subBuilder.MergeFrom(Created);
+            }
+            input.ReadMessage(subBuilder);
+            Created = subBuilder;
+            break;
+          }
+          case 1602: {
+            global::Chat.Core.Models.Content.Types.New subBuilder = new global::Chat.Core.Models.Content.Types.New();
+            if (contentCase_ == ContentOneofCase.New) {
+              subBuilder.MergeFrom(New);
+            }
+            input.ReadMessage(subBuilder);
+            New = subBuilder;
+            break;
+          }
+          case 1610: {
+            global::Chat.Core.Models.Content.Types.Dismiss subBuilder = new global::Chat.Core.Models.Content.Types.Dismiss();
+            if (contentCase_ == ContentOneofCase.Dismiss) {
+              subBuilder.MergeFrom(Dismiss);
+            }
+            input.ReadMessage(subBuilder);
+            Dismiss = subBuilder;
+            break;
+          }
+          case 1618: {
+            global::Chat.Core.Models.Content.Types.AddPeople subBuilder = new global::Chat.Core.Models.Content.Types.AddPeople();
+            if (contentCase_ == ContentOneofCase.AddPeople) {
+              subBuilder.MergeFrom(AddPeople);
+            }
+            input.ReadMessage(subBuilder);
+            AddPeople = subBuilder;
+            break;
+          }
+          case 1626: {
+            global::Chat.Core.Models.Content.Types.RemovePeople subBuilder = new global::Chat.Core.Models.Content.Types.RemovePeople();
+            if (contentCase_ == ContentOneofCase.RemovePeople) {
+              subBuilder.MergeFrom(RemovePeople);
+            }
+            input.ReadMessage(subBuilder);
+            RemovePeople = subBuilder;
+            break;
+          }
+          case 1634: {
+            global::Chat.Core.Models.Content.Types.Apply subBuilder = new global::Chat.Core.Models.Content.Types.Apply();
+            if (contentCase_ == ContentOneofCase.Apply) {
+              subBuilder.MergeFrom(Apply);
+            }
+            input.ReadMessage(subBuilder);
+            Apply = subBuilder;
+            break;
+          }
+          case 1642: {
+            global::Chat.Core.Models.Content.Types.Quit subBuilder = new global::Chat.Core.Models.Content.Types.Quit();
+            if (contentCase_ == ContentOneofCase.Quit) {
+              subBuilder.MergeFrom(Quit);
+            }
+            input.ReadMessage(subBuilder);
+            Quit = subBuilder;
+            break;
+          }
+          case 1650: {
+            global::Chat.Core.Models.Content.Types.Announce subBuilder = new global::Chat.Core.Models.Content.Types.Announce();
+            if (contentCase_ == ContentOneofCase.Announce) {
+              subBuilder.MergeFrom(Announce);
+            }
+            input.ReadMessage(subBuilder);
+            Announce = subBuilder;
+            break;
+          }
+          case 1658: {
+            global::Chat.Core.Models.Content.Types.SetProperty subBuilder = new global::Chat.Core.Models.Content.Types.SetProperty();
+            if (contentCase_ == ContentOneofCase.SetPeoperty) {
+              subBuilder.MergeFrom(SetPeoperty);
+            }
+            input.ReadMessage(subBuilder);
+            SetPeoperty = subBuilder;
+            break;
+          }
+          case 1666: {
+            global::Chat.Core.Models.Content.Types.Withdraw subBuilder = new global::Chat.Core.Models.Content.Types.Withdraw();
+            if (contentCase_ == ContentOneofCase.Withdraw) {
+              subBuilder.MergeFrom(Withdraw);
+            }
+            input.ReadMessage(subBuilder);
+            Withdraw = subBuilder;
             break;
           }
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the Content message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class Image : pb::IMessage<Image> {
+        private static readonly pb::MessageParser<Image> _parser = new pb::MessageParser<Image>(() => new Image());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Image> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Image() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Image(Image other) : this() {
+          data_ = other.data_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Image Clone() {
+          return new Image(this);
+        }
+
+        /// <summary>Field number for the "data" field.</summary>
+        public const int DataFieldNumber = 1;
+        private pb::ByteString data_ = pb::ByteString.Empty;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public pb::ByteString Data {
+          get { return data_; }
+          set {
+            data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Image);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Image other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Data != other.Data) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Data.Length != 0) hash ^= Data.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Data.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteBytes(Data);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Data.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Image other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Data.Length != 0) {
+            Data = other.Data;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Data = input.ReadBytes();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class File : pb::IMessage<File> {
+        private static readonly pb::MessageParser<File> _parser = new pb::MessageParser<File>(() => new File());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<File> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[1]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public File() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public File(File other) : this() {
+          name_ = other.name_;
+          path_ = other.path_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public File Clone() {
+          return new File(this);
+        }
+
+        /// <summary>Field number for the "name" field.</summary>
+        public const int NameFieldNumber = 1;
+        private string name_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Name {
+          get { return name_; }
+          set {
+            name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "path" field.</summary>
+        public const int PathFieldNumber = 2;
+        private string path_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Path {
+          get { return path_; }
+          set {
+            path_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as File);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(File other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Name != other.Name) return false;
+          if (Path != other.Path) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Name.Length != 0) hash ^= Name.GetHashCode();
+          if (Path.Length != 0) hash ^= Path.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Name.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(Name);
+          }
+          if (Path.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(Path);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Name.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+          }
+          if (Path.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Path);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(File other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Name.Length != 0) {
+            Name = other.Name;
+          }
+          if (other.Path.Length != 0) {
+            Path = other.Path;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Name = input.ReadString();
+                break;
+              }
+              case 18: {
+                Path = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class Withdraw : pb::IMessage<Withdraw> {
+        private static readonly pb::MessageParser<Withdraw> _parser = new pb::MessageParser<Withdraw>(() => new Withdraw());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Withdraw> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[2]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Withdraw() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Withdraw(Withdraw other) : this() {
+          withdrawId_ = other.withdrawId_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Withdraw Clone() {
+          return new Withdraw(this);
+        }
+
+        /// <summary>Field number for the "withdrawId" field.</summary>
+        public const int WithdrawIdFieldNumber = 1;
+        private long withdrawId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long WithdrawId {
+          get { return withdrawId_; }
+          set {
+            withdrawId_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Withdraw);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Withdraw other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (WithdrawId != other.WithdrawId) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (WithdrawId != 0L) hash ^= WithdrawId.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (WithdrawId != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(WithdrawId);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (WithdrawId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(WithdrawId);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Withdraw other) {
+          if (other == null) {
+            return;
+          }
+          if (other.WithdrawId != 0L) {
+            WithdrawId = other.WithdrawId;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                WithdrawId = input.ReadInt64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class PeopleEnter : pb::IMessage<PeopleEnter> {
+        private static readonly pb::MessageParser<PeopleEnter> _parser = new pb::MessageParser<PeopleEnter>(() => new PeopleEnter());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<PeopleEnter> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[3]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleEnter() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleEnter(PeopleEnter other) : this() {
+          peopleId_ = other.peopleId_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleEnter Clone() {
+          return new PeopleEnter(this);
+        }
+
+        /// <summary>Field number for the "peopleId" field.</summary>
+        public const int PeopleIdFieldNumber = 1;
+        private long peopleId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long PeopleId {
+          get { return peopleId_; }
+          set {
+            peopleId_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as PeopleEnter);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(PeopleEnter other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (PeopleId != other.PeopleId) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (PeopleId != 0L) hash ^= PeopleId.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (PeopleId != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(PeopleId);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (PeopleId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(PeopleId);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(PeopleEnter other) {
+          if (other == null) {
+            return;
+          }
+          if (other.PeopleId != 0L) {
+            PeopleId = other.PeopleId;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                PeopleId = input.ReadInt64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class PeopleLeave : pb::IMessage<PeopleLeave> {
+        private static readonly pb::MessageParser<PeopleLeave> _parser = new pb::MessageParser<PeopleLeave>(() => new PeopleLeave());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<PeopleLeave> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[4]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleLeave() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleLeave(PeopleLeave other) : this() {
+          peopleId_ = other.peopleId_;
+          kickOutById_ = other.kickOutById_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleLeave Clone() {
+          return new PeopleLeave(this);
+        }
+
+        /// <summary>Field number for the "peopleId" field.</summary>
+        public const int PeopleIdFieldNumber = 1;
+        private long peopleId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long PeopleId {
+          get { return peopleId_; }
+          set {
+            peopleId_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "kickOutById" field.</summary>
+        public const int KickOutByIdFieldNumber = 2;
+        private long kickOutById_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long KickOutById {
+          get { return kickOutById_; }
+          set {
+            kickOutById_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as PeopleLeave);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(PeopleLeave other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (PeopleId != other.PeopleId) return false;
+          if (KickOutById != other.KickOutById) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (PeopleId != 0L) hash ^= PeopleId.GetHashCode();
+          if (KickOutById != 0L) hash ^= KickOutById.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (PeopleId != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(PeopleId);
+          }
+          if (KickOutById != 0L) {
+            output.WriteRawTag(16);
+            output.WriteInt64(KickOutById);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (PeopleId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(PeopleId);
+          }
+          if (KickOutById != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(KickOutById);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(PeopleLeave other) {
+          if (other == null) {
+            return;
+          }
+          if (other.PeopleId != 0L) {
+            PeopleId = other.PeopleId;
+          }
+          if (other.KickOutById != 0L) {
+            KickOutById = other.KickOutById;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                PeopleId = input.ReadInt64();
+                break;
+              }
+              case 16: {
+                KickOutById = input.ReadInt64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class Created : pb::IMessage<Created> {
+        private static readonly pb::MessageParser<Created> _parser = new pb::MessageParser<Created>(() => new Created());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Created> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[5]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Created() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Created(Created other) : this() {
+          creatorId_ = other.creatorId_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Created Clone() {
+          return new Created(this);
+        }
+
+        /// <summary>Field number for the "creatorId" field.</summary>
+        public const int CreatorIdFieldNumber = 1;
+        private long creatorId_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long CreatorId {
+          get { return creatorId_; }
+          set {
+            creatorId_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Created);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Created other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (CreatorId != other.CreatorId) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (CreatorId != 0L) hash ^= CreatorId.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (CreatorId != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(CreatorId);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (CreatorId != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(CreatorId);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Created other) {
+          if (other == null) {
+            return;
+          }
+          if (other.CreatorId != 0L) {
+            CreatorId = other.CreatorId;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                CreatorId = input.ReadInt64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class New : pb::IMessage<New> {
+        private static readonly pb::MessageParser<New> _parser = new pb::MessageParser<New>(() => new New());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<New> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[6]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public New() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public New(New other) : this() {
+          peopleIds_ = other.peopleIds_.Clone();
+          name_ = other.name_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public New Clone() {
+          return new New(this);
+        }
+
+        /// <summary>Field number for the "peopleIds" field.</summary>
+        public const int PeopleIdsFieldNumber = 1;
+        private static readonly pb::FieldCodec<long> _repeated_peopleIds_codec
+            = pb::FieldCodec.ForInt64(10);
+        private readonly pbc::RepeatedField<long> peopleIds_ = new pbc::RepeatedField<long>();
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public pbc::RepeatedField<long> PeopleIds {
+          get { return peopleIds_; }
+        }
+
+        /// <summary>Field number for the "name" field.</summary>
+        public const int NameFieldNumber = 2;
+        private string name_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Name {
+          get { return name_; }
+          set {
+            name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as New);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(New other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if(!peopleIds_.Equals(other.peopleIds_)) return false;
+          if (Name != other.Name) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          hash ^= peopleIds_.GetHashCode();
+          if (Name.Length != 0) hash ^= Name.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          peopleIds_.WriteTo(output, _repeated_peopleIds_codec);
+          if (Name.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(Name);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          size += peopleIds_.CalculateSize(_repeated_peopleIds_codec);
+          if (Name.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(New other) {
+          if (other == null) {
+            return;
+          }
+          peopleIds_.Add(other.peopleIds_);
+          if (other.Name.Length != 0) {
+            Name = other.Name;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10:
+              case 8: {
+                peopleIds_.AddEntriesFrom(input, _repeated_peopleIds_codec);
+                break;
+              }
+              case 18: {
+                Name = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class Dismiss : pb::IMessage<Dismiss> {
+        private static readonly pb::MessageParser<Dismiss> _parser = new pb::MessageParser<Dismiss>(() => new Dismiss());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Dismiss> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[7]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Dismiss() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Dismiss(Dismiss other) : this() {
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Dismiss Clone() {
+          return new Dismiss(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Dismiss);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Dismiss other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Dismiss other) {
+          if (other == null) {
+            return;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class AddPeople : pb::IMessage<AddPeople> {
+        private static readonly pb::MessageParser<AddPeople> _parser = new pb::MessageParser<AddPeople>(() => new AddPeople());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<AddPeople> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[8]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public AddPeople() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public AddPeople(AddPeople other) : this() {
+          peopleIds_ = other.peopleIds_.Clone();
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public AddPeople Clone() {
+          return new AddPeople(this);
+        }
+
+        /// <summary>Field number for the "peopleIds" field.</summary>
+        public const int PeopleIdsFieldNumber = 1;
+        private static readonly pb::FieldCodec<long> _repeated_peopleIds_codec
+            = pb::FieldCodec.ForInt64(10);
+        private readonly pbc::RepeatedField<long> peopleIds_ = new pbc::RepeatedField<long>();
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public pbc::RepeatedField<long> PeopleIds {
+          get { return peopleIds_; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as AddPeople);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(AddPeople other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if(!peopleIds_.Equals(other.peopleIds_)) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          hash ^= peopleIds_.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          peopleIds_.WriteTo(output, _repeated_peopleIds_codec);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          size += peopleIds_.CalculateSize(_repeated_peopleIds_codec);
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(AddPeople other) {
+          if (other == null) {
+            return;
+          }
+          peopleIds_.Add(other.peopleIds_);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10:
+              case 8: {
+                peopleIds_.AddEntriesFrom(input, _repeated_peopleIds_codec);
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class RemovePeople : pb::IMessage<RemovePeople> {
+        private static readonly pb::MessageParser<RemovePeople> _parser = new pb::MessageParser<RemovePeople>(() => new RemovePeople());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<RemovePeople> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[9]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public RemovePeople() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public RemovePeople(RemovePeople other) : this() {
+          peopleIds_ = other.peopleIds_.Clone();
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public RemovePeople Clone() {
+          return new RemovePeople(this);
+        }
+
+        /// <summary>Field number for the "peopleIds" field.</summary>
+        public const int PeopleIdsFieldNumber = 1;
+        private static readonly pb::FieldCodec<long> _repeated_peopleIds_codec
+            = pb::FieldCodec.ForInt64(10);
+        private readonly pbc::RepeatedField<long> peopleIds_ = new pbc::RepeatedField<long>();
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public pbc::RepeatedField<long> PeopleIds {
+          get { return peopleIds_; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as RemovePeople);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(RemovePeople other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if(!peopleIds_.Equals(other.peopleIds_)) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          hash ^= peopleIds_.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          peopleIds_.WriteTo(output, _repeated_peopleIds_codec);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          size += peopleIds_.CalculateSize(_repeated_peopleIds_codec);
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(RemovePeople other) {
+          if (other == null) {
+            return;
+          }
+          peopleIds_.Add(other.peopleIds_);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10:
+              case 8: {
+                peopleIds_.AddEntriesFrom(input, _repeated_peopleIds_codec);
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class Apply : pb::IMessage<Apply> {
+        private static readonly pb::MessageParser<Apply> _parser = new pb::MessageParser<Apply>(() => new Apply());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Apply> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[10]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Apply() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Apply(Apply other) : this() {
+          message_ = other.message_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Apply Clone() {
+          return new Apply(this);
+        }
+
+        /// <summary>Field number for the "message" field.</summary>
+        public const int MessageFieldNumber = 1;
+        private string message_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Message {
+          get { return message_; }
+          set {
+            message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Apply);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Apply other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Message != other.Message) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Message.Length != 0) hash ^= Message.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Message.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(Message);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Message.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Apply other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Message.Length != 0) {
+            Message = other.Message;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Message = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class Quit : pb::IMessage<Quit> {
+        private static readonly pb::MessageParser<Quit> _parser = new pb::MessageParser<Quit>(() => new Quit());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Quit> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[11]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Quit() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Quit(Quit other) : this() {
+          message_ = other.message_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Quit Clone() {
+          return new Quit(this);
+        }
+
+        /// <summary>Field number for the "message" field.</summary>
+        public const int MessageFieldNumber = 1;
+        private string message_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Message {
+          get { return message_; }
+          set {
+            message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Quit);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Quit other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Message != other.Message) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Message.Length != 0) hash ^= Message.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Message.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(Message);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Message.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Quit other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Message.Length != 0) {
+            Message = other.Message;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Message = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class Announce : pb::IMessage<Announce> {
+        private static readonly pb::MessageParser<Announce> _parser = new pb::MessageParser<Announce>(() => new Announce());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<Announce> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[12]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Announce() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Announce(Announce other) : this() {
+          message_ = other.message_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public Announce Clone() {
+          return new Announce(this);
+        }
+
+        /// <summary>Field number for the "message" field.</summary>
+        public const int MessageFieldNumber = 1;
+        private string message_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Message {
+          get { return message_; }
+          set {
+            message_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as Announce);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(Announce other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Message != other.Message) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Message.Length != 0) hash ^= Message.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Message.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(Message);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Message.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(Announce other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Message.Length != 0) {
+            Message = other.Message;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Message = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class SetProperty : pb::IMessage<SetProperty> {
+        private static readonly pb::MessageParser<SetProperty> _parser = new pb::MessageParser<SetProperty>(() => new SetProperty());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<SetProperty> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.Content.Descriptor.NestedTypes[13]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public SetProperty() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public SetProperty(SetProperty other) : this() {
+          key_ = other.key_;
+          value_ = other.value_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public SetProperty Clone() {
+          return new SetProperty(this);
+        }
+
+        /// <summary>Field number for the "key" field.</summary>
+        public const int KeyFieldNumber = 1;
+        private string key_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Key {
+          get { return key_; }
+          set {
+            key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "value" field.</summary>
+        public const int ValueFieldNumber = 2;
+        private string value_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Value {
+          get { return value_; }
+          set {
+            value_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as SetProperty);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(SetProperty other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Key != other.Key) return false;
+          if (Value != other.Value) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Key.Length != 0) hash ^= Key.GetHashCode();
+          if (Value.Length != 0) hash ^= Value.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Key.Length != 0) {
+            output.WriteRawTag(10);
+            output.WriteString(Key);
+          }
+          if (Value.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(Value);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Key.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Key);
+          }
+          if (Value.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Value);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(SetProperty other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Key.Length != 0) {
+            Key = other.Key;
+          }
+          if (other.Value.Length != 0) {
+            Value = other.Value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                Key = input.ReadString();
+                break;
+              }
+              case 18: {
+                Value = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
 
   }
 
@@ -380,7 +2681,7 @@ namespace Chat.Core.Models {
     public ChatMessage(ChatMessage other) : this() {
       id_ = other.id_;
       senderId_ = other.senderId_;
-      timeUnix_ = other.timeUnix_;
+      timeUnixMs_ = other.timeUnixMs_;
       Content = other.content_ != null ? other.Content.Clone() : null;
       chatroomId_ = other.chatroomId_;
     }
@@ -412,14 +2713,14 @@ namespace Chat.Core.Models {
       }
     }
 
-    /// <summary>Field number for the "timeUnix" field.</summary>
-    public const int TimeUnixFieldNumber = 3;
-    private long timeUnix_;
+    /// <summary>Field number for the "timeUnixMs" field.</summary>
+    public const int TimeUnixMsFieldNumber = 3;
+    private long timeUnixMs_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long TimeUnix {
-      get { return timeUnix_; }
+    public long TimeUnixMs {
+      get { return timeUnixMs_; }
       set {
-        timeUnix_ = value;
+        timeUnixMs_ = value;
       }
     }
 
@@ -460,7 +2761,7 @@ namespace Chat.Core.Models {
       }
       if (Id != other.Id) return false;
       if (SenderId != other.SenderId) return false;
-      if (TimeUnix != other.TimeUnix) return false;
+      if (TimeUnixMs != other.TimeUnixMs) return false;
       if (!object.Equals(Content, other.Content)) return false;
       if (ChatroomId != other.ChatroomId) return false;
       return true;
@@ -471,7 +2772,7 @@ namespace Chat.Core.Models {
       int hash = 1;
       if (Id != 0L) hash ^= Id.GetHashCode();
       if (SenderId != 0L) hash ^= SenderId.GetHashCode();
-      if (TimeUnix != 0L) hash ^= TimeUnix.GetHashCode();
+      if (TimeUnixMs != 0L) hash ^= TimeUnixMs.GetHashCode();
       if (content_ != null) hash ^= Content.GetHashCode();
       if (ChatroomId != 0L) hash ^= ChatroomId.GetHashCode();
       return hash;
@@ -492,9 +2793,9 @@ namespace Chat.Core.Models {
         output.WriteRawTag(16);
         output.WriteInt64(SenderId);
       }
-      if (TimeUnix != 0L) {
+      if (TimeUnixMs != 0L) {
         output.WriteRawTag(24);
-        output.WriteInt64(TimeUnix);
+        output.WriteInt64(TimeUnixMs);
       }
       if (content_ != null) {
         output.WriteRawTag(34);
@@ -515,8 +2816,8 @@ namespace Chat.Core.Models {
       if (SenderId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(SenderId);
       }
-      if (TimeUnix != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TimeUnix);
+      if (TimeUnixMs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TimeUnixMs);
       }
       if (content_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Content);
@@ -538,8 +2839,8 @@ namespace Chat.Core.Models {
       if (other.SenderId != 0L) {
         SenderId = other.SenderId;
       }
-      if (other.TimeUnix != 0L) {
-        TimeUnix = other.TimeUnix;
+      if (other.TimeUnixMs != 0L) {
+        TimeUnixMs = other.TimeUnixMs;
       }
       if (other.content_ != null) {
         if (content_ == null) {
@@ -569,7 +2870,7 @@ namespace Chat.Core.Models {
             break;
           }
           case 24: {
-            TimeUnix = input.ReadInt64();
+            TimeUnixMs = input.ReadInt64();
             break;
           }
           case 34: {
@@ -589,6 +2890,179 @@ namespace Chat.Core.Models {
 
   }
 
+  public sealed partial class ChatroomResponse : pb::IMessage<ChatroomResponse> {
+    private static readonly pb::MessageParser<ChatroomResponse> _parser = new pb::MessageParser<ChatroomResponse>(() => new ChatroomResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ChatroomResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatroomResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatroomResponse(ChatroomResponse other) : this() {
+      success_ = other.success_;
+      detail_ = other.detail_;
+      chatroomId_ = other.chatroomId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ChatroomResponse Clone() {
+      return new ChatroomResponse(this);
+    }
+
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "detail" field.</summary>
+    public const int DetailFieldNumber = 2;
+    private string detail_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Detail {
+      get { return detail_; }
+      set {
+        detail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "chatroomId" field.</summary>
+    public const int ChatroomIdFieldNumber = 3;
+    private long chatroomId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ChatroomId {
+      get { return chatroomId_; }
+      set {
+        chatroomId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ChatroomResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ChatroomResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Success != other.Success) return false;
+      if (Detail != other.Detail) return false;
+      if (ChatroomId != other.ChatroomId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Success != false) hash ^= Success.GetHashCode();
+      if (Detail.Length != 0) hash ^= Detail.GetHashCode();
+      if (ChatroomId != 0L) hash ^= ChatroomId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (Detail.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Detail);
+      }
+      if (ChatroomId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(ChatroomId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Success != false) {
+        size += 1 + 1;
+      }
+      if (Detail.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Detail);
+      }
+      if (ChatroomId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ChatroomId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ChatroomResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      if (other.Detail.Length != 0) {
+        Detail = other.Detail;
+      }
+      if (other.ChatroomId != 0L) {
+        ChatroomId = other.ChatroomId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+          case 18: {
+            Detail = input.ReadString();
+            break;
+          }
+          case 24: {
+            ChatroomId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class SendMessageRequest : pb::IMessage<SendMessageRequest> {
     private static readonly pb::MessageParser<SendMessageRequest> _parser = new pb::MessageParser<SendMessageRequest>(() => new SendMessageRequest());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -596,7 +3070,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -719,7 +3193,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -736,8 +3210,9 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SendMessageResponse(SendMessageResponse other) : this() {
-      status_ = other.status_;
+      success_ = other.success_;
       detail_ = other.detail_;
+      chatroomId_ = other.chatroomId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -745,14 +3220,14 @@ namespace Chat.Core.Models {
       return new SendMessageResponse(this);
     }
 
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 1;
-    private global::Chat.Core.Models.SendMessageResponse.Types.Status status_ = 0;
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Chat.Core.Models.SendMessageResponse.Types.Status Status {
-      get { return status_; }
+    public bool Success {
+      get { return success_; }
       set {
-        status_ = value;
+        success_ = value;
       }
     }
 
@@ -764,6 +3239,17 @@ namespace Chat.Core.Models {
       get { return detail_; }
       set {
         detail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "chatroomId" field.</summary>
+    public const int ChatroomIdFieldNumber = 3;
+    private long chatroomId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ChatroomId {
+      get { return chatroomId_; }
+      set {
+        chatroomId_ = value;
       }
     }
 
@@ -780,16 +3266,18 @@ namespace Chat.Core.Models {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Status != other.Status) return false;
+      if (Success != other.Success) return false;
       if (Detail != other.Detail) return false;
+      if (ChatroomId != other.ChatroomId) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Status != 0) hash ^= Status.GetHashCode();
+      if (Success != false) hash ^= Success.GetHashCode();
       if (Detail.Length != 0) hash ^= Detail.GetHashCode();
+      if (ChatroomId != 0L) hash ^= ChatroomId.GetHashCode();
       return hash;
     }
 
@@ -800,24 +3288,31 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Status != 0) {
+      if (Success != false) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) Status);
+        output.WriteBool(Success);
       }
       if (Detail.Length != 0) {
         output.WriteRawTag(18);
         output.WriteString(Detail);
+      }
+      if (ChatroomId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(ChatroomId);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Status != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      if (Success != false) {
+        size += 1 + 1;
       }
       if (Detail.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Detail);
+      }
+      if (ChatroomId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ChatroomId);
       }
       return size;
     }
@@ -827,11 +3322,14 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.Status != 0) {
-        Status = other.Status;
+      if (other.Success != false) {
+        Success = other.Success;
       }
       if (other.Detail.Length != 0) {
         Detail = other.Detail;
+      }
+      if (other.ChatroomId != 0L) {
+        ChatroomId = other.ChatroomId;
       }
     }
 
@@ -844,39 +3342,31 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            status_ = (global::Chat.Core.Models.SendMessageResponse.Types.Status) input.ReadEnum();
+            Success = input.ReadBool();
             break;
           }
           case 18: {
             Detail = input.ReadString();
             break;
           }
+          case 24: {
+            ChatroomId = input.ReadInt64();
+            break;
+          }
         }
       }
     }
 
-    #region Nested types
-    /// <summary>Container for nested types declared in the SendMessageResponse message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum Status {
-        [pbr::OriginalName("Success")] Success = 0,
-        [pbr::OriginalName("Failed")] Failed = 1,
-      }
-
-    }
-    #endregion
-
   }
 
-  public sealed partial class People : pb::IMessage<People> {
-    private static readonly pb::MessageParser<People> _parser = new pb::MessageParser<People>(() => new People());
+  public sealed partial class PeopleInfo : pb::IMessage<PeopleInfo> {
+    private static readonly pb::MessageParser<PeopleInfo> _parser = new pb::MessageParser<PeopleInfo>(() => new PeopleInfo());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<People> Parser { get { return _parser; } }
+    public static pb::MessageParser<PeopleInfo> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -885,28 +3375,44 @@ namespace Chat.Core.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public People() {
+    public PeopleInfo() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public People(People other) : this() {
+    public PeopleInfo(PeopleInfo other) : this() {
       id_ = other.id_;
       username_ = other.username_;
+      tags_ = other.tags_.Clone();
+      note_ = other.note_;
+      blocked_ = other.blocked_;
+      chatroomId_ = other.chatroomId_;
+      switch (other.RoleInfoCase) {
+        case RoleInfoOneofCase.Self:
+          Self = other.Self.Clone();
+          break;
+        case RoleInfoOneofCase.Friend:
+          Friend = other.Friend.Clone();
+          break;
+        case RoleInfoOneofCase.Stranger:
+          Stranger = other.Stranger.Clone();
+          break;
+      }
+
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public People Clone() {
-      return new People(this);
+    public PeopleInfo Clone() {
+      return new PeopleInfo(this);
     }
 
     /// <summary>Field number for the "id" field.</summary>
     public const int IdFieldNumber = 1;
     private long id_;
     /// <summary>
-    /// Public
+    /// Public Info
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Id {
@@ -927,160 +3433,14 @@ namespace Chat.Core.Models {
       }
     }
 
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as People);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(People other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Id != other.Id) return false;
-      if (Username != other.Username) return false;
-      return true;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Id != 0L) hash ^= Id.GetHashCode();
-      if (Username.Length != 0) hash ^= Username.GetHashCode();
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Id != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(Id);
-      }
-      if (Username.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Username);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Id != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
-      }
-      if (Username.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(People other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Id != 0L) {
-        Id = other.Id;
-      }
-      if (other.Username.Length != 0) {
-        Username = other.Username;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            input.SkipLastField();
-            break;
-          case 8: {
-            Id = input.ReadInt64();
-            break;
-          }
-          case 18: {
-            Username = input.ReadString();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class Friend : pb::IMessage<Friend> {
-    private static readonly pb::MessageParser<Friend> _parser = new pb::MessageParser<Friend>(() => new Friend());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Friend> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[6]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Friend() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Friend(Friend other) : this() {
-      myId_ = other.myId_;
-      friendId_ = other.friendId_;
-      tags_ = other.tags_.Clone();
-      note_ = other.note_;
-      blocked_ = other.blocked_;
-      chatroomId_ = other.chatroomId_;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Friend Clone() {
-      return new Friend(this);
-    }
-
-    /// <summary>Field number for the "myId" field.</summary>
-    public const int MyIdFieldNumber = 1;
-    private int myId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int MyId {
-      get { return myId_; }
-      set {
-        myId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "friendId" field.</summary>
-    public const int FriendIdFieldNumber = 2;
-    private int friendId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int FriendId {
-      get { return friendId_; }
-      set {
-        friendId_ = value;
-      }
-    }
-
     /// <summary>Field number for the "tags" field.</summary>
     public const int TagsFieldNumber = 10;
     private static readonly pb::FieldCodec<string> _repeated_tags_codec
         = pb::FieldCodec.ForString(82);
     private readonly pbc::RepeatedField<string> tags_ = new pbc::RepeatedField<string>();
+    /// <summary>
+    /// Relationship Info
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<string> Tags {
       get { return tags_; }
@@ -1119,37 +3479,98 @@ namespace Chat.Core.Models {
       }
     }
 
+    /// <summary>Field number for the "self" field.</summary>
+    public const int SelfFieldNumber = 101;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as Friend);
+    public global::Chat.Core.Models.PeopleInfo.Types.SelfInfo Self {
+      get { return roleInfoCase_ == RoleInfoOneofCase.Self ? (global::Chat.Core.Models.PeopleInfo.Types.SelfInfo) roleInfo_ : null; }
+      set {
+        roleInfo_ = value;
+        roleInfoCase_ = value == null ? RoleInfoOneofCase.None : RoleInfoOneofCase.Self;
+      }
+    }
+
+    /// <summary>Field number for the "friend" field.</summary>
+    public const int FriendFieldNumber = 102;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.PeopleInfo.Types.FriendInfo Friend {
+      get { return roleInfoCase_ == RoleInfoOneofCase.Friend ? (global::Chat.Core.Models.PeopleInfo.Types.FriendInfo) roleInfo_ : null; }
+      set {
+        roleInfo_ = value;
+        roleInfoCase_ = value == null ? RoleInfoOneofCase.None : RoleInfoOneofCase.Friend;
+      }
+    }
+
+    /// <summary>Field number for the "stranger" field.</summary>
+    public const int StrangerFieldNumber = 103;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo Stranger {
+      get { return roleInfoCase_ == RoleInfoOneofCase.Stranger ? (global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo) roleInfo_ : null; }
+      set {
+        roleInfo_ = value;
+        roleInfoCase_ = value == null ? RoleInfoOneofCase.None : RoleInfoOneofCase.Stranger;
+      }
+    }
+
+    private object roleInfo_;
+    /// <summary>Enum of possible cases for the "roleInfo" oneof.</summary>
+    public enum RoleInfoOneofCase {
+      None = 0,
+      Self = 101,
+      Friend = 102,
+      Stranger = 103,
+    }
+    private RoleInfoOneofCase roleInfoCase_ = RoleInfoOneofCase.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RoleInfoOneofCase RoleInfoCase {
+      get { return roleInfoCase_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Friend other) {
+    public void ClearRoleInfo() {
+      roleInfoCase_ = RoleInfoOneofCase.None;
+      roleInfo_ = null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as PeopleInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PeopleInfo other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (MyId != other.MyId) return false;
-      if (FriendId != other.FriendId) return false;
+      if (Id != other.Id) return false;
+      if (Username != other.Username) return false;
       if(!tags_.Equals(other.tags_)) return false;
       if (Note != other.Note) return false;
       if (Blocked != other.Blocked) return false;
       if (ChatroomId != other.ChatroomId) return false;
+      if (!object.Equals(Self, other.Self)) return false;
+      if (!object.Equals(Friend, other.Friend)) return false;
+      if (!object.Equals(Stranger, other.Stranger)) return false;
+      if (RoleInfoCase != other.RoleInfoCase) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (MyId != 0) hash ^= MyId.GetHashCode();
-      if (FriendId != 0) hash ^= FriendId.GetHashCode();
+      if (Id != 0L) hash ^= Id.GetHashCode();
+      if (Username.Length != 0) hash ^= Username.GetHashCode();
       hash ^= tags_.GetHashCode();
       if (Note.Length != 0) hash ^= Note.GetHashCode();
       if (Blocked != false) hash ^= Blocked.GetHashCode();
       if (ChatroomId != 0L) hash ^= ChatroomId.GetHashCode();
+      if (roleInfoCase_ == RoleInfoOneofCase.Self) hash ^= Self.GetHashCode();
+      if (roleInfoCase_ == RoleInfoOneofCase.Friend) hash ^= Friend.GetHashCode();
+      if (roleInfoCase_ == RoleInfoOneofCase.Stranger) hash ^= Stranger.GetHashCode();
+      hash ^= (int) roleInfoCase_;
       return hash;
     }
 
@@ -1160,13 +3581,13 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (MyId != 0) {
+      if (Id != 0L) {
         output.WriteRawTag(8);
-        output.WriteInt32(MyId);
+        output.WriteInt64(Id);
       }
-      if (FriendId != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(FriendId);
+      if (Username.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Username);
       }
       tags_.WriteTo(output, _repeated_tags_codec);
       if (Note.Length != 0) {
@@ -1181,16 +3602,28 @@ namespace Chat.Core.Models {
         output.WriteRawTag(168, 1);
         output.WriteInt64(ChatroomId);
       }
+      if (roleInfoCase_ == RoleInfoOneofCase.Self) {
+        output.WriteRawTag(170, 6);
+        output.WriteMessage(Self);
+      }
+      if (roleInfoCase_ == RoleInfoOneofCase.Friend) {
+        output.WriteRawTag(178, 6);
+        output.WriteMessage(Friend);
+      }
+      if (roleInfoCase_ == RoleInfoOneofCase.Stranger) {
+        output.WriteRawTag(186, 6);
+        output.WriteMessage(Stranger);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (MyId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MyId);
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
       }
-      if (FriendId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FriendId);
+      if (Username.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
       }
       size += tags_.CalculateSize(_repeated_tags_codec);
       if (Note.Length != 0) {
@@ -1202,19 +3635,28 @@ namespace Chat.Core.Models {
       if (ChatroomId != 0L) {
         size += 2 + pb::CodedOutputStream.ComputeInt64Size(ChatroomId);
       }
+      if (roleInfoCase_ == RoleInfoOneofCase.Self) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Self);
+      }
+      if (roleInfoCase_ == RoleInfoOneofCase.Friend) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Friend);
+      }
+      if (roleInfoCase_ == RoleInfoOneofCase.Stranger) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(Stranger);
+      }
       return size;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Friend other) {
+    public void MergeFrom(PeopleInfo other) {
       if (other == null) {
         return;
       }
-      if (other.MyId != 0) {
-        MyId = other.MyId;
+      if (other.Id != 0L) {
+        Id = other.Id;
       }
-      if (other.FriendId != 0) {
-        FriendId = other.FriendId;
+      if (other.Username.Length != 0) {
+        Username = other.Username;
       }
       tags_.Add(other.tags_);
       if (other.Note.Length != 0) {
@@ -1226,6 +3668,18 @@ namespace Chat.Core.Models {
       if (other.ChatroomId != 0L) {
         ChatroomId = other.ChatroomId;
       }
+      switch (other.RoleInfoCase) {
+        case RoleInfoOneofCase.Self:
+          Self = other.Self;
+          break;
+        case RoleInfoOneofCase.Friend:
+          Friend = other.Friend;
+          break;
+        case RoleInfoOneofCase.Stranger:
+          Stranger = other.Stranger;
+          break;
+      }
+
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1237,11 +3691,11 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            MyId = input.ReadInt32();
+            Id = input.ReadInt64();
             break;
           }
-          case 16: {
-            FriendId = input.ReadInt32();
+          case 18: {
+            Username = input.ReadString();
             break;
           }
           case 82: {
@@ -1260,6 +3714,458 @@ namespace Chat.Core.Models {
             ChatroomId = input.ReadInt64();
             break;
           }
+          case 810: {
+            global::Chat.Core.Models.PeopleInfo.Types.SelfInfo subBuilder = new global::Chat.Core.Models.PeopleInfo.Types.SelfInfo();
+            if (roleInfoCase_ == RoleInfoOneofCase.Self) {
+              subBuilder.MergeFrom(Self);
+            }
+            input.ReadMessage(subBuilder);
+            Self = subBuilder;
+            break;
+          }
+          case 818: {
+            global::Chat.Core.Models.PeopleInfo.Types.FriendInfo subBuilder = new global::Chat.Core.Models.PeopleInfo.Types.FriendInfo();
+            if (roleInfoCase_ == RoleInfoOneofCase.Friend) {
+              subBuilder.MergeFrom(Friend);
+            }
+            input.ReadMessage(subBuilder);
+            Friend = subBuilder;
+            break;
+          }
+          case 826: {
+            global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo subBuilder = new global::Chat.Core.Models.PeopleInfo.Types.StrangerInfo();
+            if (roleInfoCase_ == RoleInfoOneofCase.Stranger) {
+              subBuilder.MergeFrom(Stranger);
+            }
+            input.ReadMessage(subBuilder);
+            Stranger = subBuilder;
+            break;
+          }
+        }
+      }
+    }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the PeopleInfo message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class SelfInfo : pb::IMessage<SelfInfo> {
+        private static readonly pb::MessageParser<SelfInfo> _parser = new pb::MessageParser<SelfInfo>(() => new SelfInfo());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<SelfInfo> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.PeopleInfo.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public SelfInfo() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public SelfInfo(SelfInfo other) : this() {
+          Settings = other.settings_ != null ? other.Settings.Clone() : null;
+          signupTimeUnixMs_ = other.signupTimeUnixMs_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public SelfInfo Clone() {
+          return new SelfInfo(this);
+        }
+
+        /// <summary>Field number for the "settings" field.</summary>
+        public const int SettingsFieldNumber = 1;
+        private global::Chat.Core.Models.UserSettings settings_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public global::Chat.Core.Models.UserSettings Settings {
+          get { return settings_; }
+          set {
+            settings_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "signupTimeUnixMs" field.</summary>
+        public const int SignupTimeUnixMsFieldNumber = 2;
+        private long signupTimeUnixMs_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long SignupTimeUnixMs {
+          get { return signupTimeUnixMs_; }
+          set {
+            signupTimeUnixMs_ = value;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as SelfInfo);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(SelfInfo other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (!object.Equals(Settings, other.Settings)) return false;
+          if (SignupTimeUnixMs != other.SignupTimeUnixMs) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (settings_ != null) hash ^= Settings.GetHashCode();
+          if (SignupTimeUnixMs != 0L) hash ^= SignupTimeUnixMs.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (settings_ != null) {
+            output.WriteRawTag(10);
+            output.WriteMessage(Settings);
+          }
+          if (SignupTimeUnixMs != 0L) {
+            output.WriteRawTag(16);
+            output.WriteInt64(SignupTimeUnixMs);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (settings_ != null) {
+            size += 1 + pb::CodedOutputStream.ComputeMessageSize(Settings);
+          }
+          if (SignupTimeUnixMs != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(SignupTimeUnixMs);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(SelfInfo other) {
+          if (other == null) {
+            return;
+          }
+          if (other.settings_ != null) {
+            if (settings_ == null) {
+              settings_ = new global::Chat.Core.Models.UserSettings();
+            }
+            Settings.MergeFrom(other.Settings);
+          }
+          if (other.SignupTimeUnixMs != 0L) {
+            SignupTimeUnixMs = other.SignupTimeUnixMs;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 10: {
+                if (settings_ == null) {
+                  settings_ = new global::Chat.Core.Models.UserSettings();
+                }
+                input.ReadMessage(settings_);
+                break;
+              }
+              case 16: {
+                SignupTimeUnixMs = input.ReadInt64();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class FriendInfo : pb::IMessage<FriendInfo> {
+        private static readonly pb::MessageParser<FriendInfo> _parser = new pb::MessageParser<FriendInfo>(() => new FriendInfo());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<FriendInfo> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.PeopleInfo.Descriptor.NestedTypes[1]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public FriendInfo() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public FriendInfo(FriendInfo other) : this() {
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public FriendInfo Clone() {
+          return new FriendInfo(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as FriendInfo);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(FriendInfo other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(FriendInfo other) {
+          if (other == null) {
+            return;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+            }
+          }
+        }
+
+      }
+
+      public sealed partial class StrangerInfo : pb::IMessage<StrangerInfo> {
+        private static readonly pb::MessageParser<StrangerInfo> _parser = new pb::MessageParser<StrangerInfo>(() => new StrangerInfo());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<StrangerInfo> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.PeopleInfo.Descriptor.NestedTypes[2]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public StrangerInfo() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public StrangerInfo(StrangerInfo other) : this() {
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public StrangerInfo Clone() {
+          return new StrangerInfo(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as StrangerInfo);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(StrangerInfo other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(StrangerInfo other) {
+          if (other == null) {
+            return;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
+
+  }
+
+  public sealed partial class UserSettings : pb::IMessage<UserSettings> {
+    private static readonly pb::MessageParser<UserSettings> _parser = new pb::MessageParser<UserSettings>(() => new UserSettings());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UserSettings> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserSettings() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserSettings(UserSettings other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserSettings Clone() {
+      return new UserSettings(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UserSettings);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UserSettings other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UserSettings other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
         }
       }
     }
@@ -1273,7 +4179,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1291,9 +4197,10 @@ namespace Chat.Core.Models {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ChatroomInfo(ChatroomInfo other) : this() {
       id_ = other.id_;
-      peopleIds_ = other.peopleIds_.Clone();
-      hostId_ = other.hostId_;
+      peoples_ = other.peoples_.Clone();
       name_ = other.name_;
+      isP2P_ = other.isP2P_;
+      isActive_ = other.isActive_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1312,25 +4219,14 @@ namespace Chat.Core.Models {
       }
     }
 
-    /// <summary>Field number for the "peopleIds" field.</summary>
-    public const int PeopleIdsFieldNumber = 2;
-    private static readonly pb::FieldCodec<long> _repeated_peopleIds_codec
-        = pb::FieldCodec.ForInt64(18);
-    private readonly pbc::RepeatedField<long> peopleIds_ = new pbc::RepeatedField<long>();
+    /// <summary>Field number for the "peoples" field.</summary>
+    public const int PeoplesFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom> _repeated_peoples_codec
+        = pb::FieldCodec.ForMessage(18, global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom.Parser);
+    private readonly pbc::RepeatedField<global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom> peoples_ = new pbc::RepeatedField<global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<long> PeopleIds {
-      get { return peopleIds_; }
-    }
-
-    /// <summary>Field number for the "hostId" field.</summary>
-    public const int HostIdFieldNumber = 3;
-    private long hostId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long HostId {
-      get { return hostId_; }
-      set {
-        hostId_ = value;
-      }
+    public pbc::RepeatedField<global::Chat.Core.Models.ChatroomInfo.Types.PeopleInRoom> Peoples {
+      get { return peoples_; }
     }
 
     /// <summary>Field number for the "name" field.</summary>
@@ -1341,6 +4237,28 @@ namespace Chat.Core.Models {
       get { return name_; }
       set {
         name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "isP2P" field.</summary>
+    public const int IsP2PFieldNumber = 5;
+    private bool isP2P_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsP2P {
+      get { return isP2P_; }
+      set {
+        isP2P_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "isActive" field.</summary>
+    public const int IsActiveFieldNumber = 6;
+    private bool isActive_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsActive {
+      get { return isActive_; }
+      set {
+        isActive_ = value;
       }
     }
 
@@ -1358,9 +4276,10 @@ namespace Chat.Core.Models {
         return true;
       }
       if (Id != other.Id) return false;
-      if(!peopleIds_.Equals(other.peopleIds_)) return false;
-      if (HostId != other.HostId) return false;
+      if(!peoples_.Equals(other.peoples_)) return false;
       if (Name != other.Name) return false;
+      if (IsP2P != other.IsP2P) return false;
+      if (IsActive != other.IsActive) return false;
       return true;
     }
 
@@ -1368,9 +4287,10 @@ namespace Chat.Core.Models {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0L) hash ^= Id.GetHashCode();
-      hash ^= peopleIds_.GetHashCode();
-      if (HostId != 0L) hash ^= HostId.GetHashCode();
+      hash ^= peoples_.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (IsP2P != false) hash ^= IsP2P.GetHashCode();
+      if (IsActive != false) hash ^= IsActive.GetHashCode();
       return hash;
     }
 
@@ -1385,14 +4305,18 @@ namespace Chat.Core.Models {
         output.WriteRawTag(8);
         output.WriteInt64(Id);
       }
-      peopleIds_.WriteTo(output, _repeated_peopleIds_codec);
-      if (HostId != 0L) {
-        output.WriteRawTag(24);
-        output.WriteInt64(HostId);
-      }
+      peoples_.WriteTo(output, _repeated_peoples_codec);
       if (Name.Length != 0) {
         output.WriteRawTag(34);
         output.WriteString(Name);
+      }
+      if (IsP2P != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(IsP2P);
+      }
+      if (IsActive != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(IsActive);
       }
     }
 
@@ -1402,12 +4326,15 @@ namespace Chat.Core.Models {
       if (Id != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
       }
-      size += peopleIds_.CalculateSize(_repeated_peopleIds_codec);
-      if (HostId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(HostId);
-      }
+      size += peoples_.CalculateSize(_repeated_peoples_codec);
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (IsP2P != false) {
+        size += 1 + 1;
+      }
+      if (IsActive != false) {
+        size += 1 + 1;
       }
       return size;
     }
@@ -1420,12 +4347,15 @@ namespace Chat.Core.Models {
       if (other.Id != 0L) {
         Id = other.Id;
       }
-      peopleIds_.Add(other.peopleIds_);
-      if (other.HostId != 0L) {
-        HostId = other.HostId;
-      }
+      peoples_.Add(other.peoples_);
       if (other.Name.Length != 0) {
         Name = other.Name;
+      }
+      if (other.IsP2P != false) {
+        IsP2P = other.IsP2P;
+      }
+      if (other.IsActive != false) {
+        IsActive = other.IsActive;
       }
     }
 
@@ -1441,22 +4371,233 @@ namespace Chat.Core.Models {
             Id = input.ReadInt64();
             break;
           }
-          case 18:
-          case 16: {
-            peopleIds_.AddEntriesFrom(input, _repeated_peopleIds_codec);
-            break;
-          }
-          case 24: {
-            HostId = input.ReadInt64();
+          case 18: {
+            peoples_.AddEntriesFrom(input, _repeated_peoples_codec);
             break;
           }
           case 34: {
             Name = input.ReadString();
             break;
           }
+          case 40: {
+            IsP2P = input.ReadBool();
+            break;
+          }
+          case 48: {
+            IsActive = input.ReadBool();
+            break;
+          }
         }
       }
     }
+
+    #region Nested types
+    /// <summary>Container for nested types declared in the ChatroomInfo message type.</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static partial class Types {
+      public sealed partial class PeopleInRoom : pb::IMessage<PeopleInRoom> {
+        private static readonly pb::MessageParser<PeopleInRoom> _parser = new pb::MessageParser<PeopleInRoom>(() => new PeopleInRoom());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pb::MessageParser<PeopleInRoom> Parser { get { return _parser; } }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public static pbr::MessageDescriptor Descriptor {
+          get { return global::Chat.Core.Models.ChatroomInfo.Descriptor.NestedTypes[0]; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        pbr::MessageDescriptor pb::IMessage.Descriptor {
+          get { return Descriptor; }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleInRoom() {
+          OnConstruction();
+        }
+
+        partial void OnConstruction();
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleInRoom(PeopleInRoom other) : this() {
+          id_ = other.id_;
+          name_ = other.name_;
+          isBlocked_ = other.isBlocked_;
+          role_ = other.role_;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public PeopleInRoom Clone() {
+          return new PeopleInRoom(this);
+        }
+
+        /// <summary>Field number for the "id" field.</summary>
+        public const int IdFieldNumber = 1;
+        private long id_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public long Id {
+          get { return id_; }
+          set {
+            id_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "name" field.</summary>
+        public const int NameFieldNumber = 2;
+        private string name_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Name {
+          get { return name_; }
+          set {
+            name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        /// <summary>Field number for the "isBlocked" field.</summary>
+        public const int IsBlockedFieldNumber = 3;
+        private bool isBlocked_;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool IsBlocked {
+          get { return isBlocked_; }
+          set {
+            isBlocked_ = value;
+          }
+        }
+
+        /// <summary>Field number for the "role" field.</summary>
+        public const int RoleFieldNumber = 4;
+        private string role_ = "";
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public string Role {
+          get { return role_; }
+          set {
+            role_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override bool Equals(object other) {
+          return Equals(other as PeopleInRoom);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public bool Equals(PeopleInRoom other) {
+          if (ReferenceEquals(other, null)) {
+            return false;
+          }
+          if (ReferenceEquals(other, this)) {
+            return true;
+          }
+          if (Id != other.Id) return false;
+          if (Name != other.Name) return false;
+          if (IsBlocked != other.IsBlocked) return false;
+          if (Role != other.Role) return false;
+          return true;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override int GetHashCode() {
+          int hash = 1;
+          if (Id != 0L) hash ^= Id.GetHashCode();
+          if (Name.Length != 0) hash ^= Name.GetHashCode();
+          if (IsBlocked != false) hash ^= IsBlocked.GetHashCode();
+          if (Role.Length != 0) hash ^= Role.GetHashCode();
+          return hash;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public override string ToString() {
+          return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void WriteTo(pb::CodedOutputStream output) {
+          if (Id != 0L) {
+            output.WriteRawTag(8);
+            output.WriteInt64(Id);
+          }
+          if (Name.Length != 0) {
+            output.WriteRawTag(18);
+            output.WriteString(Name);
+          }
+          if (IsBlocked != false) {
+            output.WriteRawTag(24);
+            output.WriteBool(IsBlocked);
+          }
+          if (Role.Length != 0) {
+            output.WriteRawTag(34);
+            output.WriteString(Role);
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public int CalculateSize() {
+          int size = 0;
+          if (Id != 0L) {
+            size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+          }
+          if (Name.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+          }
+          if (IsBlocked != false) {
+            size += 1 + 1;
+          }
+          if (Role.Length != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeStringSize(Role);
+          }
+          return size;
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(PeopleInRoom other) {
+          if (other == null) {
+            return;
+          }
+          if (other.Id != 0L) {
+            Id = other.Id;
+          }
+          if (other.Name.Length != 0) {
+            Name = other.Name;
+          }
+          if (other.IsBlocked != false) {
+            IsBlocked = other.IsBlocked;
+          }
+          if (other.Role.Length != 0) {
+            Role = other.Role;
+          }
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+        public void MergeFrom(pb::CodedInputStream input) {
+          uint tag;
+          while ((tag = input.ReadTag()) != 0) {
+            switch(tag) {
+              default:
+                input.SkipLastField();
+                break;
+              case 8: {
+                Id = input.ReadInt64();
+                break;
+              }
+              case 18: {
+                Name = input.ReadString();
+                break;
+              }
+              case 24: {
+                IsBlocked = input.ReadBool();
+                break;
+              }
+              case 34: {
+                Role = input.ReadString();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+    #endregion
 
   }
 
@@ -1467,7 +4608,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1598,14 +4739,14 @@ namespace Chat.Core.Models {
 
   }
 
-  public sealed partial class GetChatroomRequest : pb::IMessage<GetChatroomRequest> {
-    private static readonly pb::MessageParser<GetChatroomRequest> _parser = new pb::MessageParser<GetChatroomRequest>(() => new GetChatroomRequest());
+  public sealed partial class NewChatroomResponse : pb::IMessage<NewChatroomResponse> {
+    private static readonly pb::MessageParser<NewChatroomResponse> _parser = new pb::MessageParser<NewChatroomResponse>(() => new NewChatroomResponse());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetChatroomRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<NewChatroomResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1614,21 +4755,172 @@ namespace Chat.Core.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetChatroomRequest() {
+    public NewChatroomResponse() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetChatroomRequest(GetChatroomRequest other) : this() {
+    public NewChatroomResponse(NewChatroomResponse other) : this() {
+      success_ = other.success_;
+      Chatroom = other.chatroom_ != null ? other.Chatroom.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public NewChatroomResponse Clone() {
+      return new NewChatroomResponse(this);
+    }
+
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Success {
+      get { return success_; }
+      set {
+        success_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "chatroom" field.</summary>
+    public const int ChatroomFieldNumber = 2;
+    private global::Chat.Core.Models.ChatroomInfo chatroom_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.ChatroomInfo Chatroom {
+      get { return chatroom_; }
+      set {
+        chatroom_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as NewChatroomResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(NewChatroomResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Success != other.Success) return false;
+      if (!object.Equals(Chatroom, other.Chatroom)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Success != false) hash ^= Success.GetHashCode();
+      if (chatroom_ != null) hash ^= Chatroom.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Success != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Success);
+      }
+      if (chatroom_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Chatroom);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Success != false) {
+        size += 1 + 1;
+      }
+      if (chatroom_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Chatroom);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(NewChatroomResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Success != false) {
+        Success = other.Success;
+      }
+      if (other.chatroom_ != null) {
+        if (chatroom_ == null) {
+          chatroom_ = new global::Chat.Core.Models.ChatroomInfo();
+        }
+        Chatroom.MergeFrom(other.Chatroom);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Success = input.ReadBool();
+            break;
+          }
+          case 18: {
+            if (chatroom_ == null) {
+              chatroom_ = new global::Chat.Core.Models.ChatroomInfo();
+            }
+            input.ReadMessage(chatroom_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetChatroomInfoRequest : pb::IMessage<GetChatroomInfoRequest> {
+    private static readonly pb::MessageParser<GetChatroomInfoRequest> _parser = new pb::MessageParser<GetChatroomInfoRequest>(() => new GetChatroomInfoRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetChatroomInfoRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetChatroomInfoRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetChatroomInfoRequest(GetChatroomInfoRequest other) : this() {
       senderId_ = other.senderId_;
       chatroomId_ = other.chatroomId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetChatroomRequest Clone() {
-      return new GetChatroomRequest(this);
+    public GetChatroomInfoRequest Clone() {
+      return new GetChatroomInfoRequest(this);
     }
 
     /// <summary>Field number for the "senderId" field.</summary>
@@ -1655,11 +4947,11 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as GetChatroomRequest);
+      return Equals(other as GetChatroomInfoRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetChatroomRequest other) {
+    public bool Equals(GetChatroomInfoRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1709,7 +5001,7 @@ namespace Chat.Core.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetChatroomRequest other) {
+    public void MergeFrom(GetChatroomInfoRequest other) {
       if (other == null) {
         return;
       }
@@ -1743,14 +5035,14 @@ namespace Chat.Core.Models {
 
   }
 
-  public sealed partial class ChatroomResponse : pb::IMessage<ChatroomResponse> {
-    private static readonly pb::MessageParser<ChatroomResponse> _parser = new pb::MessageParser<ChatroomResponse>(() => new ChatroomResponse());
+  public sealed partial class GetChatroomInfoResponse : pb::IMessage<GetChatroomInfoResponse> {
+    private static readonly pb::MessageParser<GetChatroomInfoResponse> _parser = new pb::MessageParser<GetChatroomInfoResponse>(() => new GetChatroomInfoResponse());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ChatroomResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<GetChatroomInfoResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1759,22 +5051,22 @@ namespace Chat.Core.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ChatroomResponse() {
+    public GetChatroomInfoResponse() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ChatroomResponse(ChatroomResponse other) : this() {
+    public GetChatroomInfoResponse(GetChatroomInfoResponse other) : this() {
       success_ = other.success_;
       Chatroom = other.chatroom_ != null ? other.Chatroom.Clone() : null;
       detail_ = other.detail_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ChatroomResponse Clone() {
-      return new ChatroomResponse(this);
+    public GetChatroomInfoResponse Clone() {
+      return new GetChatroomInfoResponse(this);
     }
 
     /// <summary>Field number for the "success" field.</summary>
@@ -1812,11 +5104,11 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as ChatroomResponse);
+      return Equals(other as GetChatroomInfoResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ChatroomResponse other) {
+    public bool Equals(GetChatroomInfoResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1875,7 +5167,7 @@ namespace Chat.Core.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ChatroomResponse other) {
+    public void MergeFrom(GetChatroomInfoResponse other) {
       if (other == null) {
         return;
       }
@@ -1929,7 +5221,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2074,7 +5366,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2091,8 +5383,9 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SignupResponse(SignupResponse other) : this() {
-      status_ = other.status_;
+      success_ = other.success_;
       detail_ = other.detail_;
+      errorCode_ = other.errorCode_;
       userId_ = other.userId_;
     }
 
@@ -2101,14 +5394,14 @@ namespace Chat.Core.Models {
       return new SignupResponse(this);
     }
 
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 1;
-    private global::Chat.Core.Models.SignupResponse.Types.Status status_ = 0;
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Chat.Core.Models.SignupResponse.Types.Status Status {
-      get { return status_; }
+    public bool Success {
+      get { return success_; }
       set {
-        status_ = value;
+        success_ = value;
       }
     }
 
@@ -2120,6 +5413,17 @@ namespace Chat.Core.Models {
       get { return detail_; }
       set {
         detail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "errorCode" field.</summary>
+    public const int ErrorCodeFieldNumber = 4;
+    private int errorCode_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ErrorCode {
+      get { return errorCode_; }
+      set {
+        errorCode_ = value;
       }
     }
 
@@ -2147,8 +5451,9 @@ namespace Chat.Core.Models {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Status != other.Status) return false;
+      if (Success != other.Success) return false;
       if (Detail != other.Detail) return false;
+      if (ErrorCode != other.ErrorCode) return false;
       if (UserId != other.UserId) return false;
       return true;
     }
@@ -2156,8 +5461,9 @@ namespace Chat.Core.Models {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Status != 0) hash ^= Status.GetHashCode();
+      if (Success != false) hash ^= Success.GetHashCode();
       if (Detail.Length != 0) hash ^= Detail.GetHashCode();
+      if (ErrorCode != 0) hash ^= ErrorCode.GetHashCode();
       if (UserId != 0L) hash ^= UserId.GetHashCode();
       return hash;
     }
@@ -2169,9 +5475,9 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Status != 0) {
+      if (Success != false) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) Status);
+        output.WriteBool(Success);
       }
       if (Detail.Length != 0) {
         output.WriteRawTag(18);
@@ -2181,16 +5487,23 @@ namespace Chat.Core.Models {
         output.WriteRawTag(24);
         output.WriteInt64(UserId);
       }
+      if (ErrorCode != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(ErrorCode);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Status != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      if (Success != false) {
+        size += 1 + 1;
       }
       if (Detail.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Detail);
+      }
+      if (ErrorCode != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ErrorCode);
       }
       if (UserId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
@@ -2203,11 +5516,14 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.Status != 0) {
-        Status = other.Status;
+      if (other.Success != false) {
+        Success = other.Success;
       }
       if (other.Detail.Length != 0) {
         Detail = other.Detail;
+      }
+      if (other.ErrorCode != 0) {
+        ErrorCode = other.ErrorCode;
       }
       if (other.UserId != 0L) {
         UserId = other.UserId;
@@ -2223,7 +5539,7 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            status_ = (global::Chat.Core.Models.SignupResponse.Types.Status) input.ReadEnum();
+            Success = input.ReadBool();
             break;
           }
           case 18: {
@@ -2234,23 +5550,13 @@ namespace Chat.Core.Models {
             UserId = input.ReadInt64();
             break;
           }
+          case 32: {
+            ErrorCode = input.ReadInt32();
+            break;
+          }
         }
       }
     }
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the SignupResponse message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum Status {
-        [pbr::OriginalName("Success")] Success = 0,
-        [pbr::OriginalName("UsernameExist")] UsernameExist = 101,
-        [pbr::OriginalName("UsernameFormatWrong")] UsernameFormatWrong = 102,
-        [pbr::OriginalName("PasswordFormatWrong")] PasswordFormatWrong = 103,
-      }
-
-    }
-    #endregion
 
   }
 
@@ -2261,7 +5567,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2434,7 +5740,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2451,8 +5757,10 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public LoginResponse(LoginResponse other) : this() {
-      status_ = other.status_;
+      success_ = other.success_;
       detail_ = other.detail_;
+      token_ = other.token_;
+      userId_ = other.userId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2460,14 +5768,14 @@ namespace Chat.Core.Models {
       return new LoginResponse(this);
     }
 
-    /// <summary>Field number for the "status" field.</summary>
-    public const int StatusFieldNumber = 1;
-    private global::Chat.Core.Models.LoginResponse.Types.Status status_ = 0;
+    /// <summary>Field number for the "success" field.</summary>
+    public const int SuccessFieldNumber = 1;
+    private bool success_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Chat.Core.Models.LoginResponse.Types.Status Status {
-      get { return status_; }
+    public bool Success {
+      get { return success_; }
       set {
-        status_ = value;
+        success_ = value;
       }
     }
 
@@ -2479,6 +5787,28 @@ namespace Chat.Core.Models {
       get { return detail_; }
       set {
         detail_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "token" field.</summary>
+    public const int TokenFieldNumber = 3;
+    private string token_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Token {
+      get { return token_; }
+      set {
+        token_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 4;
+    private long userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
       }
     }
 
@@ -2495,16 +5825,20 @@ namespace Chat.Core.Models {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Status != other.Status) return false;
+      if (Success != other.Success) return false;
       if (Detail != other.Detail) return false;
+      if (Token != other.Token) return false;
+      if (UserId != other.UserId) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Status != 0) hash ^= Status.GetHashCode();
+      if (Success != false) hash ^= Success.GetHashCode();
       if (Detail.Length != 0) hash ^= Detail.GetHashCode();
+      if (Token.Length != 0) hash ^= Token.GetHashCode();
+      if (UserId != 0L) hash ^= UserId.GetHashCode();
       return hash;
     }
 
@@ -2515,24 +5849,38 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Status != 0) {
+      if (Success != false) {
         output.WriteRawTag(8);
-        output.WriteEnum((int) Status);
+        output.WriteBool(Success);
       }
       if (Detail.Length != 0) {
         output.WriteRawTag(18);
         output.WriteString(Detail);
+      }
+      if (Token.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Token);
+      }
+      if (UserId != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(UserId);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Status != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+      if (Success != false) {
+        size += 1 + 1;
       }
       if (Detail.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Detail);
+      }
+      if (Token.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
+      }
+      if (UserId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
       }
       return size;
     }
@@ -2542,11 +5890,17 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.Status != 0) {
-        Status = other.Status;
+      if (other.Success != false) {
+        Success = other.Success;
       }
       if (other.Detail.Length != 0) {
         Detail = other.Detail;
+      }
+      if (other.Token.Length != 0) {
+        Token = other.Token;
+      }
+      if (other.UserId != 0L) {
+        UserId = other.UserId;
       }
     }
 
@@ -2559,29 +5913,24 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            status_ = (global::Chat.Core.Models.LoginResponse.Types.Status) input.ReadEnum();
+            Success = input.ReadBool();
             break;
           }
           case 18: {
             Detail = input.ReadString();
             break;
           }
+          case 26: {
+            Token = input.ReadString();
+            break;
+          }
+          case 32: {
+            UserId = input.ReadInt64();
+            break;
+          }
         }
       }
     }
-
-    #region Nested types
-    /// <summary>Container for nested types declared in the LoginResponse message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum Status {
-        [pbr::OriginalName("Success")] Success = 0,
-        [pbr::OriginalName("NoSuchUser")] NoSuchUser = 101,
-        [pbr::OriginalName("WrongPassword")] WrongPassword = 102,
-      }
-
-    }
-    #endregion
 
   }
 
@@ -2592,7 +5941,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2765,7 +6114,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2910,6 +6259,9 @@ namespace Chat.Core.Models {
         [pbr::OriginalName("Refuse")] Refuse = 1,
         [pbr::OriginalName("AlreadyFriend")] AlreadyFriend = 2,
         [pbr::OriginalName("UserNotExist")] UserNotExist = 3,
+        [pbr::OriginalName("UserNotOnline")] UserNotOnline = 4,
+        [pbr::OriginalName("ResponseTimeout")] ResponseTimeout = 5,
+        [pbr::OriginalName("WithSelf")] WithSelf = 6,
       }
 
     }
@@ -2917,229 +6269,10 @@ namespace Chat.Core.Models {
 
   }
 
-  public sealed partial class GetPeoplesInfoRequest : pb::IMessage<GetPeoplesInfoRequest> {
-    private static readonly pb::MessageParser<GetPeoplesInfoRequest> _parser = new pb::MessageParser<GetPeoplesInfoRequest>(() => new GetPeoplesInfoRequest());
+  public sealed partial class GetPeopleInfoRequest : pb::IMessage<GetPeopleInfoRequest> {
+    private static readonly pb::MessageParser<GetPeopleInfoRequest> _parser = new pb::MessageParser<GetPeopleInfoRequest>(() => new GetPeopleInfoRequest());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetPeoplesInfoRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[17]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPeoplesInfoRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPeoplesInfoRequest(GetPeoplesInfoRequest other) : this() {
-      ids_ = other.ids_.Clone();
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPeoplesInfoRequest Clone() {
-      return new GetPeoplesInfoRequest(this);
-    }
-
-    /// <summary>Field number for the "ids" field.</summary>
-    public const int IdsFieldNumber = 1;
-    private static readonly pb::FieldCodec<int> _repeated_ids_codec
-        = pb::FieldCodec.ForInt32(10);
-    private readonly pbc::RepeatedField<int> ids_ = new pbc::RepeatedField<int>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> Ids {
-      get { return ids_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as GetPeoplesInfoRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetPeoplesInfoRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if(!ids_.Equals(other.ids_)) return false;
-      return true;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      hash ^= ids_.GetHashCode();
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      ids_.WriteTo(output, _repeated_ids_codec);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      size += ids_.CalculateSize(_repeated_ids_codec);
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetPeoplesInfoRequest other) {
-      if (other == null) {
-        return;
-      }
-      ids_.Add(other.ids_);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            input.SkipLastField();
-            break;
-          case 10:
-          case 8: {
-            ids_.AddEntriesFrom(input, _repeated_ids_codec);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class GetPeoplesInfoResponse : pb::IMessage<GetPeoplesInfoResponse> {
-    private static readonly pb::MessageParser<GetPeoplesInfoResponse> _parser = new pb::MessageParser<GetPeoplesInfoResponse>(() => new GetPeoplesInfoResponse());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<GetPeoplesInfoResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[18]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPeoplesInfoResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPeoplesInfoResponse(GetPeoplesInfoResponse other) : this() {
-      peoples_ = other.peoples_.Clone();
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public GetPeoplesInfoResponse Clone() {
-      return new GetPeoplesInfoResponse(this);
-    }
-
-    /// <summary>Field number for the "peoples" field.</summary>
-    public const int PeoplesFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Chat.Core.Models.People> _repeated_peoples_codec
-        = pb::FieldCodec.ForMessage(10, global::Chat.Core.Models.People.Parser);
-    private readonly pbc::RepeatedField<global::Chat.Core.Models.People> peoples_ = new pbc::RepeatedField<global::Chat.Core.Models.People>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Chat.Core.Models.People> Peoples {
-      get { return peoples_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as GetPeoplesInfoResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(GetPeoplesInfoResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if(!peoples_.Equals(other.peoples_)) return false;
-      return true;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      hash ^= peoples_.GetHashCode();
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      peoples_.WriteTo(output, _repeated_peoples_codec);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      size += peoples_.CalculateSize(_repeated_peoples_codec);
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(GetPeoplesInfoResponse other) {
-      if (other == null) {
-        return;
-      }
-      peoples_.Add(other.peoples_);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            input.SkipLastField();
-            break;
-          case 10: {
-            peoples_.AddEntriesFrom(input, _repeated_peoples_codec);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class FriendNotification : pb::IMessage<FriendNotification> {
-    private static readonly pb::MessageParser<FriendNotification> _parser = new pb::MessageParser<FriendNotification>(() => new FriendNotification());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<FriendNotification> Parser { get { return _parser; } }
+    public static pb::MessageParser<GetPeopleInfoRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -3152,68 +6285,68 @@ namespace Chat.Core.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FriendNotification() {
+    public GetPeopleInfoRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FriendNotification(FriendNotification other) : this() {
-      id_ = other.id_;
-      type_ = other.type_;
+    public GetPeopleInfoRequest(GetPeopleInfoRequest other) : this() {
+      senderId_ = other.senderId_;
+      targetId_ = other.targetId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FriendNotification Clone() {
-      return new FriendNotification(this);
+    public GetPeopleInfoRequest Clone() {
+      return new GetPeopleInfoRequest(this);
     }
 
-    /// <summary>Field number for the "id" field.</summary>
-    public const int IdFieldNumber = 1;
-    private int id_;
+    /// <summary>Field number for the "senderId" field.</summary>
+    public const int SenderIdFieldNumber = 1;
+    private long senderId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id {
-      get { return id_; }
+    public long SenderId {
+      get { return senderId_; }
       set {
-        id_ = value;
+        senderId_ = value;
       }
     }
 
-    /// <summary>Field number for the "type" field.</summary>
-    public const int TypeFieldNumber = 2;
-    private global::Chat.Core.Models.FriendNotification.Types.Type type_ = 0;
+    /// <summary>Field number for the "targetId" field.</summary>
+    public const int TargetIdFieldNumber = 2;
+    private long targetId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Chat.Core.Models.FriendNotification.Types.Type Type {
-      get { return type_; }
+    public long TargetId {
+      get { return targetId_; }
       set {
-        type_ = value;
+        targetId_ = value;
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as FriendNotification);
+      return Equals(other as GetPeopleInfoRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(FriendNotification other) {
+    public bool Equals(GetPeopleInfoRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Id != other.Id) return false;
-      if (Type != other.Type) return false;
+      if (SenderId != other.SenderId) return false;
+      if (TargetId != other.TargetId) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Id != 0) hash ^= Id.GetHashCode();
-      if (Type != 0) hash ^= Type.GetHashCode();
+      if (SenderId != 0L) hash ^= SenderId.GetHashCode();
+      if (TargetId != 0L) hash ^= TargetId.GetHashCode();
       return hash;
     }
 
@@ -3224,38 +6357,38 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Id != 0) {
+      if (SenderId != 0L) {
         output.WriteRawTag(8);
-        output.WriteInt32(Id);
+        output.WriteInt64(SenderId);
       }
-      if (Type != 0) {
+      if (TargetId != 0L) {
         output.WriteRawTag(16);
-        output.WriteEnum((int) Type);
+        output.WriteInt64(TargetId);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Id != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      if (SenderId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SenderId);
       }
-      if (Type != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+      if (TargetId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(TargetId);
       }
       return size;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(FriendNotification other) {
+    public void MergeFrom(GetPeopleInfoRequest other) {
       if (other == null) {
         return;
       }
-      if (other.Id != 0) {
-        Id = other.Id;
+      if (other.SenderId != 0L) {
+        SenderId = other.SenderId;
       }
-      if (other.Type != 0) {
-        Type = other.Type;
+      if (other.TargetId != 0L) {
+        TargetId = other.TargetId;
       }
     }
 
@@ -3268,28 +6401,139 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            Id = input.ReadInt32();
+            SenderId = input.ReadInt64();
             break;
           }
           case 16: {
-            type_ = (global::Chat.Core.Models.FriendNotification.Types.Type) input.ReadEnum();
+            TargetId = input.ReadInt64();
             break;
           }
         }
       }
     }
 
-    #region Nested types
-    /// <summary>Container for nested types declared in the FriendNotification message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static partial class Types {
-      public enum Type {
-        [pbr::OriginalName("Login")] Login = 0,
-        [pbr::OriginalName("Logout")] Logout = 1,
-      }
+  }
 
+  public sealed partial class GetPeopleInfoResponse : pb::IMessage<GetPeopleInfoResponse> {
+    private static readonly pb::MessageParser<GetPeopleInfoResponse> _parser = new pb::MessageParser<GetPeopleInfoResponse>(() => new GetPeopleInfoResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetPeopleInfoResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[20]; }
     }
-    #endregion
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetPeopleInfoResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetPeopleInfoResponse(GetPeopleInfoResponse other) : this() {
+      PeopleInfo = other.peopleInfo_ != null ? other.PeopleInfo.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetPeopleInfoResponse Clone() {
+      return new GetPeopleInfoResponse(this);
+    }
+
+    /// <summary>Field number for the "peopleInfo" field.</summary>
+    public const int PeopleInfoFieldNumber = 1;
+    private global::Chat.Core.Models.PeopleInfo peopleInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Chat.Core.Models.PeopleInfo PeopleInfo {
+      get { return peopleInfo_; }
+      set {
+        peopleInfo_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetPeopleInfoResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetPeopleInfoResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(PeopleInfo, other.PeopleInfo)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (peopleInfo_ != null) hash ^= PeopleInfo.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (peopleInfo_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(PeopleInfo);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (peopleInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PeopleInfo);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetPeopleInfoResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.peopleInfo_ != null) {
+        if (peopleInfo_ == null) {
+          peopleInfo_ = new global::Chat.Core.Models.PeopleInfo();
+        }
+        PeopleInfo.MergeFrom(other.PeopleInfo);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (peopleInfo_ == null) {
+              peopleInfo_ = new global::Chat.Core.Models.PeopleInfo();
+            }
+            input.ReadMessage(peopleInfo_);
+            break;
+          }
+        }
+      }
+    }
 
   }
 
@@ -3300,7 +6544,7 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3317,8 +6561,10 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public GetMessagesRequest(GetMessagesRequest other) : this() {
-      userId_ = other.userId_;
-      afterTimeUnix_ = other.afterTimeUnix_;
+      senderId_ = other.senderId_;
+      afterTimeUnixMs_ = other.afterTimeUnixMs_;
+      chatroomId_ = other.chatroomId_;
+      count_ = other.count_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3326,25 +6572,47 @@ namespace Chat.Core.Models {
       return new GetMessagesRequest(this);
     }
 
-    /// <summary>Field number for the "userId" field.</summary>
-    public const int UserIdFieldNumber = 1;
-    private long userId_;
+    /// <summary>Field number for the "senderId" field.</summary>
+    public const int SenderIdFieldNumber = 1;
+    private long senderId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long UserId {
-      get { return userId_; }
+    public long SenderId {
+      get { return senderId_; }
       set {
-        userId_ = value;
+        senderId_ = value;
       }
     }
 
-    /// <summary>Field number for the "afterTimeUnix" field.</summary>
-    public const int AfterTimeUnixFieldNumber = 2;
-    private long afterTimeUnix_;
+    /// <summary>Field number for the "afterTimeUnixMs" field.</summary>
+    public const int AfterTimeUnixMsFieldNumber = 2;
+    private long afterTimeUnixMs_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long AfterTimeUnix {
-      get { return afterTimeUnix_; }
+    public long AfterTimeUnixMs {
+      get { return afterTimeUnixMs_; }
       set {
-        afterTimeUnix_ = value;
+        afterTimeUnixMs_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "chatroomId" field.</summary>
+    public const int ChatroomIdFieldNumber = 3;
+    private long chatroomId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ChatroomId {
+      get { return chatroomId_; }
+      set {
+        chatroomId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "count" field.</summary>
+    public const int CountFieldNumber = 4;
+    private int count_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Count {
+      get { return count_; }
+      set {
+        count_ = value;
       }
     }
 
@@ -3361,16 +6629,20 @@ namespace Chat.Core.Models {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (UserId != other.UserId) return false;
-      if (AfterTimeUnix != other.AfterTimeUnix) return false;
+      if (SenderId != other.SenderId) return false;
+      if (AfterTimeUnixMs != other.AfterTimeUnixMs) return false;
+      if (ChatroomId != other.ChatroomId) return false;
+      if (Count != other.Count) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (UserId != 0L) hash ^= UserId.GetHashCode();
-      if (AfterTimeUnix != 0L) hash ^= AfterTimeUnix.GetHashCode();
+      if (SenderId != 0L) hash ^= SenderId.GetHashCode();
+      if (AfterTimeUnixMs != 0L) hash ^= AfterTimeUnixMs.GetHashCode();
+      if (ChatroomId != 0L) hash ^= ChatroomId.GetHashCode();
+      if (Count != 0) hash ^= Count.GetHashCode();
       return hash;
     }
 
@@ -3381,24 +6653,38 @@ namespace Chat.Core.Models {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (UserId != 0L) {
+      if (SenderId != 0L) {
         output.WriteRawTag(8);
-        output.WriteInt64(UserId);
+        output.WriteInt64(SenderId);
       }
-      if (AfterTimeUnix != 0L) {
+      if (AfterTimeUnixMs != 0L) {
         output.WriteRawTag(16);
-        output.WriteInt64(AfterTimeUnix);
+        output.WriteInt64(AfterTimeUnixMs);
+      }
+      if (ChatroomId != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(ChatroomId);
+      }
+      if (Count != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Count);
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (UserId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(UserId);
+      if (SenderId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(SenderId);
       }
-      if (AfterTimeUnix != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AfterTimeUnix);
+      if (AfterTimeUnixMs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(AfterTimeUnixMs);
+      }
+      if (ChatroomId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ChatroomId);
+      }
+      if (Count != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Count);
       }
       return size;
     }
@@ -3408,11 +6694,17 @@ namespace Chat.Core.Models {
       if (other == null) {
         return;
       }
-      if (other.UserId != 0L) {
-        UserId = other.UserId;
+      if (other.SenderId != 0L) {
+        SenderId = other.SenderId;
       }
-      if (other.AfterTimeUnix != 0L) {
-        AfterTimeUnix = other.AfterTimeUnix;
+      if (other.AfterTimeUnixMs != 0L) {
+        AfterTimeUnixMs = other.AfterTimeUnixMs;
+      }
+      if (other.ChatroomId != 0L) {
+        ChatroomId = other.ChatroomId;
+      }
+      if (other.Count != 0) {
+        Count = other.Count;
       }
     }
 
@@ -3425,11 +6717,309 @@ namespace Chat.Core.Models {
             input.SkipLastField();
             break;
           case 8: {
-            UserId = input.ReadInt64();
+            SenderId = input.ReadInt64();
             break;
           }
           case 16: {
-            AfterTimeUnix = input.ReadInt64();
+            AfterTimeUnixMs = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            ChatroomId = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            Count = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetDataRequest : pb::IMessage<GetDataRequest> {
+    private static readonly pb::MessageParser<GetDataRequest> _parser = new pb::MessageParser<GetDataRequest>(() => new GetDataRequest());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetDataRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[22]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetDataRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetDataRequest(GetDataRequest other) : this() {
+      fileName_ = other.fileName_;
+      seed_ = other.seed_;
+      randLength_ = other.randLength_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetDataRequest Clone() {
+      return new GetDataRequest(this);
+    }
+
+    /// <summary>Field number for the "fileName" field.</summary>
+    public const int FileNameFieldNumber = 1;
+    private string fileName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string FileName {
+      get { return fileName_; }
+      set {
+        fileName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "seed" field.</summary>
+    public const int SeedFieldNumber = 10;
+    private int seed_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Seed {
+      get { return seed_; }
+      set {
+        seed_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "randLength" field.</summary>
+    public const int RandLengthFieldNumber = 11;
+    private int randLength_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int RandLength {
+      get { return randLength_; }
+      set {
+        randLength_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetDataRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetDataRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (FileName != other.FileName) return false;
+      if (Seed != other.Seed) return false;
+      if (RandLength != other.RandLength) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (FileName.Length != 0) hash ^= FileName.GetHashCode();
+      if (Seed != 0) hash ^= Seed.GetHashCode();
+      if (RandLength != 0) hash ^= RandLength.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (FileName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(FileName);
+      }
+      if (Seed != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(Seed);
+      }
+      if (RandLength != 0) {
+        output.WriteRawTag(88);
+        output.WriteInt32(RandLength);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (FileName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(FileName);
+      }
+      if (Seed != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Seed);
+      }
+      if (RandLength != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(RandLength);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetDataRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.FileName.Length != 0) {
+        FileName = other.FileName;
+      }
+      if (other.Seed != 0) {
+        Seed = other.Seed;
+      }
+      if (other.RandLength != 0) {
+        RandLength = other.RandLength;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            FileName = input.ReadString();
+            break;
+          }
+          case 80: {
+            Seed = input.ReadInt32();
+            break;
+          }
+          case 88: {
+            RandLength = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetDataResponse : pb::IMessage<GetDataResponse> {
+    private static readonly pb::MessageParser<GetDataResponse> _parser = new pb::MessageParser<GetDataResponse>(() => new GetDataResponse());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetDataResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Chat.Core.Models.ModelsReflection.Descriptor.MessageTypes[23]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetDataResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetDataResponse(GetDataResponse other) : this() {
+      data_ = other.data_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetDataResponse Clone() {
+      return new GetDataResponse(this);
+    }
+
+    /// <summary>Field number for the "data" field.</summary>
+    public const int DataFieldNumber = 1;
+    private pb::ByteString data_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Data {
+      get { return data_; }
+      set {
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetDataResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetDataResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Data != other.Data) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Data.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteBytes(Data);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetDataResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Data.Length != 0) {
+        Data = other.Data;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Data = input.ReadBytes();
             break;
           }
         }

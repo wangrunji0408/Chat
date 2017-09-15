@@ -8,6 +8,9 @@ namespace Chat.Core.Interfaces
     public interface IClientService
     {
         Task InformNewMessageAsync(ChatMessage message);
+
+        Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request);
+        
         // TODO Server send disconnection to client.
         //Task Disconnect();
     }

@@ -16,16 +16,19 @@ namespace Chat.Connection.Local
 			_server = server;
 		}
 
-        public async Task<IServerService> LoginAsync(LoginRequest request)
+        public async Task<IServerService> GetService(LoginResponse token)
         {
-            await Task.CompletedTask;
-            var response = await _server.LoginAsync(request);
-            if (response.Status != LoginResponse.Types.Status.Success)
-                throw new Exception($"Failed to login: {response.Detail}");
-            var userId = request.UserId;
+            if (!token.Success)
+                throw new InvalidOperationException("Can't get service with failed login response.");
+            var userId = token.UserId;
             var client = new LocalClientService(Client);
             _server.SetUserClient(userId, client);
-            return new LocalServerService(_server, userId);
+            return new LocalServerService(_server, userId, token.Token);
+        }
+
+        public async Task<LoginResponse> LoginAsync(LoginRequest request)
+        {
+            return await _server.LoginAsync(request);
         }
 
         public Task<SignupResponse> SignupAsync(SignupRequest request)

@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace Chat.Client.ConsoleApp.Options
+namespace Chat.Client.ConsoleApp.Options.Chatroom
 {
     [Verb("send")]
     class SendOption: RoomOptionBase
@@ -10,7 +10,7 @@ namespace Chat.Client.ConsoleApp.Options
 
         internal override void Execute(Program app)
         {
-            app.Client.SendTextMessage(Text, ChatroomId).Wait();
+            Chatroom.SendTextAsync(Text).Wait();
         }
     }
 }

@@ -17,5 +17,10 @@ namespace Chat.Connection.Grpc
             var request = new SendMessageRequest{Message = message};
             await base.NewMessageAsync(request);
         }
+
+        public Task<MakeFriendResponse> MakeFriend(MakeFriendRequest request)
+        {
+            return base.MakeFriendAsync(request).ResponseAsync;
+        }
     }
 }
