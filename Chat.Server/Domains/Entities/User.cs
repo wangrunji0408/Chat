@@ -17,7 +17,6 @@ namespace Chat.Server.Domains.Entities
     {
         public string Username { get; private set; }
         public DateTimeOffset CreateTime { get; private set; } = DateTimeOffset.Now;
-        public DateTimeOffset LastLoginTime { get; private set; }
         internal ICollection<UserChatroom> UserChatrooms { get; private set; }
 	    internal ICollection<UserRelationship> UserRelationships { get; private set; }
 

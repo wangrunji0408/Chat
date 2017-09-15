@@ -9,7 +9,7 @@ namespace Chat.Server.ConsoleApp.Options.Chatroom
 	{
 		[Value(0)]
 		public long ChatroomId { get; set; }
-		[Value(1)]
+		[Option('c', "count", Default = 10)]
 		public int Count { get; set; }
 
 		internal override void Execute(Program app)
